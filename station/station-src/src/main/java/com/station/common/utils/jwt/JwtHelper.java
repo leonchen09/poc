@@ -54,7 +54,6 @@ public class JwtHelper {
 		    claims= new JWTVerifier(secret).verify(token);
 		    claims.put("code", 0);
 		} catch (JWTVerifyException | InvalidKeyException | NoSuchAlgorithmException | IllegalStateException | SignatureException | IOException e) {
-			System.out.println("verifyToken:"+e.getMessage());
 			claims = new HashMap<String, Object>();
 			claims.put("code", (e instanceof JWTExpiredException)?1:9);
 		}

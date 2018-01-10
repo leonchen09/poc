@@ -190,6 +190,18 @@ public class GprsBalanceSend {
 	@ApiModelProperty(value = "sendTime")
 	private Date sendTime;
 
+    //均衡强制执行标志 1 强制执行 0 非强制执行
+    @ApiModelProperty(value="mode")
+    private Integer mode;
+
+    public Integer getMode() {
+		return mode;
+	}
+
+	public void setMode(Integer mode) {
+		this.mode = mode;
+	}
+
 	/**
 	 * This method returns the value of the database column gprs_balance_send.id  
 	 * @return the value of gprs_balance_send.id

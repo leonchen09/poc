@@ -32,5 +32,8 @@ public interface StationInfoMapper extends BaseMapper<StationInfo, Integer> {
   	List<StationInfo>  appSelectListSelectivePaging(SearchStationInfoPagingVo searchStationInfoPagingVo);
 
   	//查询电池组告警信息列表
-  	List<StationInfo> appWarnAreaSelectListSelectivePaging(SearchWarningInfoPagingVo searchWarningInfoPagingVo);
+  	List<StationInfo> appWarnAreaSelectListSelective(SearchWarningInfoPagingVo searchWarningInfoPagingVo);
+  	//前台电池出列表
+  	List<StationInfo> selectStationInfoList(StationInfo stationIfno);
+	
 }

@@ -133,7 +133,17 @@ public class User {
 	private String company3;
 	@ApiModelProperty(value = "验证码",example = "验证码",required = false)
 	private String userCode;
+	@ApiModelProperty(value = "刷新时间",example = "web刷新时间",required = false)
+	private Integer refreshTime;
 	
+	public Integer getRefreshTime() {
+		return refreshTime;
+	}
+
+	public void setRefreshTime(Integer refreshTime) {
+		this.refreshTime = refreshTime;
+	}
+
 	public String getUserCode() {
 		return userCode;
 	}

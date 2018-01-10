@@ -22,7 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -82,9 +84,24 @@ public class PulseServiceImpl implements PulseService {
         if (pulseVo.getCellIndex() != null && pulseVo.getCellIndex() > 0 && pulseVo.getCellIndex() < 25) {
             cells.add(pulseVo.getCellIndex());
         }
+        Map<String,Integer> cellCount = new HashMap<String,Integer>();
         if (CollectionUtils.isEmpty(cells)) {
-            cells.addAll(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-                    12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24));
+           //原来的
+//        	cells.addAll(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+//                    12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24));
+           //单体电压平台--测定选定和单个电池组测试
+			List<String> gprsList = pulseVo.getGprsIdList();
+			if (gprsList != null) {
+				StationInfo stationInfo = new StationInfo();
+				for (String gprsId : gprsList) {
+					stationInfo.setGprsId(gprsId);
+					List<StationInfo> stationInfoList = stationInfoMapper.selectListSelective(stationInfo);
+					if (stationInfoList.size() == 0) {
+						return;
+					}
+					cellCount.put(gprsId, stationInfoList.get(0).getCellCount());
+				}
+			}
         }
 
         List<String> gprsIds = Lists.newArrayList();
@@ -98,13 +115,35 @@ public class PulseServiceImpl implements PulseService {
         } else if (CollectionUtils.isNotEmpty(pulseVo.getGprsIdList())) {
             gprsIds.addAll(pulseVo.getGprsIdList().stream().collect(Collectors.toSet()));
         }
+        //测试全部
+        if (gprsIds != null && gprsIds.size() != 1) {
+			StationInfo stationInfo = new StationInfo();
+			for (String gprsId : gprsIds) {
+				stationInfo.setGprsId(gprsId);
+				List<StationInfo> stationInfoList = stationInfoMapper.selectListSelective(stationInfo);
+				if (stationInfoList.size() == 0) {
+					return;
+				}
+				cellCount.put(gprsId, stationInfoList.get(0).getCellCount());
+			}
+		}
         if (CollectionUtils.isEmpty(gprsIds)) {
             return;
         }
         taskExecutor.execute(() -> {
             for (final String gprsId : gprsIds) {
-                sendCommand(gprsId, cells, pulseVo);
-            }
+            	//原来的//sendCommand(gprsId, cells, pulseVo);
+            	//如果cellcount 为NULL 说明是进行的单体特征测试
+				if (cellCount.isEmpty()) {
+					sendCommand(gprsId, cells, pulseVo);
+				} else {
+					Integer cellNumber = cellCount.get(gprsId);
+					for(int i=1;i<=cellNumber;i++) {
+						cells.add(i);
+					}
+					sendCommand(gprsId, cells, pulseVo);
+				}
+			}
         });
     }
 
@@ -169,16 +208,17 @@ public class PulseServiceImpl implements PulseService {
         GprsConfigInfo condition = new GprsConfigInfo();
         condition.setGprsId(gprsid);
         List<GprsConfigInfo> configs = gprsConfigInfoMapper.selectListSelective(condition);
-       
-        
-      
-        
-        
-        
+
         if (CollectionUtils.isEmpty(configs)) {
             return;
         }
-        GprsConfigInfo gprsConfigInfo = configs.get(0);
+		GprsConfigInfo gprsConfigInfo = configs.get(0);
+		if (gprsConfigInfo.getDeviceType() == 3) {
+			pulseVo.setDischargeTime(4); // 2V监测设备，区间2的持续时间
+		}
+		if (gprsConfigInfo.getDeviceType() == 4) {
+			pulseVo.setDischargeTime(9);// 12监测设备，区间2的持续时间
+		}
         gprsConfigInfo.setFastSampleInterval(pulseVo.getFastSampleInterval());
         gprsConfigInfo.setDischargeTime(pulseVo.getDischargeTime());
         gprsConfigInfo.setSlowSampleInterval(pulseVo.getSlowSampleInterval());
@@ -192,6 +232,18 @@ public class PulseServiceImpl implements PulseService {
 
     private void saveCommand(String gprsid, Integer cell, PulseVo pulseVo) {
         PulseDischargeSend send = new PulseDischargeSend();
+        //通过设备类型骗的区间2的持续时间
+        GprsConfigInfo gprsConfigInfo = new GprsConfigInfo();
+        gprsConfigInfo.setGprsId(gprsid);
+        List<GprsConfigInfo> configInfo = gprsConfigInfoMapper.selectListSelective(gprsConfigInfo);
+        if(configInfo.size() != 0) {
+        	if(configInfo.get(0).getDeviceType() == 3) {
+        		pulseVo.setDischargeTime(4); //2V监测设备，区间2的持续时间
+        	}
+        	if(configInfo.get(0).getDeviceType() == 4) {
+        		pulseVo.setDischargeTime(9);//12监测设备，区间2的持续时间
+        	}
+        }
         send.setGprsId(gprsid);
         send.setPulseCell(cell);
         send.setSendDone(Integer.valueOf(0).byteValue());

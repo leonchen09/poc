@@ -49,7 +49,7 @@ public class RolesControll extends BaseController{
 	@ResponseBody
 	@ApiOperation(value = "新增角色模板及权限", notes = "新增角色模板及权限")
 	public AjaxResponse<Object> save(@RequestBody RolesDetail roles) {
-		AjaxResponse<Object> ajaxResponse = new AjaxResponse<>();
+		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		List<String> permissionCodeList = roles.getPermissionCodeList();
 		try {
 			Roles role = new Roles();
@@ -74,6 +74,8 @@ public class RolesControll extends BaseController{
 				rolePermission.setPermissionId(permissions.getPermissionId());
 				rolePermissionSer.insertSelective(rolePermission);
 			}
+			ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
+			ajaxResponse.setMsg("新增成功！");
 		} catch (Exception e) {
 			ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 			ajaxResponse.setMsg("模板名称输入有误！");

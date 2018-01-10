@@ -2491,6 +2491,12 @@
 			<if test="gprsId != null">
 				and gprs_id = #{gprsId,jdbcType=VARCHAR}
 			</if>
+			<if test="rcvTime1 != null">
+				and rcv_time &gt;&#61; #{rcvTime1,jdbcType=TIMESTAMP}
+			</if>
+			<if test="rcvTime2 != null">
+				and rcv_time &lt;&#61; #{rcvTime2,jdbcType=TIMESTAMP}
+			</if>
 			<if test="state != null">
 				and state = #{state,jdbcType=VARCHAR}
 			</if>
@@ -2507,17 +2513,12 @@
 					(gen_cur &gt;&#61; #{maxCur,jdbcType=DECIMAL} AND gen_cur &lt;&#61; #{minCur,jdbcType=DECIMAL})
 				)
 			</if>
-			<if test="rcvTime1 != null">
-				and rcv_time &gt;&#61; #{rcvTime1,jdbcType=TIMESTAMP}
-			</if>
-			<if test="rcvTime2 != null">
-				and rcv_time &lt;&#61; #{rcvTime2,jdbcType=TIMESTAMP}
-			</if>
 		</where>
-		ORDER BY rcv_time DESC limit 0,5
+		<!-- sql优化，改为java排序 -->
+		<!-- ORDER BY rcv_time DESC limit 0,5 -->
 	</select>
 
-	<select id="getPackDataInfosWhichIdLessThanGivenValue" resultMap="BaseResultMap">
+<!-- 	<select id="getPackDataInfosWhichIdLessThanGivenValue" resultMap="BaseResultMap">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM pack_data_info a INNER JOIN (
@@ -2533,9 +2534,24 @@
 			SELECT id FROM pack_data_info WHERE gprs_id = #{gprsId,jdbcType=VARCHAR} and id &gt; #{id,jdbcType=INTEGER}
 			ORDER BY id ASC LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
 		) b USING (id)
+	</select> -->
+
+	<!-- sql优化 -->
+	<select id="getPackDataInfosWhichIdLessThanGivenValue" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info WHERE gprs_id = #{gprsId,jdbcType=VARCHAR} and id &lt; #{id,jdbcType=INTEGER}
+			ORDER BY id DESC LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
 	</select>
 
-	<select id="getPackDataInfosByTimes" resultMap="BaseResultMap">
+	<select id="getPackDataInfosWhichGreaterThanGivenValue" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info a WHERE gprs_id = #{gprsId,jdbcType=VARCHAR} and id &gt; #{id,jdbcType=INTEGER}
+			ORDER BY id ASC LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+
+<!-- 	<select id="getPackDataInfosByTimes" resultMap="BaseResultMap">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM pack_data_info a INNER JOIN (
@@ -2557,8 +2573,31 @@
 			ORDER BY id DESC
 			LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
 		) b USING (id)
-	</select>
+	</select> -->
 
+	<!-- sql优化 -->
+	<select id="getPackDataInfosByTimes" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info
+			<where>
+				<if test="gprsId != null">
+					and gprs_id = #{gprsId,jdbcType=VARCHAR}
+				</if>
+				<if test="startTime != null">
+					and rcv_time &gt;&#61; #{startTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="endTime != null">
+					and rcv_time &lt;&#61; #{endTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="state != null">
+					and state = #{state,jdbcType=VARCHAR}
+				</if>
+			</where>
+			ORDER BY id DESC
+			LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</select>
+	
 	<select id="selectByOrderSelective" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -2567,11 +2606,11 @@
 			<if test="gprsId != null">
 				and gprs_id = #{gprsId,jdbcType=VARCHAR}
 			</if>
-			<if test="state != null">
-				and state = #{state,jdbcType=VARCHAR}
-			</if>
 			<if test="rcvTime != null">
 				and rcv_time &lt; #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="state != null">
+				and state = #{state,jdbcType=VARCHAR}
 			</if>
 		</where>
 		order by rcv_time desc

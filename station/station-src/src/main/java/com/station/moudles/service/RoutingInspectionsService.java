@@ -27,4 +27,8 @@ public interface RoutingInspectionsService extends BaseService<RoutingInspection
 	//查看整治信息
 	List<RoutingInspections> selectCellInspace(RoutingInspections routingInspections);
 	
+	//查询在判断主表中是否有新增的数据
+	List<RoutingInspections> selectListSelectiveFirst(RoutingInspections routingInspections);
+	
+	
 }

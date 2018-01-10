@@ -30,6 +30,16 @@ public class Parameter {
 	 */
 	@ApiModelProperty(value = "parameterDesc", example = "parameterDesc", required = false)
 	private String parameterDesc;
+	//参数类型
+	private String parameterCategory;
+	
+	public String getParameterCategory() {
+		return parameterCategory;
+	}
+
+	public void setParameterCategory(String parameterCategory) {
+		this.parameterCategory = parameterCategory;
+	}
 
 	/**
 	 * This method returns the value of the database column parameters.parameter_code  

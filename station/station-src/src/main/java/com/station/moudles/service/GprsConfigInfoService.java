@@ -33,7 +33,8 @@ public interface GprsConfigInfoService extends BaseService<GprsConfigInfo, Integ
 
 	void createSubDeviceByGprsId(String gprsId);
 	//----add 新增主机同时新增24个从机 并且设备类型和规格匹配
-	void createSubDevice(String gprsId,Integer deviceType,String gprsSpec );
+	//现在通过设备类型来决定从机的个数
+	void createSubDevice(String gprsId,Integer deviceType,String gprsSpec,Integer count,Integer subDeviceCount );
 
 	List selectUnbindGprsList(String gprsId);
 	

@@ -25,12 +25,12 @@ public abstract class BaseServiceImpl<T, TID> implements BaseService<T, TID> {
 
 	public void deleteByPrimaryKey(TID id) {
 		int rows = baseMapper.deleteByPrimaryKey(id);
-		System.out.println("deleteByPrimaryKey删除条数" + rows + ";id=" + id);
+		logger.debug("deleteByPrimaryKey删除条数" + rows + ";id=" + id);
 	}
 
 	public void deleteSelective(T record) {
 		int rows = baseMapper.deleteSelective(record);
-		System.out.println("deleteByPrimaryKey删除条数" + rows + ";record=" + record);
+		logger.debug("deleteByPrimaryKey删除条数" + rows + ";record=" + record);
 	}
 
 	public void deleteByPKs(TID[] ids) {
@@ -60,12 +60,12 @@ public abstract class BaseServiceImpl<T, TID> implements BaseService<T, TID> {
 
 	public void updateByPrimaryKeySelective(T record) {
 		int rows = baseMapper.updateByPrimaryKeySelective(record);
-		System.out.println("updateByPrimaryKeySelective更新条数" + rows + ";record=" + record);
+		logger.debug("updateByPrimaryKeySelective更新条数" + rows + ";record=" + record);
 	}
 
 	public void updateByPrimaryKey(T record) {
 		int rows = baseMapper.updateByPrimaryKey(record);
-		System.out.println("updateByPrimaryKey更新条数" + rows + ";record=" + record);
+		logger.debug("updateByPrimaryKey更新条数" + rows + ";record=" + record);
 	}
 
 	// void genratePk(T record) {

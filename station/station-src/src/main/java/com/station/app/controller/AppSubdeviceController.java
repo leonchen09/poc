@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.station.common.Constant;
 import com.station.common.utils.ReflectUtil;
 import com.station.moudles.controller.BaseController;
+import com.station.moudles.entity.GprsConfigInfo;
 import com.station.moudles.entity.PackDataInfoLatest;
 import com.station.moudles.entity.Parameter;
 import com.station.moudles.entity.RoutingInspectionStationDetail;
+import com.station.moudles.service.GprsConfigInfoService;
 import com.station.moudles.service.ModifyGprsidSendService;
 import com.station.moudles.service.PackDataInfoLatestService;
 import com.station.moudles.service.ParameterService;
@@ -39,6 +41,8 @@ public class AppSubdeviceController extends BaseController {
 	ModifyGprsidSendService modifyGprsidSendSer;
 	@Autowired
 	ParameterService paramterSer;
+	@Autowired
+	GprsConfigInfoService gprsConfigInfoSer;
 
 
 	@RequestMapping(value = "/subDeviceAndCellInfo/{gprsId}", method = RequestMethod.POST)
@@ -59,16 +63,24 @@ public class AppSubdeviceController extends BaseController {
 		String minVol = subMinVol.get(0).getParameterValue();
 		BigDecimal minV = new BigDecimal(minVol);
 		//查询单体的电压范围
-		par.setParameterCode("maxCellVol");
+		par.setParameterCode("chargeMaxVol");
 		List<Parameter> cellMaxVol = paramterSer.selectListSelective(par);
 		String cellMaxV = cellMaxVol.get(0).getParameterValue();
-		par.setParameterCode("minCellVol");
+		par.setParameterCode("chargeMinVol");
 		List<Parameter> cellMixVol = paramterSer.selectListSelective(par);
 		String cellMixV = cellMixVol.get(0).getParameterValue();
+		//查询出主机是否在线
+		GprsConfigInfo gprsConfigInfo = new GprsConfigInfo();
+		gprsConfigInfo.setGprsId(gprsId);
+		List<GprsConfigInfo> gprsList = gprsConfigInfoSer.selectListSelective(gprsConfigInfo);
+
 		//查询出从机的电压
 		List<PackDataInfoLatest> pdiList = packDataInfoLatestSer.selectListSelective(queryPdi);
 		PackDataInfoLatest pdi = null;
 		Map<String,Object> map = new HashMap<String,Object>();
+		if(gprsList.size() != 0) {
+			map.put("linkStatus", gprsList.get(0).getLinkStatus());
+		}
 		map.put("minVol", cellMixV);
 		map.put("maxVol", cellMaxV);
 		List<Map> volList = new ArrayList<>();

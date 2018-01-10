@@ -5,10 +5,11 @@
 		<id column="parameter_code" property="parameterCode" jdbcType="VARCHAR" />
 		<result column="parameter_value" property="parameterValue" jdbcType="VARCHAR" />
 		<result column="parameter_desc" property="parameterDesc" jdbcType="VARCHAR" />
+		<result column="parameter_category" property="parameterCategory" jdbcType="VARCHAR"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		parameter_code, parameter_value, parameter_desc
+		parameter_code, parameter_value, parameter_desc,parameter_category
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -32,6 +33,9 @@
 			<if test="parameterDesc != null">
 				and parameter_desc = #{parameterDesc,jdbcType=VARCHAR}
 			</if>
+			<if test="parameterCategory != null">
+				and parameter_category = #{parameterCategory,jdbcType=VARCHAR}
+			</if>
 		</where>
 	</select>
 
@@ -48,6 +52,9 @@
 			</if>
 			<if test="parameterDesc != null">
 				and parameter_desc like "%${parameterDesc}%"
+			</if>
+			<if test="parameterCategory != null">
+				and parameter_category = #{parameterCategory,jdbcType=VARCHAR}
 			</if>
 		</where>
 	</select>
@@ -77,30 +84,45 @@
 			<if test="parameterDesc != null">
 				and parameter_desc = #{parameterDesc,jdbcType=VARCHAR}
 			</if>
+			<if test="parameterCategory != null">
+				and parameter_category = #{parameterCategory,jdbcType=VARCHAR}
+			</if>
 		</where>
 	</delete>
 
 	<insert id="insert" parameterType="com.station.moudles.entity.Parameter" useGeneratedKeys="true" keyProperty="parameterCode">
-		insert into parameters (parameter_value, parameter_desc)
-		values (#{parameterValue,jdbcType=VARCHAR}, #{parameterDesc,jdbcType=VARCHAR})
+		insert into parameters ( parameter_code,parameter_value,parameter_category)
+		values ( #{parameterCode,jdbcType=VARCHAR},#{parameterValue,jdbcType=VARCHAR},#{parameterCategory,jdbcType=VARCHAR})
 	</insert>
 
 	<insert id="insertSelective" parameterType="com.station.moudles.entity.Parameter" useGeneratedKeys="true" keyProperty="parameterCode">
 		insert into parameters
 		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="parameterCode != null">
+				parameter_code,
+			</if>
 			<if test="parameterValue != null">
 				parameter_value,
 			</if>
 			<if test="parameterDesc != null">
 				parameter_desc,
 			</if>
+			<if test="parameterCategory != null">
+				parameter_category,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="parameterCode != null">
+				#{parameterCode,jdbcType=VARCHAR},
+			</if>
 			<if test="parameterValue != null">
 				#{parameterValue,jdbcType=VARCHAR},
 			</if>
 			<if test="parameterDesc != null">
 				#{parameterDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="parameterCategory != null">
+				#{parameterCategory,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -114,8 +136,22 @@
 			<if test="parameterDesc != null">
 				parameter_desc = #{parameterDesc,jdbcType=VARCHAR},
 			</if>
+			<if test="parameterCategory != null">
+				parameter_category =#{parameterCategory,jdbcType=VARCHAR},
+			</if>
 		</set>
 		where parameter_code = #{parameterCode,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateByparameterCategory" parameterType="com.station.moudles.entity.Parameter">
+		update parameters
+		<set>
+			<if test="parameterValue != null">
+				parameter_value = #{parameterValue,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where parameter_category = #{parameterCategory,jdbcType=VARCHAR} 
+		and parameter_code = #{parameterCode,jdbcType=VARCHAR}
 	</update>
 
 	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.Parameter">

@@ -31,6 +31,7 @@
 		<result column="duration" property="duration" jdbcType="INTEGER" />
 		<result column="send_done" property="sendDone" jdbcType="TINYINT" />
 		<result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+		<result column="mode" property="mode" jdbcType = "INTEGER"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -40,7 +41,7 @@
 		cell_18,
 		cell_19, cell_20,
 		cell_21, cell_22, cell_23, cell_24, duration, send_done,
-		send_time
+		send_time,mode
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -141,6 +142,9 @@
 			</if>
 			<if test="sendTime != null">
 				and send_time = #{sendTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="mode != null">
+				and mode = #{mode,jdbcType=INTEGER}
 			</if>
 		</where>
 	</select>
@@ -343,6 +347,9 @@
 			<if test="sendTime != null">
 				and send_time = #{sendTime,jdbcType=TIMESTAMP}
 			</if>
+			<if test="mode != null">
+				and mode = #{mode,jdbcType=INTEGER}
+			</if>
 		</where>
 	</delete>
 
@@ -463,6 +470,9 @@
 			<if test="sendTime != null">
 				send_time,
 			</if>
+			<if test="mode != null">
+				mode,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="gprsId != null">
@@ -548,6 +558,9 @@
 			</if>
 			<if test="sendTime != null">
 				#{sendTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mode != null">
+				#{mode,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
@@ -638,6 +651,9 @@
 			</if>
 			<if test="sendTime != null">
 				send_time = #{sendTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mode != null">
+				mode = #{mode,jdbcType=INTEGER},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}

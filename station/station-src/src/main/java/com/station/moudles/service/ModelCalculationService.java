@@ -34,13 +34,13 @@ public interface ModelCalculationService {
      *     最近12次浮充态的cell_vol_X值之和-max(cell_vol_X)-min(cell_vol_X)}/10，X=1~24
      *
      *     取每只电池最近12次浮充态的单体电压数据并去掉最高最低取剩余10个值的平均 值,分别作为单体有效浮充电压, 如单体浮充数据超过一周,则 视为本次模型计算失败。
-     *     1、max(cell_vol_X):最近12次浮充态最大的current值,min(cell_vol_X)最近12次浮充态最小的cell_vol_X值，X=1~24
+     *     1、max(cell_vol_X):最近12次浮充态最大的current值,min(cell_vol_X)最近12次浮充态最小的cell_vol_X值，X=1~cellCount
      *     2、最近12次的浮充态的cell_vol_X数据在最近一周内取，如果没有取到则返回模型计算失败。否则为成功。
      * </pre>
      *
-     * @return key is cell num(1~24), value is the cell voltage
+     * @return key is cell num(1~cellCount), value is the cell voltage
      */
-    Map<Integer, BigDecimal> calculateValidVoltage(String gprsId, Date currentDate);
+    Map<Integer, BigDecimal> calculateValidVoltage(StationInfo stationInfo, Date currentDate);
 
     List<PackDataInfo> getValidVoltage(String gprsId, Date currentDate);
 

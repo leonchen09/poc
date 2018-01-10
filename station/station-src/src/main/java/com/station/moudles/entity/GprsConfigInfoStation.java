@@ -13,6 +13,7 @@ public class GprsConfigInfoStation extends GprsConfigInfo {
 	private Integer operatorType;
 	@ApiModelProperty(value = "运维ID", example = "运维ID", required = false)
 	private String maintainanceId;
+	
 
 	/**
 	 * @return the companyId3

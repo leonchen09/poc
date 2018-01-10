@@ -1,7 +1,9 @@
 package com.station.moudles.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,11 +44,23 @@ public class ParameterController extends BaseController {
 		ajaxResponse.setData(parameterList);
 		return ajaxResponse;
 	}
+	/*
+	 *选择设备类型返回对应的参数 
+	 */
+	@RequestMapping(value = "/typeList", method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "获取所有参数列表")
+	public AjaxResponse<List<Parameter>> getTypeList(@RequestBody Parameter parameter) {
+		AjaxResponse<List<Parameter>> ajaxResponse = new AjaxResponse<List<Parameter>>();
+		List<Parameter> parameterTypeList = parameterSer.selectListSelective(parameter);
+		ajaxResponse.setData(parameterTypeList);
+		return ajaxResponse;
+	}
 
 	@RequestMapping(value = "/updateAll", method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation(value = "更新对应parameter")
-	public AjaxResponse<List<Parameter>> updateParameterAll(@Validated @RequestBody AppConfigVo appConfig , BindingResult br) throws IllegalArgumentException, IllegalAccessException {
+	public AjaxResponse<List<Parameter>> updateParameterAll(@Validated @RequestBody AppConfigVo appConfig , BindingResult br) throws IllegalArgumentException, IllegalAccessException,InvocationTargetException {
 		if (br.hasErrors()) {
 			List<ObjectError> errorList = br.getAllErrors();
 			StringBuffer sb = new StringBuffer();
@@ -56,7 +70,10 @@ public class ParameterController extends BaseController {
     		return new AjaxResponse<>(Constant.RS_CODE_ERROR, sb.toString());
 		}
 		AjaxResponse<List<Parameter>> ajaxResponse = new AjaxResponse<List<Parameter>>();
-		parameterSer.updateParameterAll(appConfig);
+		AppConfigVo VO = new AppConfigVo();
+		BeanUtils.copyProperties(VO, appConfig);
+		VO.setParameterCategory(null);
+		parameterSer.updateParameterAll(VO,appConfig.getParameterCategory());
 		return ajaxResponse;
 	}
 

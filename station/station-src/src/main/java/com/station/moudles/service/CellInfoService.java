@@ -16,5 +16,8 @@ public interface CellInfoService extends BaseService<CellInfo, Integer> {
 
     void updateSendDoneByGprsCellIndex(String gprsId, Integer cellIndex, Integer pulseSendDone);
 
-    void appUpdateCellInfo(RoutingInspectionStationDetail RoutingInspectionStationDetail,RoutingInspectionDetail detailList,String cellPlant);
+    void exportUpdateCellInfo(RoutingInspectionStationDetail routingInspectionStationDetail,RoutingInspectionDetail detailList,String cellPlant);
+   
+    void appUpdateCellInfo(RoutingInspectionStationDetail routingInspectionStationDetail,RoutingInspectionDetail detailList,String cellPlant,boolean isInsert);
+
 }

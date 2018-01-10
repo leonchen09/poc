@@ -99,4 +99,11 @@ public class MyDateUtils {
 		c.set(Calendar.MILLISECOND, 0);  
 		return c.getTime();
 	}
+	
+	public static Date add(Date d, int field, int amount) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(d);
+		calendar.add(field, amount);
+		return calendar.getTime();
+	}
 }

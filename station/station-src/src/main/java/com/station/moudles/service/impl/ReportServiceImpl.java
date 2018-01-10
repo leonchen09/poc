@@ -66,6 +66,7 @@ import com.station.moudles.vo.report.ChargeDischargeReportItem;
 import com.station.moudles.vo.report.PulseReport;
 import com.station.moudles.vo.report.PulseReportItem;
 import com.station.moudles.vo.report.StationReport;
+import com.station.moudles.vo.report.StationReportFilter;
 import com.station.moudles.vo.report.StationReportItem;
 import com.station.moudles.vo.report.SuggestionReport;
 import com.station.moudles.vo.report.SuggestionReportItem;
@@ -368,7 +369,7 @@ public class ReportServiceImpl implements ReportService {
         if (CollectionUtils.isNotEmpty(validDischarges)) {
             stopWatch.reset();
             stopWatch.start();
-            List<ChargeDischargeReportItem> details = getLatestDischarges(validDischarges.get(validDischarges.size() - 1), packDataInfos);
+            List<ChargeDischargeReportItem> details = getLatestDischarges(validDischarges.get(validDischarges.size() - 1), packDataInfos, stationInfo);
             stopWatch.stop();
             LOGGER.debug("获取{}条最近一次有效放电详情, 设备编号:{},耗时:{}",
                     new Object[]{details.size(), stationInfo.getGprsId(), stopWatch});
@@ -377,7 +378,7 @@ public class ReportServiceImpl implements ReportService {
             }
             stopWatch.reset();
             stopWatch.start();
-            List<ChargeDischargeReportItem> items = getEndVoltage(validDischarges, packDataInfos);
+            List<ChargeDischargeReportItem> items = getEndVoltage(validDischarges, packDataInfos, stationInfo);
             stopWatch.stop();
             LOGGER.debug("获取{}条截止电压最低放电详情, 设备编号:{},耗时:{}",
                     new Object[]{items.size(), stationInfo.getGprsId(), stopWatch});
@@ -389,10 +390,10 @@ public class ReportServiceImpl implements ReportService {
     }
     
     private List<ChargeDischargeReportItem> getEndVoltage(List<PackDataInfo> validDischarges,
-                                                          List<PackDataInfo> packDataInfos) {
+                                                          List<PackDataInfo> packDataInfos, StationInfo stationInfo) {
     	packDataInfos = packDataInfos.stream().sorted(Comparator.comparing(PackDataInfo::getRcvTime))
 				  .collect(Collectors.toList());
-        Map<Integer, List<PackDataInfo>> map = Maps.newHashMap();
+        /*Map<Integer, List<PackDataInfo>> map = Maps.newHashMap();
         for (int i = 0; i < validDischarges.size(); i++) {
             PackDataInfo packDataInfo = validDischarges.get(i);
             List<PackDataInfo> items = getDischarges(packDataInfo, packDataInfos);
@@ -416,7 +417,10 @@ public class ReportServiceImpl implements ReportService {
                 matchedKey = entry.getKey();
             }
         }
-        return convertToReportItem(map.get(matchedKey));
+        return convertToReportItem(map.get(matchedKey));*/
+    	PackDataInfo packDataInfo = validDischarges.stream().min(Comparator.comparing(PackDataInfo::getGenVol)).get();
+    	List<PackDataInfo> items = getDischarges(packDataInfo, packDataInfos);
+    	return convertToReportItem(items, stationInfo);
     }
 
     private List<PackDataInfo> getDischarges(PackDataInfo packDataInfo,
@@ -447,7 +451,19 @@ public class ReportServiceImpl implements ReportService {
             }
         }
         if (count < 10) {
-            return Collections.emptyList();
+        	List<PackDataInfo> forwardLookup = forwardLookup(items.get(0).getId(), packDataInfo.getGprsId());
+			if (CollectionUtils.isEmpty(forwardLookup) || forwardLookup.size() < 10) {
+				startIndex = 0;
+			} else {
+				List<PackDataInfo> collect = forwardLookup.stream()
+						.sorted(Comparator.comparing(PackDataInfo::getId).reversed()).collect(Collectors.toList());
+				collect = collect.subList(0, 10 - count);
+				if (stateVerify(collect, "放电", true)) {
+					startIndex = 0;
+				} else {
+					return Collections.emptyList();
+				}
+			}
         }
         // 向后找连续10条非放电态的数据
         count = 0;
@@ -460,28 +476,41 @@ public class ReportServiceImpl implements ReportService {
                 count = 0;
             }
             if (count >= 10) {
-                endIndex = i;
+                endIndex = i + 1;
                 break;
             }
         }
         if (count < 10) {
-            return Collections.emptyList();
+        	List<PackDataInfo> backwardLookup = backwardLookup(items.get(items.size() - 1).getId(),
+					packDataInfo.getGprsId());
+			if (CollectionUtils.isEmpty(backwardLookup) || backwardLookup.size() < 10) {
+				endIndex = items.size();
+			} else {
+				List<PackDataInfo> collect = backwardLookup.stream()
+						.sorted(Comparator.comparing(PackDataInfo::getId)).collect(Collectors.toList());
+				collect = collect.subList(0, 10 - count);
+				if (stateVerify(collect, "放电", true)) {
+					endIndex = items.size();
+				} else {
+					return Collections.emptyList();
+				}
+			}
         }
         return items.subList(startIndex, endIndex);
     }
 
     private List<ChargeDischargeReportItem> getLatestDischarges(PackDataInfo packDataInfo,
-                                                                List<PackDataInfo> items) {
+                                                                List<PackDataInfo> items, StationInfo stationInfo) {
     	items = items.stream().sorted(Comparator.comparing(PackDataInfo::getRcvTime))
     						  .collect(Collectors.toList());
         List<PackDataInfo> packDataInfos = getDischarges(packDataInfo, items);
         if (CollectionUtils.isEmpty(packDataInfos)) {
             return Collections.emptyList();
         }
-        return convertToReportItem(packDataInfos);
+        return convertToReportItem(packDataInfos, stationInfo);
     }
 
-    private List<ChargeDischargeReportItem> convertToReportItem(List<PackDataInfo> packDataInfos) {
+    private List<ChargeDischargeReportItem> convertToReportItem(List<PackDataInfo> packDataInfos, StationInfo stationInfo) {
         return packDataInfos.stream()
                 .map(item -> {
                     ChargeDischargeReportItem reportItem = new ChargeDischargeReportItem();
@@ -489,10 +518,10 @@ public class ReportServiceImpl implements ReportService {
                     reportItem.setTime(MyDateUtils.getDateString(item.getRcvTime(), "yyyy/MM/dd HH:mm:ss"));
                     reportItem.setCur(item.getGenCur().toString());
                     reportItem.setVol(item.getGenVol().toString());
-                    Map<Integer, String> cellMap = Maps.newHashMap();
-                    for (int i = 1; i < 25; i++) {
+                    Map<String, String> cellMap = Maps.newHashMap();
+                    for (int i = 1; i < stationInfo.getCellCount() + 1; i++) {
                         BigDecimal bigDecimal = (BigDecimal) BeanValueUtils.getValue("cellVol" + i, item);
-                        cellMap.put(i, bigDecimal == null ? StringUtils.EMPTY : bigDecimal.toString());
+                        cellMap.put(String.valueOf(i), bigDecimal == null ? StringUtils.EMPTY : bigDecimal.toString());
                     }
                     reportItem.setCellMap(cellMap);
                     return reportItem;
@@ -504,7 +533,21 @@ public class ReportServiceImpl implements ReportService {
         if (gprsConfigInfo == null) {
             return Collections.emptyList();
         }
-        List<PackDataInfo> items = Lists.newArrayList();
+        int counter = 0;
+		List<PackDataInfo> items = Lists.newArrayList();
+		for (int i = 0; i < packDataInfos.size(); i++) {
+			if (isValidDischarge(packDataInfos.get(i), gprsConfigInfo)) {
+				counter++;
+			} else {
+				counter = 0;
+			}
+			if (counter >= 2) {
+				items.add(packDataInfos.get(i));
+				counter = 0;
+			}
+		}
+        
+        /*List<PackDataInfo> items = Lists.newArrayList();
         for (PackDataInfo item : packDataInfos) {
             boolean res = ModelCalculationServiceImpl.DISCHARGE_NAME.equals(item.getState());
             if (!res) {
@@ -523,17 +566,39 @@ public class ReportServiceImpl implements ReportService {
                 continue;
             }
             items.add(item);
-        }
+        }*/
         return items.stream()
                 .sorted(Comparator.comparing(PackDataInfo::getRcvTime))
                 .collect(Collectors.toList());
     }
+    
+    private boolean isValidDischarge(PackDataInfo item, GprsConfigInfo gprsConfigInfo) {
+		boolean res = ModelCalculationServiceImpl.DISCHARGE_NAME.equals(item.getState());
+		if (!res) {
+			return false;
+		}
+		res = item.getGenVol().compareTo(gprsConfigInfo.getValidDischargeVol()) <= 0;
+		if (!res) {
+			return false;
+		}
+		BigDecimal minCur = gprsConfigInfo.getValidDischargeCur().abs();
+		BigDecimal maxCur = gprsConfigInfo.getMaxDischargeCur() == null ? BigDecimal.valueOf(100)
+				: gprsConfigInfo.getMaxDischargeCur();
+		maxCur = maxCur.abs();
+		res = (item.getGenCur().compareTo(minCur) >= 0 && item.getGenCur().compareTo(maxCur) <= 0)
+				|| (item.getGenCur().compareTo(maxCur.multiply(BigDecimal.valueOf(-1))) >= 0
+						&& item.getGenCur().compareTo(minCur.multiply(BigDecimal.valueOf(-1))) <= 0);
+		if (!res) {
+			return false;
+		}
+		return true;
+	}
 
     private void generateEvents(StationInfo stationInfo,
                                 ChargeDischargeReport report,
                                 List<PackDataInfo> packDataInfos,
                                 AbstractEvent event) {
-        List<ChargeDischargeEvent> events = event.generateEvents(stationInfo.getGprsId(), packDataInfos);
+        List<ChargeDischargeEvent> events = event.generateEvents(stationInfo.getGprsId(), packDataInfos, this);
         if (CollectionUtils.isNotEmpty(events)) {
         	//取出来的数据是按时间降序的，需求要按时间升序
         	Collections.reverse(events);
@@ -1097,42 +1162,58 @@ public class ReportServiceImpl implements ReportService {
     
     @Override
 	public StationReport generateStationVolCurStr(StationReport stationReport) {
-		StationReport filter = new StationReport();
-		BeanUtils.copyProperties(stationReport, filter);
-		filter.setStartRcvTimeStr(JxlsUtil.dateFmt(stationReport.getStartRcvTime()));
-		filter.setEndRcvTimeStr(JxlsUtil.dateFmt(stationReport.getEndRcvTime()));
+		StationReport report = new StationReport();
+		BeanUtils.copyProperties(stationReport, report);
+		report.setStartRcvTimeStr(JxlsUtil.dateFmt(stationReport.getStartRcvTime()));
+		report.setEndRcvTimeStr(JxlsUtil.dateFmt(stationReport.getEndRcvTime()));
 		List<StationReportItem> items = new ArrayList<>();
-		filter.setItems(items);
+		report.setItems(items);
+		Map<String, StationReportFilter> filter = new HashMap<>();
+		report.setFilter(filter);
+		// 过滤条件赋值
 		StationFilter[] values = StationFilter.values();
 		for (int i = 0; i < values.length; i++) {
-			Parameter param = parameterMapper.selectByPrimaryKey(values[i].toString());
-			String parameterValue = param.getParameterValue();
-			switch (values[i]) {
-			case maxGenVol:
-			case minGenVol:
-			case maxGenCur:
-			case minGenCur:
-			case maxCellVol:
-			case minCellVol:
-				BigDecimal convertDec = new BigDecimal(parameterValue);
-				ReflectUtil.setValueByKet(filter, values[i].toString(), convertDec);
-				break;
-			case maxEnvironTem:
-			case minEnvironTem:
-			case maxCellTem:
-			case minCellTem:
-			case maxComSuc:
-			case minComSuc:
-				Integer convertInt = new Integer(parameterValue);
-				ReflectUtil.setValueByKet(filter, values[i].toString(), convertInt);
-				break;
+			Parameter record = new Parameter();
+			record.setParameterCode(values[i].toString());
+			List<Parameter> selectListSelective = parameterMapper.selectListSelective(record);
+			Map<String, Parameter> parameterMap = selectListSelective.stream()
+					.collect(Collectors.toMap(Parameter::getParameterCategory, p -> p));
+			StationReportFilter itemFilter = null;
+			for(String key : parameterMap.keySet()){
+				if (filter.containsKey(key)) {
+					itemFilter = filter.get(key);
+				}else {
+					itemFilter = new StationReportFilter();
+					filter.put(key, itemFilter);
+				}
+				String parameterValue = parameterMap.get(key).getParameterValue();
+				switch (values[i]) {
+				case maxGenVol:
+				case minGenVol:
+				case maxGenCur:
+				case minGenCur:
+				case maxCellVol:
+				case minCellVol:
+					BigDecimal convertDec = new BigDecimal(parameterValue);
+					ReflectUtil.setValueByKet(itemFilter, values[i].toString(), convertDec);
+					break;
+				case maxEnvironTem:
+				case minEnvironTem:
+				case maxCellTem:
+				case minCellTem:
+				case maxComSuc:
+				case minComSuc:
+					Integer convertInt = new Integer(parameterValue);
+					ReflectUtil.setValueByKet(itemFilter, values[i].toString(), convertInt);
+					break;
+				}
 			}
 		}
 
 		SearchStationInfoPagingVo query = new SearchStationInfoPagingVo();
-		query.setCompanyId3(filter.getCompanyId3());
-		query.setLinkStatus(filter.getLinkStatus());
-		query.setState(filter.getState());
+		query.setCompanyId3(report.getCompanyId3());
+		query.setLinkStatus(report.getLinkStatus());
+		query.setState(report.getState());
 		query.setDelFlag(0);//只查询未删除的
 		query.setPageSize(null);
 		query.setPageNo(null);
@@ -1141,28 +1222,28 @@ public class ReportServiceImpl implements ReportService {
 		stopWatch.start();
 		List<StationInfo> selectListSelective = stationInfoMapper.selectListSelectivePaging(query);
 		stopWatch.stop();
-		filter.setStationTotal(selectListSelective == null ? 0 : selectListSelective.size());
+		report.setStationTotal(selectListSelective == null ? 0 : selectListSelective.size());
 		logger.info("station查询时间-->"+stopWatch.getTime());
 		logger.info("station查询条数-->"+(selectListSelective == null ? 0 : selectListSelective.size()));
 		for (StationInfo stationInfo : selectListSelective) {
-			 StationReportItem item = new StationReportItem();
-			 BeanUtils.copyProperties(stationInfo, item);
 			 if (stationInfo.getLinkStatus() == null || stationInfo.getLinkStatus() == 0) {
+				 StationReportItem item = new StationReportItem();
+				 BeanUtils.copyProperties(stationInfo, item);
 				 item.setRemark("设备离线或未绑定设备");
 				 items.add(item);
 				 continue;
 			 }
-			 exceptionStationCheck(filter,items,item,stationInfo);
+			 exceptionStationCheck(report,items,stationInfo);
 		}
-		return filter;
+		return report;
 	}
 
-	private void exceptionStationCheck(StationReport filter,List<StationReportItem> items,
-										StationReportItem item,StationInfo stationInfo) {
+	private void exceptionStationCheck(StationReport report,List<StationReportItem> items,
+										StationInfo stationInfo) {
 		Map<String, Object> paramMap = Maps.newHashMap();
 		paramMap.put("gprsId", stationInfo.getGprsId());
-		paramMap.put("startTime", filter.getStartRcvTime());
-		paramMap.put("endTime", filter.getEndRcvTime());
+		paramMap.put("startTime", report.getStartRcvTime());
+		paramMap.put("endTime", report.getEndRcvTime());
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.reset();
 		stopWatch.start();
@@ -1171,12 +1252,17 @@ public class ReportServiceImpl implements ReportService {
 		logger.info("packData查询时间-->"+stopWatch.getTime());
 		logger.info("packData查询条数-->"+(pdiByTime == null ? 0 : pdiByTime.size()));
 		if (pdiByTime == null || pdiByTime.size() < 10) {
+			StationReportItem item = new StationReportItem();
+			BeanUtils.copyProperties(stationInfo, item);
 			item.setRemark("数据量过少");
 			items.add(item);
 			return;
 		}
+		StationReportFilter filter = report.getFilter().get(stationInfo.getDeviceType() + "");
 		int exceptionCount = 0; // 一个电池组，只取5条异常数据
 		for (PackDataInfo packDataInfo : pdiByTime) {
+			StationReportItem item = new StationReportItem();
+			BeanUtils.copyProperties(stationInfo, item);
 			boolean hasException = false;
 			boolean hasDeviceExce = false;
 			if (packDataInfo.getGenVol() == null) {
@@ -1224,7 +1310,7 @@ public class ReportServiceImpl implements ReportService {
 			if (hasDeviceExce) {
 				pdiExce.append("主机异常");
 			}
-			for (int i = 1; i < 25; i++) {
+			for (int i = 1; i < stationInfo.getCellCount() + 1; i++) {
 				StringBuffer sb = new StringBuffer();
 				boolean hasSubDeviceExce = false;
 				BigDecimal cellVol = (BigDecimal) ReflectUtil.getValueByKey(packDataInfo, "cellVol" + i);
@@ -1289,11 +1375,51 @@ public class ReportServiceImpl implements ReportService {
 		}else {
 			try {
 				event.setGprsConfigInfo(gprsConfigInfo);
-		        events = event.generateEvents(gprsId, packDataInfos);
+		        events = event.generateEvents(gprsId, packDataInfos, this);
 			} catch (Exception e) {
 				LOGGER.info("不能找到相关的掉电配置,编号:{}", gprsId);
 			}
 		}
 		return events;
+	}
+	
+	public List<PackDataInfo> forwardLookup(Integer startId, String gprsId) {
+		Map<String, Object> paramMap = Maps.newHashMap();
+		paramMap.put("gprsId", gprsId);
+		paramMap.put("id", startId);
+		paramMap.put("pageNum", 0);
+		paramMap.put("pageSize", 10);
+		return packDataInfoMapper.getPackDataInfosWhichIdLessThanGivenValue(paramMap);
+	}
+
+	public List<PackDataInfo> backwardLookup(Integer startId, String gprsId) {
+		Map<String, Object> paramMap = Maps.newHashMap();
+		paramMap.put("gprsId", gprsId);
+		paramMap.put("id", startId);
+		paramMap.put("pageNum", 0);
+		paramMap.put("pageSize", 10);
+		return packDataInfoMapper.getPackDataInfosWhichGreaterThanGivenValue(paramMap);
+	}
+
+	/**
+	 * 判断集合是否都为指定状态
+	 * 
+	 * @param list
+	 * @param state
+	 *            判断状态
+	 * @param isContrary
+	 *            是否判断相反的状态
+	 * @return
+	 */
+	private boolean stateVerify(List<PackDataInfo> list, String state, boolean isContrary) {
+		for (PackDataInfo packDataInfo : list) {
+			if (!isContrary && !state.equals(packDataInfo.getState())) {
+				return false;
+			}
+			if (isContrary && state.equals(packDataInfo.getState())) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -36,6 +38,7 @@ import com.station.moudles.entity.GprsConfigInfo;
 import com.station.moudles.entity.GprsConfigInfoDetail;
 import com.station.moudles.entity.GprsConfigInfoStation;
 import com.station.moudles.entity.GprsConfigSend;
+import com.station.moudles.entity.GprsDeviceType;
 import com.station.moudles.entity.ModifyBalanceSend;
 import com.station.moudles.entity.PulseDischargeSend;
 import com.station.moudles.entity.RoutingInspectionDetail;
@@ -44,9 +47,11 @@ import com.station.moudles.entity.RoutingInspections;
 import com.station.moudles.entity.StationInfo;
 import com.station.moudles.entity.SubDevice;
 import com.station.moudles.mapper.GprsConfigInfoMapper;
+import com.station.moudles.mapper.SubDeviceMapper;
 import com.station.moudles.service.CellInfoService;
 import com.station.moudles.service.GprsConfigInfoService;
 import com.station.moudles.service.GprsConfigSendService;
+import com.station.moudles.service.GprsDeviceTypeService;
 import com.station.moudles.service.RoutingInspectionDetailService;
 import com.station.moudles.service.RoutingInspectionsService;
 import com.station.moudles.service.StationInfoService;
@@ -79,6 +84,11 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 	RoutingInspectionDetailService routingInspectionDetailSer;
 	@Autowired
 	ModifyBalanceInfoServiceImpl modifybalanceInfoSer;
+	@Autowired
+	GprsDeviceTypeService gprsDeviceTypeSer;
+	@Autowired
+	SubDeviceMapper subDeviceMapper;
+	
 	private static final Logger logger = LoggerFactory.getLogger(GprsConfigInfoServiceImpl.class);
 
 	@Override
@@ -108,8 +118,11 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 		// BeanUtils.copyProperties(nullGprsConfigSend, updateConfig);
 		
 		// 12/19 修改 修改主机参数直接修改gprs_congfig_info表里面的参数 
-		//gprsConfigInfoMapper.updateByCompanyId(updateConfig);
-
+		if (flag) {
+			gprsConfigInfoMapper.updateByCompanyId(updateConfig);
+		}
+		//将gprsDeviceType 设置为null 以前没有传递这个，避免错误
+		gprsConfigInfo.setDeviceType(null);
 		PulseDischargeSend pulseDischargeSend = new PulseDischargeSend();
 		BeanUtils.copyProperties(gprsConfigInfo, pulseDischargeSend);
 		pulseDischargeSend.setId(null);
@@ -201,11 +214,28 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 		gprsFile = true;
 		// 导入主机，问题行详细记录信息
 		TreeMap<Integer, String> errorRow = new TreeMap<>();
-
+		// 先查询所有
+		GprsDeviceType gprsDeviceType = new GprsDeviceType();
+		List<GprsDeviceType> deviceTypeList = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+		//k- name.V-类型
+		Map<String, Integer> nameAndcode = new HashMap<String, Integer>();
+		//k- name,V-sub_device_count
+		Map<String, Integer> nameAndSubCount = new HashMap<String, Integer>();
+		//K-name,v -vol
+		Map<String,Integer> nameAndVol = new HashMap<String,Integer>();
+		if (deviceTypeList.size() != 0) {
+			for (GprsDeviceType deviceType : deviceTypeList) {
+				nameAndcode.put(deviceType.getTypeName(), deviceType.getTypeCode());
+				nameAndSubCount.put(deviceType.getTypeName(), deviceType.getSubDeviceCount());
+				nameAndVol.put(deviceType.getTypeName(), deviceType.getVolLevel());
+			}
+		}
 		logger.info("start parse masterDevice excel file!");
 		try {
 			int rowNum = 1;
 			int successCount = 0;
+			Integer subDeviceCount = 0;
+			Integer volLevel = 0;
 			InputStream inp = new FileInputStream(file);
 			Workbook wb = WorkbookFactory.create(inp);
 			Sheet sheet = wb.getSheetAt(0);
@@ -267,14 +297,46 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 					}
 					if (StringUtils.getString(row.getCell(2)) != null && row.getCell(2).toString().length() <= 20) {
 						String deviceTypeStr = row.getCell(2).toString();
-						if (deviceTypeStr != null && deviceTypeStr.indexOf("诊断") != -1) {
-							createGprsConfigInfo.setDeviceType(2);
-						} else if(deviceTypeStr != null && deviceTypeStr.indexOf("复用") != -1){
-							createGprsConfigInfo.setDeviceType(1);
-						} else {
-							errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行主机的操作类型填写错误，注意检查模板是否正确！");
+//						if (deviceTypeStr != null && deviceTypeStr.indexOf("诊断") != -1) {
+//							createGprsConfigInfo.setDeviceType(2);
+//						} else if(deviceTypeStr != null && deviceTypeStr.indexOf("复用") != -1){
+//							createGprsConfigInfo.setDeviceType(1);
+//						} else {
+//							errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行主机的操作类型填写错误，注意检查模板是否正确！");
+//							continue;
+//						}
+						switch (deviceTypeStr) {
+						case "蓄电池串联复用设备":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							createGprsConfigInfo.setSubDeviceCount(nameAndSubCount.get(deviceTypeStr));
+							subDeviceCount=nameAndSubCount.get(deviceTypeStr);
+							volLevel = nameAndVol.get(deviceTypeStr);
+							break;
+						case "蓄电池串联复用诊断组件":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							createGprsConfigInfo.setSubDeviceCount(nameAndSubCount.get(deviceTypeStr));
+							subDeviceCount=nameAndSubCount.get(deviceTypeStr);
+							volLevel = nameAndVol.get(deviceTypeStr);
+							break;
+						
+						case "蓄电池2V监测设备":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							createGprsConfigInfo.setSubDeviceCount(nameAndSubCount.get(deviceTypeStr));
+							subDeviceCount=nameAndSubCount.get(deviceTypeStr);
+							volLevel = nameAndVol.get(deviceTypeStr);
+							break;
+						case "蓄电池12V监测设备":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							createGprsConfigInfo.setSubDeviceCount(nameAndSubCount.get(deviceTypeStr));
+							subDeviceCount=nameAndSubCount.get(deviceTypeStr);
+							volLevel = nameAndVol.get(deviceTypeStr);
+							break;
+						default:
+							errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行备用主机的设备类型类型没有填写或者填写错误！");
 							continue;
 						}
+						
+						
 					} else {
 						errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行主机的操作类型没有填写或者字符长度超过20个字符！");
 						continue;
@@ -321,19 +383,32 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行的设备编号存在，并且是备用的设备，不能导入！");
 								continue;
 							}else {
-
+							// 查询是否有绑定过电池组
+							StationInfo stationInfo = new StationInfo();
+							stationInfo.setGprsId(gprsConfigInfo.getGprsId());
+							List<StationInfo> stationList = stationInfoSer.selectListSelective(stationInfo);
+							if(stationList.size() != 0) {
+								if(stationList.get(0).getVolLevel() != volLevel) {
+									errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行的设备的设备类型对应的电压平台和该设备已经绑定电池组的电压平台不一致，不能导入！");
+									continue;
+								}
+							}
 							gprsConfigInfoMapper.updateByGprsSelective(createGprsConfigInfo);
+							// 修改从机的设备类型
+							SubDevice subDevice = new SubDevice();
+							subDevice.setSubType(createGprsConfigInfo.getDeviceType());
+							subDevice.setGprsId(gprsConfigInfo.getGprsId());
+							subDeviceMapper.updateSubTypeByGprsId(subDevice);
 							successCount++;
 						
 							ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
 							ajaxResponse.setMsg("主机导入成功");
 							// -------add 新增主机同时新增24个从机 并且设备类型和规格匹配
-							GprsConfigInfo gprsInfo = configList.get(0);
-							Integer deviceTpe = gprsInfo.getDeviceType();
-							String gprsSpec = gprsInfo.getGprsSpec();
+							Integer deviceTpe = createGprsConfigInfo.getDeviceType();
+							String gprsSpec = gprsConfigInfo.getGprsSpec();
 							
 							// 把逻辑抽成了方法，因为新增时也要用到
-							isSubDevice(gprsId, deviceTpe, gprsSpec);
+							isSubDevice(gprsId, deviceTpe, gprsSpec,subDeviceCount);
 							continue;
 							}
 						}
@@ -343,7 +418,7 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 					insertSelective(createGprsConfigInfo);
 					// 原来的createSubDeviceByGprsId(gprsId);
 					// -----add新增主机同时新增24个从机 并且设备类型和规格匹配
-					createSubDevice(gprsId, createGprsConfigInfo.getDeviceType(), createGprsConfigInfo.getGprsSpec());
+					createSubDevice(gprsId, createGprsConfigInfo.getDeviceType(), createGprsConfigInfo.getGprsSpec(),0,createGprsConfigInfo.getSubDeviceCount());
 
 					successCount++;
 				}
@@ -372,15 +447,27 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 		return true;
 	}
 
-	public void isSubDevice(String gprsId, Integer deviceType, String gprsSpec) {
+	public void isSubDevice(String gprsId, Integer deviceType, String gprsSpec,Integer subDeviceCount) {
 		SubDevice subDevice = new SubDevice();
 		subDevice.setGprsId(gprsId);
 		int count = subDeviceSer.selectListCountSelective(subDevice);
 		if (count == 0) { // 没有从机，生成从机
 			// 原来的createSubDeviceByGprsId(gprsId);
 			// ---add
-			createSubDevice(gprsId, deviceType, gprsSpec);
+			createSubDevice(gprsId, deviceType, gprsSpec,count,subDeviceCount);
 		}
+		if(count > subDeviceCount) {//原来是设备是24个从机，现在设备是4个从机，就删除后面的
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("startIndex", subDeviceCount+1);
+			map.put("endIndex", count);
+			map.put("gprsId", gprsId);
+			subDeviceSer.deleteMoreSubDevice(map);
+		}
+		if(count < subDeviceCount) {//原来是设备是4个从机，现在设备是24个从机，就增加后面的
+			createSubDevice(gprsId, deviceType, gprsSpec,count,subDeviceCount);
+		}
+		
+		
 	}
 
 	// 备用主机导入
@@ -395,6 +482,16 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 		backFile = true;
 		// 问题行详细记录信息
 		TreeMap<Integer, String> errorRow = new TreeMap<>();
+		// 先查询所有
+		GprsDeviceType gprsDeviceType = new GprsDeviceType();
+		List<GprsDeviceType> deviceTypeList = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+		//k- name.V-类型
+		Map<String, Integer> nameAndcode = new HashMap<String, Integer>();
+		if (deviceTypeList.size() != 0) {
+			for (GprsDeviceType deviceType : deviceTypeList) {
+				nameAndcode.put(deviceType.getTypeName(), deviceType.getTypeCode());
+			}
+		}
 		logger.info("start parse backupDevice excel file!");
 		try {
 			int rowNum = 1;
@@ -454,12 +551,30 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 					// ----end
 					if (StringUtils.getString(row.getCell(1)) != null && row.getCell(1).toString().length() <= 20) {
 						String deviceTypeStr = row.getCell(1).toString();
-						if (deviceTypeStr != null && deviceTypeStr.indexOf("诊断") != -1) {
-							createGprsConfigInfo.setDeviceType(2);
-						} else if(deviceTypeStr.indexOf("复用")  != -1){
-							createGprsConfigInfo.setDeviceType(1);
-						}else {
-							errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行的备用主机的类型没有填写有无，注意检查模板是否正确！");
+//						if (deviceTypeStr != null && deviceTypeStr.indexOf("诊断") != -1) {
+//							createGprsConfigInfo.setDeviceType(2);
+//						} else if(deviceTypeStr.indexOf("复用")  != -1){
+//							createGprsConfigInfo.setDeviceType(1);
+//						}else {
+//							errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行的备用主机的类型没有填写有无，注意检查模板是否正确！");
+//							continue;
+//						}
+						switch (deviceTypeStr) {
+						case "蓄电池串联复用设备":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							break;
+						case "蓄电池串联复用诊断组件":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							break;
+						
+						case "蓄电池2V监测设备":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							break;
+						case "蓄电池12V监测设备":
+							createGprsConfigInfo.setDeviceType(nameAndcode.get(deviceTypeStr));
+							break;
+						default:
+							errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行主机的设备类型类型没有填写或者填写错误");
 							continue;
 						}
 					} else {
@@ -531,6 +646,7 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 								continue;
 							}
 							gprsConfigInfoMapper.updateByGprsSelective(createGprsConfigInfo);
+							
 							successCount++;
 						}
 						ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
@@ -590,9 +706,10 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 	}
 
 	// -------add 新增主机同时新增24个从机 并且设备类型和规格匹配
+	//现在根据设备类型来决定新增从机的多少
 	@Override
-	public void createSubDevice(String gprsId, Integer deviceType, String gprsSpec) {
-		for (int i = 1; i < 25; i++) {
+	public void createSubDevice(String gprsId, Integer deviceType, String gprsSpec,Integer count,Integer subDeviceCount) {
+		for (int i = count+1; i <= subDeviceCount; i++) {
 			SubDevice subDevice = new SubDevice();
 			subDevice.setCellSort(i);
 			subDevice.setGprsId(gprsId);
@@ -642,17 +759,10 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 
 	public static void main(String[] args) {
 		String deviceTypeStr = "蓄电池串联复用诊断组件";
-		if (deviceTypeStr != null && deviceTypeStr.indexOf("诊断") != -1) {
-			System.out.println(2);
-		} else {
-			System.out.println(1);
-		}
-
 		GprsConfigSend gprsConfigSend = new GprsConfigSend();
 		GprsConfigInfo c = new GprsConfigInfo();
 		c.setHeartbeatInterval(50);
 		BeanUtils.copyProperties(gprsConfigSend, c);
-		System.out.println(c.getHeartbeatInterval());
 	}
 
 	@Override
@@ -698,9 +808,9 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 		RoutingInspections routingInspections = new RoutingInspections();
 		routingInspections.setStationId(stationDetail.getStationId());
 		routingInspections.setGprsId(stationDetail.getGprsId());
-		routingInspections.setRoutingInspectionStatus(1);// 设备维护中
+		//routingInspections.setRoutingInspectionStatus(1);// 设备维护中
 		// 通过电池组的状态在维护中 ，电池组id,设备id来判断是否有这条数据 如果没有就新增
-		List<RoutingInspections> routingList = routingInspectionsSer.selectListSelective(routingInspections);		
+		List<RoutingInspections> routingList = routingInspectionsSer.selectListSelectiveFirst(routingInspections);		
 		if (routingList.size() == 0) {
 			if (stationDetail.getOperateTime() != null) {
 				routingInspections.setOperateTime(stationDetail.getOperateTime());
@@ -718,7 +828,7 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 			routingInspections.setGprsId(stationDetail.getGprsId());
 			routingInspections.setOperatePhone(stationDetail.getOperatePhone());
 			routingInspections.setDeviceType(stationDetail.getDeviceType());
-			routingInspections.setRoutingInspectionStatus(1);// 安装维护中
+			routingInspections.setRoutingInspectionStatus(0);// 在提交之前状态
 			routingInspectionsSer.insertSelective(routingInspections);
 
 			logger.info("新增巡检记录修改主机:{}成功", routingInspections.getConfirmOperateName());
@@ -734,13 +844,15 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 		}
 			RoutingInspectionDetail routingInspectionDetail = new RoutingInspectionDetail();
 			routingInspectionDetail.setRoutingInspectionsId(routingInspectionId);
-			routingInspectionDetail.setRequestType(0);
-			// 查询出提交的最大次数
-			List<RoutingInspectionDetail> routingDetail = routingInspectionDetailSer
-					.selectListSelective(routingInspectionDetail);
-			if (routingDetail.size() != 0) {
+			routingInspectionDetail.setRequestType(1);//通过requestType == 1 查询web是否回应
+			// 查询出web提交的
+			List<RoutingInspectionDetail> routingDetailType = routingInspectionDetailSer.selectListSelective(routingInspectionDetail);
+			routingInspectionDetail.setRequestType(0);//通过requestType == 0 查询出最大RequestSeq的数据
+			List<RoutingInspectionDetail> routingDetailSeq = routingInspectionDetailSer.selectListSelective(routingInspectionDetail);
+
+			if (routingDetailType.size() != 0) {
 				// 得出最新数据		
-				RoutingInspectionDetail InspectionDetail = routingDetail.stream()
+				RoutingInspectionDetail InspectionDetail = routingDetailSeq.stream()
 						.max(Comparator.comparing(RoutingInspectionDetail::getRequestSeq)).get();
 				if (InspectionDetail.getRequestSeq() == null) {
 					routingInspectionDetail.setRequestSeq(1);
@@ -882,7 +994,8 @@ public class GprsConfigInfoServiceImpl extends BaseServiceImpl<GprsConfigInfo, I
 			gprsConfigSend.setSendDone((byte) 0);
 			gprsConfigSend.setConnectionType(2);
 			gprsConfigSendSer.insertSelective(gprsConfigSend);
-			updateByPrimaryKeySelective(gprsConfigInfo);
+			//不直接修改gprs_config_info表
+			//updateByPrimaryKeySelective(gprsConfigInfo);
 		}
 	}
 

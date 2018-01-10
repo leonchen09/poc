@@ -2247,4 +2247,52 @@
     where gprs_id = #{gprsId,jdbcType=VARCHAR}
   </update>
 
+
+	<resultMap id="RoutingBaseResultMap" type="com.station.moudles.entity.RoutingInspectionPackData"
+	 extends="com.station.moudles.mapper.PackDataInfoLatestMapper.BaseResultMap">
+		<id column="routing_inspection_id" property="routingInspectionId" jdbcType="INTEGER" />
+		<result column="station_id" property="stationId" jdbcType="INTEGER" />
+		<result column="operate_type" property="operateType" jdbcType="INTEGER" />
+		<result column="operate_id" property="operateId" jdbcType="INTEGER" />
+		<result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+		<result column="routing_inspection_status" property="routingInspectionStatus" jdbcType="INTEGER" />
+		<result column="confirm_operate_id" property="confirmOperateId" jdbcType="INTEGER"/>
+		<result column="confirm_operate_name" property="confirmOperateName" jdbcType="VARCHAR"/>
+		<result column="operate_phone" property="operatePhone" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<select id="selectListHasChangeCell" resultMap="RoutingBaseResultMap">
+		select
+			*
+		from
+			pack_data_info_latest d
+		inner join (
+			select
+				*
+			from
+				routing_inspections r
+			where
+			not exists (
+				select
+					*
+				from
+					routing_inspections r1
+				where
+					r1.operate_type = r.operate_type
+				and r1.gprs_id = r.gprs_id
+				and r1.operate_time > r.operate_time
+				and r1.routing_inspection_status = 2
+				and r1.device_type = 1
+				<if test="operateType">
+					and r1.operate_type = #{operateType, jdbcType=INTEGER}
+				</if>
+			)
+		) routing on d.gprs_id = routing.gprs_id
+		<if test="state != null">
+			and d.state = #{state, jdbcType=VARCHAR}
+		</if>
+	</select>
 </mapper>

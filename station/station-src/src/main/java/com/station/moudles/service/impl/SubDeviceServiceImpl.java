@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +28,7 @@ import org.springframework.stereotype.Service;
 import com.station.common.Constant;
 import com.station.common.utils.RowParseHelper;
 import com.station.common.utils.StringUtils;
+import com.station.moudles.entity.GprsDeviceType;
 import com.station.moudles.entity.InspectSignCellIndex;
 import com.station.moudles.entity.ModifyGprsidSend;
 import com.station.moudles.entity.RoutingInspectionDetail;
@@ -33,6 +36,7 @@ import com.station.moudles.entity.RoutingInspectionStationDetail;
 import com.station.moudles.entity.RoutingInspections;
 import com.station.moudles.entity.SubDevice;
 import com.station.moudles.mapper.SubDeviceMapper;
+import com.station.moudles.service.GprsDeviceTypeService;
 import com.station.moudles.service.InspectSignCellIndexService;
 import com.station.moudles.service.ModifyGprsidSendService;
 import com.station.moudles.service.RoutingInspectionDetailService;
@@ -51,6 +55,8 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 	RoutingInspectionDetailService routingInspectionDetailSer;
 	@Autowired
 	ModifyGprsidSendService modifyGprsidSendSer;
+	@Autowired
+	GprsDeviceTypeService gprsDeviceTypeSer;
 
 	private static final Logger logger = LoggerFactory.getLogger(SubDeviceServiceImpl.class);
 
@@ -81,6 +87,16 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 		subFile = true;
 		// 记录异常信息
 		TreeMap<Integer, String> errorRow = new TreeMap<>();
+		// 先查询所有
+		GprsDeviceType gprsDeviceType = new GprsDeviceType();
+		List<GprsDeviceType> deviceTypeList = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+		//k- name.V-类型
+		Map<String, Integer> nameAndcode = new HashMap<String, Integer>();
+		if (deviceTypeList.size() != 0) {
+			for (GprsDeviceType deviceType : deviceTypeList) {
+				nameAndcode.put(deviceType.getTypeName(), deviceType.getTypeCode());
+			}
+		}
 		logger.info("start parse subDevice excel file!");
 		try {
 			int rowNum = 1;
@@ -126,12 +142,30 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 						// -----10/10 add 添加导入备用从机设备类型和规格
 						if (StringUtils.getString(row.getCell(0)) != null && row.getCell(0).toString().length() <= 20) {
 							String subType = row.getCell(0).toString();
-							if (subType != null && subType.indexOf("诊断") != -1) {
-								subDevice.setSubType(2);
-							} else if (subType != null && subType.indexOf("复用") != -1) {
-								subDevice.setSubType(1);
-							} else {
-								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行从机类型没有填写不正确，注意模板是否正确！");
+//							if (subType != null && subType.indexOf("诊断") != -1) {
+//								subDevice.setSubType(2);
+//							} else if (subType != null && subType.indexOf("复用") != -1) {
+//								subDevice.setSubType(1);
+//							} else {
+//								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行从机类型没有填写不正确，注意模板是否正确！");
+//								continue;
+//							}
+							switch (subType) {
+							case "蓄电池串联复用设备":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							case "蓄电池串联复用诊断组件":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							
+							case "蓄电池2V监测设备":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							case "蓄电池12V监测设备":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							default:
+								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行备用从机的设备类型类型没有填写或者填写错误");
 								continue;
 							}
 						} else {
@@ -158,12 +192,30 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 					if (subDeviceList.size() > 0) {
 						if (StringUtils.getString(row.getCell(0)) != null && row.getCell(0).toString().length() <= 20) {
 							String subType = row.getCell(0).toString();
-							if (subType != null && subType.indexOf("诊断") != -1) {
-								subDevice.setSubType(2);
-							} else if (subType != null && subType.indexOf("复用") != -1) {
-								subDevice.setSubType(1);
-							} else {
-								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行从机类型没有填写或者备用从机的设备类型超过20个字符！");
+//							if (subType != null && subType.indexOf("诊断") != -1) {
+//								subDevice.setSubType(2);
+//							} else if (subType != null && subType.indexOf("复用") != -1) {
+//								subDevice.setSubType(1);
+//							} else {
+//								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行从机类型没有填写或者备用从机的设备类型超过20个字符！");
+//								continue;
+//							}
+							switch (subType) {
+							case "蓄电池串联复用设备":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							case "蓄电池串联复用诊断组件":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							
+							case "蓄电池2V监测设备":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							case "蓄电池12V监测设备":
+								subDevice.setSubType(nameAndcode.get(subType));
+								break;
+							default:
+								errorRow.put(rowNum + 1, "第" + (rowNum + 1) + "行备用从机的设备类型没有填写或者填写错误");
 								continue;
 							}
 						} else {
@@ -259,9 +311,9 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 							RoutingInspections routingInspections = new RoutingInspections();
 							routingInspections.setStationId(stationDetail.getStationId());
 							routingInspections.setGprsId(master.getGprsId());
-							routingInspections.setRoutingInspectionStatus(1);// 安装维护状态
+							//routingInspections.setRoutingInspectionStatus(1);// 安装维护状态
 							// 通过电池组的状态在维护中 ，电池组id,设备id来判断是否有这条数据 如果没有就新增
-							List<RoutingInspections> routingList = routingInspectionsSer.selectListSelective(routingInspections);
+							List<RoutingInspections> routingList = routingInspectionsSer.selectListSelectiveFirst(routingInspections);
 							if (routingList.size() == 0) {
 								if (stationDetail.getOperateTime() != null) {
 									routingInspections.setOperateTime(stationDetail.getOperateTime());
@@ -269,7 +321,7 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 									Date date = new Date();
 									routingInspections.setOperateTime(date);
 								}
-								routingInspections.setRoutingInspectionStatus(1);
+								routingInspections.setRoutingInspectionStatus(0);//提交之前的状态
 								routingInspections.setDeviceType(master.getSubType());
 								routingInspections.setOperateType(stationDetail.getOperateType());
 								routingInspections.setOperateId(stationDetail.getOperateId());
@@ -286,45 +338,47 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 							}else {
 								routingId = routingList.get(0).getRoutingInspectionId();
 							}
-							RoutingInspectionDetail routingInspectionDetail = new RoutingInspectionDetail();
-							routingInpectionDetail.setRoutingInspectionsId(routingId);
-							routingInpectionDetail.setRequestType(0);//请求
+							RoutingInspectionDetail Detail = new RoutingInspectionDetail();
+							Detail.setRoutingInspectionsId(routingId);
+							Detail.setRequestType(1);//web回应
 							// 查询出提交的最大次数
-							List<RoutingInspectionDetail> routingDetail = routingInspectionDetailSer.selectListSelective(routingInspectionDetail);
-							if (routingDetail.size() != 0) {
-								routingInspectionDetail.setRoutingInspectionsId(routingId);
-								routingInspectionDetail.setRequestType(0);
-								RoutingInspectionDetail InspectionDetail = routingDetail.stream().max(Comparator.comparing(RoutingInspectionDetail::getRequestSeq)).get();
+							List<RoutingInspectionDetail> routingDetailType = routingInspectionDetailSer.selectListSelective(Detail);
+							Detail.setRequestType(0);//通过requestType == 0 查询出最大RequestSeq的数据
+							List<RoutingInspectionDetail> routingDetailSeq = routingInspectionDetailSer.selectListSelective(Detail);
+							if (routingDetailType.size() != 0) {
+								Detail.setRoutingInspectionsId(routingId);
+								Detail.setRequestType(0);
+								RoutingInspectionDetail InspectionDetail = routingDetailSeq.stream().max(Comparator.comparing(RoutingInspectionDetail::getRequestSeq)).get();
 								if (InspectionDetail.getRequestSeq() == null) {
-									routingInspectionDetail.setRequestSeq(1);
+									Detail.setRequestSeq(1);
 								} else {
-									routingInspectionDetail.setRequestSeq(InspectionDetail.getRequestSeq() + 1);
+									Detail.setRequestSeq(InspectionDetail.getRequestSeq() + 1);
 								}
 								if (stationDetail.getOperateTime() != null) {
-									routingInspectionDetail.setCreateTime(stationDetail.getOperateTime());
+									Detail.setCreateTime(stationDetail.getOperateTime());
 								}
-								routingInspectionDetail.setDetailOperateId(stationDetail.getOperateId());
-								routingInspectionDetail.setDetailOperateName(stationDetail.getOperateName());
-								routingInspectionDetail.setDetailOperateType(4);// 跟换从机
-								routingInspectionDetail.setDetailOperateValueOld(master.getSubDeviceId());
-								routingInspectionDetail.setDetailOperateValueNew(routingInpectionDetail.getDetailOperateValueNew());
-								routingInspectionDetail.setCellIndex(routingInpectionDetail.getCellIndex());
-								routingInspectionDetailSer.insertSelective(routingInspectionDetail);
+								Detail.setDetailOperateId(stationDetail.getOperateId());
+								Detail.setDetailOperateName(stationDetail.getOperateName());
+								Detail.setDetailOperateType(4);// 跟换从机
+								Detail.setDetailOperateValueOld(master.getSubDeviceId());
+								Detail.setDetailOperateValueNew(routingInpectionDetail.getDetailOperateValueNew());
+								Detail.setCellIndex(routingInpectionDetail.getCellIndex());
+								routingInspectionDetailSer.insertSelective(Detail);
 
 							} else {
-								routingInspectionDetail.setRoutingInspectionsId(routingId);
-								routingInspectionDetail.setRequestType(0);
+								Detail.setRoutingInspectionsId(routingId);
+								Detail.setRequestType(0);
 								if (stationDetail.getOperateTime() != null) {
-									routingInspectionDetail.setCreateTime(stationDetail.getOperateTime());
+									Detail.setCreateTime(stationDetail.getOperateTime());
 								}
-								routingInspectionDetail.setRequestSeq(1);
-								routingInspectionDetail.setDetailOperateId(stationDetail.getOperateId());
-								routingInspectionDetail.setDetailOperateName(stationDetail.getOperateName());
-								routingInspectionDetail.setDetailOperateType(4);// 跟换从机
-								routingInspectionDetail.setDetailOperateValueOld(master.getSubDeviceId());
-								routingInspectionDetail.setDetailOperateValueNew(routingInpectionDetail.getDetailOperateValueNew());
-								routingInspectionDetail.setCellIndex(routingInpectionDetail.getCellIndex());
-								routingInspectionDetailSer.insertSelective(routingInspectionDetail);
+								Detail.setRequestSeq(1);
+								Detail.setDetailOperateId(stationDetail.getOperateId());
+								Detail.setDetailOperateName(stationDetail.getOperateName());
+								Detail.setDetailOperateType(4);// 跟换从机
+								Detail.setDetailOperateValueOld(master.getSubDeviceId());
+								Detail.setDetailOperateValueNew(routingInpectionDetail.getDetailOperateValueNew());
+								Detail.setCellIndex(routingInpectionDetail.getCellIndex());
+								routingInspectionDetailSer.insertSelective(Detail);
 							}
 
 						} else {
@@ -342,5 +396,12 @@ public class SubDeviceServiceImpl extends BaseServiceImpl<SubDevice, Integer> im
 		}else {
 			throw new IllegalArgumentException("第" + routingInpectionDetail.getCellIndex() + "号故障从机ID不存在，请重新输入！");
 		}
+	}
+
+	//删除多余的从机
+	@Override
+	public void deleteMoreSubDevice(Map map) {
+		subDeviceMapper.deleteMoreSubDevice(map);
+		
 	}
 }

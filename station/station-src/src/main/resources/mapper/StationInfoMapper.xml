@@ -36,7 +36,7 @@
 		<result column="address_coding" property="addressCoding" jdbcType="VARCHAR"/>
 		<result column="gen_vol" property="genVol" jdbcType="DECIMAL" />
     	<result column="gen_cur" property="genCur" jdbcType="DECIMAL" />
-		
+		<result column="cell_count" property ="cellCount" jdbcType ="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -52,7 +52,8 @@
 		duration_status,
 		load_power,
 		inspect_status,
-		address_coding
+		address_coding,
+		cell_count
 	</sql>
 
 	<select id="findAll" resultMap="BaseResultMap">
@@ -189,6 +190,108 @@
 		</where>
 		) tmp left join gprs_config_info config on tmp.gprs_id=config.gprs_id
 	</select>
+	
+	<select id="selectStationInfoList" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.StationInfo">
+		select 
+		tmp.id,tmp.gprs_id,tmp.name,tmp.address,tmp.province,tmp.city,
+		tmp.district,
+		tmp.lat,
+		tmp.lng, 
+		tmp.pack_type, 
+		tmp.real_duration, tmp.duration_status,
+		tmp.status,
+		tmp.inspect_status,
+		config.link_status,config.device_type,config.gprs_id 	
+		from base_station_info as tmp inner join gprs_config_info as config on tmp.gprs_id=config.gprs_id
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null">
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="address != null">
+				and address = #{address,jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="district != null">
+				and district = #{district,jdbcType=VARCHAR}
+			</if>
+			<if test="lat != null">
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<if test="lng != null">
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="maintainanceId != null">
+				and maintainance_id = #{maintainanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="packType != null">
+				and pack_type = #{packType,jdbcType=VARCHAR}
+			</if>
+			<if test="roomType != null">
+				and room_type = #{roomType,jdbcType=VARCHAR}
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=DECIMAL}
+			</if>
+			<if test="realDuration != null">
+				and real_duration = #{realDuration,jdbcType=DECIMAL}
+			</if>
+			<if test="okNum != null">
+				and ok_num = #{okNum,jdbcType=INTEGER}
+			</if>
+			<if test="poorNum != null">
+				and poor_num = #{poorNum,jdbcType=INTEGER}
+			</if>
+			<if test="errorNum != null">
+				and error_num = #{errorNum,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="companyId1 != null">
+				and company_id1 = #{companyId1,jdbcType=INTEGER}
+			</if>
+			<if test="companyId2 != null">
+				and company_id2 = #{companyId2,jdbcType=INTEGER}
+			</if>
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			<if test="delFlag != null">
+				and del_flag = #{delFlag,jdbcType=INTEGER}
+			</if>
+			<if test="companyName3 != null">
+				and company_name3 = #{companyName3,jdbcType=VARCHAR}
+			</if>
+			<if test="volLevel != null">
+				and vol_level = #{volLevel,jdbcType=INTEGER}
+			</if>
+			<if test="operatorType != null">
+				and operator_type = #{operatorType,jdbcType=INTEGER}
+			</if>
+			<if test="durationStatus != null">
+				and duration_status = #{durationStatus,jdbcType=INTEGER}
+			</if>
+			<if test="isGprsIdNotNull">
+				and tmp.gprs_id!="-1"
+			</if>
+		</where>
+		
+	</select>
+	
 
 	<select id="getStationByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
@@ -198,7 +301,7 @@
 	</select>
 	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
 		select *
-		from full_station_info
+		from full_station_info 
 		<where>
 			<if test="id != null">
 				and id = #{id,jdbcType=INTEGER}
@@ -292,7 +395,7 @@
 			<if test="state !=null"> 
 			and state = #{state,jdbcType=VARCHAR}
 			</if>
-		</where>
+		</where> 
 		order by id desc
 	</select>
 
@@ -419,7 +522,7 @@
 		company_id3,
 		del_flag, company_name3, vol_level,
 		operator_type,
-		duration_status)
+		duration_status,cell_count)
 		values (#{gprsId,jdbcType=VARCHAR},
 		#{gprsIdOut,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR},
@@ -441,7 +544,8 @@
 		#{delFlag,jdbcType=INTEGER}, #{companyName3,jdbcType=VARCHAR},
 		#{volLevel,jdbcType=INTEGER},
 		#{operatorType,jdbcType=INTEGER},
-		#{durationStatus,jdbcType=INTEGER})
+		#{durationStatus,jdbcType=INTEGER},
+		#{cellCount,jdbcType = INTEGER})
 	</insert>
 
 	<insert id="insertSelective" parameterType="com.station.moudles.entity.StationInfo" useGeneratedKeys="true" keyProperty="id">
@@ -531,6 +635,12 @@
 			<if test="addressCoding != null">
 				address_coding,
 			</if>
+			<if test="cellCount != null">
+				cell_count,
+			</if>
+			<if test="inspectStatus != null">
+				inspect_status,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="gprsId != null">
@@ -616,6 +726,12 @@
 			</if>
 			<if test="addressCoding != null">
 				#{addressCoding,jdbcType=VARCHAR},
+			</if>
+			<if test="cellCount != null">
+				#{cellCount,jdbcType=INTEGER},
+			</if>
+			<if test="inspectStatus != null">
+				#{inspectStatus,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
@@ -705,8 +821,11 @@
 				load_power = #{loadPower,jdbcType=DECIMAL},
 			</if>
 			<if test="inspectStatus != null">
-				inspect_status = #{inspectStatus,jdbcType=INTEGER}
+				inspect_status = #{inspectStatus,jdbcType=INTEGER},
 			</if>
+			<if test="cellCount != null">
+				cell_count = #{cellCount,jdbcType=INTEGER},
+			</if> 
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -1139,7 +1258,7 @@
 	<select id="appSelectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
 		select  *,
 		case inspect_status when 30 then 
-		(case link_status when  null then 30 when 1 then 31 when 0 then 32 end)
+		(case  when link_status is null then 32 when link_status=1 then 31 when link_status=0 then 32 end)
 		 else inspect_status end as appstatuts 
 		from full_station_info 
 		<where>
@@ -1157,7 +1276,7 @@
 			</if>
 			<!-- 添加设备id  -->
 			<if test="name != null">
-				and (name like "%${name}%" or gprs_id like "%${name}%")
+				and (name like "%${name}%" or gprs_id like "%${name}%" or maintainance_id like "%${name}%")
 			</if>
 			<if test="address != null">
 				and address like "%${address}%"
@@ -1239,21 +1358,24 @@
 		order by appstatuts asc
 	</select>
 
-		<select id="appWarnAreaSelectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
-		select f.* from(
-		select
-		gprs_id
-		from warning_info
+	<select id="appWarnAreaSelectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		SELECT
+			f.* 
+		FROM
+			( SELECT gprs_id, max( id ) AS m_id FROM warning_info where rcv_time &gt;= #{rcvTime,jdbcType=TIMESTAMP} GROUP BY gprs_id ) AS w
+			LEFT JOIN full_station_info AS f ON w.gprs_id = f.gprs_id
+			LEFT JOIN warning_info AS warn ON warn.id = w.m_id 			
 		 <where>
+			 f.gprs_id IS NOT NULL
 			<if test="id != null">
 				and id = #{id,jdbcType=INTEGER}
 			</if>
 			<if test="gprsId != null">
 				and gprs_id = #{gprsId,jdbcType=VARCHAR}
 			</if>
-			<if test="rcvTime != null">
+		<!-- 	<if test="rcvTime != null">
 				and rcv_time &gt;= #{rcvTime,jdbcType=TIMESTAMP}
-			</if>
+			</if> -->
 			<if test="cellTemHigh != null">
 				and cell_tem_high = #{cellTemHigh,jdbcType=TINYINT}
 			</if>
@@ -1279,15 +1401,12 @@
 			<if test="socLow != null">
 				and soc_low = #{socLow,jdbcType=TINYINT}
 			</if>
-		</where>
-		) as w left join full_station_info as f on w.gprs_id=f.gprs_id 
-		<where>
-			f.gprs_id != -1
 			<if test="companyId3 != null">
 				and company_id3 = #{companyId3,jdbcType=INTEGER}
 			</if>
-		</where> 
-	</select>
+		</where>
+		<!-- limit #{pageNo,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER} -->
+	</select> 
 
 
 </mapper>

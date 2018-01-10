@@ -44,7 +44,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.station.common.Constant;
-import com.station.common.utils.JxlsUtil;
 import com.station.common.utils.StringUtils;
 import com.station.moudles.helper.ChargeEvent;
 import com.station.moudles.helper.DischargeEvent;
@@ -59,7 +58,6 @@ import com.station.moudles.vo.report.PulseReportItem;
 import com.station.moudles.vo.report.StationReport;
 import com.station.moudles.vo.report.SuggestionReport;
 
-import io.netty.util.internal.StringUtil;
 import net.sf.jxls.transformer.XLSTransformer;
 
 /**
@@ -458,5 +456,5 @@ public class ReportController extends BaseController {
 		}
 		return ajaxResponse;
 	}
-
+	
 }

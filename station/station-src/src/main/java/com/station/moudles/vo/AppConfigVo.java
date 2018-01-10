@@ -62,7 +62,17 @@ public class AppConfigVo {
 	
 	@Pattern(regexp = "^0|(-?[1-9]\\d*)$" , message ="通讯成功率最小值设置参数非法！")
 	private String minComSuc;
+	//参数种类
+	private String parameterCategory;
 	
+	public String getParameterCategory() {
+		return parameterCategory;
+	}
+
+	public void setParameterCategory(String parameterCategory) {
+		this.parameterCategory = parameterCategory;
+	}
+
 	public String getAppPhone1() {
 		return appPhone1;
 	}

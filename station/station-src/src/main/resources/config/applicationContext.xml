@@ -105,8 +105,8 @@
         <property name="username" value="${jdbc.username}" />  
         <property name="password" value="${jdbc.password}" />
         <!-- 配置初始化大小、最小、最大 -->  
-        <property name="initialSize" value="10" />  
-        <property name="minIdle" value="10" />  
+        <property name="initialSize" value="50" />  
+        <property name="minIdle" value="50" />  
         <property name="maxActive" value="500" />  
         <!-- 配置获取连接等待超时的时间 -->  
         <property name="maxWait" value="60000" />  
@@ -116,11 +116,16 @@
         <property name="minEvictableIdleTimeMillis" value="300000" />  
         <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->  
         <property name="poolPreparedStatements" value="true" />  
-        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />  
-        <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->  
-        <!-- <property name="filters" value="stat" /> -->
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> 
+        
+        <property name="defaultAutoCommit" value="false" />
+        <!-- 设置密码解密算法 -->
         <property name="connectionProperties" value="password=${jdbc.password}"/> 
-        <property name="passwordCallback" ref="dbPasswordCallback"/> 
+        <property name="passwordCallback" ref="dbPasswordCallback"/>
+        
+        <!-- 开启Druid的监控统计功能 -->
+        <!-- 注意如果要用log4j一定要加上log4j -->
+        <property name="filters" value="stat,log4j" /> 
     </bean> 
 
 	<!-- JDBC事务 -->
@@ -245,6 +250,7 @@
 		</property>
 		<!-- 调用类中的方法 -->
 		<property name="targetMethod" value="dischargeAutoCheck" />
+		<property name="concurrent" value="false" />
 	</bean>
 	
 		<!-- 触发器设置 设置这个任务触发器，凌晨3点执行一次 -->
@@ -260,7 +266,33 @@
 	</bean>
 	
 	
-	
+	<!-- ======================== 自动均衡 start ======================== -->
+	<!-- 需要调度的任务 -->
+	<bean id="autoBalanceTask" class="com.station.moudles.quartz.AutoBalanceTask" />
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="autoBalanceTaskMethodInvoking"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="autoBalanceTask" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod" value="execute" />
+	</bean>
+
+	<!-- 触发器设置 设置这个任务触发器  10分钟执行一次-->
+	<bean id="autoBalanceTaskTriger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="autoBalanceTaskMethodInvoking" />
+		</property>
+		<property name="cronExpression">
+			<!-- 格式解释：秒 分 时 日 月 年 -->
+			<value>0 0/10 * * * ? </value>
+		</property>
+	</bean>
+	<!-- ======================== 自动均衡 end ======================== -->
 	
 
 	<!-- ======================== 调度工厂 ======================== -->
@@ -270,6 +302,7 @@
 				<!-- 特征测试，暂时不需要定时做。 -->
 				<!-- <ref bean="pulseDischargeTaskTriger" /> --> 
 				<!-- <ref bean="stationInfoTaskTriger" /> -->
+				<!-- <ref bean="autoBalanceTaskTriger" /> -->
 				<ref bean="deviceDischargeAutocheckTaskTriger"/>
 			</list>
 		</property>

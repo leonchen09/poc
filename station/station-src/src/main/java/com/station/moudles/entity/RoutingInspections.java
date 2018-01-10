@@ -71,6 +71,8 @@ public class RoutingInspections {
 	
 	@ApiModelProperty(value = "设备类型", required = false)
 	private Integer deviceType;
+	
+
 	//结束时间
 	private Date endTime;
 

@@ -1,7 +1,5 @@
 package com.station.moudles.vo.report;
 
-import java.math.BigDecimal;
-
 import io.swagger.annotations.ApiModelProperty;
 
 public class StationReportItem {
@@ -23,15 +21,6 @@ public class StationReportItem {
 	@ApiModelProperty(value = "设备在线状态,0离线,1在线")
 	private Byte linkStatus;
 
-	/*@ApiModelProperty(value = "总电压", required = false)
-	private BigDecimal genVol;
-
-	@ApiModelProperty(value = "总电流", required = false)
-	private BigDecimal genCur;
-
-	@ApiModelProperty(value = "温度", required = false)
-	private Integer environTem;*/
-	
 	@ApiModelProperty(value = "备注", required = false)
 	private String remark;
 	

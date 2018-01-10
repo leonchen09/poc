@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -51,5 +52,14 @@ public interface StationInfoService extends BaseService<StationInfo, Integer> {
 	
 	void bindingAddRoutingInspections(RoutingInspectionStationDetail routingInspectionsDetail);
 	//查询电池组告警信息列表
-  	List<StationInfo> appWarnAreaSelectListSelectivePaging(SearchWarningInfoPagingVo searchWarningInfoPagingVo);
+  	List<StationInfo> appWarnAreaSelectListSelective(SearchWarningInfoPagingVo searchWarningInfoPagingVo);
+  	//显示不经常改变的信息
+  	StationDetail getStationDetailBasicInfoByStationId(Integer stationId);
+  	//显示需要刷新的数据
+  	StationDetail getStationDetailpackInfoByStationId(String gprsId);
+  	//前台电池出列表
+  	List<StationInfo> selectStationInfoList(StationInfo stationIfno);
+  	//判断电压平台一致性
+  	void judgeCellVolLevel(StationInfo stationInfo);
+  	
 }

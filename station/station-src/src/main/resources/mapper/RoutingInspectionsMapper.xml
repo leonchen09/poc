@@ -15,6 +15,7 @@
 		<result column="operate_phone" property="operatePhone" jdbcType="VARCHAR"/>
 		<result column="remark" property="remark" jdbcType="VARCHAR"/>
 		<result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+		
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -72,6 +73,48 @@
 			</if>
 		</where>
 	</select>
+	<select id="selectListSelectiveFirst" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.RoutingInspections">
+			select
+		<include refid="Base_Column_List" />
+		from routing_inspections
+		<where>
+				(routing_inspection_status = 0 or routing_inspection_status = 1
+				or routing_inspection_status = 3)
+			<if test="routingInspectionId != null">
+				and routing_inspection_id =
+				#{routingInspectionId,jdbcType=INTEGER}
+			</if>
+			<if test="stationId != null">
+				and station_id = #{stationId,jdbcType=INTEGER}
+			</if>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="operateId != null">
+				and operate_id = #{operateId,jdbcType=INTEGER}
+			</if>
+			<if test="operateName != null">
+				and operate_name = #{operateName,jdbcType=VARCHAR}
+			</if>
+			<if test="operateTime != null">
+				and operate_time &gt;= #{operateTime,jdbcType=TIMESTAMP}
+			</if>
+			
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="operatePhone != null">
+				and operate_phone = #{operatePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	
+	
+	</select>
+
+
 
 	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
 		select
@@ -376,7 +419,9 @@
 			<if test="name != null">
 				and name like "%${name}%" or gprs_id like "%${name}%"
 			</if>
-	
+			<if test="volLevel != null">
+				and vol_level = #{volLevel,jdbcType=INTEGER}
+			</if>
 		</where>
 		) order by routing_inspection_id desc ) 
 		tmp left join base_station_info s on tmp.station_id=s.id
@@ -393,31 +438,25 @@
 		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
 		<result column="operate_phone" property="operatePhone" jdbcType="VARCHAR"/>
 		<result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+		<result column="type_name" property="deviceTypeStr" jdbcType="INTEGER"/>
 		<collection property="routingInspectionDetailList" javaType="java.util.List" resultMap="com.station.moudles.mapper.RoutingInspectionDetailMapper.BaseResultMap">
 		</collection>
 	</resultMap>
 
 	<select id="selectStationDetailByPrimaryKey" resultMap="StationDetailBaseResultMap" parameterType="java.lang.Integer">
-<!-- 		select * from(
-		SELECT * FROM
-		base_station_management.routing_inspections
-		ri,base_station_info s
-		where
-		routing_inspection_id=#{routingInspectionId,jdbcType=INTEGER} and
-		s.id=ri.station_id) tmp left join routing_inspection_detail rid
-		on
-		tmp.routing_inspection_id=rid.routing_inspections_id -->
 		
-		select * from(
+		select *,type.type_name as deviceTypeStr from(
 		SELECT ri.gprs_id,s.name,s.operator_type,s.address,s.company_name3,
 		ri.station_id,ri.routing_inspection_id,ri.operate_name,ri.operate_time,ri.operate_phone,ri.device_type,
 		ri.operate_type
 		FROM
 		base_station_management.routing_inspections as ri left join base_station_info as s
-		 on s.id=ri.station_id where routing_inspection_id=#{routingInspectionId,jdbcType=INTEGER}
+		 on s.id=ri.station_id 
+		 where routing_inspection_id=#{routingInspectionId,jdbcType=INTEGER}
 		) tmp left join routing_inspection_detail rid
 		on
 		tmp.routing_inspection_id=rid.routing_inspections_id
+		left join gprs_device_type as type on tmp.device_type=type.type_code
 		
 	</select>
 	

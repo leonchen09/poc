@@ -23,7 +23,7 @@ public class TemplateExportController extends BaseController {
 	private String parent = TemplateExportController.class.getClassLoader().getResource("").getPath()
 			+ "base_template/";
 	private String[] sourceName = { "主机导入模板.xlsx", "电池组导入模板.xlsx",
-			"备用主机导入模板.xlsx", "备用从机导入模板.xlsx", "设备维护记录导入模板.xlsx","电池更换记录模板.xlsx"};
+			"备用主机导入模板.xlsx", "备用从机导入模板.xlsx", "设备维护记录导入模板.xlsx","电池更换记录模板.xlsx","设备维护记录12V从机导入模板.xlsx"};
 	
 
 	@ResponseBody
@@ -34,7 +34,7 @@ public class TemplateExportController extends BaseController {
 			ajaxResponse.setMsg("请不要传入非法参数！");
 			return ajaxResponse;
 		}
-		String filePath = parent + sourceName[type];
+		String filePath = parent + sourceName[type]; 
 		filePath = URLDecoder.decode(filePath, "UTF-8");
 		File file = new File(filePath);
 		String name = sourceName[type];

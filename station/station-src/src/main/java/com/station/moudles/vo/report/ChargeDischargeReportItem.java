@@ -11,7 +11,7 @@ public class ChargeDischargeReportItem {
     private String state;
     private String cur; // 电压
     private String vol;//电流
-    private Map<Integer, String> cellMap;
+    private Map<String, String> cellMap;
 
     public String getTime() {
         return time;
@@ -45,11 +45,11 @@ public class ChargeDischargeReportItem {
         this.vol = vol;
     }
 
-    public Map<Integer, String> getCellMap() {
+    public Map<String, String> getCellMap() {
         return cellMap;
     }
 
-    public void setCellMap(Map<Integer, String> cellMap) {
+    public void setCellMap(Map<String, String> cellMap) {
         this.cellMap = cellMap;
     }
 }

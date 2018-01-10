@@ -327,7 +327,7 @@
 
 	<select id="selectWarningListByStation" resultMap="StationBaseResultMap">
 		select
-		w.*,s.company_id3,s.company_name3,s.name,s.operator_type,s.maintainance_id,
+		w.*,s.company_id3,s.company_name3,s.name,s.operator_type,s.maintainance_id,s.district,
 		s.address,c.device_type from(
 		select
 		max(id) as w_id
@@ -486,5 +486,123 @@
 		t3.district = s.district and
 		t3.company_id3=s.company_id3
 	</select>
+
+	<select id="appSelectWarnAreaList" resultMap="WarnAreaResultMap">
+	SELECT
+		s.*,
+        cell_tem_high_num, round(cell_tem_high_num*100/num,2) as cell_tem_high_percent,
+		env_tem_high_num, round(env_tem_high_num*100/num,2) as env_tem_high_percent,
+		cell_tem_low_num, round(cell_tem_low_num*100/num,2) as cell_tem_low_percent,
+        env_tem_low_num, round(env_tem_low_num*100/num,2) as env_tem_low_percent,
+		gen_vol_high_num, round(gen_vol_high_num*100/num,2) as gen_vol_high_percent,
+        gen_vol_low_num, round(gen_vol_low_num*100/num,2) as gen_vol_low_percent,
+		loss_electricity_num, round(loss_electricity_num*100/num,2) as loss_electricity_percent,
+        soc_low_num, round(soc_low_num*100/num,2) as soc_low_percent
+		FROM
+		(SELECT
+		company_id3,
+		company_name3,
+		IFNULL(city, '-1') AS city,
+		IFNULL(district, city) AS
+		district,
+		SUM(cell_tem_high_num) as
+		cell_tem_high_num,
+		SUM(env_tem_high_num) as env_tem_high_num,
+		SUM(cell_tem_low_num) as cell_tem_low_num,
+		SUM(env_tem_low_num) as
+		env_tem_low_num,
+		SUM(gen_vol_high_num)
+		as gen_vol_high_num,
+		SUM(gen_vol_low_num) as gen_vol_low_num,
+		SUM(loss_electricity_num) as
+		loss_electricity_num,
+		SUM(soc_low_num) as soc_low_num
+		FROM
+		(SELECT
+		company_id3,
+		company_name3,
+		district,
+		city,
+		SUM(cell_tem_high) AS
+		cell_tem_high_num,
+		SUM(env_tem_high) AS env_tem_high_num,
+		SUM(cell_tem_low) AS cell_tem_low_num,
+		SUM(env_tem_low) AS
+		env_tem_low_num,
+		SUM(gen_vol_high) AS gen_vol_high_num,
+		SUM(gen_vol_low) AS gen_vol_low_num,
+		SUM(loss_electricity) AS
+		loss_electricity_num,
+		SUM(soc_low) AS soc_low_num
+		FROM
+		(
+		SELECT
+		warn.*,
+		s.company_id1,
+		s.company_id2,
+		s.company_id3,
+		s.company_name3,
+		s.city,
+		s.district
+		FROM
+		(SELECT
+		gprs_id, MAX(id) AS m_id
+		FROM
+		warning_info
+		WHERE
+		rcv_time > #{rcvTime,jdbcType=TIMESTAMP}
+		GROUP BY
+		gprs_id) w
+		LEFT JOIN base_station_info s ON w.gprs_id = s.gprs_id
+		LEFT
+		JOIN
+		warning_info warn ON warn.id = w.m_id
+		WHERE
+		<if test="companyId1 != null">
+			company_id1 = #{companyId1,jdbcType=INTEGER}
+		</if>
+		<if test="companyId2 != null">
+			company_id2 = #{companyId2,jdbcType=INTEGER}
+		</if>
+		<if test="companyId3 != null">
+			company_id3 = #{companyId3,jdbcType=INTEGER}
+		</if>
+		)
+		t1
+		GROUP BY district,company_id3) t2
+		GROUP BY company_name3 , city ,
+		district 
+		HAVING city != - 1) t3
+		RIGHT JOIN
+		(SELECT
+		*
+		FROM
+		(SELECT
+		IFNULL(company_id3, - 1) AS company_id3,
+		company_name3,
+		IFNULL(city, - 1) AS
+		city,
+		IFNULL(district, city) AS district,
+		COUNT(*) AS num
+		FROM
+		base_station_info
+		WHERE
+		<if test="companyId1 != null">
+			company_id1 = #{companyId1,jdbcType=INTEGER}
+		</if>
+		<if test="companyId2 != null">
+			company_id2 = #{companyId2,jdbcType=INTEGER}
+		</if>
+		<if test="companyId3 != null">
+			company_id3 = #{companyId3,jdbcType=INTEGER}
+		</if>
+		GROUP BY company_id3, city,
+		district  ) t
+		WHERE
+		t.company_id3 != - 1 AND city != - 1) s ON
+		t3.district = s.district and
+		t3.company_id3=s.company_id3
+	</select>
+
 
 </mapper>

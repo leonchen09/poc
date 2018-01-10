@@ -26,6 +26,12 @@
 	</properties>
 
 	<dependencies>
+	<!--2018/1/2短信包  -->
+		<dependency>
+			<groupId>com.github.qcloudsms</groupId>
+			<artifactId>sms</artifactId>
+			<version>0.9.2</version>
+		</dependency>
 		<!-- <dependency> <groupId>org.mybatis.caches</groupId> <artifactId>mybatis-ehcache</artifactId> <version>1.0.3</version> </dependency> -->
  
 		<dependency>
@@ -381,6 +387,11 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.6.0</version>
 		</dependency>
+	    <dependency>
+	    	<groupId>com.alibaba</groupId>
+	    	<artifactId>fastjson</artifactId>
+	    	<version>1.2.44</version>
+	    </dependency>
 	</dependencies>
 
 	<build>

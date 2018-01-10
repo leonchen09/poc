@@ -17,10 +17,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.zookeeper.Op.SetData;
-import org.aspectj.weaver.AjAttribute.AjSynthetic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +32,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.station.common.Constant;
-import com.station.common.cache.InitCache;
 import com.station.common.utils.BeanValueUtils;
 import com.station.common.utils.CommonConvertUtils;
 import com.station.common.utils.MyDateUtils;
-import com.station.common.utils.RandomUtil;
 import com.station.common.utils.ReflectUtil;
 import com.station.common.utils.StringUtils;
 import com.station.moudles.entity.CellInfo;
@@ -50,12 +47,11 @@ import com.station.moudles.entity.RoutingInspections;
 import com.station.moudles.entity.StationDetail;
 import com.station.moudles.entity.StationDurationHistory;
 import com.station.moudles.entity.StationInfo;
-import com.station.moudles.entity.SugReplaceCellIndex;
-import com.station.moudles.mapper.PackDataInfoMapper;
 import com.station.moudles.service.CellInfoService;
 import com.station.moudles.service.CommonService;
 import com.station.moudles.service.CompanyService;
 import com.station.moudles.service.GprsConfigInfoService;
+import com.station.moudles.service.GprsDeviceTypeService;
 import com.station.moudles.service.PackDataExpandLatestService;
 import com.station.moudles.service.PackDataInfoLatestService;
 import com.station.moudles.service.PackDataInfoService;
@@ -101,6 +97,8 @@ public class StationInfoController extends BaseController {
 	
 	@Autowired
 	RoutingInspectionsService routingInspectionsSer;
+	@Autowired
+	GprsDeviceTypeService gprsDeviceTypeSer;
 
 	private final ExecutorService fixedThreadPool = Executors.newSingleThreadExecutor();
 
@@ -111,6 +109,15 @@ public class StationInfoController extends BaseController {
 	@ApiOperation(value = "根据条件获取列表", notes = "返回列表")
 	public AjaxResponse<List<StationInfo>> getStationInfoList(@RequestBody StationInfo queryStationInfo) {
 		List<StationInfo> stationInfoList = stationInfoSer.selectListSelective(queryStationInfo);
+		AjaxResponse<List<StationInfo>> ajaxResponse = new AjaxResponse<List<StationInfo>>(stationInfoList);
+		return ajaxResponse;
+	}
+	// 前台页面的电池组列表
+	@RequestMapping(value = "/stationList", method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "根据条件获取列表", notes = "返回列表")
+	public AjaxResponse<List<StationInfo>> getStationList(@RequestBody StationInfo queryStationInfo) {
+		List<StationInfo> stationInfoList = stationInfoSer.selectStationInfoList(queryStationInfo);
 		AjaxResponse<List<StationInfo>> ajaxResponse = new AjaxResponse<List<StationInfo>>(stationInfoList);
 		return ajaxResponse;
 	}
@@ -150,7 +157,8 @@ public class StationInfoController extends BaseController {
 			String packType = stationInfo.getPackType();
 			if (packType != null) {
 				packType = packType.toUpperCase();
-				if (!packType.matches("^[1-9]\\d*V[1-9]\\d*AH$")) {
+				stationInfo.setPackType(packType);
+				if (!packType.matches("^[1-9]\\d*[V][1-9]\\d*AH$")) {
 					ajaxResponse.setMsg("电池组类型非法！请正确填写！");
 					return ajaxResponse;
 				}
@@ -167,15 +175,27 @@ public class StationInfoController extends BaseController {
 			}
 			
 			if (!StringUtils.isNull(gprsId) && !gprsId.equals("-1")) {
+				// 判断电压平台一致性问题
+				try {
+					stationInfoSer.judgeCellVolLevel(stationInfo);
+				} catch (Exception e) {
+					ajaxResponse.setMsg(e.getMessage());
+					return ajaxResponse;
+				}
 				GprsConfigInfo updateGprsConfigInfo = new GprsConfigInfo();
 				updateGprsConfigInfo.setGprsId(stationInfo.getGprsId());
 				updateGprsConfigInfo.setCompanyId(stationInfo.getCompanyId3());
 				gprsConfigInfoSer.updateByGprsSelective(updateGprsConfigInfo);
-
+				stationInfo.setInspectStatus(30);//已经绑定设比为已安装
 				stationInfo.setGprsIdOut(stationInfo.getGprsId());
 			}
-			// stationInfoSer.insertSelective(stationInfo);
-			stationInfoSer.createStationCells(stationInfo);
+			try {
+				stationInfoSer.createStationCells(stationInfo);
+			} catch (Exception e) {
+				ajaxResponse.setCode(Constant.RS_CODE_ERROR);
+				ajaxResponse.setMsg(e.getMessage());
+				return ajaxResponse;
+			}
 			ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
 			ajaxResponse.setMsg("添加成功！");
 		} else {
@@ -188,7 +208,7 @@ public class StationInfoController extends BaseController {
 	@ResponseBody
 	@ApiOperation(value = "根据pk集合删除", notes = "根据pk集合删除，以','为分隔符")
 	@ApiImplicitParams(value = {
-			@ApiImplicitParam(required = true, name = "ids", value = "pk集合", paramType = "query", allowMultiple = true, dataType = "Integer") })
+	@ApiImplicitParam(required = true, name = "ids", value = "pk集合", paramType = "query", allowMultiple = true, dataType = "Integer")})
 	public AjaxResponse<Object> delAll(Integer[] ids) {
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>(Constant.RS_CODE_ERROR, "请选择删除项！");
 		if (ids == null || ids.length < 0) {
@@ -212,25 +232,7 @@ public class StationInfoController extends BaseController {
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>(Constant.RS_CODE_ERROR, "修改出错！");
 		request.setAttribute(Constant.ERROR_REQUEST, ajaxResponse);
 		if (commonSer.completeCompany(stationInfo)) {
-			/*
-			 * String gprsId = stationInfo.getGprsId(); if (gprsId != null &&
-			 * !gprsId.equals("-1")) { GprsConfigInfo updateGprsConfigInfo = new
-			 * GprsConfigInfo(); updateGprsConfigInfo.setGprsId(gprsId);
-			 * updateGprsConfigInfo.setCompanyId(stationInfo.getCompanyId3());
-			 * //检查gprs_id_out是否为null，如果是，则设置为gprs_id. GprsConfigInfo queryInfo = new
-			 * GprsConfigInfo(); queryInfo.setGprsId(updateGprsConfigInfo.getGprsId());
-			 * List<GprsConfigInfo> gprsConfigInfos =
-			 * gprsConfigInfoSer.selectListSelective(queryInfo); if(gprsConfigInfos != null
-			 * && gprsConfigInfos.size() > 0) { queryInfo = gprsConfigInfos.get(0);
-			 * if(queryInfo.getGprsIdOut() == null || queryInfo.getGprsIdOut().isEmpty()) {
-			 * updateGprsConfigInfo.setGprsIdOut(updateGprsConfigInfo.getGprsId()); } }
-			 * gprsConfigInfoSer.updateByGprsSelective(updateGprsConfigInfo);
-			 * stationInfo.setGprsIdOut(gprsId); CellInfo updateCellInfo = new CellInfo();
-			 * updateCellInfo.setGprsId(stationInfo.getGprsId());
-			 * updateCellInfo.setStationId(stationInfo.getId());
-			 * cellInfoSer.updateGprsIdByStationId(updateCellInfo); }
-			 * stationInfoSer.updateByPrimaryKeySelective(stationInfo);
-			 */
+
 			// 校验经纬度
 			BigDecimal lat = stationInfo.getLat();
 			BigDecimal lng = stationInfo.getLng();
@@ -244,6 +246,7 @@ public class StationInfoController extends BaseController {
 			String packType = stationInfo.getPackType();
 			if (packType != null) {
 				packType = packType.toUpperCase();
+				stationInfo.setPackType(packType);
 				if (!packType.matches("^[1-9]\\d*V[1-9]\\d*AH$")) {
 					ajaxResponse.setMsg("电池组类型非法！请正确填写！");
 					return ajaxResponse;
@@ -253,7 +256,12 @@ public class StationInfoController extends BaseController {
 				return ajaxResponse;
 			}
 			// -----add 10/31 调整在统一个service 中调用
-			stationInfoSer.updateGprsAndCellAndStation(stationInfo);
+			try {
+				stationInfoSer.updateGprsAndCellAndStation(stationInfo);
+			} catch (Exception e) {
+				ajaxResponse.setMsg(e.getMessage());
+				return ajaxResponse;
+			}
 
 			ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
 			ajaxResponse.setMsg("修改成功！");
@@ -316,6 +324,11 @@ public class StationInfoController extends BaseController {
 		return ajaxResponse;
 	}
 
+	/**
+	 * 以前通过一个借口展示所以电池组的信息
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/entity/detail/basic/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation(value = "根据pk获取详情", notes = "根据pk获取详情")
@@ -328,7 +341,40 @@ public class StationInfoController extends BaseController {
 		ajaxResponse.setMsg("获取成功！");
 		return ajaxResponse;
 	}
-
+	/**
+	 * 展示不经常改变的信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/entity/detail/basicInfo/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse<StationDetail> getStationDetailBasicInfo(@PathVariable Integer id) {
+		AjaxResponse<StationDetail> ajaxResponse = new AjaxResponse<StationDetail>(Constant.RS_CODE_ERROR, "获取失败！");
+		request.setAttribute(Constant.ERROR_REQUEST, ajaxResponse);
+		StationDetail stationDetail = stationInfoSer.getStationDetailBasicInfoByStationId(id);
+		ajaxResponse.setData(stationDetail);
+		ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
+		ajaxResponse.setMsg("获取成功！");
+		return ajaxResponse;
+	}
+	/**
+	 * 显示需要刷新的数据
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/entity/detail/packInfo/{gprsId}", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxResponse<StationDetail> getStationDetailpackInfo(@PathVariable String gprsId) {
+		AjaxResponse<StationDetail> ajaxResponse = new AjaxResponse<StationDetail>(Constant.RS_CODE_ERROR, "获取失败！");
+		request.setAttribute(Constant.ERROR_REQUEST, ajaxResponse);
+		StationDetail stationDetail = stationInfoSer.getStationDetailpackInfoByStationId(gprsId);
+		ajaxResponse.setData(stationDetail);
+		ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
+		ajaxResponse.setMsg("获取成功！");
+		return ajaxResponse;
+	}
+	
+	
 	// ---------------- add -----------------
 	@RequestMapping(value = "/entity/detail/info/{gprsId}", method = RequestMethod.POST)
 	@ResponseBody
@@ -570,6 +616,7 @@ public class StationInfoController extends BaseController {
 			if (in != null) {
 				in.close();
 			}
+			FileUtils.deleteQuietly(file);
 		}
 
 		return ajaxResponse;
@@ -642,6 +689,7 @@ public class StationInfoController extends BaseController {
 			if (in != null) {
 				in.close();
 			}
+			FileUtils.deleteQuietly(file);
 		}
 
 		return ajaxResponse;

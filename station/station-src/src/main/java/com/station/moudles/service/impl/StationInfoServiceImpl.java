@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -46,11 +45,11 @@ import com.station.common.utils.MyDateUtils;
 import com.station.common.utils.ReflectUtil;
 import com.station.common.utils.RowParseHelper;
 import com.station.common.utils.StringUtils;
-import com.station.moudles.entity.ModifyBalanceSend;
 import com.station.moudles.entity.CellInfo;
 import com.station.moudles.entity.CellInfoDetail;
 import com.station.moudles.entity.GprsBalanceSend;
 import com.station.moudles.entity.GprsConfigInfo;
+import com.station.moudles.entity.GprsDeviceType;
 import com.station.moudles.entity.PackDataExpandLatest;
 import com.station.moudles.entity.PackDataInfo;
 import com.station.moudles.entity.PackDataInfoLatest;
@@ -62,17 +61,18 @@ import com.station.moudles.entity.RoutingInspections;
 import com.station.moudles.entity.StationDetail;
 import com.station.moudles.entity.StationInfo;
 import com.station.moudles.entity.SubDevice;
-import com.station.moudles.mapper.GprsConfigInfoMapper;
+import com.station.moudles.mapper.CellInfoMapper;
+import com.station.moudles.mapper.GprsDeviceTypeMapper;
 import com.station.moudles.mapper.PackDataInfoMapper;
 import com.station.moudles.mapper.PulseCalculationSendMapper;
 import com.station.moudles.mapper.StationInfoMapper;
-import com.station.moudles.service.ModifyBalanceInfoService;
 import com.station.moudles.service.CachService;
 import com.station.moudles.service.CellInfoService;
 import com.station.moudles.service.CommonService;
 import com.station.moudles.service.CompanyService;
 import com.station.moudles.service.GprsBalanceSendService;
 import com.station.moudles.service.GprsConfigInfoService;
+import com.station.moudles.service.GprsDeviceTypeService;
 import com.station.moudles.service.PackDataExpandLatestService;
 import com.station.moudles.service.PackDataInfoLatestService;
 import com.station.moudles.service.PackDataInfoService;
@@ -83,18 +83,16 @@ import com.station.moudles.service.StationInfoService;
 import com.station.moudles.service.SubDeviceService;
 import com.station.moudles.vo.AjaxResponse;
 import com.station.moudles.vo.CommonSearchVo;
-import com.station.moudles.vo.search.SearchPackDataInfoPagingVo;
 import com.station.moudles.vo.search.SearchStationInfoPagingVo;
 import com.station.moudles.vo.search.SearchWarningInfoPagingVo;
-
 import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.transformer.XLSTransformer;
 
 @Service
 public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer> implements StationInfoService {
-	//导入电池组标志判断
+	// 导入电池组标志判断
 	private static boolean stationFile = false;
-	
+
 	@Autowired
 	StationInfoMapper stationInfoMapper;
 	@Autowired
@@ -129,6 +127,12 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 	RoutingInspectionsService routingInspectionsSer;
 	@Autowired
 	RoutingInspectionDetailService routingInspectionDetailSer;
+	@Autowired
+	GprsDeviceTypeService gprsDeviceTypeSer;
+	@Autowired
+	CellInfoMapper cellInfoMapper;
+	@Autowired
+	GprsDeviceTypeMapper gprsDeviceTypeMapper;
 
 	private static final Logger logger = LoggerFactory.getLogger(StationInfoServiceImpl.class);
 
@@ -333,14 +337,27 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 	@Override
 	public boolean parseStationExcelFile(File file, AjaxResponse ajaxResponse, Integer companyId)
 			throws EncryptedDocumentException, InvalidFormatException, IOException {
-		//默认为 false
-		if(stationFile) {
+		// 默认为 false
+		if (stationFile) {
 			ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 			ajaxResponse.setMsg("系统繁忙！");
 			return true;
 		}
-		//进入导入设置为true
+		// 进入导入设置为true
 		stationFile = true;
+		// 先查询所有的单体平台电压对应的设备类型；
+		GprsDeviceType gprsDeviceType = new GprsDeviceType();
+		List<GprsDeviceType> deviceTypeList = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+		//k-type.V-电压
+		Map<Integer, Integer> typeAndVol = new HashMap<Integer, Integer>();
+		//k-type,V-sub_device_count
+		//Map<Integer, Integer> typeAndSubCount = new HashMap<Integer, Integer>();
+		if (deviceTypeList.size() != 0) {
+			for (GprsDeviceType deviceType : deviceTypeList) {
+				typeAndVol.put(deviceType.getTypeCode(), deviceType.getVolLevel());
+				//typeAndSubCount.put(deviceType.getTypeCode(), deviceType.getSubDeviceCount());
+			}
+		}
 		// 导入电池组，问题行详细记录信息
 		TreeMap<Integer, String> errorRow = new TreeMap<Integer, String>();
 		try {
@@ -467,16 +484,16 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 					}
 
 					if (StringUtils.getString(row.getCell(8)) != null) {
-						
+
 						BigDecimal lng = null;
 						try {
-							lng= new BigDecimal(row.getCell(8).toString());
-						}catch (Exception e) {
+							lng = new BigDecimal(row.getCell(8).toString());
+						} catch (Exception e) {
 							errorRow.put(rowNum + 1, "经度值必须是数字类型！");
 							continue;
 						}
 						if (16 >= String.valueOf(lng.doubleValue()).length()) {
-							if(lng.doubleValue() < 0.0) {
+							if (lng.doubleValue() < 0.0) {
 								errorRow.put(rowNum + 1, "在中国境内经度值不能为负数！");
 								continue;
 							}
@@ -494,17 +511,17 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 						errorRow.put(rowNum + 1, "经度没有填写！");
 						continue;
 					}
-						
+
 					if (StringUtils.getString(row.getCell(9)) != null) {
-						BigDecimal lat =null;
+						BigDecimal lat = null;
 						try {
-						 lat = new BigDecimal(row.getCell(9).toString());
-						}catch (Exception e) {
+							lat = new BigDecimal(row.getCell(9).toString());
+						} catch (Exception e) {
 							errorRow.put(rowNum + 1, "纬度值必须是数字类型！");
 							continue;
 						}
 						if (17 >= String.valueOf(lat.doubleValue()).length()) {
-							if(lat.doubleValue()<0.0) {
+							if (lat.doubleValue() < 0.0) {
 								errorRow.put(rowNum + 1, "在中国境内纬度值不能为负数！");
 								continue;
 							}
@@ -522,10 +539,58 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 						errorRow.put(rowNum + 1, "纬度没有填写！");
 						continue;
 					}
+
+					// 电压平台
+					if (StringUtils.getString(row.getCell(14)) != null) {
+						String temp = row.getCell(14).toString().trim().toUpperCase();
+						Pattern regex = Pattern.compile("^[1-9]{1,3}[V]{1}$");
+						Matcher matcher = regex.matcher(temp);
+						boolean matches = matcher.matches();
+						if (!matches) {
+							errorRow.put(rowNum + 1, "单体电压平台值不符合规范！ 例：3V");
+							continue;
+						}
+
+						if (11 >= temp.length()) {
+							if (!StringUtils.isNull(temp)) {
+								if (temp.contains("V")) {
+									stationInfo.setVolLevel(Integer.parseInt(temp.replace("V", "")));
+								} else {
+									stationInfo.setVolLevel(Integer.parseInt(temp));
+								}
+							}
+						} else {
+							errorRow.put(rowNum + 1, "单体电压平台值过长！");
+							continue;
+						}
+						// 修改单体电压平台为必填
+					} else {
+						errorRow.put(rowNum + 1, "单体电压平台没有填写！");
+						continue;
+					}
+					//电池组类型
+					if (StringUtils.getString(row.getCell(12)) != null) {
+						// 正则匹配 v前要有数字，ah前面要有数字且ah结尾
+						String packType = StringUtils.getString(row.getCell(12)).toUpperCase();
+						if (45 >= packType.length()) {
+							if (packType.matches("^[1-9]\\d*V[1-9]\\d*AH$")) {
+								stationInfo.setPackType(packType);
+							} else {
+								errorRow.put(rowNum + 1, "电池组类型格式错误！");
+								continue;
+							}
+						} else {
+							errorRow.put(rowNum + 1, "电池组类型过长！");
+							continue;
+						}
+					} else {
+						errorRow.put(rowNum + 1, "电池组类型没有填写！");
+						continue;
+					}
 					// 增加一列设备编号
 					if (StringUtils.getString(row.getCell(10)) != null) {
 						String id = RowParseHelper.getCell(row, 10);
-						String gprsId =id.trim();
+						String gprsId = id.trim();
 						if (!StringUtils.isNull(gprsId)) {
 							// 查询设备是否被占用
 							StationInfo stationBean = new StationInfo();
@@ -545,6 +610,7 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 									// 系统有该设备信息，自动绑定
 									stationInfo.setGprsId(gprsId);
 									stationInfo.setGprsIdOut(gprsId);
+									stationInfo.setInspectStatus(30);// 已安装
 									GprsConfigInfo updateGprsConfigInfo = new GprsConfigInfo();
 									updateGprsConfigInfo.setGprsId(gprsId);
 									updateGprsConfigInfo.setCompanyId(stationInfo.getCompanyId3());
@@ -557,6 +623,17 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 										queryInfo = gprsConfigInfos.get(0);
 										if (queryInfo.getGprsIdOut() == null || queryInfo.getGprsIdOut().isEmpty()) {
 											updateGprsConfigInfo.setGprsIdOut(updateGprsConfigInfo.getGprsId());
+										}
+										//判断电压平台对应的设备类型和设备的设备类型是否一致
+										if(typeAndVol.get(queryInfo.getDeviceType()) != stationInfo.getVolLevel()) {
+											errorRow.put(rowNum + 1, "设备编号是" + gprsId + "的设备类型和电压平台对应的设备类型不一致！");
+											continue;
+										}
+										//判断单体数量和从机数量
+										Integer cellCount = calculateCellCount(stationInfo);
+										if(queryInfo.getSubDeviceCount() != cellCount) {
+											errorRow.put(rowNum + 1, "设备编号是" + gprsId + "的设备类型和电压平台对应的单体数量和从机数量不一致！");
+											continue;
 										}
 									}
 									gprsConfigInfoSer.updateByGprsSelective(updateGprsConfigInfo);
@@ -579,42 +656,23 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 						}
 					}
 
-					if (StringUtils.getString(row.getCell(12)) != null) {
-						// 正则匹配 v前要有数字，ah前面要有数字且ah结尾
-						String packType = StringUtils.getString(row.getCell(12)).toUpperCase();
-						if (45 >= packType.length()) {
-							if (packType.matches("^[1-9]\\d*V[1-9]\\d*AH$")) {
-								stationInfo.setPackType(packType);
-							} else {
-								errorRow.put(rowNum + 1, "电池组类型格式错误！");
-								continue;
-							}
-						} else {
-							errorRow.put(rowNum + 1, "电池组类型过长！");
-							continue;
-						}
-					} else {
-						errorRow.put(rowNum + 1, "电池组类型没有填写！");
-						continue;
-					}
-
 					// 增加了一列负载功率等级
 					if (StringUtils.getString(row.getCell(13)) != null) {
 						String temp = row.getCell(13).toString().trim().toUpperCase();
 						Pattern regex = Pattern.compile("^\\d{1,9}$");
 						Matcher matcher = regex.matcher(temp);
 						boolean matches = matcher.matches();
-						
+
 						Pattern regex2 = Pattern.compile("^[0-9]+(.[0]{1})?");
 						Matcher matcher2 = regex2.matcher(temp);
 						boolean matches2 = matcher2.matches();
-						
-						Integer temp2= null;
-						if(!matches) {
-							if(!matches2) {
+
+						Integer temp2 = null;
+						if (!matches) {
+							if (!matches2) {
 								errorRow.put(rowNum + 1, "负载功率等级值不符合规范！ 例：200；是整数");
 								continue;
-							}else {
+							} else {
 								double dou = Double.parseDouble(temp);
 								temp2 = (int) dou;
 							}
@@ -622,7 +680,8 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 						if (12 > temp.length()) {
 							if (!StringUtils.isNull(temp)) {
 								if (temp.contains("W")) {
-									stationInfo.setLoadPower(BigDecimal.valueOf(Integer.valueOf(temp.replace("W", ""))));
+									stationInfo
+											.setLoadPower(BigDecimal.valueOf(Integer.valueOf(temp.replace("W", ""))));
 								} else {
 									stationInfo.setLoadPower(BigDecimal.valueOf(Integer.valueOf(temp2)));
 								}
@@ -633,29 +692,6 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 						}
 					}
 
-					if (StringUtils.getString(row.getCell(14)) != null) {
-						String temp = row.getCell(14).toString().trim().toUpperCase();
-						Pattern regex = Pattern.compile("^\\d{1,3}[V]{1}$");
-						Matcher matcher = regex.matcher(temp);
-						boolean matches = matcher.matches();
-						if(!matches) {
-							errorRow.put(rowNum + 1, "单体电压平台值不符合规范！ 例：3V");
-							continue;
-						}
-
-						if (11 >= temp.length()) {
-							if (!StringUtils.isNull(temp)) {
-								if (temp.contains("V")) {
-									stationInfo.setVolLevel(Integer.parseInt(temp.replace("V", "")));
-								} else {
-									stationInfo.setVolLevel(Integer.parseInt(temp));
-								}
-							}
-						} else {
-							errorRow.put(rowNum + 1, "单体电压平台值过长！");
-							continue;
-						}
-					}
 					if (StringUtils.getString(row.getCell(15)) != null) {
 						String plant = RowParseHelper.getCell(row, 15);
 						if (30 >= plant.length()) {
@@ -696,23 +732,37 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 			logger.error("电池组表导入出错-->", e);
 		}
 		errorRow.clear();
-		//最后设置为false
-		stationFile=false;
+		// 最后设置为false
+		stationFile = false;
 		return true;
 	}
 
 	@Override
 	public void createStationCells(StationInfo stationInfo) {
-		insertSelective(stationInfo);
-		for (int i = 1; i < 25; i++) {
-			CellInfo cellInfo = new CellInfo();
-			// ---10/24 gprsid 添加到cellInfo中
-			cellInfo.setGprsId(stationInfo.getGprsId());
-			cellInfo.setCellIndex(i);
-			cellInfo.setCellPlant(stationInfo.getCellPlant());
-			cellInfo.setStationId(stationInfo.getId());
-			cellInfo.setUpdateTime(new Date());
-			cellInfoSer.insertSelective(cellInfo);
+		// 根据设备类型和设置电压平台的参数俩决定电池的数量 如电池组类型48V500AH 电压平台2V 电池数量 48/2 =24
+		String packType = stationInfo.getPackType();
+		Integer type = Integer.parseInt(packType.substring(0, packType.lastIndexOf("V")));
+		Integer volLevel = stationInfo.getVolLevel();
+		if (volLevel == 0) {
+			throw new IllegalArgumentException("电压平台不能为0V！");
+		}
+		Integer number = type % volLevel;
+		if (number == 0) {
+			Integer cellCount = type / volLevel;
+			stationInfo.setCellCount(cellCount);
+			insertSelective(stationInfo);
+			for (int i = 1; i < cellCount + 1; i++) {
+				CellInfo cellInfo = new CellInfo();
+				// ---10/24 gprsid 添加到cellInfo中
+				cellInfo.setGprsId(stationInfo.getGprsId());
+				cellInfo.setCellIndex(i);
+				cellInfo.setCellPlant(stationInfo.getCellPlant());
+				cellInfo.setStationId(stationInfo.getId());
+				cellInfo.setUpdateTime(new Date());
+				cellInfoSer.insertSelective(cellInfo);
+			}
+		} else {
+			throw new IllegalArgumentException("电池组类型和电压平台不匹配！");
 		}
 	}
 
@@ -748,7 +798,7 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 
 	@Override
 	public void updateByGprsSelective(StationInfo record) {
-		if(record.getGprsId().equals("-1"))
+		if (record.getGprsId().equals("-1"))
 			throw new RuntimeException("按GPRSID更新时，gprsd=-1，会更新其他数据，请检查业务逻辑。");
 		int row = stationInfoMapper.updateByGprsSelective(record);
 		logger.debug("updateByGprsSelective row=" + row);
@@ -1037,6 +1087,7 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 				c = configList.get(0);
 				stationDetail.setLinkStatus(c.getLinkStatus());
 				stationDetail.setDeviceType(c.getDeviceType());
+				stationDetail.setDeviceTypeStr(c.getDeviceTypeStr());
 				stationDetail.setGprsFlag(c.getGprsFlag());
 				// ----10/16 add 添加电话卡号 \端口\规格
 				stationDetail.setDevicePhone(c.getDevicePhone());
@@ -1238,7 +1289,7 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 	@Override
 	public void updateGprsAndCellAndStation(StationInfo stationInfo) {
 		String gprsId = stationInfo.getGprsId();
-		//绑定中的修改
+		// 绑定中的修改
 		if (!StringUtils.isNull(gprsId) && !gprsId.equals("-1")) {
 			GprsConfigInfo updateGprsConfigInfo = new GprsConfigInfo();
 			updateGprsConfigInfo.setGprsId(gprsId);
@@ -1247,31 +1298,73 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 			GprsConfigInfo queryInfo = new GprsConfigInfo();
 			queryInfo.setGprsId(updateGprsConfigInfo.getGprsId());
 			List<GprsConfigInfo> gprsConfigInfos = gprsConfigInfoSer.selectListSelective(queryInfo);
-			String gprsIdOut=gprsId;
+			String gprsIdOut = gprsId;
 			if (gprsConfigInfos != null && gprsConfigInfos.size() > 0) {
 				queryInfo = gprsConfigInfos.get(0);
 				if (queryInfo.getGprsIdOut() == null || queryInfo.getGprsIdOut().isEmpty()) {
 					updateGprsConfigInfo.setGprsIdOut(updateGprsConfigInfo.getGprsId());
-					gprsIdOut=updateGprsConfigInfo.getGprsId();
-				}else {
-					gprsIdOut=queryInfo.getGprsIdOut();
+					gprsIdOut = updateGprsConfigInfo.getGprsId();
+				} else {
+					gprsIdOut = queryInfo.getGprsIdOut();
+				}
+				// 判断电压平台是否一致
+				GprsDeviceType gprsDeviceType = new GprsDeviceType();
+				gprsDeviceType.setTypeCode(queryInfo.getDeviceType());
+				List<GprsDeviceType> deviceType = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+				if (deviceType.size() != 0) {
+					if (stationInfo.getVolLevel() != deviceType.get(0).getVolLevel()) {
+						throw new RuntimeException("绑定的设备类型与当前电池组的类型、单体电压平台不匹配，保存失败！");
+					}
+					// 根据单体电压平台和电池组类型决定单体的个数
+					CellInfo cellInfo = new CellInfo();
+					cellInfo.setStationId(stationInfo.getId());
+					List<CellInfo> cellList = cellInfoSer.selectListSelective(cellInfo);
+					Integer cellCount = null;
+					if (cellList.size() != 0) {
+						cellCount = calculateCellCount(stationInfo);
+					}
+					if (cellCount != null) {
+						// 绑定设备的从机和电池组单体是否对应
+						if (cellCount != deviceType.get(0).getSubDeviceCount()) {
+							throw new RuntimeException("绑定设备对应的从机个数和该电池组对应的单体个数不相符合，保存失败！");
+						}
+						Integer cellCountOld = cellList.size();
+						isInsertCellInfo(stationInfo, cellCountOld, cellCount);
+						stationInfo.setCellCount(cellCount);
+					}
 				}
 			}
 			gprsConfigInfoSer.updateByGprsSelective(updateGprsConfigInfo);
-			
+
+			stationInfo.setInspectStatus(30);// 已安装
 			stationInfo.setGprsIdOut(gprsIdOut);
 			stationInfoSer.updateByPrimaryKeySelective(stationInfo);
-			
+
 			CellInfo updateCellInfo = new CellInfo();
 			updateCellInfo.setGprsId(stationInfo.getGprsId());
 			updateCellInfo.setStationId(stationInfo.getId());
 			cellInfoSer.updateGprsIdByStationId(updateCellInfo);
 		}
-		
-		//未绑定的电池组修改或已经绑定的电池组解绑
-		if(gprsId != null && gprsId.equals("-1")) {
+
+		// 未绑定的电池组修改或已经绑定的电池组解绑
+		if (gprsId != null && gprsId.equals("-1")) {
+			// 根据单体电压平台和电池组类型决定单体的个数
+			CellInfo cellInfo = new CellInfo();
+			cellInfo.setStationId(stationInfo.getId());
+			List<CellInfo> cellList = cellInfoSer.selectListSelective(cellInfo);
+			Integer cellCount = null;
+			if (cellList.size() != 0) {
+				cellCount = calculateCellCount(stationInfo);
+			}
+			if (cellCount != null) {
+				Integer cellCountOld = cellList.size();
+				isInsertCellInfo(stationInfo, cellCountOld, cellCount);
+				stationInfo.setCellCount(cellCount);
+			}
 			stationInfo.setGprsIdOut("-1");
+			stationInfo.setInspectStatus(99);// 未安装
 			stationInfoSer.updateByPrimaryKeySelective(stationInfo);
+
 			CellInfo updateCell = new CellInfo();
 			updateCell.setGprsId("-1");
 			updateCell.setStationId(stationInfo.getId());
@@ -1279,42 +1372,262 @@ public class StationInfoServiceImpl extends BaseServiceImpl<StationInfo, Integer
 		}
 
 	}
+
+	// 根据单体的平台的电压和设备类型计算单体的个数
+	public Integer calculateCellCount(StationInfo stationInfo) {
+		String packType = stationInfo.getPackType();
+		Integer type = Integer.parseInt(packType.substring(0, packType.lastIndexOf("V")));
+		Integer volLevel = stationInfo.getVolLevel();
+		if (volLevel == 0) {
+			throw new IllegalArgumentException("电压平台不能为0V！");
+		}
+		Integer number = type % volLevel;
+		if (number == 0) {
+			Integer cellCount = type / volLevel;
+			return cellCount;
+		} else {
+			throw new IllegalArgumentException("电池组类型和电压平台不匹配！");
+		}
+	}
+
+	// 根据以前单体的个数和现在计算后的单体个数比较；判断是否需要新增单体信息 。
+	public void isInsertCellInfo(StationInfo stationInfo, Integer cellCountOld, Integer cellCount) {
+		if (cellCountOld < cellCount) {
+			for (int i = cellCountOld + 1; i < cellCount + 1; i++) {
+				CellInfo cellInfo = new CellInfo();
+				cellInfo.setGprsId(stationInfo.getGprsId());
+				cellInfo.setCellIndex(i);
+				cellInfo.setCellPlant(stationInfo.getCellPlant());
+				cellInfo.setStationId(stationInfo.getId());
+				cellInfo.setUpdateTime(new Date());
+				cellInfoSer.insertSelective(cellInfo);
+			}
+		}
+		if (cellCountOld > cellCount) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("cellCountOld", cellCountOld + 1);
+			map.put("cellCount", cellCount + 1);
+			map.put("stationId", stationInfo.getId());
+			cellInfoMapper.deleteMoreCell(map);
+		}
+	}
+
 	// app 首页分页
 	@Override
 	public List<StationInfo> appSelectListSelectivePaging(SearchStationInfoPagingVo searchStationInfoPagingVo) {
 		return stationInfoMapper.appSelectListSelectivePaging(searchStationInfoPagingVo);
 	}
 
-	//app绑定电池组添加巡检记录
+	// app绑定电池组添加巡检记录
 	@Override
 	public void bindingAddRoutingInspections(RoutingInspectionStationDetail routingInspectionsDetail) {
 		RoutingInspections routingInspections = new RoutingInspections();
-		routingInspections.setRoutingInspectionStatus(1);//安装维护中
+		routingInspections.setRoutingInspectionStatus(0);// 未提交之前的状态
 		routingInspections.setOperateTime(new Date());
 		routingInspections.setStationId(routingInspectionsDetail.getStationId());
 		routingInspections.setOperateType(routingInspectionsDetail.getOperateType());
 		routingInspections.setOperateId(routingInspectionsDetail.getOperateId());
 		routingInspections.setOperateName(routingInspectionsDetail.getOperateName());
 		routingInspections.setDeviceType(routingInspectionsDetail.getDeviceType());
-		routingInspections.setGprsId(routingInspectionsDetail.getGprsId());	
+		routingInspections.setGprsId(routingInspectionsDetail.getGprsId());
 		routingInspections.setOperatePhone(routingInspectionsDetail.getOperatePhone());
 		routingInspectionsSer.insertSelective(routingInspections);
-		
+
 		RoutingInspectionDetail routingDeail = new RoutingInspectionDetail();
 		routingDeail.setRoutingInspectionsId(routingInspections.getRoutingInspectionId());
 		routingDeail.setDetailOperateId(routingInspectionsDetail.getOperateId());
 		routingDeail.setDetailOperateName(routingInspectionsDetail.getOperateName());
-		routingDeail.setDetailOperateType(1);//安装主机
-		routingDeail.setRequestSeq(1);//app 第一次请求
+		routingDeail.setDetailOperateValueNew(routingInspectionsDetail.getGprsId());
+		routingDeail.setDetailOperateType(1);// 安装主机
+		routingDeail.setRequestSeq(1);// app 第一次请求
 		routingDeail.setRequestType(0);// 请求
 		routingInspectionDetailSer.insertSelective(routingDeail);
-		
+
 	}
 
 	@Override
-	public List<StationInfo> appWarnAreaSelectListSelectivePaging(SearchWarningInfoPagingVo searchWarningInfoPagingVo) {
+	public List<StationInfo> appWarnAreaSelectListSelective(SearchWarningInfoPagingVo searchWarningInfoPagingVo) {
+
+		return stationInfoMapper.appWarnAreaSelectListSelective(searchWarningInfoPagingVo);
+	}
+
+	/**
+	 * 展示不经常改变的数据
+	 */
+	@Override
+	public StationDetail getStationDetailBasicInfoByStationId(Integer stationId) {
+		StationDetail stationDetail = new StationDetail();
+		StationInfo stationInfo = selectByPrimaryKey(stationId);
+		if (stationInfo == null) {
+			return stationDetail;
+		}
+		detailInfo(stationDetail, stationInfo);
+
+		return stationDetail;
+	}
+
+	public void detailInfo(StationDetail stationDetail, StationInfo stationInfo) {
+		BeanUtils.copyProperties(stationInfo, stationDetail);
+		final String gprsId = stationDetail.getGprsId();
+		if (!gprsId.equals("-1")) {
+			GprsConfigInfo queryGprsConfigInfo = new GprsConfigInfo();
+			queryGprsConfigInfo.setGprsId(stationInfo.getGprsId());
+			List<GprsConfigInfo> configList = gprsConfigInfoSer.selectListSelective(queryGprsConfigInfo);
+			GprsConfigInfo c = null;
+			if (configList.size() > 0) {
+				c = configList.get(0);
+				// 这里要改合并代码后要查询gprs_device_typ 表来返回设备类型
+				stationDetail.setDeviceType(c.getDeviceType());
+
+			}
+			PackDataExpandLatest queryPde = new PackDataExpandLatest();
+			queryPde.setGprsId(gprsId);
+			List<PackDataExpandLatest> pdeList = packDataExpandLatestSer.selectListSelective(queryPde);
+			PackDataExpandLatest pde = null;
+			if (pdeList.size() > 0) {
+				pde = pdeList.get(0);
+				// 电池组容量预测
+				stationDetail.setPackCapPred(pde.getPackCapPred());
+				// 电池组放点时长预测
+				stationDetail.setPackDischargeTimePred(pde.getPackDischargeTimePred());
+			}
+
+			CellInfo queryCell = new CellInfo();
+			queryCell.setStationId(stationDetail.getId());
+			queryCell.setGprsId(stationDetail.getGprsId()); // 增加了GPRS_ID 的参数，解决页面显示48个单体的bug
+			List<CellInfo> cellList = cellInfoSer.selectListSelective(queryCell);
+			List<CellInfoDetail> cellDetailList = new ArrayList<CellInfoDetail>();
+			for (CellInfo cell : cellList) {
+				CellInfoDetail cellDetail = new CellInfoDetail();
+				BeanUtils.copyProperties(cell, cellDetail);
+				if (pde != null) {
+					cellDetail.setCellCapIndex(
+							(Integer) BeanValueUtils.getValue("cellCapSort" + cellDetail.getCellIndex(), pde));
+					cellDetail.setCellResist(
+							(BigDecimal) BeanValueUtils.getValue("cellResist" + cellDetail.getCellIndex(), pde));
+					cellDetail.setCellStatus(
+							(Integer) BeanValueUtils.getValue("cellEvalu" + cellDetail.getCellIndex(), pde));
+					cellDetail.setCellCap(
+							(BigDecimal) BeanValueUtils.getValue("cellCap" + cellDetail.getCellIndex(), pde));
+				}
+				cellDetailList.add(cellDetail);
+			}
+			sortByCap(cellDetailList);
+			sortByIndex(cellDetailList);
+			stationDetail.setCellInfoDetailList(cellDetailList);
+		}
+
+	}
+
+	@Override
+	public StationDetail getStationDetailpackInfoByStationId(String gprsId) {
+		StationDetail stationDetail = new StationDetail();
+		// eg: T0B000002 base_station_info表中没有数据
+		StationInfo stationInfo = new StationInfo();
+		stationInfo.setGprsId(gprsId);
+		packInfo(stationDetail, stationInfo);
+		return stationDetail;
+	}
+
+	public void packInfo(StationDetail stationDetail, StationInfo stationInfo) {
+		BeanUtils.copyProperties(stationInfo, stationDetail);
+		final String gprsId = stationDetail.getGprsId();
+		if (!gprsId.equals("-1")) {
+			PackDataExpandLatest queryPde = new PackDataExpandLatest();
+			queryPde.setGprsId(gprsId);
+			List<PackDataExpandLatest> pdeList = packDataExpandLatestSer.selectListSelective(queryPde);
+			PackDataExpandLatest pde = null;
+			if (pdeList.size() > 0) {
+				pde = pdeList.get(0);
+				stationDetail.setPackCapPred(pde.getPackCapPred());
+				stationDetail.setPackDischargeTimePred(pde.getPackDischargeTimePred());
+			}
+
+			PackDataInfoLatest queryPdi = new PackDataInfoLatest();
+			queryPdi.setGprsId(gprsId);
+			List<PackDataInfoLatest> pdiList = packDataInfoLatestSer.selectListSelective(queryPdi);
+			PackDataInfoLatest pdi = null;
+			if (pdiList.size() > 0) {
+				pdi = pdiList.get(0);
+				stationDetail.setUpdateTime(pdi.getRcvTime());
+				stationDetail.setState(pdi.getState());
+				stationDetail.setGenCur(pdi.getGenCur());
+				stationDetail.setGenVol(pdi.getGenVol());
+				stationDetail.setEnvironTem(pdi.getEnvironTem());
+				stationDetail.setSoc(pdi.getSoc());
+				// 加的
+				// stationDetail.setPackDataInfoLatest(pdi);
+			}
+			CellInfo queryCell = new CellInfo();
+			queryCell.setStationId(stationDetail.getId());
+			queryCell.setGprsId(stationDetail.getGprsId()); // 增加了GPRS_ID 的参数，解决页面显示48个单体的bug
+			List<CellInfo> cellList = cellInfoSer.selectListSelective(queryCell);
+			List<CellInfoDetail> cellDetailList = new ArrayList<CellInfoDetail>();
+			for (CellInfo cell : cellList) {
+				CellInfoDetail cellDetail = new CellInfoDetail();
+				BeanUtils.copyProperties(cell, cellDetail);
+				if (pdi != null) {
+					cellDetail.setCellVol(
+							(BigDecimal) BeanValueUtils.getValue("cellVol" + cellDetail.getCellIndex(), pdi));
+					cellDetail.setCellEqu((Byte) BeanValueUtils.getValue("cellEqu" + cellDetail.getCellIndex(), pdi));
+					cellDetail
+							.setCellTem((Integer) BeanValueUtils.getValue("cellTem" + cellDetail.getCellIndex(), pdi));
+				} else {
+					// 添加逻辑，当pdi表中没有数据时，默认cellEqu赋值为0，方便前端显示
+					cellDetail.setCellEqu((byte) 0);
+				}
+				cellDetailList.add(cellDetail);
+
+			}
+			sortByCap(cellDetailList);
+			sortByIndex(cellDetailList);
+			stationDetail.setCellInfoDetailList(cellDetailList);
+			// 每次更新实时时长。
+			if (stationDetail.getPackDischargeTimePred() != null && stationDetail.getSoc() != null) {
+				stationDetail.setRealDuration(stationDetail.getPackDischargeTimePred()
+						.multiply(BigDecimal.valueOf(stationDetail.getSoc() / 100.0)));
+			}
+
+		}
+	}
+
+	@Override
+	public List<StationInfo> selectStationInfoList(StationInfo stationIfno) {
+		// TODO Auto-generated method stub
+		return stationInfoMapper.selectStationInfoList(stationIfno);
+	}
+
+	@Override
+	public void judgeCellVolLevel(StationInfo stationInfo) {
+		// 判断电压平台是否一致
+//		GprsConfigInfo queryInfo = new GprsConfigInfo();
+//		queryInfo.setGprsId(stationInfo.getGprsId());
+//		List<GprsConfigInfo> gprsConfigInfos = gprsConfigInfoSer.selectListSelective(queryInfo);
+//
+//		GprsDeviceType gprsDeviceType = new GprsDeviceType();
+//		gprsDeviceType.setTypeCode(gprsConfigInfos.get(0).getDeviceType());
+//		List<GprsDeviceType> deviceType = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+//		if (deviceType.size() != 0) {
+//			if (stationInfo.getVolLevel() != deviceType.get(0).getVolLevel().intValue()) {
+//				throw new RuntimeException("绑定的设备类型与当前电池组的类型、单体电压平台不匹配，保存失败！");
+//			}
+//		}
+//		Integer cellCount = calculateCellCount(stationInfo);
+//		if(cellCount != gprsConfigInfos.get(0).getSubDeviceCount()) {
+//			throw new RuntimeException("绑定设备对应的从机个数和该电池组对应的单体个数不相符合，保存失败！");
+//		}
 		
-		return stationInfoMapper.appWarnAreaSelectListSelectivePaging(searchWarningInfoPagingVo);
+		GprsDeviceType dviceType = gprsDeviceTypeMapper.selectVolLevelAanCellCount(stationInfo.getGprsId());
+		if(dviceType == null) {
+			throw new RuntimeException("设备编号不存在！");
+		}
+		if (stationInfo.getVolLevel() != dviceType.getVolLevel().intValue()) {
+			throw new RuntimeException("绑定的设备类型与当前电池组的类型、单体电压平台不匹配，保存失败！");
+		}
+		Integer cellCount = calculateCellCount(stationInfo);
+		if(cellCount != dviceType.getSubDeviceCount()) {
+			throw new RuntimeException("绑定设备对应的从机个数和该电池组对应的单体个数不相符合，保存失败！");
+		}
 	}
 
 }

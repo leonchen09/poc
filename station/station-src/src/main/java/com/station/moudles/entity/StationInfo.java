@@ -207,6 +207,16 @@ public class StationInfo {
 	private BigDecimal genVol;
 	// 总电流
 	private BigDecimal genCur;
+	//总单体数量
+	private Integer cellCount;
+	
+	public Integer getCellCount() {
+		return cellCount;
+	}
+
+	public void setCellCount(Integer cellCount) {
+		this.cellCount = cellCount;
+	}
 
 	public BigDecimal getGenVol() {
 		return genVol;

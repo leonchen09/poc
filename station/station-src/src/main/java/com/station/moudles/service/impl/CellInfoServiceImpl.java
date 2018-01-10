@@ -58,7 +58,7 @@ public class CellInfoServiceImpl extends BaseServiceImpl<CellInfo, Integer> impl
 
     //app提交更新cellInfo数据--保存原来的数据在cell_history_info 中
 	@Override
-	public void appUpdateCellInfo(RoutingInspectionStationDetail routingInspectionStationDetail,RoutingInspectionDetail detailList,String cellPlant) {
+	public void exportUpdateCellInfo(RoutingInspectionStationDetail routingInspectionStationDetail,RoutingInspectionDetail detailList,String cellPlant) {
 		CellInfo cellInfo=new CellInfo();
 		cellInfo.setGprsId(routingInspectionStationDetail.getGprsId());
 		cellInfo.setStationId(routingInspectionStationDetail.getStationId());
@@ -94,5 +94,43 @@ public class CellInfoServiceImpl extends BaseServiceImpl<CellInfo, Integer> impl
 		}else {
 			logger.debug("updateByPrimaryKey更新条数--app提交:" + cellList.size());
 		}
+	}
+
+	@Override
+	public void appUpdateCellInfo(RoutingInspectionStationDetail routingInspectionStationDetail,RoutingInspectionDetail detailList, String cellPlant,boolean isInsert) {
+		CellInfo cellInfo=new CellInfo();
+		cellInfo.setGprsId(routingInspectionStationDetail.getGprsId());
+		cellInfo.setStationId(routingInspectionStationDetail.getStationId());
+		cellInfo.setCellIndex(detailList.getCellIndex());
+		List<CellInfo> cellList = cellInfoMapper.selectListSelective(cellInfo);
+		if(!CollectionUtils.isEmpty(cellList)) {
+			CellInfo cell = cellList.get(0);
+			//将原来的数据保存在cell_history_info 中
+			CellHistoryInfo cellHistory = new CellHistoryInfo();
+			cellHistory.setGprsId(cell.getGprsId());
+			cellHistory.setCellNumber(cell.getCellIndex());
+			cellHistory.setCellPlant(cell.getCellPlant());
+			cellHistory.setCellType(cell.getCellType());
+			cellHistory.setUpdateTime(cell.getUpdateTime());
+			if(isInsert) {
+			cellHistoryInfoMapper.insertSelective(cellHistory);
+			}
+			//更新cell_info 的数据
+			if ("新电池".equals(detailList.getDetailOperateValueNew())) {
+				cell.setUseFrom(routingInspectionStationDetail.getOperateTime());
+			}
+			if("新电池".equals(cellPlant)|| "二次利旧".equals(cellPlant)) {
+				cell.setCellType(cellPlant);
+			}else {
+				cell.setCellPlant(cellPlant);
+			}
+			cell.setUpdateTime(routingInspectionStationDetail.getOperateTime());
+		
+			cellInfoMapper.updateByPrimaryKey(cell);
+			logger.debug("updateByPrimaryKey更新条数--app提交:" + cellList.size());
+		}else {
+			logger.debug("updateByPrimaryKey更新条数--app提交:" + cellList.size());
+		}
+		
 	}
 }

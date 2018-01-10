@@ -38,7 +38,6 @@ public class JspFilter implements Filter {
 		String requestUrl = req.getRequestURI();
 		HttpServletResponse res = (HttpServletResponse)response;
 		String remoteIp = request.getRemoteAddr();  
-		System.out.println(remoteIp+requestUrl);
 		if(requestUrl.indexOf(".jsp")!=-1){
 			res.sendRedirect(context + "/login/loginIndex");
 			return;

@@ -159,7 +159,17 @@ public class SearchStationInfoPagingVo extends PageEntity {
 	//巡检人员姓名
 	@ApiModelProperty(value = "巡检人员姓名", required = false)
 	private String operateName;
+	
+	//总单体数量
+	private Integer cellCount;
+	
+	public Integer getCellCount() {
+		return cellCount;
+	}
 
+	public void setCellCount(Integer cellCount) {
+		this.cellCount = cellCount;
+	}
 
 	public String getOperateName() {
 		return operateName;

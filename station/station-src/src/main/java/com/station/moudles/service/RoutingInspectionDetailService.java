@@ -10,6 +10,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 
 import com.station.moudles.entity.RoutingInspectionDetail;
+import com.station.moudles.entity.RoutingInspectionStationDetail;
 import com.station.moudles.vo.AjaxResponse;
 
 public interface RoutingInspectionDetailService extends BaseService<RoutingInspectionDetail, Integer> {
@@ -25,4 +26,11 @@ public interface RoutingInspectionDetailService extends BaseService<RoutingInspe
 	void routingInsepectionExcelFile(Row row);
 
 	void routingInsepectionExcelFileCell(Row row);
+	
+	AjaxResponse<RoutingInspectionStationDetail> appSaveInfo(RoutingInspectionStationDetail routingInspectionStationDetail);
+
+	//提交未完成 
+	void notAccomplishSubmit(RoutingInspectionDetail routingInspectionDetail);
+	//提交完成
+	void confirmRoutingInspection(RoutingInspectionDetail routingInspectionDetail);
 }

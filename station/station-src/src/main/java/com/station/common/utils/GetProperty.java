@@ -43,7 +43,6 @@ public class GetProperty {
 			while (eu.hasMoreElements()) {
 				String key = (String) eu.nextElement();
 				String value = props.getProperty(key);
-				System.out.println(key + "=" + value);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -40,6 +41,7 @@ import com.station.common.Constant;
 import com.station.common.utils.CommonConvertUtils;
 import com.station.common.utils.ReflectUtil;
 import com.station.common.utils.RowParseHelper;
+import com.station.common.utils.StringUtils;
 import com.station.moudles.entity.CellInfo;
 import com.station.moudles.entity.CellInfoDetail;
 import com.station.moudles.entity.GprsConfigInfo;
@@ -116,11 +118,19 @@ public class RoutingInspectionsManagerController extends BaseController {
 	@ResponseBody
 	@ApiOperation(value = "根据条件保存没有完成的信息", notes = "根据条件保存没有完成的信息")
 	public AjaxResponse<Object> saveNotAccomplishSubmit(@RequestBody RoutingInspectionDetail routingInspectionDetail) {
-		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>(Constant.RS_CODE_ERROR, "请选择为完成项！");
+		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>(Constant.RS_CODE_SUCCESS, "确认完成！");
 		if (routingInspectionDetail == null) {
 			return ajaxResponse;
 		}
-		RoutingInspectionDetail query = new RoutingInspectionDetail();
+		try {
+			routingInspectionDetailSer.notAccomplishSubmit(routingInspectionDetail);
+		} catch (Exception e) {
+			ajaxResponse.setCode(Constant.RS_CODE_ERROR);
+			ajaxResponse.setMsg(e.getMessage());
+			return ajaxResponse;
+		}
+		return ajaxResponse;
+/*		RoutingInspectionDetail query = new RoutingInspectionDetail();
 		query.setRoutingInspectionsId(routingInspectionDetail.getRoutingInspectionsId());
 		query.setRequestType(1);// 后台返回给APP时 状态要改变 0 是没有回应 1 是回应
 		List<RoutingInspectionDetail> selectListSelective = routingInspectionDetailSer.selectListSelective(query);
@@ -139,17 +149,10 @@ public class RoutingInspectionsManagerController extends BaseController {
 			routingInspectionDetail.setRequestType(1);
 			routingInspectionDetail.setRequestSeq(routingDetail.getRequestSeq() + 1);
 			routingInspectionDetail.setRoutingInspectionsId(routingInspectionDetail.getRoutingInspectionsId());
-			routingInspectionDetail.setDetailOperateId(routingInspectionDetail.getOperateId());
-			routingInspectionDetail.setDetailOperateName(routingInspectionDetail.getOperateName());
+			routingInspectionDetail.setDetailOperateId(routingInspectionDetail.getUserId());
+			routingInspectionDetail.setDetailOperateName(routingInspectionDetail.getUserName());
 			routingInspectionDetailSer.insertSelective(routingInspectionDetail);
 		}
-
-		// 确定未完成改变主表的的状态为安装维护中
-//		RoutingInspections routingInspections = new RoutingInspections();
-//		routingInspections.setRoutingInspectionId(routingInspectionDetail.getRoutingInspectionsId());
-//		routingInspections.setRoutingInspectionStatus(1);// 安装维护中
-//		routingInspectionsSer.updateByPrimaryKeySelective(routingInspections);
-
 		// 确定未完成改变电池组的状态
 		StationInfo station = new StationInfo();
 		station.setId(routingInspectionDetail.getStationId());
@@ -170,10 +173,10 @@ public class RoutingInspectionsManagerController extends BaseController {
 				station.setInspectStatus(24);
 				stationInfoSer.updateByPrimaryKeySelective(station);
 			}
-		}
-		ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
-		ajaxResponse.setMsg("提交成功！");
-		return ajaxResponse;
+		}*/
+//		ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
+//		ajaxResponse.setMsg("提交成功！");
+//		return ajaxResponse;
 
 	}
 
@@ -189,9 +192,17 @@ public class RoutingInspectionsManagerController extends BaseController {
 			return new AjaxResponse<RoutingInspectionDetail>(Constant.RS_CODE_ERROR, "请选择确认！");
 		}
 
-		AjaxResponse<RoutingInspectionDetail> ajaxResponse = new AjaxResponse<RoutingInspectionDetail>(
-				Constant.RS_CODE_SUCCESS, "确认完成成功！");
-		if (routingInspectionDetail.getRoutingInspectionsId() != null) {
+		AjaxResponse<RoutingInspectionDetail> ajaxResponse = new AjaxResponse<RoutingInspectionDetail>(Constant.RS_CODE_SUCCESS, "确认完成成功！");
+		try {
+			routingInspectionDetailSer.confirmRoutingInspection(routingInspectionDetail);
+
+		} catch (Exception e) {
+			ajaxResponse.setCode(Constant.RS_CODE_ERROR);
+			ajaxResponse.setMsg(e.getMessage());
+			return ajaxResponse;
+		}
+		
+		/*if (routingInspectionDetail.getRoutingInspectionsId() != null) {
 			// 更新确定列表的状态 改为确定成功
 			RoutingInspections routingInspections = new RoutingInspections();			
 			// 得到Date类型当前时间
@@ -244,34 +255,45 @@ public class RoutingInspectionsManagerController extends BaseController {
 				}
 			}
 			//确定完成后修改该更换单体信息
-			RoutingInspectionDetail queryInspectionCell = new RoutingInspectionDetail();
 			querySignCell.setRoutingInspectionsId(routingInspectionDetail.getRoutingInspectionsId());
 			querySignCell.setDetailOperateType(5);//更换单体类型
-			List<RoutingInspectionDetail> inspectionCellinfoListType = routingInspectionDetailSer.selectListSelective(queryInspectionCell);
+			List<RoutingInspectionDetail> inspectionCellinfoListType = routingInspectionDetailSer.selectListSelective(querySignCell);
+			List<Integer> indexType = new ArrayList<Integer>();//得到跟换单体类型的单体号
+			boolean isInsert = true;
 			if(inspectionCellinfoListType.size() != 0) {
 				for(RoutingInspectionDetail inspectionCellType : inspectionCellinfoListType) {
 					RoutingInspectionStationDetail stationDetail = new RoutingInspectionStationDetail();
+					indexType.add(inspectionCellType.getCellIndex());
 					stationDetail.setGprsId(routingInspec.getGprsId());
 					stationDetail.setStationId(routingInspec.getStationId());
 					stationDetail.setOperateTime(inspectionCellType.getCreateTime());
-					cellInfoSer.appUpdateCellInfo(stationDetail,inspectionCellType,inspectionCellType.getDetailOperateValueNew());
+					cellInfoSer.appUpdateCellInfo(stationDetail,inspectionCellType,inspectionCellType.getDetailOperateValueNew(),isInsert);
 				}
 			}
-			querySignCell.setDetailOperateType(6);//更换单体类型
-			List<RoutingInspectionDetail> inspectionCellinfoListPant = routingInspectionDetailSer.selectListSelective(queryInspectionCell);
+			querySignCell.setDetailOperateType(6);//更换单体品牌
+			List<RoutingInspectionDetail> inspectionCellinfoListPant = routingInspectionDetailSer.selectListSelective(querySignCell);
+		
 			if(inspectionCellinfoListPant.size() != 0) {
 				for(RoutingInspectionDetail inspectionCell : inspectionCellinfoListPant) {
 					RoutingInspectionStationDetail stationDetail = new RoutingInspectionStationDetail();
+					
+					for(Integer index :indexType) {
+						if(index == inspectionCell.getCellIndex()) {
+							isInsert = false;
+							continue;
+						};
+					
+					}					
 					stationDetail.setGprsId(routingInspec.getGprsId());
 					stationDetail.setStationId(routingInspec.getStationId());
 					stationDetail.setOperateTime(inspectionCell.getCreateTime());
-					cellInfoSer.appUpdateCellInfo(stationDetail,inspectionCell,inspectionCell.getDetailOperateValueNew());
+					cellInfoSer.appUpdateCellInfo(stationDetail,inspectionCell,inspectionCell.getDetailOperateValueNew(),isInsert);
 				}
 			}
 		} else {
 			ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 			ajaxResponse.setMsg("确认完成失败！");
-		}
+		}*/
 		return ajaxResponse;
 
 	}
@@ -297,18 +319,15 @@ public class RoutingInspectionsManagerController extends BaseController {
 		List<RoutingInspectionDetail> routingInspectionDetailList = routingInspectionDetailSer
 				.selectListSelectiveApp(routingInspectionDetail);
 		if (routingInspectionDetailList.size() != 0) {
-
+			//过滤掉品牌为null的
+//			List<RoutingInspectionDetail> collect = new ArrayList<RoutingInspectionDetail>();
+//			for(RoutingInspectionDetail detail :routingInspectionDetailList) {
+//				if(detail.getDetailOperateValueNew() !=null) {
+//					collect.add(detail);
+//				}
+//			}
 			routingInspections.setRoutingInspectionDetailList(routingInspectionDetailList);
 		}
-
-		// 得到巡检人员的电话号码
-		/*
-		 * User user = new User(); user.setLoginId(routingInspections.getOperateName());
-		 * List<User> selectListSelective = userSer.selectListSelective(user); if
-		 * (selectListSelective.size() != 0) {
-		 * routingInspections.setOperatePhone(selectListSelective.get(0).getUserPhone1()
-		 * ); }
-		 */
 
 		// 获得24个单体的信息
 		if (!routingInspections.getGprsId().equals("-1")) {
@@ -385,14 +404,6 @@ public class RoutingInspectionsManagerController extends BaseController {
 		}
 		RoutingInspectionStationDetail routingInspections = routingInspectionsSer
 				.selectStationDetailByPrimaryKey(routingInspectionId);
-		// 得到巡检人员的电话号码
-		/*
-		 * User user = new User(); user.setLoginId(routingInspections.getOperateName());
-		 * List<User> selectListSelective = userSer.selectListSelective(user); if
-		 * (selectListSelective.size() != 0) {
-		 * routingInspections.setOperatePhone(selectListSelective.get(0).getUserPhone1()
-		 * ); }
-		 */
 
 		// 获取详情列表
 		Integer routingInspectionsId = routingInspections.getRoutingInspectionId();
@@ -507,17 +518,43 @@ public class RoutingInspectionsManagerController extends BaseController {
 		try {
 			int rowNum = 1;
 			int successCount = 0;
+			String str = "";
 			InputStream inp = new FileInputStream(file);
 			Workbook wb = WorkbookFactory.create(inp);
 			Sheet sheet = wb.getSheetAt(0);
 			for (Row row : sheet) {
 				rowNum = row.getRowNum();
+				boolean type1 = false;
+				boolean type2 = false;
+				if(rowNum == 4) {
+					if (StringUtils.isNull(row.getCell(35))) {
+						str="";
+					}else {
+						str = row.getCell(35).toString();
+					}
+				}				
 				if (rowNum >= 6) {
 					if (!RowParseHelper.hasData(row, 36)) {
 						// 解析当前行有没有数据
 						break;
 					}
 					try {
+					//如果再cell(35)出不为空并且是蓄电池12V监测设备 ；说明模板内填写错误的设备类型
+					if("蓄电池12V监测设备".equals(row.getCell(2).toString()) && str.length() !=0 ) {
+						successCount++;
+						type1 = true;
+					}
+					if(type1) {
+						throw new RuntimeException("模板中是设备类型填写与该模板不对应！");
+					}
+					if(!"蓄电池12V监测设备".equals(row.getCell(2).toString()) && str.length() ==0 ) {
+						successCount++;
+						type2 = true;
+					}
+					if(type2) {
+						throw new RuntimeException("模板中是设备类型填写与该模板不对应！");
+					}
+					
 						routingInspectionDetailSer.routingInsepectionExcelFile(row);
 						successCount++;
 					} catch (Exception e) {

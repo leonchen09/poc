@@ -63,7 +63,6 @@ public class PagingInterceptor implements Interceptor {
 			if (sql.indexOf("left join") != -1) {
 				isComplex = true;
 				beginIndex = sql.indexOf("(") + 1;
-				System.out.println(sql.lastIndexOf(")"));
 				endIndex = sql.lastIndexOf(")");
 				mainSql = sql.substring(beginIndex, endIndex);
 			}
@@ -179,7 +178,6 @@ public class PagingInterceptor implements Interceptor {
 				return sqlBuffer.toString();
 			}
 		} catch (Exception e) {
-			System.out.println(sql);
 			return sql;
 		}
 	}

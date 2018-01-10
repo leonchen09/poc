@@ -64,9 +64,23 @@ public class StationDetail extends StationInfo {
     private Integer gprsFlag;
     
     @ApiModelProperty(value = "app显示主机是否正常", required = false)
-    
+    // 判断主机是否异常
     private boolean isNormal;
-    
+    //设备类型名称
+    private String deviceTypeStr;
+
+	public String getDeviceTypeStr() {
+		return deviceTypeStr;
+	}
+
+	public void setDeviceTypeStr(String deviceTypeStr) {
+		this.deviceTypeStr = deviceTypeStr;
+	}
+
+	public void setNormal(boolean isNormal) {
+		this.isNormal = isNormal;
+	}
+
 	public boolean getIsNormal() {
 		return isNormal;
 	}

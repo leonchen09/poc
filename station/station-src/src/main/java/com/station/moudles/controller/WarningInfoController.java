@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,6 +95,7 @@ public class WarningInfoController extends BaseController {
 				if (in != null) {
 					in.close();
 				}
+				FileUtils.deleteQuietly(file);
 			}
 		}
 		return ajaxResponse;
@@ -140,6 +142,7 @@ public class WarningInfoController extends BaseController {
 				if (in != null) {
 					in.close();
 				}
+				FileUtils.deleteQuietly(file);
 			}
 		}
 		return ajaxResponse;

@@ -147,6 +147,14 @@
 			id = #{item,jdbcType=INTEGER}
 		</foreach>
 	</delete>
+	<delete id = "deleteMoreSubDevice" parameterType="java.util.Map">
+		delete from sub_devices
+		where cell_sort
+		BETWEEN  #{map.startIndex} and  #{map.endIndex}
+		and gprs_id =#{map.gprsId} 
+	
+	</delete>
+	
 
 	<delete id="deleteSelective" parameterType="com.station.moudles.entity.SubDevice">
 		delete from sub_devices
@@ -324,6 +332,38 @@
 			</if>
 		</set>
 		where sub_device_id = #{subDeviceId,jdbcType=CHAR}
+	</update>
+	
+	<update id="updateSubTypeByGprsId" parameterType="com.station.moudles.entity.SubDevice">
+		update sub_devices
+		<set>
+			<if test="subDeviceIdOut != null">
+				sub_device_id_out = #{subDeviceIdOut,jdbcType=CHAR},
+			</if>
+			<if test="subDeviceId != null">
+				sub_device_id = #{subDeviceId,jdbcType=CHAR},
+			</if> 
+		<!-- 	<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if> -->
+			<if test="cellSort != null">
+				cell_sort = #{cellSort,jdbcType=INTEGER},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="subFlag != null">
+				 sub_flag =#{subFlag,jdbcType=INTEGER},
+			</if>
+			<!-- 10/10 add 备用从机的规格和设备类型  -->
+			<if test="subSpec != null">
+				 sub_spec =#{subSpec,jdbcType=VARCHAR},
+			</if>
+			<if test="subType != null">
+				 sub_type =#{subType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where gprs_id = #{gprsId,jdbcType=CHAR}
 	</update>
 
 </mapper>

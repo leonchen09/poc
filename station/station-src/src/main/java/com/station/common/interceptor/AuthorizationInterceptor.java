@@ -109,16 +109,19 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
 				return true;
 			} else {
-				System.out.println(resultMap);
+				log.debug(resultMap.toString());
 				if (resultMap.get("code").toString().equals("1") && requestUrl.equals("/token/renew")) {
 					return true;
 				}
 				ajaxResponse = new AjaxResponse(resultMap.get("code").toString(), "Token验证错误！");
-
+				response.setHeader("Content-type", "text/html;charset=UTF-8");
+				response.getWriter().write(JsonUtil.writeValueAsString(ajaxResponse));
+				return false; 
 			}
 		}
+		// 若没有token 直接到这里。返回信息
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		response.getWriter().write(JsonUtil.writeValueAsString(ajaxResponse));
-		return true; 
+		return false;  
 	}
 }

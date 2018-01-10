@@ -109,7 +109,8 @@
 		<result property="para6" jdbcType="INTEGER" column="para6" />
 		<result property="para7" jdbcType="INTEGER" column="para7" />
 		<result column="charge_interval" property="chargeInterval" jdbcType="INTEGER"/>
-		
+		<result column="sub_device_count" property="subDeviceCount" jdbcType="INTEGER"/>
+	   	<result column="type_name" property="deviceTypeStr" jdbcType="VARCHAR"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -148,7 +149,7 @@
 		max_discharge_cur,
 		gprs_flag,
 		gprs_port,
-		gprs_spec,charge_interval
+		gprs_spec,charge_interval,sub_device_count
 	</sql>
 
 	<select id="selectByGprsIds" resultMap="BaseResultMap"
@@ -169,7 +170,7 @@
 			where id = #{id,jdbcType=INTEGER} -->
 		<!-- 加上均衡信息 -->
 		select
-		gprs.* ,
+		gprs.* ,type.type_name as deviceTypeStr,
 		balance.para1, balance.para2, balance.para3,
 		balance.para4,
 		balance.para5,
@@ -177,14 +178,16 @@
 		from
 		gprs_config_info as gprs left join version_and_balance_info as balance
 		on gprs.gprs_id=balance.gprs_id
+		left join gprs_device_type as type on type.type_code = gprs.device_type 
 		where gprs.id = #{id,jdbcType=INTEGER}
 	</select>
 
 	<select id="selectListSelective" resultMap="BaseResultMap"
 		parameterType="com.station.moudles.entity.GprsConfigInfo">
-		select
-		<include refid="Base_Column_List" />
-		from gprs_config_info
+		select type.type_name as deviceTypeStr,
+		gprs.*
+		from gprs_config_info 
+		as gprs left join  gprs_device_type as type on gprs.device_type = type.type_code
 		<where>
 			<if test="id != null">
 				and id = #{id,jdbcType=INTEGER}
@@ -383,6 +386,9 @@
 			</if>
 			<if test="chargeInterval != null">
 				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+			<if test="subDeviceCount != null">
+				and sub_device_count =#{subDeviceCount,jdbcType=INTEGER}
 			</if>
 		</where>
 	</select>
@@ -602,6 +608,9 @@
 			<if test="chargeInterval != null">
 				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
 			</if>
+			<if test="subDeviceCount != null">
+				and sub_device_count =#{subDeviceCount,jdbcType=INTEGER}
+			</if>
 		</where>
 		order by id desc
 	</select>
@@ -817,6 +826,9 @@
 			<if test="chargeInterval != null">
 				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
 			</if>
+			<if test="subDeviceCount != null">
+				and sub_device_count =#{subDeviceCount,jdbcType=INTEGER}
+			</if>
 		</where>
 	</delete>
 
@@ -855,7 +867,8 @@
 		valid_day,
 		suggest_cell_cap_percent, suggest_time,
 		suggest_average_num,
-		margin_time, max_discharge_cur,gprs_flag,gprs_port,gprs_spec,charge_interval)
+		margin_time, max_discharge_cur,gprs_flag,gprs_port,
+		gprs_spec,charge_interval,sub_device_count)
 		values
 		(#{gprsId,jdbcType=VARCHAR},
 		#{gprsIdOut,jdbcType=VARCHAR},
@@ -912,7 +925,8 @@
 		#{gprsFlag,jdbcType=INTEGER},
 		#{gprsPort,jdbcType=VARCHAR},
 		#{gprsSpec,jdbcType=VARCHAR},
-		#{chargeInterval,jdbcType=INTEGER})
+		#{chargeInterval,jdbcType=INTEGER},
+		#{subDeviceCount,jdbcType=INTEGER})
 	</insert>
 
 	<insert id="insertSelective" parameterType="com.station.moudles.entity.GprsConfigInfo"
@@ -1107,6 +1121,9 @@
 			<if test="chargeInterval != null">
 				 charge_interval, 
 			</if>
+			<if test="subDeviceCount != null">
+				sub_device_count,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="gprsId != null">
@@ -1291,6 +1308,9 @@
 			<if test="chargeInterval != null">
 				 #{chargeInterval,jdbcType=INTEGER},
 			</if>
+			<if test="subDeviceCount != null">
+				#{subDeviceCount,jdbcType=INTEGER},
+			</if>
 		</trim>
 	</insert>
 
@@ -1306,9 +1326,9 @@
 			<if test="rcvTime != null">
 				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
 			</if>
-			<if test="linkStatus != null">
+	<!-- 		<if test="linkStatus != null">
 				link_status = #{linkStatus,jdbcType=TINYINT},
-			</if>
+			</if> -->
 			<if test="port != null">
 				port = #{port,jdbcType=INTEGER},
 			</if>
@@ -1494,10 +1514,13 @@
 				gprs_port = #{gprsPort,jdbcType=VARCHAR},
 			</if>
 			<if test="gprsSpec !=null ">
-				gprs_spec = #{gprsSpec,jdbcType=VARCHAR}
+				gprs_spec = #{gprsSpec,jdbcType=VARCHAR},
 			</if>
 			<if test="chargeInterval != null">
-				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
+				charge_interval = #{chargeInterval,jdbcType=INTEGER},
+			</if>
+			<if test="subDeviceCount != null">
+				 sub_device_count =#{subDeviceCount,jdbcType=INTEGER}
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
@@ -1511,8 +1534,8 @@
 		#{gprsIdOut,jdbcType=VARCHAR},
 		rcv_time =
 		#{rcvTime,jdbcType=TIMESTAMP},
-		link_status =
-		#{linkStatus,jdbcType=TINYINT},
+		<!-- link_status =
+		#{linkStatus,jdbcType=TINYINT}, -->
 		port = #{port,jdbcType=INTEGER},
 		connection_type = #{connectionType,jdbcType=INTEGER},
 		heartbeat_interval =
@@ -1615,7 +1638,9 @@
 		margin_time =
 		#{marginTime,jdbcType=DECIMAL},
 		max_discharge_cur =
-		#{maxDischargeCur,jdbcType=DECIMAL}
+		#{maxDischargeCur,jdbcType=DECIMAL},
+		sub_device_count =#{subDeviceCount,jdbcType=INTEGER}
+		
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
@@ -1804,8 +1829,14 @@
 			<if test="chargeInterval != null">
 				 charge_interval = #{chargeInterval,jdbcType=INTEGER}
 			</if>
+			<if test="subDeviceCount != null">
+				and sub_device_count =#{subDeviceCount,jdbcType=INTEGER}
+			</if>
 		</set>
 		where company_id = #{companyId,jdbcType=INTEGER}
+		<if test = "deviceType != null">
+			and device_type = #{deviceType,jdbcType=INTEGER}
+		</if>
 	</update>
 
 	<resultMap type="com.station.moudles.entity.GprsConfigInfoDetail"
@@ -1820,6 +1851,7 @@
 			<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
 			<result column="cell_sort" property="cellSort" jdbcType="INTEGER" />
 			<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		 
 		</collection>
 	</resultMap>
 
@@ -1828,10 +1860,12 @@
 		sub_id, sub_device_id_out, sub_device_id, cell_sort, update_time
 		from(select
 		*
-		from gprs_config_info where id = #{id,jdbcType=INTEGER}) c
-		left
-		join
+		from gprs_config_info 
+		where id = #{id,jdbcType=INTEGER}) c
+		left join
 		sub_devices s on c.gprs_id=s.gprs_id
+		
+		
 	</select>
 
 	<update id="updateByGprsSelective" parameterType="com.station.moudles.entity.GprsConfigInfo">
@@ -2025,10 +2059,13 @@
 				gprs_spec = #{gprsSpec,jdbcType=VARCHAR},
 			</if>
 			<if test="gprsPort != null">
-				gprs_port= #{gprsPort,jdbcType=VARCHAR}
+				gprs_port= #{gprsPort,jdbcType=VARCHAR},
 			</if>
 			<if test="chargeInterval != null">
-				 charge_interval = #{chargeInterval,jdbcType=INTEGER}
+				 charge_interval = #{chargeInterval,jdbcType=INTEGER},
+			</if>
+			<if test="subDeviceCount != null">
+				sub_device_count =#{subDeviceCount,jdbcType=INTEGER},
 			</if>
 		</set>
 		where gprs_id = #{gprsId,jdbcType=VARCHAR}
@@ -2044,11 +2081,12 @@
 		<result column="maintainance_id" property="maintainanceId"
 			jdbcType="VARCHAR" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="vol_level" property="volLevel" jdbcType="INTEGER" />
 	</resultMap>
 	<select id="selectStationListSelectivePaging" resultMap="StationBaseResultMap"
 		parameterType="com.station.moudles.vo.search.PageEntity">
 		select
-		tmp.*,s.company_id3,s.company_name3,s.operator_type,s.maintainance_id,s.name
+		tmp.*,s.company_id3,s.company_name3,s.operator_type,s.maintainance_id,s.name,s.vol_level
 		from base_station_info s right join (select
 		<include refid="Base_Column_List" />
 		from gprs_config_info
@@ -2412,6 +2450,11 @@
 			</if>
 		</where>
 		) tmp on tmp.gprs_id=s.gprs_id
+		<where>
+			<if test = "volLevel != null">
+				and vol_level =#{volLevel,jdbcType=INTEGER}
+			</if>
+		</where>
 		 order by id desc 
 	</select>
 

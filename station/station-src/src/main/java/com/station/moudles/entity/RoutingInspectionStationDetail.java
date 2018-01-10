@@ -56,8 +56,6 @@ public class RoutingInspectionStationDetail extends StationInfo {
 	 */
 	@ApiModelProperty(value = "confirmOperateId", required = false)
 	private Integer confirmOperateId;
-	
-
 
 	@ApiModelProperty(value = "confirmOperateName", example = "confirmOperateName", required = false)
 	private String confirmOperateName;
@@ -100,7 +98,17 @@ public class RoutingInspectionStationDetail extends StationInfo {
 	
 	@ApiModelProperty(value = "设备类型", required = false)
 	private Integer deviceType;
+	
+	@ApiModelProperty(value = "设备类型名称", required = false)
+	private String deviceTypeStr;
 
+	public String getDeviceTypeStr() {
+		return deviceTypeStr;
+	}
+
+	public void setDeviceTypeStr(String deviceTypeStr) {
+		this.deviceTypeStr = deviceTypeStr;
+	}
 	public String getGprsId() {
 		return gprsId;
 	}

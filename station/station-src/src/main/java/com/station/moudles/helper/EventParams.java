@@ -6,11 +6,11 @@ public class EventParams {
 	 */
 	public int currentCount = 10;
 	/**
-	 *  向前查找非当前事件的个数
+	 *  向前查找非当前事件的个数(相对时间)
 	 */
 	public int forwardCount = 10;
 	/**
-	 *  向后查找非当前事件的个数
+	 *  向后查找非当前事件的个数(相对时间)
 	 */
-	public int backwardCount = 0;
+	public int backwardCount = 10;
 }

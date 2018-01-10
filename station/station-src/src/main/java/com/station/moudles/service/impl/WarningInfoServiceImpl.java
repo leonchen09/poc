@@ -197,7 +197,6 @@ public class WarningInfoServiceImpl extends BaseServiceImpl<WarningInfo, Integer
 							+ "，温度过低告警阈值 "+ warnReport.getTemLowWarningThreshold()+"℃"
 							+ "；SOC过低告警阈值 "+warnReport.getSocLowWarningThreshold();
 		excel.setCellStrValue(2, 0, "本次告警标准："+standard);
-		// System.out.println(excel.sheet.getRow(1).getCell(9).toString());
 		int rowIndex = 4;
 		XSSFCellStyle cellStyle = excel.getCellStyle(rowIndex, 0);
 		int firstRow = rowIndex;
@@ -255,6 +254,28 @@ public class WarningInfoServiceImpl extends BaseServiceImpl<WarningInfo, Integer
 	public static void main(String[] args) {
 		StationWarningInfo sw = new StationWarningInfo();
 		sw.setLossElectricity((byte) 1);
-		System.out.println(sw.getLossElectricity().equals((byte) 1));
+	}
+
+	@Override
+	public List<WarnArea> appSelectWarnAreaList(CommonSearchVo commonSearchVo) {
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("rcvTime", MyDateUtils.getDiffTime(-1 * 60 * 1000));
+		if (commonSearchVo.getCompanyLevel() != null) {
+			switch (commonSearchVo.getCompanyLevel()) {
+			case 1:
+				m.put("companyId1", commonSearchVo.getCompanyId());
+				break;
+			case 2:
+				m.put("companyId2", commonSearchVo.getCompanyId());
+				break;
+			case 3:
+				m.put("companyId3", commonSearchVo.getCompanyId());
+				break;
+			default:
+				m.put("companyId1", commonSearchVo.getCompanyId());
+				break;
+			}
+		}
+		return warningInfoMapper.appSelectWarnAreaList(m);
 	}
 }

@@ -16,6 +16,7 @@ import com.station.moudles.entity.DeviceDischargeAutocheck;
 import com.station.moudles.entity.GprsConfigInfo;
 import com.station.moudles.entity.PackDataInfo;
 import com.station.moudles.helper.DischargeEvent;
+import com.station.moudles.helper.EventParams;
 import com.station.moudles.service.DeviceDischargeAutocheckService;
 import com.station.moudles.service.ReportService;
 import com.station.moudles.service.StationInfoService;
@@ -93,8 +94,12 @@ public class DeviceDischargeAutocheckTask {
 
 			while (true) {
 				// 电池组有效放电数据
+				EventParams params = new EventParams();
+				params.currentCount = 10;
+				params.forwardCount = 10;
+				params.backwardCount = 0;
 				List<ChargeDischargeEvent> report = reportService.getChargeDischargeEvent(gprsId, startTime, endTime,
-						new DischargeEvent(true), null);
+						new DischargeEvent(true), params);
 				if (report != null && report.size() != 0 && report.get(0).getDetails().size() != 0) {
 					// 放电详情
 					List<PackDataInfo> packDateInfoList = report.get(0).getDetails();
@@ -103,45 +108,64 @@ public class DeviceDischargeAutocheckTask {
 					newPackDateInfo.addAll(packDateInfoList.subList(0, packDateInfoList.size() - 10));
 					// 第一次放电时间
 					deviceDischarge.setFirstDischargeTime(newPackDateInfo.get(newPackDateInfo.size() - 1).getRcvTime());
-					if (newPackDateInfo.size() >= 50) {
-
-						// 超过50条
-						BigDecimal startSumVol = BigDecimal.ZERO;
+					if (newPackDateInfo.size() >= 50) {//必须找到超过50条放电数据才可以做判断。
+						//接口返回的数据，最近的时间在list的最前面。因此，list的开始是结束电压，list的结束时开始电压。
+						BigDecimal endSumVol = BigDecimal.ZERO;
 						for (int i = 0; i < 20; i++) {
 							PackDataInfo dataInfo = newPackDateInfo.get(i);
-							startSumVol = startSumVol.add(dataInfo.getGenVol());
+							endSumVol = endSumVol.add(dataInfo.getGenVol());
 						}
 
-						BigDecimal endSumVol = BigDecimal.ZERO;
+						BigDecimal startSumVol = BigDecimal.ZERO;
 						for (int i = newPackDateInfo.size() - 20; i < newPackDateInfo.size(); i++) {
 							PackDataInfo dataInfo = newPackDateInfo.get(i);
-							endSumVol = endSumVol.add(dataInfo.getGenVol());
+							startSumVol = startSumVol.add(dataInfo.getGenVol());
 						}
 
 						BigDecimal big = new BigDecimal(20.00);
 						// 开始电压的平均值- 结束电压的平均值
 						BigDecimal subtract = startSumVol.divide(big).subtract(endSumVol.divide(big));
-						int r = subtract.compareTo(BigDecimal.ZERO); // 和0，Zero比较
-						// 小于 -1 等于 0 大于 1
-						if (r == -1) {
-							// 数据状态 0 正确 1 错误
-							deviceDischarge.setIsCorrect(1);
-						} else {
-							deviceDischarge.setIsCorrect(0);
+						if(subtract.abs().doubleValue() < 2.0) {// 差值大于2，才能做判断，否则认为判断条件不足，继续往下找，或者超过时间，留待下次检测。
+							PackDataInfo packDataInfo = newPackDateInfo.get(newPackDateInfo.size() - 1);
+							endTime = packDataInfo.getRcvTime();
+							// 如果得到的时间超过了极限时间要跳出循环			
+							if (endTime.getTime() < startTime.getTime()) {
+								deviceDischarge.setGprsId(gprsId);
+								// 开始电压
+								deviceDischarge.setStartVol(null);
+								// 结束电压
+								deviceDischarge.setEndVol(null);
+								// 写入改记录时间
+								deviceDischarge.setCheckDate(new Date());
+								// 未修复0 修改1
+								deviceDischarge.setDataUpdated(null);
+								deviceDischarge.setIsCorrect(null);
+								deviceDischargeAutocheckSer.insertSelective(deviceDischarge);
+								break;
+							}
+						}else {//开始，结束电压差值大于2，才进行判断。
+							int r = subtract.compareTo(BigDecimal.ZERO); 
+							// 小于 -1 等于 0 大于 1
+							if (r == -1) {
+								// 数据状态 0 正确 1 错误
+								deviceDischarge.setIsCorrect(1);
+							} else {
+								deviceDischarge.setIsCorrect(0);
+							}
+							deviceDischarge.setGprsId(gprsId);
+							// 开始电压平均值
+							deviceDischarge.setStartVol(startSumVol.divide(big));
+							// 结束电压平均值
+							deviceDischarge.setEndVol(endSumVol.divide(big));
+							// 写入改记录时间
+							deviceDischarge.setCheckDate(new Date());
+							// 未修复0 修改1
+							deviceDischarge.setDataUpdated(0);
+							deviceDischargeAutocheckSer.insertSelective(deviceDischarge);
+							logger.debug("记录了检测出的放电数据:" + gprsId, startTime, endTime);
+							logger.debug("完成！！！！！！!耗时：" + (new Date().getTime() - sd.getTime()) / 1000 + "s");
+							break;
 						}
-						deviceDischarge.setGprsId(gprsId);
-						// 开始电压平均值
-						deviceDischarge.setStartVol(startSumVol.divide(big));
-						// 结束电压平均值
-						deviceDischarge.setEndVol(endSumVol.divide(big));
-						// 写入改记录时间
-						deviceDischarge.setCheckDate(new Date());
-						// 未修复0 修改1
-						deviceDischarge.setDataUpdated(0);
-						deviceDischargeAutocheckSer.insertSelective(deviceDischarge);
-						logger.debug("记录了检测出的放电数据:" + gprsId, startTime, endTime);
-						logger.debug("完成！！！！！！!耗时：" + (new Date().getTime() - sd.getTime()) / 1000 + "s");
-						break;
 					} else {
 						// 不符合50条要求 得到该批次数据的最早时间 作为结束时间
 						PackDataInfo packDataInfo = newPackDateInfo.get(newPackDateInfo.size() - 1);

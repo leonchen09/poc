@@ -28,6 +28,16 @@ public class StationWarningInfo extends WarningInfo {
 	private String socStr;
 	@ApiModelProperty(value = "设备类型，1蓄电池串联复用设备,2蓄电池串联复用诊断组件", required = false)
 	private Integer deviceType;
+	//地区
+	private String district;
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
 
 	/**
 	 * @return the deviceType

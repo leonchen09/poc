@@ -33,10 +33,12 @@ import com.station.moudles.entity.ModifyBalanceSend;
 import com.station.moudles.entity.GprsConfigInfo;
 import com.station.moudles.entity.GprsConfigInfoDetail;
 import com.station.moudles.entity.GprsConfigInfoStation;
+import com.station.moudles.entity.GprsDeviceType;
 import com.station.moudles.entity.ModifyGprsidSend;
 import com.station.moudles.entity.PackDataExpandLatest;
 import com.station.moudles.entity.StationInfo;
 import com.station.moudles.mapper.PackDataExpandLatestMapper;
+import com.station.moudles.service.GprsDeviceTypeService;
 import com.station.moudles.service.ModifyBalanceInfoService;
 import com.station.moudles.service.ModifyGprsidSendService;
 import com.station.moudles.service.StationInfoService;
@@ -75,6 +77,8 @@ public class GprsConfigInfoController extends BaseController {
 	StationInfoService stationInfoSer;
 	@Autowired
 	ModifyBalanceInfoService modifyBalanceInfoSer;
+	@Autowired
+	GprsDeviceTypeService gprsDeviceTypeSer;
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.POST)
 	@ResponseBody
@@ -99,12 +103,18 @@ public class GprsConfigInfoController extends BaseController {
 		// -----add 没有备用的主机
 		searchGprsConfigInfoPagingVo.setGprsFlag(0);
 
-		List<GprsConfigInfoStation> gprsConfigInfoList = gprsConfigInfoSer
-				.selectStationListSelectivePaging(searchGprsConfigInfoPagingVo);
-		ShowPage<GprsConfigInfoStation> page = new ShowPage<GprsConfigInfoStation>(searchGprsConfigInfoPagingVo,
-				gprsConfigInfoList);
-		AjaxResponse<ShowPage<GprsConfigInfoStation>> ajaxResponse = new AjaxResponse<ShowPage<GprsConfigInfoStation>>(
-				page);
+		List<GprsConfigInfoStation> gprsConfigInfoList = gprsConfigInfoSer.selectStationListSelectivePaging(searchGprsConfigInfoPagingVo);
+		//返回deviceTypeStr
+		if (gprsConfigInfoList.size() != 0) {
+			GprsDeviceType gprsDeviceType = new GprsDeviceType();
+			gprsDeviceType.setTypeCode(gprsConfigInfoList.get(0).getDeviceType());
+			List<GprsDeviceType> deviceTypeStr = gprsDeviceTypeSer.selectListSelective(gprsDeviceType);
+			if (deviceTypeStr.size() != 0) {
+				gprsConfigInfoList.get(0).setDeviceTypeStr(deviceTypeStr.get(0).getTypeName());
+			}
+		}
+		ShowPage<GprsConfigInfoStation> page = new ShowPage<GprsConfigInfoStation>(searchGprsConfigInfoPagingVo,gprsConfigInfoList);
+		AjaxResponse<ShowPage<GprsConfigInfoStation>> ajaxResponse = new AjaxResponse<ShowPage<GprsConfigInfoStation>>(page);
 		return ajaxResponse;
 	}
 
@@ -126,8 +136,7 @@ public class GprsConfigInfoController extends BaseController {
 			return new AjaxResponse<GprsConfigInfo>(Constant.RS_CODE_ERROR, "请选择pk！");
 		}
 		GprsConfigInfo gprsConfigInfo = gprsConfigInfoSer.selectByPrimaryKey(id);
-		AjaxResponse<GprsConfigInfo> ajaxResponse = new AjaxResponse<GprsConfigInfo>(Constant.RS_CODE_SUCCESS,
-				"获取基站gprs参数配置表成功！");
+		AjaxResponse<GprsConfigInfo> ajaxResponse = new AjaxResponse<GprsConfigInfo>(Constant.RS_CODE_SUCCESS,"获取基站gprs参数配置表成功！");
 		if (gprsConfigInfo != null) {
 			ajaxResponse.setData(gprsConfigInfo);
 		} else {
@@ -153,48 +162,57 @@ public class GprsConfigInfoController extends BaseController {
 		}
 
 		// gprs_config_info表修改完之后
+		//将gprsDeviceType 设置为null 以前没有传递这个，避免错误
+		gprsConfigInfo.setDeviceType(null);
 		StationInfo queryStationInfo = new StationInfo();
 		queryStationInfo.setCompanyId3(gprsConfigInfo.getCompanyId());
 		List<StationInfo> stationList = stationInfoSer.selectListSelective(queryStationInfo);
 		for (StationInfo stationInfo : stationList) {
 			if (!String.valueOf(-1).equals(stationInfo.getGprsId())) {
-				// ---add 11/1添加均衡信息
-				ModifyBalanceSend balanceSend = new ModifyBalanceSend();
-				balanceSend.setGprsId(stationInfo.getGprsId());
-				balanceSend.setSendDone(0);// 未发送
-				if (gprsConfigInfo.getPara1() != null) {
-					balanceSend.setPara1(gprsConfigInfo.getPara1());
-				}
-				if (gprsConfigInfo.getPara2() != null) {
-					balanceSend.setPara2(gprsConfigInfo.getPara2());
-				}
-				if (gprsConfigInfo.getPara3() != null) {
-					balanceSend.setPara3(gprsConfigInfo.getPara3());
-				}
-				if (gprsConfigInfo.getPara4() != null) {
-					balanceSend.setPara4(gprsConfigInfo.getPara4());
-				}
-				if (gprsConfigInfo.getPara5() != null) {
-					balanceSend.setPara5(gprsConfigInfo.getPara5());
-				}
-				if (gprsConfigInfo.getPara6() != null) {
-					balanceSend.setPara6(gprsConfigInfo.getPara6());
-				}
-				if (gprsConfigInfo.getPara7() != null) {
-					balanceSend.setPara7(gprsConfigInfo.getPara7());
-					modifyBalanceInfoSer.insertSelective(balanceSend);
-				} else {
-					ajaxResponse.setCode(Constant.RS_CODE_ERROR);
-					ajaxResponse.setMsg("发送均衡参数指令失败！");
+				GprsConfigInfo query = new GprsConfigInfo();
+				query.setGprsId(stationInfo.getGprsId());
+				List<GprsConfigInfo> gprsConfig = gprsConfigInfoSer.selectListSelective(query);
+				GprsConfigInfo gprsInfo = CollectionUtils.isEmpty(gprsConfig) ? null : gprsConfig.get(0);
+				//判断---排除检测设备进行均衡参数设置
+				if (gprsInfo != null && gprsInfo.getDeviceType() != 3 && gprsInfo.getDeviceType() != 4) {
+					// ---add 11/1添加均衡信息
+					ModifyBalanceSend balanceSend = new ModifyBalanceSend();
+					balanceSend.setGprsId(stationInfo.getGprsId());
+					balanceSend.setSendDone(0);// 未发送
+					if (gprsConfigInfo.getPara1() != null) {
+						balanceSend.setPara1(gprsConfigInfo.getPara1());
+					}
+					if (gprsConfigInfo.getPara2() != null) {
+						balanceSend.setPara2(gprsConfigInfo.getPara2());
+					}
+					if (gprsConfigInfo.getPara3() != null) {
+						balanceSend.setPara3(gprsConfigInfo.getPara3());
+					}
+					if (gprsConfigInfo.getPara4() != null) {
+						balanceSend.setPara4(gprsConfigInfo.getPara4());
+					}
+					if (gprsConfigInfo.getPara5() != null) {
+						balanceSend.setPara5(gprsConfigInfo.getPara5());
+					}
+					if (gprsConfigInfo.getPara6() != null) {
+						balanceSend.setPara6(gprsConfigInfo.getPara6());
+					}
+					if (gprsConfigInfo.getPara7() != null) {
+						balanceSend.setPara7(gprsConfigInfo.getPara7());
+						modifyBalanceInfoSer.insertSelective(balanceSend);
+					} else {
+						ajaxResponse.setCode(Constant.RS_CODE_ERROR);
+						ajaxResponse.setMsg("发送均衡参数指令失败！");
+					}
 				}
 				// -------end
 				PackDataExpandLatest packDataExpandLatest = packDataExpandLatestMapper
 						.selectByPrimaryKey(stationInfo.getGprsId());
 				if (packDataExpandLatest != null) {
-					GprsConfigInfo condition = new GprsConfigInfo();
-					condition.setGprsId(stationInfo.getGprsId());
-					List<GprsConfigInfo> configs = gprsConfigInfoSer.selectListSelective(condition);
-					GprsConfigInfo gprsInfo = CollectionUtils.isEmpty(configs) ? null : configs.get(0);
+//					GprsConfigInfo condition = new GprsConfigInfo();
+//					condition.setGprsId(stationInfo.getGprsId());
+//					List<GprsConfigInfo> configs = gprsConfigInfoSer.selectListSelective(condition);
+//					GprsConfigInfo gprsInfo = CollectionUtils.isEmpty(configs) ? null : configs.get(0);
 					if (gprsConfigInfo.getConsoleCellCapError() != null
 							|| gprsConfigInfo.getConsoleCellCapNormal() != null) {
 						// 单体性能重新设置，故障单体重新统计
@@ -479,7 +497,7 @@ public class GprsConfigInfoController extends BaseController {
 
 	@RequestMapping(value = "/updateBasic", method = RequestMethod.POST)
 	@ResponseBody
-	@ApiOperation(value = "根据pk更新基站gprs参数配置表", notes = "根据pk更新基站gprs参数配置表，属性为null的不更新")
+	@ApiOperation(value = "根据pk更新基站备用主机参数配置表", notes = "根据pk更新基站gprs参数配置表，属性为null的不更新")
 	public AjaxResponse<Object> update(@RequestBody GprsConfigInfo gprsConfigInfo) {
 		if (gprsConfigInfo.getId() == null) {
 			return new AjaxResponse<Object>(Constant.RS_CODE_ERROR, "请设置pk！");
@@ -498,11 +516,11 @@ public class GprsConfigInfoController extends BaseController {
 		}
 		// 备用主机的正则表达式
 		if(StringUtils.getString(gprsConfigInfo.getGprsId()) != null) {
-			Pattern regex = Pattern.compile("^([A-Z]{1}\\d{1}[A-Z]{1}\\d{6})$");
+			Pattern regex = Pattern.compile("^([A-Z]{1}[1]{1}[A-Z]{1}\\d{6})$");
 			Matcher matcher = regex.matcher(gprsConfigInfo.getGprsId().trim());
 			boolean matches = matcher.matches();
 			if(!matches) {
-				ajaxResponse.setMsg("设备编号不能有空格或者字符长度不能超过9位，例：T0B000111！");
+				ajaxResponse.setMsg("设备编号不能有空格，字符长度不能超过9位，第二位必须是1 。例：T1B000111！");
 				return ajaxResponse;
 			}
 		}
@@ -562,6 +580,11 @@ public class GprsConfigInfoController extends BaseController {
 		AjaxResponse<GprsConfigInfoDetail> ajaxResponse = new AjaxResponse<GprsConfigInfoDetail>(
 				Constant.RS_CODE_SUCCESS, "获取基站gprs参数配置表成功！");
 		if (gprsConfigInfo != null) {
+			GprsDeviceType gprsDevice = new GprsDeviceType();
+			gprsDevice.setTypeCode(gprsConfigInfo.getDeviceType());
+			List<GprsDeviceType> device = gprsDeviceTypeSer.selectListSelective(gprsDevice);
+			device.get(0).getTypeName();
+			gprsConfigInfo.setDeviceTypeStr(device.get(0).getTypeName());
 			ajaxResponse.setData(gprsConfigInfo);
 		} else {
 			ajaxResponse.setCode(Constant.RS_CODE_ERROR);
@@ -576,7 +599,7 @@ public class GprsConfigInfoController extends BaseController {
 	public AjaxResponse<GprsConfigInfo> save(@RequestBody GprsConfigInfo gprsConfigInfo) {
 		gprsConfigInfo.setId(null);
 		GprsConfigInfo queryGprsConfigInfo = new GprsConfigInfo();
-		queryGprsConfigInfo.setGprsId(gprsConfigInfo.getGprsId());
+		queryGprsConfigInfo.setGprsIdOut(gprsConfigInfo.getGprsId());
 		List<GprsConfigInfo> queryList = gprsConfigInfoSer.selectListSelective(queryGprsConfigInfo);
 		gprsConfigInfo.setGprsIdOut(gprsConfigInfo.getGprsId().trim());
 		// ---add 新增是备用主机
@@ -596,20 +619,20 @@ public class GprsConfigInfoController extends BaseController {
 		}
 
 		// 备用主机的正则表达式
-		Pattern regex = Pattern.compile("^([A-Z]{1}\\d{1}[A-Z]{1}\\d{6})$");
+		Pattern regex = Pattern.compile("^([A-Z]{1}[1]{1}[A-Z]{1}\\d{6})$");
 		Matcher matcher = regex.matcher(gprsConfigInfo.getGprsId().trim());
 		boolean matches = matcher.matches();
 		if (matches) {
 			if (queryList.size() > 0) {
 				ajaxResponse.setMsg("设备重复");
+				
 			} else {
-
 				gprsConfigInfoSer.insertSelective(gprsConfigInfo);
 				ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
 				ajaxResponse.setMsg("添加基站gprs参数配置表成功！");
 			}
 		} else {
-			ajaxResponse.setMsg("设备编号不能有空格或者字符长度不能超过9位，例：T0B000111");
+			ajaxResponse.setMsg("设备编号不能有空格或者字符长度不能超过9位，例：T1B000111");
 		}
 
 		return ajaxResponse;
@@ -638,7 +661,7 @@ public class GprsConfigInfoController extends BaseController {
 			}
 		}
 		// 主机正则表达式
-		Pattern regex = Pattern.compile("^([A-Z]{1}\\d{1}[A-Z]{1}\\d{6})$");
+		Pattern regex = Pattern.compile("^([A-Z]{1}[0]{1}[A-Z]{1}\\d{6})$");
 		Matcher matcher = regex.matcher(gprsConfigInfo.getGprsId().trim());
 		boolean matches = matcher.matches();
 		if (matches) {
@@ -652,14 +675,20 @@ public class GprsConfigInfoController extends BaseController {
 				// gprsConfigInfo.getDeviceType(),gprsConfigInfo.getGprsSpec().trim());
 
 			} else {
+				try {
 				gprsConfigInfoSer.insertSelective(gprsConfigInfo);
 				// ----------add
 				// 原来的
 				// gprsConfigInfoSer.createSubDeviceByGprsId(gprsConfigInfo.getGprsId());
 				// 新增一个主机后24个从机的设备类型和规格和主机匹配
-				gprsConfigInfoSer.createSubDevice(gprsConfigInfo.getGprsId().trim(), gprsConfigInfo.getDeviceType(),
-						gprsConfigInfo.getGprsSpec().trim());
+				gprsConfigInfoSer.createSubDevice(gprsConfigInfo.getGprsId().trim(),gprsConfigInfo.getDeviceType(),
+						gprsConfigInfo.getGprsSpec().trim(),0,gprsConfigInfo.getSubDeviceCount());
 				// ----end
+				} catch (Exception e) {
+					ajaxResponse.setCode(Constant.RS_CODE_ERROR);
+					ajaxResponse.setMsg("新增失败!");
+					return ajaxResponse;
+				}
 				ajaxResponse.setCode(Constant.RS_CODE_SUCCESS);
 				ajaxResponse.setMsg("添加设备成功！");
 			}

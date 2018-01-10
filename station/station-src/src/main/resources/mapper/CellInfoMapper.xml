@@ -162,6 +162,13 @@
 			</if>
 		</where>
 	</delete>
+	
+	<delete id="deleteMoreCell" parameterType="java.util.Map">
+		delete from cell_info where cell_index
+		BETWEEN  #{map.cellCount} and  #{map.cellCountOld}
+		and station_id = #{map.stationId,jdbcType=INTEGER} 
+		
+	</delete>
 
 	<insert id="insert" parameterType="com.station.moudles.entity.CellInfo" useGeneratedKeys="true" keyProperty="id">
 		insert into cell_info (gprs_id,

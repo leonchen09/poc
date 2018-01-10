@@ -1,4 +1,4 @@
-﻿#0921�޸�
+#0921�޸�
 ALTER TABLE `base_station_management`.`base_station_info` 
 CHANGE COLUMN `duration` `duration` DECIMAL(6,2) NULL DEFAULT NULL COMMENT 'Ԥ��ʱ������λСʱ' ;
 
@@ -117,7 +117,9 @@ VIEW `full_station_info` AS
         `st`.`address_coding` AS `address_coding`,
         `config`.`link_status` AS `link_status`,
         `config`.`device_type` AS `device_type`,
-        `pack`.`state` AS `state`
+        `pack`.`state` AS `state`,
+        `pack`.`gen_vol` AS `gen_vol`,
+        `pack`.`gen_cur` AS `gen_cur`
     FROM
         ((`base_station_info` `st`
         LEFT JOIN `gprs_config_info` `config` ON ((`st`.`gprs_id` = `config`.`gprs_id`)))
@@ -181,3 +183,166 @@ ADD COLUMN `charge_interval`  int(11) NULL DEFAULT '60' COMMENT '充电状态下
 #12/17
 ALTER TABLE `users`
 ADD COLUMN `user_code`  int(11) NULL DEFAULT null COMMENT '用户验证码';
+#12/20
+alter table gprs_balance_send add column mode int(11) null default null comment '1：强制执行，从机均衡状态由后台控制； 0：非强制，从机可以启用自动均衡'
+
+#12/25
+alter table base_station_info 
+add column cell_count int(11) null default null comment '电池总数';
+
+alter table gprs_config_info 
+add column sub_device_count int(11) null default null comment '从机总数';
+
+ CREATE TABLE `cell_vol_level` (                                                                         
+                  `id` int(11) NOT NULL AUTO_INCREMENT,                                                                 
+                  `vol_level_name` varchar(32) DEFAULT NULL COMMENT '电压平台名称',                               
+                  `vol_level_code` int(11) DEFAULT NULL COMMENT '电压平台编码',                                   
+                  `create_id` varchar(32) DEFAULT NULL COMMENT '登录人员id',                                               
+                  `create_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',  
+                  PRIMARY KEY (`id`) USING BTREE                                                                        
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8  
+  
+ CREATE TABLE `gprs_device_type` (                                                                       
+                    `id` int(11) NOT NULL AUTO_INCREMENT,                                                                 
+                    `type_code` int(11) DEFAULT NULL COMMENT '设备类型编号',                                        
+                    `type_name` varchar(32) DEFAULT NULL COMMENT '设备类型',                                          
+                    `sub_vol` decimal(5,3) unsigned DEFAULT NULL COMMENT '从机电压',                                  
+                    `vol_level` int(11) DEFAULT NULL COMMENT '电压平台编码 FK',                                     
+                    `create_id` varchar(32) DEFAULT NULL COMMENT '登录人员id',                                         
+                    `create_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',  
+                    PRIMARY KEY (`id`)                                                                                    
+                  ) ENGINE=InnoDB DEFAULT CHARSET=utf8   
+                  
+
+ #12/27                 
+ALTER TABLE `base_station_management`.`parameters` 
+CHANGE COLUMN `parameter_category` `parameter_category` VARCHAR(32) CHARACTER SET 'utf8' NOT NULL COMMENT '参数类别，用以区分同一个参数名，不同的设备或者分公司。' AFTER `parameter_code`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`parameter_code`, `parameter_category`);
+
+ALTER TABLE `gprs_device_type`
+ADD COLUMN sub_device_count  int(11) NULL DEFAULT null COMMENT '从机数量';  
+
+#12/29
+ALTER TABLE base_station_info alter column inspect_status drop default;
+ALTER TABLE base_station_info alter column inspect_status set default 99; 
+#2018/1/3
+
+SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for gprs_device_type
+-- ----------------------------
+DROP TABLE IF EXISTS `gprs_device_type`;
+CREATE TABLE `gprs_device_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_code` int(11) DEFAULT NULL COMMENT '设备类型编号',
+  `type_name` varchar(32) DEFAULT NULL COMMENT '设备类型 ，1蓄电池串联复用设备,2蓄电池串联复用诊断组件，3，蓄电池4V监测设备，4，蓄电池12V监测设备',
+  `sub_vol` decimal(5,3) unsigned DEFAULT NULL COMMENT '从机电压',
+  `vol_level` int(11) DEFAULT NULL COMMENT '电压平台编码 FK',
+  `create_id` varchar(32) DEFAULT NULL COMMENT '登录人员id',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `sub_device_count` int(11) DEFAULT NULL COMMENT '从机数量',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of gprs_device_type
+-- ----------------------------
+INSERT INTO `gprs_device_type` VALUES ('1', '1', '蓄电池串联复用设备', '4.000', '2', 'admin', '2017-12-27 14:43:24', '24');
+INSERT INTO `gprs_device_type` VALUES ('2', '2', '蓄电池串联复用诊断组件', '4.000', '2', 'admin', '2017-12-27 14:44:21', '24');
+INSERT INTO `gprs_device_type` VALUES ('3', '3', '蓄电池2V监测设备', '4.000', '2', 'admin', '2017-12-27 14:45:31', '24');
+INSERT INTO `gprs_device_type` VALUES ('4', '4', '蓄电池12V监测设备', '4.000', '12', 'admin', '2017-12-27 14:45:59', '4');  
+
+#2018/1/3
+INSERT INTO `permissions` (`permission_type`, `permission_name`, `permission_code`, `parent_id`, `permission_system`) VALUES ('1', '单体电压平台管理', '10003', '1', '1') ;
+INSERT INTO `permissions` (`permission_type`, `permission_name`, `permission_code`, `parent_id`, `permission_system`) VALUES ('1', '设备类型管理', '10004', '1', '1') ;  
+
+#2018/1/5
+SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for cell_vol_level
+-- ----------------------------
+DROP TABLE IF EXISTS `cell_vol_level`;
+CREATE TABLE `cell_vol_level` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vol_level_name` varchar(32) DEFAULT NULL COMMENT '电压平台名称',
+  `vol_level_code` int(11) DEFAULT NULL COMMENT '电压平台编码',
+  `create_id` varchar(32) DEFAULT NULL COMMENT '登录人员id',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cell_vol_level
+-- ----------------------------
+INSERT INTO `cell_vol_level` VALUES ('1', '12', '12', 'admin', '2017-12-29 14:01:50');
+INSERT INTO `cell_vol_level` VALUES ('2', '2', '2', 'admin', '2017-12-29 14:02:25');
+
+#2018/18
+CREATE INDEX rcv_time ON warning_info (gprs_id,rcv_time)
+
+
+#2018/1/9
+ALTER 
+ALGORITHM=UNDEFINED 
+DEFINER=`amplifi`@`%` 
+SQL SECURITY DEFINER 
+VIEW `full_station_info` AS 
+SELECT
+	`st`.`id` AS `id`,
+	`st`.`gprs_id` AS `gprs_id`,
+	`st`.`gprs_id_out` AS `gprs_id_out`,
+	`st`.`name` AS `name`,
+	`st`.`address` AS `address`,
+	`st`.`province` AS `province`,
+	`st`.`city` AS `city`,
+	`st`.`district` AS `district`,
+	`st`.`lat` AS `lat`,
+	`st`.`lng` AS `lng`,
+	`st`.`maintainance_id` AS `maintainance_id`,
+	`st`.`pack_type` AS `pack_type`,
+	`st`.`room_type` AS `room_type`,
+	`st`.`duration` AS `duration`,
+	`st`.`real_duration` AS `real_duration`,
+	`st`.`ok_num` AS `ok_num`,
+	`st`.`poor_num` AS `poor_num`,
+	`st`.`error_num` AS `error_num`,
+	`st`.`status` AS `status`,
+	`st`.`company_id1` AS `company_id1`,
+	`st`.`company_id2` AS `company_id2`,
+	`st`.`company_id3` AS `company_id3`,
+	`st`.`del_flag` AS `del_flag`,
+	`st`.`company_name3` AS `company_name3`,
+	`st`.`vol_level` AS `vol_level`,
+	`st`.`operator_type` AS `operator_type`,
+	`st`.`duration_status` AS `duration_status`,
+	`st`.`update_time` AS `update_time`,
+	`st`.`load_power` AS `load_power`,
+	`st`.`inspect_status` AS `inspect_status`,
+	`st`.`address_coding` AS `address_coding`,
+	`st`.`cell_count` AS `cell_count`,
+	`config`.`link_status` AS `link_status`,
+	`config`.`device_type` AS `device_type`,
+	`pack`.`state` AS `state`,
+	`pack`.`gen_vol` AS `gen_vol`,
+	`pack`.`gen_cur` AS `gen_cur`
+FROM
+	(
+		(
+			`base_station_info` `st`
+			LEFT JOIN `gprs_config_info` `config` ON (
+				(
+					`st`.`gprs_id` = `config`.`gprs_id`
+				)
+			)
+		)
+		LEFT JOIN `pack_data_info_latest` `pack` ON (
+			(
+				`config`.`gprs_id` = `pack`.`gprs_id`
+			)
+		)
+	) ;
+
+#1/10
+ALTER  TABLE  pack_data_info ALGORITHM=inplace, LOCK=NONE, DROP INDEX `rcv_index`,
+ADD INDEX `rcv_index` (`rcv_time` ASC, `gprs_id` ASC, `state` ASC);          

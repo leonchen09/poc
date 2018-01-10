@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -157,6 +158,7 @@ public class AppStationInfoController extends BaseController {
 							}
 							gprsConfigInfoSer.updateByGprsSelective(updateGprsConfigInfo);
 							stationInfo.setGprsIdOut(gprsId);
+							stationInfo.setGprsId(gprsId); 
 							CellInfo updateCellInfo = new CellInfo();
 							updateCellInfo.setGprsId(stationInfo.getGprsId());
 							updateCellInfo.setStationId(stationInfo.getId());
@@ -207,7 +209,11 @@ public class AppStationInfoController extends BaseController {
 			return ajaxResponse;
 		}
 		StationDetail stationDetail = new StationDetail();
-		
+		//判断电池组是否被绑定
+		StationInfo station = stationInfoSer.selectByPrimaryKey(stationInfo.getId());
+		if(!station.getGprsId().equals(stationInfo.getGprsId())) {
+			return ajaxResponse;
+		}
 		if (StringUtils.getString(stationInfo.getGprsId()) != null && StringUtils.getString(stationInfo.getId()) != null) {
 			String gprsId = stationInfo.getGprsId();
 			
@@ -307,6 +313,7 @@ public class AppStationInfoController extends BaseController {
 				List<GprsConfigInfo> gprsInfo = gprsConfigInfoSer.selectListSelective(gprsConfigInfo);
 				if(gprsInfo.size() != 0) {
 					stationDetail.setDeviceType(gprsInfo.get(0).getDeviceType());
+					stationDetail.setLinkStatus(gprsInfo.get(0).getLinkStatus());
 				}				
 				PackDataExpandLatest packdataExpand = packDataExpandLatestMapper.selectByPrimaryKey(gprsId);
 				if (packdataExpand != null) {
@@ -385,8 +392,8 @@ public class AppStationInfoController extends BaseController {
 		RoutingInspections inspections = new RoutingInspections();
 		inspections.setStationId(stationId);
 		inspections.setGprsId(stationDetail.getGprsId());
-		inspections.setRoutingInspectionStatus(1);
-		List<RoutingInspections> routingRecord = routingInspectionsMapper.selectListSelective(inspections);
+		//inspections.setRoutingInspectionStatus(1);
+		List<RoutingInspections> routingRecord = routingInspectionsMapper.selectListSelectiveFirst(inspections);
 		if (routingRecord.size() > 0) {
 			RoutingInspections routingInspections = routingRecord.get(0);
 			RoutingInspectionDetail inspectionDetail = new RoutingInspectionDetail();
@@ -397,18 +404,22 @@ public class AppStationInfoController extends BaseController {
 			//得到最新app请求的数据集合
 			Integer maxRoutingdetailSeq = detailList.stream().max(Comparator.comparing(RoutingInspectionDetail::getRequestSeq)).get().getRequestSeq(); 
 			List<RoutingInspectionDetail> newlistSeq = new ArrayList<RoutingInspectionDetail>(); 
-			newlistSeq = detailList.stream().filter(k -> k.getRequestSeq() == maxRoutingdetailSeq) .collect(Collectors.toList());			
+			newlistSeq = detailList.stream().filter(k -> k.getRequestSeq() == maxRoutingdetailSeq && k.getRequestType() == 0) .collect(Collectors.toList());			
 			//web端返回的最新集合
 			Integer maxRoutingDtailType  = detailList.stream().max(Comparator.comparing(RoutingInspectionDetail::getRequestType)).get().getRequestType(); 
 			List<RoutingInspectionDetail> listType = new ArrayList<RoutingInspectionDetail>(); 
 			listType = detailList.stream().filter(k -> k.getRequestType() == maxRoutingDtailType) .collect(Collectors.toList());
+			RoutingInspectionDetail routingDeatilListType = null;
+			if(listType.size() != 0) {
+				 routingDeatilListType = listType.get(listType.size()-1);
+			}
 			//app请求的所以的数据
 			List<RoutingInspectionDetail> appRequestALL = new ArrayList<RoutingInspectionDetail>(); 
 			appRequestALL = detailList.stream().filter(k -> k.getRequestType() == 0) .collect(Collectors.toList());
 			
 			//info.put("inspectionRecord", detailList);
 			info.put("newlistSeq", newlistSeq);
-			info.put("listType", listType.get(listType.size()-1));
+			info.put("listType",routingDeatilListType);
 			info.put("appRequestALL", appRequestALL);
 			}else{
 				info.put("newlistSeq", null);

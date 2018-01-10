@@ -45,6 +45,17 @@ public class CommonSearchVo extends PageEntity {
 	private String state;
 	//用户id
 	private String loginId;
+	//电压级别
+	private Integer volLevel;
+
+	public Integer getVolLevel() {
+		return volLevel;
+	}
+
+	public void setVolLevel(Integer volLevel) {
+		this.volLevel = volLevel;
+	}
+
 	public String getLoginId() {
 		return loginId;
 	}

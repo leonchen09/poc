@@ -37,7 +37,7 @@ import com.station.moudles.vo.AjaxResponse;
 public class RestExceptionHandler {
 	private static Logger logger = Logger.getLogger(RestExceptionHandler.class);
 
-	// 运行时异常
+/*	// 运行时异常
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseBody
 	public AjaxResponse<Object> runtimeExceptionHandler(RuntimeException runtimeException) {
@@ -46,13 +46,13 @@ public class RestExceptionHandler {
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("输入的参数错误或者后台运行错误，异常编号：1000");
 		return ajaxResponse;
-	}
+	}*/
 
 	// 空指针异常
 	@ExceptionHandler(NullPointerException.class)
 	@ResponseBody
 	public AjaxResponse<Object> nullPointerExceptionHandler(NullPointerException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("空指针异常，异常编号：1001");
@@ -63,7 +63,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler(ClassCastException.class)
 	@ResponseBody
 	public AjaxResponse<Object> classCastExceptionHandler(ClassCastException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("类型转换异常，异常编号：1002");
@@ -74,7 +74,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler(IOException.class)
 	@ResponseBody
 	public AjaxResponse<Object> iOExceptionHandler(IOException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("Io异常，异常编号：1003");
@@ -85,7 +85,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler(NoSuchMethodException.class)
 	@ResponseBody
 	public AjaxResponse<Object> noSuchMethodExceptionHandler(NoSuchMethodException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("未知方法错误，异常编号：1004");
@@ -96,7 +96,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler(IndexOutOfBoundsException.class)
 	@ResponseBody
 	public AjaxResponse<Object> indexOutOfBoundsExceptionHandler(IndexOutOfBoundsException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("数组越界错误，异常编号：1005");
@@ -107,7 +107,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler({ HttpMessageNotReadableException.class })
 	@ResponseBody
 	public AjaxResponse<Object> requestNotReadable(HttpMessageNotReadableException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("输入的参数不符合要求，异常编号：400");
@@ -118,7 +118,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler({ TypeMismatchException.class })
 	@ResponseBody
 	public AjaxResponse<Object> requestTypeMismatch(TypeMismatchException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		// String retParam = ReturnFormat.retParam(400, null);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
@@ -130,7 +130,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler({ MissingServletRequestParameterException.class })
 	@ResponseBody
 	public AjaxResponse<Object> requestMissingServletRequest(MissingServletRequestParameterException ex) {
-		logger.error(ex.toString());
+		logger.error(ex);
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("输入的参数不符合要求，异常编号：400");
@@ -141,7 +141,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
 	@ResponseBody
 	public AjaxResponse<Object> request405() {
-
+		
 		AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
 		ajaxResponse.setCode(Constant.RS_CODE_ERROR);
 		ajaxResponse.setMsg("请求的方法错误，异常编号：405");

@@ -93,11 +93,5 @@ public class LoginController extends BaseController {
 		return ajaxResponse;
 		
 	}
-	
-	
-	
-	
-	public static void main(String[] args) {
-		System.out.println(MD5.toMD5("admin"));
-	}
+
 }

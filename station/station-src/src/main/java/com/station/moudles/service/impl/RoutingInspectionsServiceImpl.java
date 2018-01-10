@@ -261,6 +261,10 @@ public class RoutingInspectionsServiceImpl extends BaseServiceImpl<RoutingInspec
 		return routingInspectionsMapper.selectCellInspace(routingInspections);
 	}
 
-
+	@Override
+	public List<RoutingInspections> selectListSelectiveFirst(RoutingInspections routingInspections) {
+		
+		return routingInspectionsMapper.selectListSelectiveFirst(routingInspections);
+	}
 
 }

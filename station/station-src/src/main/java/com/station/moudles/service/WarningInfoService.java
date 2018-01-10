@@ -1,6 +1,7 @@
 package com.station.moudles.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.station.moudles.entity.StationWarningInfo;
 import com.station.moudles.entity.WarnArea;
@@ -17,6 +18,9 @@ public interface WarningInfoService extends BaseService<WarningInfo, Integer> {
 	List<WarnArea> selectWarnAreaList(CommonSearchVo commonSearchVo);
 
 	String exportWarnAreaToExcel(List<WarnArea> warnAreaList, WarnReport warnReport);
+	
+	//app的告警信息
+	List<WarnArea> appSelectWarnAreaList(CommonSearchVo commonSearchVo);
 
 
 }

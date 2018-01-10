@@ -361,7 +361,25 @@ public class SearchGprsConfigInfoPagingVo extends PageEntity {
 	private String gprsSpec;
 
 	private Integer chargeInterval;
-	
+	 //从机的数量
+    private Integer subDeviceCount;
+    //电压平台
+  	private Integer volLevel;
+  	
+  	public Integer getVolLevel() {
+  		return volLevel;
+  	}
+
+  	public void setVolLevel(Integer volLevel) {
+  		this.volLevel = volLevel;
+  	}
+	public Integer getSubDeviceCount() {
+		return subDeviceCount;
+	}
+
+	public void setSubDeviceCount(Integer subDeviceCount) {
+		this.subDeviceCount = subDeviceCount;
+	}
 	public Integer getChargeInterval() {
 		return chargeInterval;
 	}

@@ -6,6 +6,7 @@ public class GprsConfigInfoDetail extends GprsConfigInfo {
 
 	private List<SubDevice> subDeviceList;
 
+
 	/**
 	 * @return the subDeviceList
 	 */

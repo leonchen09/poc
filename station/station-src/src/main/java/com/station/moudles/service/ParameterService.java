@@ -5,5 +5,5 @@ import com.station.moudles.vo.AppConfigVo;
 
 public interface ParameterService extends BaseService<Parameter, String> {
 
-	void updateParameterAll(AppConfigVo appConfig) throws IllegalArgumentException, IllegalAccessException;
+	void updateParameterAll(AppConfigVo appConfig,String parameterCategory) throws IllegalArgumentException, IllegalAccessException;
 }

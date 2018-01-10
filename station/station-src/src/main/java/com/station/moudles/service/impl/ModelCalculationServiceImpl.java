@@ -156,9 +156,9 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			PackDataExpandLatest packDataExpandLatest) {
 		BigDecimal value = BigDecimal.valueOf(getStandardCapacityFromPackType(stationInfo.getPackType()))
 				.multiply(BigDecimal.valueOf(0.3)).add(BigDecimal.ONE).abs();
-		final int feed = 24;
+		final int feed = stationInfo.getCellCount();
 		List<Integer> numbers = randomNumbers(feed);
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < stationInfo.getCellCount(); i++) {
 			int index = i + 1;
 			// 默认值 2.001
 			String name = CELL_RESIST_PREFIX + index;
@@ -166,7 +166,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			// 默认值 30%标称+1
 			name = CELL_CAP_PREFIX + index;
 			resetProperty(name, value, packDataExpandLatest);
-			// 默认值 随机生成1~24
+			// 默认值 随机生成1~stationInfo.getCellCount()
 			name = CELL_CAP_SORT_PREFIX + index;
 			resetProperty(name, numbers.get(i), packDataExpandLatest);
 			// 默认值 0:正常
@@ -217,7 +217,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 		List<ResponseStatus> statuses = new ArrayList<>(2);
 		try {
 			// 内阻计算
-			statuses.add(calculateResistance(stationInfo.getGprsId(), packDataExpandLatest));
+			statuses.add(calculateResistance(stationInfo, packDataExpandLatest));
 
 		} catch (Exception e) {
 			LOGGER.error("模型计算内阻失败，使用默认值!", e);
@@ -250,7 +250,6 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 
 		return statuses;
 	}
-
 	/**
 	 * StationInfo 单体性能统计 和 PackDataExpandLatest 单体性能状态设置
 	 * 
@@ -272,7 +271,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 				new Object[] { standardCapacity, consoleCellCapError, consoleCellCapNormal, stationInfo.getGprsId() });
 		// 性能统计
 		int okNum = 0, poorNum = 0, errorNum = 0; // add --- end
-		for (int i = 1; i < 25; i++) {
+		for (int i = 1; i < stationInfo.getCellCount() + 1; i++) {
 			String name = CELL_CAP_PREFIX + i;
 			BigDecimal value = (BigDecimal) BeanValueUtils.getValue(name, packDataExpandLatest);
 			BigDecimal percentage = value.divide(standardCapacity, 3, BigDecimal.ROUND_HALF_UP)
@@ -452,7 +451,8 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 	 * @param packDataExpandLatest
 	 * @return
 	 */
-	private ResponseStatus calculateResistance(final String gprsId, PackDataExpandLatest packDataExpandLatest) {
+	private ResponseStatus calculateResistance(StationInfo stationInfo, PackDataExpandLatest packDataExpandLatest) {
+		String gprsId = stationInfo.getGprsId();
 		long startTime = System.currentTimeMillis();
 		Map<Integer, PulseDischargeInfo> infoMap = getLatestPulseDischargeInfo(gprsId);
 		if (MapUtils.isEmpty(infoMap)) {
@@ -493,7 +493,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 		if (count > 0) {
 			avgVal = sumVal / count;
 		}
-		for (int i = 1; i < 25; i++) {
+		for (int i = 1; i < stationInfo.getCellCount() + 1; i++) {
 			String name = CELL_RESIST_PREFIX + i;
 			BigDecimal value = resistances.get(name);
 			if (value != null && value.doubleValue() > 0.0) {
@@ -526,7 +526,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			Date currentDate = new Date();
 			Date dischargeEndTime = null;// 最近一次有效放电，放电结束时间。
 			// 单体浮充电压
-			Map<Integer, BigDecimal> cellVoltage = calculateValidVoltage(stationInfo.getGprsId(), currentDate);
+			Map<Integer, BigDecimal> cellVoltage = calculateValidVoltage(stationInfo, currentDate);
 			if (MapUtils.isEmpty(cellVoltage)) {
 				return generateResponseStatus(false, startTime, "容量", "失败，找不到最近一周12次浮充态电压数据");
 			}
@@ -546,7 +546,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 				discharges.sort(Comparator.comparing(PackDataInfo::getRcvTime).reversed());
 			}
 			calculateEntityPredictionCapacitySort(latestDischargeRecord, cellVoltage,
-					calculateValidVoltageHandler(discharges), packDataExpandLatest);
+					calculateValidVoltageHandler(stationInfo, discharges), packDataExpandLatest, stationInfo);
 			// 单体预测容量计算
 			calculateEntityPredictionCapacity(latestDischargeRecord, cellVoltage, stationInfo, currentDate,
 					packDataExpandLatest);
@@ -566,7 +566,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			//无最近一次有效放电记录或这个记录早于整治时间，那么也需要从新计算放电时长和电池组预测容量
 			if (null == latestDischargeRecord || latestDischargeRecord.getRcvTime().compareTo(routingTime) < 0 ) {
 				// 计算电池组预测容量
-				calculateGroupPredictionCapacityUnLatestDischargeMode(cellVoltage, packDataExpandLatest);
+				calculateGroupPredictionCapacityUnLatestDischargeMode(cellVoltage, packDataExpandLatest, stationInfo);
 				// 电池组放电时长预测
 				calculateGroupDischargeTimePrediction(stationInfo, packDataExpandLatest, gprsConfigInfo);
 			}
@@ -674,6 +674,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			LOGGER.debug("计算CCN失败，因为没有单体标称容量数据，基站编号:{}", stationInfo.getGprsId());
 			return;
 		}
+		int cellCount = stationInfo.getCellCount();
 		for (Map.Entry<Integer, BigDecimal> entry : cellVoltage.entrySet()) {
 			Integer cellNum = entry.getKey();
 			BigDecimal voltage = entry.getValue();
@@ -688,13 +689,13 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 					if (ccn == null) {
 						ccn = BigDecimal.ZERO;
 					}
-					value = ccn.multiply(BigDecimal.valueOf((1 + ((12 - cellCapSort) / 24.0))));
+					value = ccn.multiply(BigDecimal.valueOf((1 + ((cellCount/2.0 - cellCapSort) / cellCount))));
 				} else {
 					// 浮充电压范围:(2.1V≤X≤2.35V) & 有最近一次有效放电记录
 					// 电池组预测容量pack_cap_pred* [1+(16-单体电池容量排序序号cellcap_sort_n)/240],其中n=1~24
 					// 除于240让单体容量的变化范围，低于6%
 					value = BigDecimal
-							.valueOf(packDataExpandLatest.getPackCapPred() * (1 + ((16 - cellCapSort) / 240.0)));
+							.valueOf(packDataExpandLatest.getPackCapPred() * (1 + ((cellCount*2/3.0 - cellCapSort) / (cellCount*10))));
 				}
 			} else {
 				// 浮充电压范围:小于2.1V 或 大于2.35， 单体标称容量*9.999%
@@ -756,7 +757,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 	 */
 	private void calculateEntityPredictionCapacitySort(PackDataInfo latestDischargeRecord,
 			Map<Integer, BigDecimal> cellVoltageMap, Map<Integer, BigDecimal> cellVoltageMap2,
-			PackDataExpandLatest packDataExpandLatest) {
+			PackDataExpandLatest packDataExpandLatest, StationInfo stationInfo) {
 		List<CellVoltage> inners = Lists.newArrayList();
 		List<CellVoltage> outers = Lists.newArrayList();
 
@@ -774,7 +775,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 		// Num为有效浮充电压或有效截止电压范围外的单体个数
 		int value = 0;
 		setCellCapSort(inners, value, packDataExpandLatest);
-		value = 24 - outers.size();
+		value = stationInfo.getCellCount() - outers.size();
 		if (value == 0) {
 			outers.sort(Comparator.comparing(CellVoltage::getVoltage).reversed());
 		}
@@ -885,9 +886,9 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 	 * </pre>
 	 */
 	private void calculateGroupPredictionCapacityUnLatestDischargeMode(Map<Integer, BigDecimal> cellVoltage,
-			PackDataExpandLatest packDataExpandLatest) {
+			PackDataExpandLatest packDataExpandLatest, StationInfo stationInfo) {
 		BigDecimal sum = BigDecimal.ZERO;
-		for (int i = 1; i < 25; i++) {
+		for (int i = 1; i < stationInfo.getCellCount() + 1; i++) {
 			BigDecimal value = (BigDecimal) BeanValueUtils.getValue(CELL_CAP_PREFIX + i, packDataExpandLatest);
 			if (value != null) {
 				sum = sum.add(value);
@@ -904,7 +905,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			diff = threshold;
 		}
 		// 容量计算修改
-		BigDecimal value = sum.divide(BigDecimal.valueOf(24), 2, BigDecimal.ROUND_HALF_UP);
+		BigDecimal value = sum.divide(BigDecimal.valueOf(stationInfo.getCellCount()), 2, BigDecimal.ROUND_HALF_UP);
 		if (value.compareTo(new BigDecimal(380d)) < 0) {
 			value = value.multiply(BigDecimal.valueOf(1 + (diff - 0.01) / 0.06));
 		}
@@ -1201,6 +1202,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 				packDataInfo = null;
 				break;
 			} else {
+				packDataInfos = packDataInfos.stream().sorted(Comparator.comparing(PackDataInfo::getId).reversed()).collect(Collectors.toList());
 				PackDataInfo packDataInfo1 = packDataInfos.get(0);
 				PackDataInfo packDataInfo5 = packDataInfos.get(1);
 				if ((packDataInfo1.getRcvTime().getTime() - packDataInfo5.getRcvTime().getTime()) < 11 * 60 * 1000) {// 2条记录时间间隔在10分钟内。
@@ -1273,7 +1275,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 		return map;
 	}
 
-	private Map<Integer, BigDecimal> calculateValidVoltageHandler(List<PackDataInfo> packDataInfos) {
+	private Map<Integer, BigDecimal> calculateValidVoltageHandler(StationInfo stationInfo, List<PackDataInfo> packDataInfos) {
 		if (CollectionUtils.isEmpty(packDataInfos) || packDataInfos.size() < 12) {
 			return MapUtils.EMPTY_MAP;
 		}
@@ -1282,7 +1284,7 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 		top12.addAll(packDataInfos.subList(0, 12));
 		Map<Integer, List<BigDecimal>> map = Maps.newHashMap();
 		for (PackDataInfo packDataInfo : top12) {
-			for (int i = 1; i <= 24; i++) {
+			for (int i = 1; i <= stationInfo.getCellCount(); i++) {
 				map.computeIfAbsent(i, key -> Lists.newArrayList())
 						.add((BigDecimal) BeanValueUtils.getValue("cellVol" + i, packDataInfo));
 			}
@@ -1319,12 +1321,12 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 	}
 
 	@Override
-	public Map<Integer, BigDecimal> calculateValidVoltage(String gprsId, Date currentDate) {
-		List<PackDataInfo> items = getValidVoltage(gprsId, currentDate);
+	public Map<Integer, BigDecimal> calculateValidVoltage(StationInfo stationInfo, Date currentDate) {
+		List<PackDataInfo> items = getValidVoltage(stationInfo.getGprsId(), currentDate);
 		if (items.size() < 12) {
 			return MapUtils.EMPTY_MAP;
 		}
-		return calculateValidVoltageHandler(items);
+		return calculateValidVoltageHandler(stationInfo, items);
 	}
 
 	@Override
@@ -1433,18 +1435,26 @@ public class ModelCalculationServiceImpl implements ModelCalculationService {
 			sampleCount1 += 20;
 		}
 		switch (pulseDischargeInfo.getDischargeTime()) {
-		case 0:
-			sampleCount2 += 1 * 1000 / 100;
-			break;
-		case 1:
-			sampleCount2 += 2 * 1000 / 100;
-			break;
-		case 2:
-			sampleCount2 += 3 * 1000 / 100;
-			break;
-		case 3:
-			sampleCount2 += 4 * 1000 / 100;
-			break;
+			case 0:
+				sampleCount2 += 1 * 1000 / 100;
+				break;
+			case 1:
+				sampleCount2 += 2 * 1000 / 100;
+				break;
+			case 2:
+				sampleCount2 += 3 * 1000 / 100;
+				break;
+			case 3:
+				sampleCount2 += 4 * 1000 / 100;
+				break;
+			case 4:
+				sampleCount2 += 5 * 1000 / 100;
+				break;
+			case 9:
+				sampleCount2 += 10 * 1000 / 100;
+				break;
+			default:
+				throw new IllegalArgumentException("区间2采样参数错误! -->" + pulseDischargeInfo.getDischargeTime());
 		}
 
 		int sampleCount = sampleCount1 + sampleCount2 + sampleCount3 + sampleCount4;

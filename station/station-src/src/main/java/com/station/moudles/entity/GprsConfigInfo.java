@@ -392,6 +392,35 @@ public class GprsConfigInfo {
     
     //充电状态下状态帧传输间隔，单位秒
     private Integer chargeInterval;
+    //从机的数据
+    private Integer subDeviceCount;
+    //设备类型名称
+    private String deviceTypeStr;
+    //电压平台
+  	private Integer volLevel;
+  	
+  	public Integer getVolLevel() {
+  		return volLevel;
+  	}
+
+  	public void setVolLevel(Integer volLevel) {
+  		this.volLevel = volLevel;
+  	}
+	public String getDeviceTypeStr() {
+		return deviceTypeStr;
+	}
+
+	public void setDeviceTypeStr(String deviceTypeStr) {
+		this.deviceTypeStr = deviceTypeStr;
+	}
+
+	public Integer getSubDeviceCount() {
+		return subDeviceCount;
+	}
+
+	public void setSubDeviceCount(Integer subDeviceCount) {
+		this.subDeviceCount = subDeviceCount;
+	}
 
 	public Integer getChargeInterval() {
 		return chargeInterval;
