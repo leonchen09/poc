@@ -1,0 +1,2606 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.PackDataInfoMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.PackDataInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="rcv_time" property="rcvTime" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
+		<result column="gen_vol" property="genVol" jdbcType="DECIMAL" />
+		<result column="gen_cur" property="genCur" jdbcType="DECIMAL" />
+		<result column="environ_tem" property="environTem" jdbcType="INTEGER" />
+		<result column="soc" property="soc" jdbcType="DECIMAL" />
+		<result column="cell_vol_1" property="cellVol1" jdbcType="DECIMAL" />
+		<result column="cell_vol_2" property="cellVol2" jdbcType="DECIMAL" />
+		<result column="cell_vol_3" property="cellVol3" jdbcType="DECIMAL" />
+		<result column="cell_vol_4" property="cellVol4" jdbcType="DECIMAL" />
+		<result column="cell_vol_5" property="cellVol5" jdbcType="DECIMAL" />
+		<result column="cell_vol_6" property="cellVol6" jdbcType="DECIMAL" />
+		<result column="cell_vol_7" property="cellVol7" jdbcType="DECIMAL" />
+		<result column="cell_vol_8" property="cellVol8" jdbcType="DECIMAL" />
+		<result column="cell_vol_9" property="cellVol9" jdbcType="DECIMAL" />
+		<result column="cell_vol_10" property="cellVol10" jdbcType="DECIMAL" />
+		<result column="cell_vol_11" property="cellVol11" jdbcType="DECIMAL" />
+		<result column="cell_vol_12" property="cellVol12" jdbcType="DECIMAL" />
+		<result column="cell_vol_13" property="cellVol13" jdbcType="DECIMAL" />
+		<result column="cell_vol_14" property="cellVol14" jdbcType="DECIMAL" />
+		<result column="cell_vol_15" property="cellVol15" jdbcType="DECIMAL" />
+		<result column="cell_vol_16" property="cellVol16" jdbcType="DECIMAL" />
+		<result column="cell_vol_17" property="cellVol17" jdbcType="DECIMAL" />
+		<result column="cell_vol_18" property="cellVol18" jdbcType="DECIMAL" />
+		<result column="cell_vol_19" property="cellVol19" jdbcType="DECIMAL" />
+		<result column="cell_vol_20" property="cellVol20" jdbcType="DECIMAL" />
+		<result column="cell_vol_21" property="cellVol21" jdbcType="DECIMAL" />
+		<result column="cell_vol_22" property="cellVol22" jdbcType="DECIMAL" />
+		<result column="cell_vol_23" property="cellVol23" jdbcType="DECIMAL" />
+		<result column="cell_vol_24" property="cellVol24" jdbcType="DECIMAL" />
+		<result column="cell_tem_1" property="cellTem1" jdbcType="INTEGER" />
+		<result column="cell_tem_2" property="cellTem2" jdbcType="INTEGER" />
+		<result column="cell_tem_3" property="cellTem3" jdbcType="INTEGER" />
+		<result column="cell_tem_4" property="cellTem4" jdbcType="INTEGER" />
+		<result column="cell_tem_5" property="cellTem5" jdbcType="INTEGER" />
+		<result column="cell_tem_6" property="cellTem6" jdbcType="INTEGER" />
+		<result column="cell_tem_7" property="cellTem7" jdbcType="INTEGER" />
+		<result column="cell_tem_8" property="cellTem8" jdbcType="INTEGER" />
+		<result column="cell_tem_9" property="cellTem9" jdbcType="INTEGER" />
+		<result column="cell_tem_10" property="cellTem10" jdbcType="INTEGER" />
+		<result column="cell_tem_11" property="cellTem11" jdbcType="INTEGER" />
+		<result column="cell_tem_12" property="cellTem12" jdbcType="INTEGER" />
+		<result column="cell_tem_13" property="cellTem13" jdbcType="INTEGER" />
+		<result column="cell_tem_14" property="cellTem14" jdbcType="INTEGER" />
+		<result column="cell_tem_15" property="cellTem15" jdbcType="INTEGER" />
+		<result column="cell_tem_16" property="cellTem16" jdbcType="INTEGER" />
+		<result column="cell_tem_17" property="cellTem17" jdbcType="INTEGER" />
+		<result column="cell_tem_18" property="cellTem18" jdbcType="INTEGER" />
+		<result column="cell_tem_19" property="cellTem19" jdbcType="INTEGER" />
+		<result column="cell_tem_20" property="cellTem20" jdbcType="INTEGER" />
+		<result column="cell_tem_21" property="cellTem21" jdbcType="INTEGER" />
+		<result column="cell_tem_22" property="cellTem22" jdbcType="INTEGER" />
+		<result column="cell_tem_23" property="cellTem23" jdbcType="INTEGER" />
+		<result column="cell_tem_24" property="cellTem24" jdbcType="INTEGER" />
+		<result column="cell_equ_1" property="cellEqu1" jdbcType="TINYINT" />
+		<result column="cell_equ_2" property="cellEqu2" jdbcType="TINYINT" />
+		<result column="cell_equ_3" property="cellEqu3" jdbcType="TINYINT" />
+		<result column="cell_equ_4" property="cellEqu4" jdbcType="TINYINT" />
+		<result column="cell_equ_5" property="cellEqu5" jdbcType="TINYINT" />
+		<result column="cell_equ_6" property="cellEqu6" jdbcType="TINYINT" />
+		<result column="cell_equ_7" property="cellEqu7" jdbcType="TINYINT" />
+		<result column="cell_equ_8" property="cellEqu8" jdbcType="TINYINT" />
+		<result column="cell_equ_9" property="cellEqu9" jdbcType="TINYINT" />
+		<result column="cell_equ_10" property="cellEqu10" jdbcType="TINYINT" />
+		<result column="cell_equ_11" property="cellEqu11" jdbcType="TINYINT" />
+		<result column="cell_equ_12" property="cellEqu12" jdbcType="TINYINT" />
+		<result column="cell_equ_13" property="cellEqu13" jdbcType="TINYINT" />
+		<result column="cell_equ_14" property="cellEqu14" jdbcType="TINYINT" />
+		<result column="cell_equ_15" property="cellEqu15" jdbcType="TINYINT" />
+		<result column="cell_equ_16" property="cellEqu16" jdbcType="TINYINT" />
+		<result column="cell_equ_17" property="cellEqu17" jdbcType="TINYINT" />
+		<result column="cell_equ_18" property="cellEqu18" jdbcType="TINYINT" />
+		<result column="cell_equ_19" property="cellEqu19" jdbcType="TINYINT" />
+		<result column="cell_equ_20" property="cellEqu20" jdbcType="TINYINT" />
+		<result column="cell_equ_21" property="cellEqu21" jdbcType="TINYINT" />
+		<result column="cell_equ_22" property="cellEqu22" jdbcType="TINYINT" />
+		<result column="cell_equ_23" property="cellEqu23" jdbcType="TINYINT" />
+		<result column="cell_equ_24" property="cellEqu24" jdbcType="TINYINT" />
+		<result column="com_suc_1" property="comSuc1" jdbcType="INTEGER" />
+		<result column="com_suc_2" property="comSuc2" jdbcType="INTEGER" />
+		<result column="com_suc_3" property="comSuc3" jdbcType="INTEGER" />
+		<result column="com_suc_4" property="comSuc4" jdbcType="INTEGER" />
+		<result column="com_suc_5" property="comSuc5" jdbcType="INTEGER" />
+		<result column="com_suc_6" property="comSuc6" jdbcType="INTEGER" />
+		<result column="com_suc_7" property="comSuc7" jdbcType="INTEGER" />
+		<result column="com_suc_8" property="comSuc8" jdbcType="INTEGER" />
+		<result column="com_suc_9" property="comSuc9" jdbcType="INTEGER" />
+		<result column="com_suc_10" property="comSuc10" jdbcType="INTEGER" />
+		<result column="com_suc_11" property="comSuc11" jdbcType="INTEGER" />
+		<result column="com_suc_12" property="comSuc12" jdbcType="INTEGER" />
+		<result column="com_suc_13" property="comSuc13" jdbcType="INTEGER" />
+		<result column="com_suc_14" property="comSuc14" jdbcType="INTEGER" />
+		<result column="com_suc_15" property="comSuc15" jdbcType="INTEGER" />
+		<result column="com_suc_16" property="comSuc16" jdbcType="INTEGER" />
+		<result column="com_suc_17" property="comSuc17" jdbcType="INTEGER" />
+		<result column="com_suc_18" property="comSuc18" jdbcType="INTEGER" />
+		<result column="com_suc_19" property="comSuc19" jdbcType="INTEGER" />
+		<result column="com_suc_20" property="comSuc20" jdbcType="INTEGER" />
+		<result column="com_suc_21" property="comSuc21" jdbcType="INTEGER" />
+		<result column="com_suc_22" property="comSuc22" jdbcType="INTEGER" />
+		<result column="com_suc_23" property="comSuc23" jdbcType="INTEGER" />
+		<result column="com_suc_24" property="comSuc24" jdbcType="INTEGER" />
+		<result column="passive_balance" property="passiveBalance" jdbcType="TINYINT" />
+		<result column="initiative_balance" property="initiativeBalance" jdbcType="TINYINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, rcv_time, state, gen_vol, gen_cur,
+		environ_tem, soc,
+		cell_vol_1, cell_vol_2,
+		cell_vol_3, cell_vol_4,
+		cell_vol_5, cell_vol_6, cell_vol_7, cell_vol_8,
+		cell_vol_9,
+		cell_vol_10,
+		cell_vol_11, cell_vol_12, cell_vol_13, cell_vol_14,
+		cell_vol_15,
+		cell_vol_16,
+		cell_vol_17, cell_vol_18, cell_vol_19,
+		cell_vol_20, cell_vol_21, cell_vol_22,
+		cell_vol_23,
+		cell_vol_24,
+		cell_tem_1, cell_tem_2,
+		cell_tem_3, cell_tem_4, cell_tem_5,
+		cell_tem_6,
+		cell_tem_7, cell_tem_8, cell_tem_9, cell_tem_10,
+		cell_tem_11, cell_tem_12,
+		cell_tem_13,
+		cell_tem_14, cell_tem_15,
+		cell_tem_16, cell_tem_17, cell_tem_18,
+		cell_tem_19,
+		cell_tem_20,
+		cell_tem_21, cell_tem_22, cell_tem_23, cell_tem_24, cell_equ_1,
+		cell_equ_2,
+		cell_equ_3,
+		cell_equ_4, cell_equ_5, cell_equ_6, cell_equ_7,
+		cell_equ_8, cell_equ_9,
+		cell_equ_10,
+		cell_equ_11, cell_equ_12,
+		cell_equ_13, cell_equ_14, cell_equ_15, cell_equ_16,
+		cell_equ_17,
+		cell_equ_18, cell_equ_19, cell_equ_20, cell_equ_21, cell_equ_22,
+		cell_equ_23,
+		cell_equ_24,
+		com_suc_1, com_suc_2,
+		com_suc_3, com_suc_4,
+		com_suc_5, com_suc_6, com_suc_7,
+		com_suc_8,
+		com_suc_9, com_suc_10,
+		com_suc_11, com_suc_12, com_suc_13, com_suc_14,
+		com_suc_15,
+		com_suc_16,
+		com_suc_17, com_suc_18, com_suc_19,
+		com_suc_20, com_suc_21,
+		com_suc_22,
+		com_suc_23, com_suc_24, passive_balance, initiative_balance
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from pack_data_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.PackDataInfo">
+		select
+		<include refid="Base_Column_List" />
+		from pack_data_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="state != null">
+				and state = #{state,jdbcType=VARCHAR}
+			</if>
+			<if test="genVol != null">
+				and gen_vol = #{genVol,jdbcType=DECIMAL}
+			</if>
+			<if test="genCur != null">
+				and gen_cur = #{genCur,jdbcType=DECIMAL}
+			</if>
+			<if test="environTem != null">
+				and environ_tem = #{environTem,jdbcType=INTEGER}
+			</if>
+			<if test="soc != null">
+				and soc = #{soc,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol1 != null">
+				and cell_vol_1 = #{cellVol1,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol2 != null">
+				and cell_vol_2 = #{cellVol2,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol3 != null">
+				and cell_vol_3 = #{cellVol3,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol4 != null">
+				and cell_vol_4 = #{cellVol4,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol5 != null">
+				and cell_vol_5 = #{cellVol5,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol6 != null">
+				and cell_vol_6 = #{cellVol6,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol7 != null">
+				and cell_vol_7 = #{cellVol7,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol8 != null">
+				and cell_vol_8 = #{cellVol8,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol9 != null">
+				and cell_vol_9 = #{cellVol9,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol10 != null">
+				and cell_vol_10 = #{cellVol10,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol11 != null">
+				and cell_vol_11 = #{cellVol11,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol12 != null">
+				and cell_vol_12 = #{cellVol12,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol13 != null">
+				and cell_vol_13 = #{cellVol13,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol14 != null">
+				and cell_vol_14 = #{cellVol14,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol15 != null">
+				and cell_vol_15 = #{cellVol15,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol16 != null">
+				and cell_vol_16 = #{cellVol16,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol17 != null">
+				and cell_vol_17 = #{cellVol17,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol18 != null">
+				and cell_vol_18 = #{cellVol18,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol19 != null">
+				and cell_vol_19 = #{cellVol19,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol20 != null">
+				and cell_vol_20 = #{cellVol20,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol21 != null">
+				and cell_vol_21 = #{cellVol21,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol22 != null">
+				and cell_vol_22 = #{cellVol22,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol23 != null">
+				and cell_vol_23 = #{cellVol23,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol24 != null">
+				and cell_vol_24 = #{cellVol24,jdbcType=DECIMAL}
+			</if>
+			<if test="cellTem1 != null">
+				and cell_tem_1 = #{cellTem1,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem2 != null">
+				and cell_tem_2 = #{cellTem2,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem3 != null">
+				and cell_tem_3 = #{cellTem3,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem4 != null">
+				and cell_tem_4 = #{cellTem4,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem5 != null">
+				and cell_tem_5 = #{cellTem5,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem6 != null">
+				and cell_tem_6 = #{cellTem6,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem7 != null">
+				and cell_tem_7 = #{cellTem7,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem8 != null">
+				and cell_tem_8 = #{cellTem8,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem9 != null">
+				and cell_tem_9 = #{cellTem9,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem10 != null">
+				and cell_tem_10 = #{cellTem10,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem11 != null">
+				and cell_tem_11 = #{cellTem11,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem12 != null">
+				and cell_tem_12 = #{cellTem12,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem13 != null">
+				and cell_tem_13 = #{cellTem13,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem14 != null">
+				and cell_tem_14 = #{cellTem14,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem15 != null">
+				and cell_tem_15 = #{cellTem15,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem16 != null">
+				and cell_tem_16 = #{cellTem16,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem17 != null">
+				and cell_tem_17 = #{cellTem17,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem18 != null">
+				and cell_tem_18 = #{cellTem18,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem19 != null">
+				and cell_tem_19 = #{cellTem19,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem20 != null">
+				and cell_tem_20 = #{cellTem20,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem21 != null">
+				and cell_tem_21 = #{cellTem21,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem22 != null">
+				and cell_tem_22 = #{cellTem22,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem23 != null">
+				and cell_tem_23 = #{cellTem23,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem24 != null">
+				and cell_tem_24 = #{cellTem24,jdbcType=INTEGER}
+			</if>
+			<if test="cellEqu1 != null">
+				and cell_equ_1 = #{cellEqu1,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu2 != null">
+				and cell_equ_2 = #{cellEqu2,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu3 != null">
+				and cell_equ_3 = #{cellEqu3,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu4 != null">
+				and cell_equ_4 = #{cellEqu4,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu5 != null">
+				and cell_equ_5 = #{cellEqu5,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu6 != null">
+				and cell_equ_6 = #{cellEqu6,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu7 != null">
+				and cell_equ_7 = #{cellEqu7,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu8 != null">
+				and cell_equ_8 = #{cellEqu8,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu9 != null">
+				and cell_equ_9 = #{cellEqu9,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu10 != null">
+				and cell_equ_10 = #{cellEqu10,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu11 != null">
+				and cell_equ_11 = #{cellEqu11,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu12 != null">
+				and cell_equ_12 = #{cellEqu12,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu13 != null">
+				and cell_equ_13 = #{cellEqu13,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu14 != null">
+				and cell_equ_14 = #{cellEqu14,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu15 != null">
+				and cell_equ_15 = #{cellEqu15,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu16 != null">
+				and cell_equ_16 = #{cellEqu16,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu17 != null">
+				and cell_equ_17 = #{cellEqu17,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu18 != null">
+				and cell_equ_18 = #{cellEqu18,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu19 != null">
+				and cell_equ_19 = #{cellEqu19,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu20 != null">
+				and cell_equ_20 = #{cellEqu20,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu21 != null">
+				and cell_equ_21 = #{cellEqu21,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu22 != null">
+				and cell_equ_22 = #{cellEqu22,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu23 != null">
+				and cell_equ_23 = #{cellEqu23,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu24 != null">
+				and cell_equ_24 = #{cellEqu24,jdbcType=TINYINT}
+			</if>
+			<if test="comSuc1 != null">
+				and com_suc_1 = #{comSuc1,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc2 != null">
+				and com_suc_2 = #{comSuc2,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc3 != null">
+				and com_suc_3 = #{comSuc3,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc4 != null">
+				and com_suc_4 = #{comSuc4,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc5 != null">
+				and com_suc_5 = #{comSuc5,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc6 != null">
+				and com_suc_6 = #{comSuc6,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc7 != null">
+				and com_suc_7 = #{comSuc7,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc8 != null">
+				and com_suc_8 = #{comSuc8,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc9 != null">
+				and com_suc_9 = #{comSuc9,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc10 != null">
+				and com_suc_10 = #{comSuc10,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc11 != null">
+				and com_suc_11 = #{comSuc11,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc12 != null">
+				and com_suc_12 = #{comSuc12,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc13 != null">
+				and com_suc_13 = #{comSuc13,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc14 != null">
+				and com_suc_14 = #{comSuc14,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc15 != null">
+				and com_suc_15 = #{comSuc15,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc16 != null">
+				and com_suc_16 = #{comSuc16,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc17 != null">
+				and com_suc_17 = #{comSuc17,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc18 != null">
+				and com_suc_18 = #{comSuc18,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc19 != null">
+				and com_suc_19 = #{comSuc19,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc20 != null">
+				and com_suc_20 = #{comSuc20,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc21 != null">
+				and com_suc_21 = #{comSuc21,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc22 != null">
+				and com_suc_22 = #{comSuc22,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc23 != null">
+				and com_suc_23 = #{comSuc23,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc24 != null">
+				and com_suc_24 = #{comSuc24,jdbcType=INTEGER}
+			</if>
+			<if test="passiveBalance != null">
+				and passive_balance = #{passiveBalance,jdbcType=TINYINT}
+			</if>
+			<if test="initiativeBalance != null">
+				and initiative_balance =
+				#{initiativeBalance,jdbcType=TINYINT}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from pack_data_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="state != null">
+				and state like "%${state}%"
+			</if>
+			<if test="genVol != null">
+				and gen_vol = #{genVol,jdbcType=DECIMAL}
+			</if>
+			<if test="genCur != null">
+				and gen_cur = #{genCur,jdbcType=DECIMAL}
+			</if>
+			<if test="environTem != null">
+				and environ_tem = #{environTem,jdbcType=INTEGER}
+			</if>
+			<if test="soc != null">
+				and soc = #{soc,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol1 != null">
+				and cell_vol_1 = #{cellVol1,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol2 != null">
+				and cell_vol_2 = #{cellVol2,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol3 != null">
+				and cell_vol_3 = #{cellVol3,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol4 != null">
+				and cell_vol_4 = #{cellVol4,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol5 != null">
+				and cell_vol_5 = #{cellVol5,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol6 != null">
+				and cell_vol_6 = #{cellVol6,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol7 != null">
+				and cell_vol_7 = #{cellVol7,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol8 != null">
+				and cell_vol_8 = #{cellVol8,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol9 != null">
+				and cell_vol_9 = #{cellVol9,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol10 != null">
+				and cell_vol_10 = #{cellVol10,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol11 != null">
+				and cell_vol_11 = #{cellVol11,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol12 != null">
+				and cell_vol_12 = #{cellVol12,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol13 != null">
+				and cell_vol_13 = #{cellVol13,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol14 != null">
+				and cell_vol_14 = #{cellVol14,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol15 != null">
+				and cell_vol_15 = #{cellVol15,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol16 != null">
+				and cell_vol_16 = #{cellVol16,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol17 != null">
+				and cell_vol_17 = #{cellVol17,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol18 != null">
+				and cell_vol_18 = #{cellVol18,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol19 != null">
+				and cell_vol_19 = #{cellVol19,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol20 != null">
+				and cell_vol_20 = #{cellVol20,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol21 != null">
+				and cell_vol_21 = #{cellVol21,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol22 != null">
+				and cell_vol_22 = #{cellVol22,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol23 != null">
+				and cell_vol_23 = #{cellVol23,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol24 != null">
+				and cell_vol_24 = #{cellVol24,jdbcType=DECIMAL}
+			</if>
+			<if test="cellTem1 != null">
+				and cell_tem_1 = #{cellTem1,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem2 != null">
+				and cell_tem_2 = #{cellTem2,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem3 != null">
+				and cell_tem_3 = #{cellTem3,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem4 != null">
+				and cell_tem_4 = #{cellTem4,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem5 != null">
+				and cell_tem_5 = #{cellTem5,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem6 != null">
+				and cell_tem_6 = #{cellTem6,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem7 != null">
+				and cell_tem_7 = #{cellTem7,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem8 != null">
+				and cell_tem_8 = #{cellTem8,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem9 != null">
+				and cell_tem_9 = #{cellTem9,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem10 != null">
+				and cell_tem_10 = #{cellTem10,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem11 != null">
+				and cell_tem_11 = #{cellTem11,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem12 != null">
+				and cell_tem_12 = #{cellTem12,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem13 != null">
+				and cell_tem_13 = #{cellTem13,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem14 != null">
+				and cell_tem_14 = #{cellTem14,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem15 != null">
+				and cell_tem_15 = #{cellTem15,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem16 != null">
+				and cell_tem_16 = #{cellTem16,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem17 != null">
+				and cell_tem_17 = #{cellTem17,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem18 != null">
+				and cell_tem_18 = #{cellTem18,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem19 != null">
+				and cell_tem_19 = #{cellTem19,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem20 != null">
+				and cell_tem_20 = #{cellTem20,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem21 != null">
+				and cell_tem_21 = #{cellTem21,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem22 != null">
+				and cell_tem_22 = #{cellTem22,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem23 != null">
+				and cell_tem_23 = #{cellTem23,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem24 != null">
+				and cell_tem_24 = #{cellTem24,jdbcType=INTEGER}
+			</if>
+			<if test="cellEqu1 != null">
+				and cell_equ_1 = #{cellEqu1,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu2 != null">
+				and cell_equ_2 = #{cellEqu2,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu3 != null">
+				and cell_equ_3 = #{cellEqu3,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu4 != null">
+				and cell_equ_4 = #{cellEqu4,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu5 != null">
+				and cell_equ_5 = #{cellEqu5,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu6 != null">
+				and cell_equ_6 = #{cellEqu6,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu7 != null">
+				and cell_equ_7 = #{cellEqu7,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu8 != null">
+				and cell_equ_8 = #{cellEqu8,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu9 != null">
+				and cell_equ_9 = #{cellEqu9,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu10 != null">
+				and cell_equ_10 = #{cellEqu10,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu11 != null">
+				and cell_equ_11 = #{cellEqu11,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu12 != null">
+				and cell_equ_12 = #{cellEqu12,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu13 != null">
+				and cell_equ_13 = #{cellEqu13,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu14 != null">
+				and cell_equ_14 = #{cellEqu14,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu15 != null">
+				and cell_equ_15 = #{cellEqu15,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu16 != null">
+				and cell_equ_16 = #{cellEqu16,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu17 != null">
+				and cell_equ_17 = #{cellEqu17,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu18 != null">
+				and cell_equ_18 = #{cellEqu18,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu19 != null">
+				and cell_equ_19 = #{cellEqu19,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu20 != null">
+				and cell_equ_20 = #{cellEqu20,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu21 != null">
+				and cell_equ_21 = #{cellEqu21,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu22 != null">
+				and cell_equ_22 = #{cellEqu22,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu23 != null">
+				and cell_equ_23 = #{cellEqu23,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu24 != null">
+				and cell_equ_24 = #{cellEqu24,jdbcType=TINYINT}
+			</if>
+			<if test="comSuc1 != null">
+				and com_suc_1 = #{comSuc1,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc2 != null">
+				and com_suc_2 = #{comSuc2,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc3 != null">
+				and com_suc_3 = #{comSuc3,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc4 != null">
+				and com_suc_4 = #{comSuc4,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc5 != null">
+				and com_suc_5 = #{comSuc5,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc6 != null">
+				and com_suc_6 = #{comSuc6,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc7 != null">
+				and com_suc_7 = #{comSuc7,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc8 != null">
+				and com_suc_8 = #{comSuc8,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc9 != null">
+				and com_suc_9 = #{comSuc9,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc10 != null">
+				and com_suc_10 = #{comSuc10,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc11 != null">
+				and com_suc_11 = #{comSuc11,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc12 != null">
+				and com_suc_12 = #{comSuc12,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc13 != null">
+				and com_suc_13 = #{comSuc13,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc14 != null">
+				and com_suc_14 = #{comSuc14,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc15 != null">
+				and com_suc_15 = #{comSuc15,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc16 != null">
+				and com_suc_16 = #{comSuc16,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc17 != null">
+				and com_suc_17 = #{comSuc17,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc18 != null">
+				and com_suc_18 = #{comSuc18,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc19 != null">
+				and com_suc_19 = #{comSuc19,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc20 != null">
+				and com_suc_20 = #{comSuc20,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc21 != null">
+				and com_suc_21 = #{comSuc21,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc22 != null">
+				and com_suc_22 = #{comSuc22,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc23 != null">
+				and com_suc_23 = #{comSuc23,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc24 != null">
+				and com_suc_24 = #{comSuc24,jdbcType=INTEGER}
+			</if>
+			<if test="passiveBalance != null">
+				and passive_balance = #{passiveBalance,jdbcType=TINYINT}
+			</if>
+			<if test="initiativeBalance != null">
+				and initiative_balance =
+				#{initiativeBalance,jdbcType=TINYINT}
+			</if>
+		</where>
+		order by id desc
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		pack_data_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from pack_data_info
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.PackDataInfo">
+		delete from pack_data_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="state != null">
+				and state = #{state,jdbcType=VARCHAR}
+			</if>
+			<if test="genVol != null">
+				and gen_vol = #{genVol,jdbcType=DECIMAL}
+			</if>
+			<if test="genCur != null">
+				and gen_cur = #{genCur,jdbcType=DECIMAL}
+			</if>
+			<if test="environTem != null">
+				and environ_tem = #{environTem,jdbcType=INTEGER}
+			</if>
+			<if test="soc != null">
+				and soc = #{soc,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol1 != null">
+				and cell_vol_1 = #{cellVol1,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol2 != null">
+				and cell_vol_2 = #{cellVol2,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol3 != null">
+				and cell_vol_3 = #{cellVol3,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol4 != null">
+				and cell_vol_4 = #{cellVol4,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol5 != null">
+				and cell_vol_5 = #{cellVol5,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol6 != null">
+				and cell_vol_6 = #{cellVol6,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol7 != null">
+				and cell_vol_7 = #{cellVol7,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol8 != null">
+				and cell_vol_8 = #{cellVol8,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol9 != null">
+				and cell_vol_9 = #{cellVol9,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol10 != null">
+				and cell_vol_10 = #{cellVol10,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol11 != null">
+				and cell_vol_11 = #{cellVol11,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol12 != null">
+				and cell_vol_12 = #{cellVol12,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol13 != null">
+				and cell_vol_13 = #{cellVol13,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol14 != null">
+				and cell_vol_14 = #{cellVol14,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol15 != null">
+				and cell_vol_15 = #{cellVol15,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol16 != null">
+				and cell_vol_16 = #{cellVol16,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol17 != null">
+				and cell_vol_17 = #{cellVol17,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol18 != null">
+				and cell_vol_18 = #{cellVol18,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol19 != null">
+				and cell_vol_19 = #{cellVol19,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol20 != null">
+				and cell_vol_20 = #{cellVol20,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol21 != null">
+				and cell_vol_21 = #{cellVol21,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol22 != null">
+				and cell_vol_22 = #{cellVol22,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol23 != null">
+				and cell_vol_23 = #{cellVol23,jdbcType=DECIMAL}
+			</if>
+			<if test="cellVol24 != null">
+				and cell_vol_24 = #{cellVol24,jdbcType=DECIMAL}
+			</if>
+			<if test="cellTem1 != null">
+				and cell_tem_1 = #{cellTem1,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem2 != null">
+				and cell_tem_2 = #{cellTem2,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem3 != null">
+				and cell_tem_3 = #{cellTem3,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem4 != null">
+				and cell_tem_4 = #{cellTem4,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem5 != null">
+				and cell_tem_5 = #{cellTem5,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem6 != null">
+				and cell_tem_6 = #{cellTem6,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem7 != null">
+				and cell_tem_7 = #{cellTem7,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem8 != null">
+				and cell_tem_8 = #{cellTem8,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem9 != null">
+				and cell_tem_9 = #{cellTem9,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem10 != null">
+				and cell_tem_10 = #{cellTem10,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem11 != null">
+				and cell_tem_11 = #{cellTem11,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem12 != null">
+				and cell_tem_12 = #{cellTem12,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem13 != null">
+				and cell_tem_13 = #{cellTem13,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem14 != null">
+				and cell_tem_14 = #{cellTem14,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem15 != null">
+				and cell_tem_15 = #{cellTem15,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem16 != null">
+				and cell_tem_16 = #{cellTem16,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem17 != null">
+				and cell_tem_17 = #{cellTem17,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem18 != null">
+				and cell_tem_18 = #{cellTem18,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem19 != null">
+				and cell_tem_19 = #{cellTem19,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem20 != null">
+				and cell_tem_20 = #{cellTem20,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem21 != null">
+				and cell_tem_21 = #{cellTem21,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem22 != null">
+				and cell_tem_22 = #{cellTem22,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem23 != null">
+				and cell_tem_23 = #{cellTem23,jdbcType=INTEGER}
+			</if>
+			<if test="cellTem24 != null">
+				and cell_tem_24 = #{cellTem24,jdbcType=INTEGER}
+			</if>
+			<if test="cellEqu1 != null">
+				and cell_equ_1 = #{cellEqu1,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu2 != null">
+				and cell_equ_2 = #{cellEqu2,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu3 != null">
+				and cell_equ_3 = #{cellEqu3,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu4 != null">
+				and cell_equ_4 = #{cellEqu4,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu5 != null">
+				and cell_equ_5 = #{cellEqu5,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu6 != null">
+				and cell_equ_6 = #{cellEqu6,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu7 != null">
+				and cell_equ_7 = #{cellEqu7,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu8 != null">
+				and cell_equ_8 = #{cellEqu8,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu9 != null">
+				and cell_equ_9 = #{cellEqu9,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu10 != null">
+				and cell_equ_10 = #{cellEqu10,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu11 != null">
+				and cell_equ_11 = #{cellEqu11,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu12 != null">
+				and cell_equ_12 = #{cellEqu12,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu13 != null">
+				and cell_equ_13 = #{cellEqu13,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu14 != null">
+				and cell_equ_14 = #{cellEqu14,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu15 != null">
+				and cell_equ_15 = #{cellEqu15,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu16 != null">
+				and cell_equ_16 = #{cellEqu16,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu17 != null">
+				and cell_equ_17 = #{cellEqu17,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu18 != null">
+				and cell_equ_18 = #{cellEqu18,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu19 != null">
+				and cell_equ_19 = #{cellEqu19,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu20 != null">
+				and cell_equ_20 = #{cellEqu20,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu21 != null">
+				and cell_equ_21 = #{cellEqu21,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu22 != null">
+				and cell_equ_22 = #{cellEqu22,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu23 != null">
+				and cell_equ_23 = #{cellEqu23,jdbcType=TINYINT}
+			</if>
+			<if test="cellEqu24 != null">
+				and cell_equ_24 = #{cellEqu24,jdbcType=TINYINT}
+			</if>
+			<if test="comSuc1 != null">
+				and com_suc_1 = #{comSuc1,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc2 != null">
+				and com_suc_2 = #{comSuc2,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc3 != null">
+				and com_suc_3 = #{comSuc3,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc4 != null">
+				and com_suc_4 = #{comSuc4,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc5 != null">
+				and com_suc_5 = #{comSuc5,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc6 != null">
+				and com_suc_6 = #{comSuc6,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc7 != null">
+				and com_suc_7 = #{comSuc7,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc8 != null">
+				and com_suc_8 = #{comSuc8,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc9 != null">
+				and com_suc_9 = #{comSuc9,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc10 != null">
+				and com_suc_10 = #{comSuc10,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc11 != null">
+				and com_suc_11 = #{comSuc11,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc12 != null">
+				and com_suc_12 = #{comSuc12,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc13 != null">
+				and com_suc_13 = #{comSuc13,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc14 != null">
+				and com_suc_14 = #{comSuc14,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc15 != null">
+				and com_suc_15 = #{comSuc15,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc16 != null">
+				and com_suc_16 = #{comSuc16,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc17 != null">
+				and com_suc_17 = #{comSuc17,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc18 != null">
+				and com_suc_18 = #{comSuc18,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc19 != null">
+				and com_suc_19 = #{comSuc19,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc20 != null">
+				and com_suc_20 = #{comSuc20,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc21 != null">
+				and com_suc_21 = #{comSuc21,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc22 != null">
+				and com_suc_22 = #{comSuc22,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc23 != null">
+				and com_suc_23 = #{comSuc23,jdbcType=INTEGER}
+			</if>
+			<if test="comSuc24 != null">
+				and com_suc_24 = #{comSuc24,jdbcType=INTEGER}
+			</if>
+			<if test="passiveBalance != null">
+				and passive_balance = #{passiveBalance,jdbcType=TINYINT}
+			</if>
+			<if test="initiativeBalance != null">
+				and initiative_balance =
+				#{initiativeBalance,jdbcType=TINYINT}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.PackDataInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into pack_data_info
+		(gprs_id, rcv_time, state,
+		gen_vol, gen_cur,
+		environ_tem,
+		soc,
+		cell_vol_1, cell_vol_2,
+		cell_vol_3, cell_vol_4, cell_vol_5,
+		cell_vol_6,
+		cell_vol_7, cell_vol_8,
+		cell_vol_9, cell_vol_10, cell_vol_11,
+		cell_vol_12, cell_vol_13, cell_vol_14,
+		cell_vol_15,
+		cell_vol_16,
+		cell_vol_17,
+		cell_vol_18, cell_vol_19, cell_vol_20,
+		cell_vol_21,
+		cell_vol_22, cell_vol_23,
+		cell_vol_24, cell_tem_1, cell_tem_2,
+		cell_tem_3, cell_tem_4, cell_tem_5,
+		cell_tem_6, cell_tem_7,
+		cell_tem_8,
+		cell_tem_9, cell_tem_10, cell_tem_11,
+		cell_tem_12, cell_tem_13,
+		cell_tem_14,
+		cell_tem_15, cell_tem_16, cell_tem_17,
+		cell_tem_18,
+		cell_tem_19, cell_tem_20,
+		cell_tem_21, cell_tem_22, cell_tem_23,
+		cell_tem_24, cell_equ_1, cell_equ_2,
+		cell_equ_3, cell_equ_4,
+		cell_equ_5,
+		cell_equ_6, cell_equ_7, cell_equ_8,
+		cell_equ_9, cell_equ_10,
+		cell_equ_11,
+		cell_equ_12, cell_equ_13, cell_equ_14,
+		cell_equ_15,
+		cell_equ_16, cell_equ_17,
+		cell_equ_18, cell_equ_19, cell_equ_20,
+		cell_equ_21, cell_equ_22, cell_equ_23,
+		cell_equ_24, com_suc_1,
+		com_suc_2,
+		com_suc_3, com_suc_4, com_suc_5,
+		com_suc_6, com_suc_7,
+		com_suc_8,
+		com_suc_9, com_suc_10, com_suc_11,
+		com_suc_12, com_suc_13,
+		com_suc_14,
+		com_suc_15, com_suc_16, com_suc_17,
+		com_suc_18, com_suc_19,
+		com_suc_20,
+		com_suc_21, com_suc_22, com_suc_23,
+		com_suc_24,
+		passive_balance, initiative_balance
+		)
+		values
+		(#{gprsId,jdbcType=VARCHAR}, #{rcvTime,jdbcType=TIMESTAMP},
+		#{state,jdbcType=VARCHAR},
+		#{genVol,jdbcType=DECIMAL},
+		#{genCur,jdbcType=DECIMAL},
+		#{environTem,jdbcType=INTEGER},
+		#{soc,jdbcType=DECIMAL}, #{cellVol1,jdbcType=DECIMAL},
+		#{cellVol2,jdbcType=DECIMAL},
+		#{cellVol3,jdbcType=DECIMAL},
+		#{cellVol4,jdbcType=DECIMAL},
+		#{cellVol5,jdbcType=DECIMAL},
+		#{cellVol6,jdbcType=DECIMAL}, #{cellVol7,jdbcType=DECIMAL},
+		#{cellVol8,jdbcType=DECIMAL},
+		#{cellVol9,jdbcType=DECIMAL},
+		#{cellVol10,jdbcType=DECIMAL},
+		#{cellVol11,jdbcType=DECIMAL},
+		#{cellVol12,jdbcType=DECIMAL}, #{cellVol13,jdbcType=DECIMAL},
+		#{cellVol14,jdbcType=DECIMAL},
+		#{cellVol15,jdbcType=DECIMAL},
+		#{cellVol16,jdbcType=DECIMAL},
+		#{cellVol17,jdbcType=DECIMAL},
+		#{cellVol18,jdbcType=DECIMAL}, #{cellVol19,jdbcType=DECIMAL},
+		#{cellVol20,jdbcType=DECIMAL},
+		#{cellVol21,jdbcType=DECIMAL},
+		#{cellVol22,jdbcType=DECIMAL},
+		#{cellVol23,jdbcType=DECIMAL},
+		#{cellVol24,jdbcType=DECIMAL}, #{cellTem1,jdbcType=INTEGER},
+		#{cellTem2,jdbcType=INTEGER},
+		#{cellTem3,jdbcType=INTEGER},
+		#{cellTem4,jdbcType=INTEGER},
+		#{cellTem5,jdbcType=INTEGER},
+		#{cellTem6,jdbcType=INTEGER}, #{cellTem7,jdbcType=INTEGER},
+		#{cellTem8,jdbcType=INTEGER},
+		#{cellTem9,jdbcType=INTEGER},
+		#{cellTem10,jdbcType=INTEGER},
+		#{cellTem11,jdbcType=INTEGER},
+		#{cellTem12,jdbcType=INTEGER}, #{cellTem13,jdbcType=INTEGER},
+		#{cellTem14,jdbcType=INTEGER},
+		#{cellTem15,jdbcType=INTEGER},
+		#{cellTem16,jdbcType=INTEGER},
+		#{cellTem17,jdbcType=INTEGER},
+		#{cellTem18,jdbcType=INTEGER}, #{cellTem19,jdbcType=INTEGER},
+		#{cellTem20,jdbcType=INTEGER},
+		#{cellTem21,jdbcType=INTEGER},
+		#{cellTem22,jdbcType=INTEGER},
+		#{cellTem23,jdbcType=INTEGER},
+		#{cellTem24,jdbcType=INTEGER}, #{cellEqu1,jdbcType=TINYINT},
+		#{cellEqu2,jdbcType=TINYINT},
+		#{cellEqu3,jdbcType=TINYINT},
+		#{cellEqu4,jdbcType=TINYINT},
+		#{cellEqu5,jdbcType=TINYINT},
+		#{cellEqu6,jdbcType=TINYINT}, #{cellEqu7,jdbcType=TINYINT},
+		#{cellEqu8,jdbcType=TINYINT},
+		#{cellEqu9,jdbcType=TINYINT},
+		#{cellEqu10,jdbcType=TINYINT},
+		#{cellEqu11,jdbcType=TINYINT},
+		#{cellEqu12,jdbcType=TINYINT}, #{cellEqu13,jdbcType=TINYINT},
+		#{cellEqu14,jdbcType=TINYINT},
+		#{cellEqu15,jdbcType=TINYINT},
+		#{cellEqu16,jdbcType=TINYINT},
+		#{cellEqu17,jdbcType=TINYINT},
+		#{cellEqu18,jdbcType=TINYINT}, #{cellEqu19,jdbcType=TINYINT},
+		#{cellEqu20,jdbcType=TINYINT},
+		#{cellEqu21,jdbcType=TINYINT},
+		#{cellEqu22,jdbcType=TINYINT},
+		#{cellEqu23,jdbcType=TINYINT},
+		#{cellEqu24,jdbcType=TINYINT}, #{comSuc1,jdbcType=INTEGER},
+		#{comSuc2,jdbcType=INTEGER},
+		#{comSuc3,jdbcType=INTEGER},
+		#{comSuc4,jdbcType=INTEGER},
+		#{comSuc5,jdbcType=INTEGER},
+		#{comSuc6,jdbcType=INTEGER}, #{comSuc7,jdbcType=INTEGER},
+		#{comSuc8,jdbcType=INTEGER},
+		#{comSuc9,jdbcType=INTEGER},
+		#{comSuc10,jdbcType=INTEGER},
+		#{comSuc11,jdbcType=INTEGER},
+		#{comSuc12,jdbcType=INTEGER}, #{comSuc13,jdbcType=INTEGER},
+		#{comSuc14,jdbcType=INTEGER},
+		#{comSuc15,jdbcType=INTEGER},
+		#{comSuc16,jdbcType=INTEGER},
+		#{comSuc17,jdbcType=INTEGER},
+		#{comSuc18,jdbcType=INTEGER}, #{comSuc19,jdbcType=INTEGER},
+		#{comSuc20,jdbcType=INTEGER},
+		#{comSuc21,jdbcType=INTEGER},
+		#{comSuc22,jdbcType=INTEGER},
+		#{comSuc23,jdbcType=INTEGER},
+		#{comSuc24,jdbcType=INTEGER}, #{passiveBalance,jdbcType=TINYINT},
+		#{initiativeBalance,jdbcType=TINYINT}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.PackDataInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into pack_data_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="rcvTime != null">
+				rcv_time,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="genVol != null">
+				gen_vol,
+			</if>
+			<if test="genCur != null">
+				gen_cur,
+			</if>
+			<if test="environTem != null">
+				environ_tem,
+			</if>
+			<if test="soc != null">
+				soc,
+			</if>
+			<if test="cellVol1 != null">
+				cell_vol_1,
+			</if>
+			<if test="cellVol2 != null">
+				cell_vol_2,
+			</if>
+			<if test="cellVol3 != null">
+				cell_vol_3,
+			</if>
+			<if test="cellVol4 != null">
+				cell_vol_4,
+			</if>
+			<if test="cellVol5 != null">
+				cell_vol_5,
+			</if>
+			<if test="cellVol6 != null">
+				cell_vol_6,
+			</if>
+			<if test="cellVol7 != null">
+				cell_vol_7,
+			</if>
+			<if test="cellVol8 != null">
+				cell_vol_8,
+			</if>
+			<if test="cellVol9 != null">
+				cell_vol_9,
+			</if>
+			<if test="cellVol10 != null">
+				cell_vol_10,
+			</if>
+			<if test="cellVol11 != null">
+				cell_vol_11,
+			</if>
+			<if test="cellVol12 != null">
+				cell_vol_12,
+			</if>
+			<if test="cellVol13 != null">
+				cell_vol_13,
+			</if>
+			<if test="cellVol14 != null">
+				cell_vol_14,
+			</if>
+			<if test="cellVol15 != null">
+				cell_vol_15,
+			</if>
+			<if test="cellVol16 != null">
+				cell_vol_16,
+			</if>
+			<if test="cellVol17 != null">
+				cell_vol_17,
+			</if>
+			<if test="cellVol18 != null">
+				cell_vol_18,
+			</if>
+			<if test="cellVol19 != null">
+				cell_vol_19,
+			</if>
+			<if test="cellVol20 != null">
+				cell_vol_20,
+			</if>
+			<if test="cellVol21 != null">
+				cell_vol_21,
+			</if>
+			<if test="cellVol22 != null">
+				cell_vol_22,
+			</if>
+			<if test="cellVol23 != null">
+				cell_vol_23,
+			</if>
+			<if test="cellVol24 != null">
+				cell_vol_24,
+			</if>
+			<if test="cellTem1 != null">
+				cell_tem_1,
+			</if>
+			<if test="cellTem2 != null">
+				cell_tem_2,
+			</if>
+			<if test="cellTem3 != null">
+				cell_tem_3,
+			</if>
+			<if test="cellTem4 != null">
+				cell_tem_4,
+			</if>
+			<if test="cellTem5 != null">
+				cell_tem_5,
+			</if>
+			<if test="cellTem6 != null">
+				cell_tem_6,
+			</if>
+			<if test="cellTem7 != null">
+				cell_tem_7,
+			</if>
+			<if test="cellTem8 != null">
+				cell_tem_8,
+			</if>
+			<if test="cellTem9 != null">
+				cell_tem_9,
+			</if>
+			<if test="cellTem10 != null">
+				cell_tem_10,
+			</if>
+			<if test="cellTem11 != null">
+				cell_tem_11,
+			</if>
+			<if test="cellTem12 != null">
+				cell_tem_12,
+			</if>
+			<if test="cellTem13 != null">
+				cell_tem_13,
+			</if>
+			<if test="cellTem14 != null">
+				cell_tem_14,
+			</if>
+			<if test="cellTem15 != null">
+				cell_tem_15,
+			</if>
+			<if test="cellTem16 != null">
+				cell_tem_16,
+			</if>
+			<if test="cellTem17 != null">
+				cell_tem_17,
+			</if>
+			<if test="cellTem18 != null">
+				cell_tem_18,
+			</if>
+			<if test="cellTem19 != null">
+				cell_tem_19,
+			</if>
+			<if test="cellTem20 != null">
+				cell_tem_20,
+			</if>
+			<if test="cellTem21 != null">
+				cell_tem_21,
+			</if>
+			<if test="cellTem22 != null">
+				cell_tem_22,
+			</if>
+			<if test="cellTem23 != null">
+				cell_tem_23,
+			</if>
+			<if test="cellTem24 != null">
+				cell_tem_24,
+			</if>
+			<if test="cellEqu1 != null">
+				cell_equ_1,
+			</if>
+			<if test="cellEqu2 != null">
+				cell_equ_2,
+			</if>
+			<if test="cellEqu3 != null">
+				cell_equ_3,
+			</if>
+			<if test="cellEqu4 != null">
+				cell_equ_4,
+			</if>
+			<if test="cellEqu5 != null">
+				cell_equ_5,
+			</if>
+			<if test="cellEqu6 != null">
+				cell_equ_6,
+			</if>
+			<if test="cellEqu7 != null">
+				cell_equ_7,
+			</if>
+			<if test="cellEqu8 != null">
+				cell_equ_8,
+			</if>
+			<if test="cellEqu9 != null">
+				cell_equ_9,
+			</if>
+			<if test="cellEqu10 != null">
+				cell_equ_10,
+			</if>
+			<if test="cellEqu11 != null">
+				cell_equ_11,
+			</if>
+			<if test="cellEqu12 != null">
+				cell_equ_12,
+			</if>
+			<if test="cellEqu13 != null">
+				cell_equ_13,
+			</if>
+			<if test="cellEqu14 != null">
+				cell_equ_14,
+			</if>
+			<if test="cellEqu15 != null">
+				cell_equ_15,
+			</if>
+			<if test="cellEqu16 != null">
+				cell_equ_16,
+			</if>
+			<if test="cellEqu17 != null">
+				cell_equ_17,
+			</if>
+			<if test="cellEqu18 != null">
+				cell_equ_18,
+			</if>
+			<if test="cellEqu19 != null">
+				cell_equ_19,
+			</if>
+			<if test="cellEqu20 != null">
+				cell_equ_20,
+			</if>
+			<if test="cellEqu21 != null">
+				cell_equ_21,
+			</if>
+			<if test="cellEqu22 != null">
+				cell_equ_22,
+			</if>
+			<if test="cellEqu23 != null">
+				cell_equ_23,
+			</if>
+			<if test="cellEqu24 != null">
+				cell_equ_24,
+			</if>
+			<if test="comSuc1 != null">
+				com_suc_1,
+			</if>
+			<if test="comSuc2 != null">
+				com_suc_2,
+			</if>
+			<if test="comSuc3 != null">
+				com_suc_3,
+			</if>
+			<if test="comSuc4 != null">
+				com_suc_4,
+			</if>
+			<if test="comSuc5 != null">
+				com_suc_5,
+			</if>
+			<if test="comSuc6 != null">
+				com_suc_6,
+			</if>
+			<if test="comSuc7 != null">
+				com_suc_7,
+			</if>
+			<if test="comSuc8 != null">
+				com_suc_8,
+			</if>
+			<if test="comSuc9 != null">
+				com_suc_9,
+			</if>
+			<if test="comSuc10 != null">
+				com_suc_10,
+			</if>
+			<if test="comSuc11 != null">
+				com_suc_11,
+			</if>
+			<if test="comSuc12 != null">
+				com_suc_12,
+			</if>
+			<if test="comSuc13 != null">
+				com_suc_13,
+			</if>
+			<if test="comSuc14 != null">
+				com_suc_14,
+			</if>
+			<if test="comSuc15 != null">
+				com_suc_15,
+			</if>
+			<if test="comSuc16 != null">
+				com_suc_16,
+			</if>
+			<if test="comSuc17 != null">
+				com_suc_17,
+			</if>
+			<if test="comSuc18 != null">
+				com_suc_18,
+			</if>
+			<if test="comSuc19 != null">
+				com_suc_19,
+			</if>
+			<if test="comSuc20 != null">
+				com_suc_20,
+			</if>
+			<if test="comSuc21 != null">
+				com_suc_21,
+			</if>
+			<if test="comSuc22 != null">
+				com_suc_22,
+			</if>
+			<if test="comSuc23 != null">
+				com_suc_23,
+			</if>
+			<if test="comSuc24 != null">
+				com_suc_24,
+			</if>
+			<if test="passiveBalance != null">
+				passive_balance,
+			</if>
+			<if test="initiativeBalance != null">
+				initiative_balance,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				#{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=VARCHAR},
+			</if>
+			<if test="genVol != null">
+				#{genVol,jdbcType=DECIMAL},
+			</if>
+			<if test="genCur != null">
+				#{genCur,jdbcType=DECIMAL},
+			</if>
+			<if test="environTem != null">
+				#{environTem,jdbcType=INTEGER},
+			</if>
+			<if test="soc != null">
+				#{soc,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol1 != null">
+				#{cellVol1,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol2 != null">
+				#{cellVol2,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol3 != null">
+				#{cellVol3,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol4 != null">
+				#{cellVol4,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol5 != null">
+				#{cellVol5,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol6 != null">
+				#{cellVol6,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol7 != null">
+				#{cellVol7,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol8 != null">
+				#{cellVol8,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol9 != null">
+				#{cellVol9,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol10 != null">
+				#{cellVol10,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol11 != null">
+				#{cellVol11,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol12 != null">
+				#{cellVol12,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol13 != null">
+				#{cellVol13,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol14 != null">
+				#{cellVol14,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol15 != null">
+				#{cellVol15,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol16 != null">
+				#{cellVol16,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol17 != null">
+				#{cellVol17,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol18 != null">
+				#{cellVol18,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol19 != null">
+				#{cellVol19,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol20 != null">
+				#{cellVol20,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol21 != null">
+				#{cellVol21,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol22 != null">
+				#{cellVol22,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol23 != null">
+				#{cellVol23,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol24 != null">
+				#{cellVol24,jdbcType=DECIMAL},
+			</if>
+			<if test="cellTem1 != null">
+				#{cellTem1,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem2 != null">
+				#{cellTem2,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem3 != null">
+				#{cellTem3,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem4 != null">
+				#{cellTem4,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem5 != null">
+				#{cellTem5,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem6 != null">
+				#{cellTem6,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem7 != null">
+				#{cellTem7,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem8 != null">
+				#{cellTem8,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem9 != null">
+				#{cellTem9,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem10 != null">
+				#{cellTem10,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem11 != null">
+				#{cellTem11,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem12 != null">
+				#{cellTem12,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem13 != null">
+				#{cellTem13,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem14 != null">
+				#{cellTem14,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem15 != null">
+				#{cellTem15,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem16 != null">
+				#{cellTem16,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem17 != null">
+				#{cellTem17,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem18 != null">
+				#{cellTem18,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem19 != null">
+				#{cellTem19,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem20 != null">
+				#{cellTem20,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem21 != null">
+				#{cellTem21,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem22 != null">
+				#{cellTem22,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem23 != null">
+				#{cellTem23,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem24 != null">
+				#{cellTem24,jdbcType=INTEGER},
+			</if>
+			<if test="cellEqu1 != null">
+				#{cellEqu1,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu2 != null">
+				#{cellEqu2,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu3 != null">
+				#{cellEqu3,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu4 != null">
+				#{cellEqu4,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu5 != null">
+				#{cellEqu5,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu6 != null">
+				#{cellEqu6,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu7 != null">
+				#{cellEqu7,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu8 != null">
+				#{cellEqu8,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu9 != null">
+				#{cellEqu9,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu10 != null">
+				#{cellEqu10,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu11 != null">
+				#{cellEqu11,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu12 != null">
+				#{cellEqu12,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu13 != null">
+				#{cellEqu13,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu14 != null">
+				#{cellEqu14,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu15 != null">
+				#{cellEqu15,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu16 != null">
+				#{cellEqu16,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu17 != null">
+				#{cellEqu17,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu18 != null">
+				#{cellEqu18,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu19 != null">
+				#{cellEqu19,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu20 != null">
+				#{cellEqu20,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu21 != null">
+				#{cellEqu21,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu22 != null">
+				#{cellEqu22,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu23 != null">
+				#{cellEqu23,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu24 != null">
+				#{cellEqu24,jdbcType=TINYINT},
+			</if>
+			<if test="comSuc1 != null">
+				#{comSuc1,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc2 != null">
+				#{comSuc2,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc3 != null">
+				#{comSuc3,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc4 != null">
+				#{comSuc4,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc5 != null">
+				#{comSuc5,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc6 != null">
+				#{comSuc6,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc7 != null">
+				#{comSuc7,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc8 != null">
+				#{comSuc8,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc9 != null">
+				#{comSuc9,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc10 != null">
+				#{comSuc10,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc11 != null">
+				#{comSuc11,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc12 != null">
+				#{comSuc12,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc13 != null">
+				#{comSuc13,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc14 != null">
+				#{comSuc14,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc15 != null">
+				#{comSuc15,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc16 != null">
+				#{comSuc16,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc17 != null">
+				#{comSuc17,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc18 != null">
+				#{comSuc18,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc19 != null">
+				#{comSuc19,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc20 != null">
+				#{comSuc20,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc21 != null">
+				#{comSuc21,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc22 != null">
+				#{comSuc22,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc23 != null">
+				#{comSuc23,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc24 != null">
+				#{comSuc24,jdbcType=INTEGER},
+			</if>
+			<if test="passiveBalance != null">
+				#{passiveBalance,jdbcType=TINYINT},
+			</if>
+			<if test="initiativeBalance != null">
+				#{initiativeBalance,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.PackDataInfo">
+		update pack_data_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="genVol != null">
+				gen_vol = #{genVol,jdbcType=DECIMAL},
+			</if>
+			<if test="genCur != null">
+				gen_cur = #{genCur,jdbcType=DECIMAL},
+			</if>
+			<if test="environTem != null">
+				environ_tem = #{environTem,jdbcType=INTEGER},
+			</if>
+			<if test="soc != null">
+				soc = #{soc,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol1 != null">
+				cell_vol_1 = #{cellVol1,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol2 != null">
+				cell_vol_2 = #{cellVol2,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol3 != null">
+				cell_vol_3 = #{cellVol3,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol4 != null">
+				cell_vol_4 = #{cellVol4,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol5 != null">
+				cell_vol_5 = #{cellVol5,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol6 != null">
+				cell_vol_6 = #{cellVol6,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol7 != null">
+				cell_vol_7 = #{cellVol7,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol8 != null">
+				cell_vol_8 = #{cellVol8,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol9 != null">
+				cell_vol_9 = #{cellVol9,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol10 != null">
+				cell_vol_10 = #{cellVol10,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol11 != null">
+				cell_vol_11 = #{cellVol11,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol12 != null">
+				cell_vol_12 = #{cellVol12,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol13 != null">
+				cell_vol_13 = #{cellVol13,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol14 != null">
+				cell_vol_14 = #{cellVol14,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol15 != null">
+				cell_vol_15 = #{cellVol15,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol16 != null">
+				cell_vol_16 = #{cellVol16,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol17 != null">
+				cell_vol_17 = #{cellVol17,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol18 != null">
+				cell_vol_18 = #{cellVol18,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol19 != null">
+				cell_vol_19 = #{cellVol19,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol20 != null">
+				cell_vol_20 = #{cellVol20,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol21 != null">
+				cell_vol_21 = #{cellVol21,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol22 != null">
+				cell_vol_22 = #{cellVol22,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol23 != null">
+				cell_vol_23 = #{cellVol23,jdbcType=DECIMAL},
+			</if>
+			<if test="cellVol24 != null">
+				cell_vol_24 = #{cellVol24,jdbcType=DECIMAL},
+			</if>
+			<if test="cellTem1 != null">
+				cell_tem_1 = #{cellTem1,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem2 != null">
+				cell_tem_2 = #{cellTem2,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem3 != null">
+				cell_tem_3 = #{cellTem3,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem4 != null">
+				cell_tem_4 = #{cellTem4,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem5 != null">
+				cell_tem_5 = #{cellTem5,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem6 != null">
+				cell_tem_6 = #{cellTem6,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem7 != null">
+				cell_tem_7 = #{cellTem7,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem8 != null">
+				cell_tem_8 = #{cellTem8,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem9 != null">
+				cell_tem_9 = #{cellTem9,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem10 != null">
+				cell_tem_10 = #{cellTem10,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem11 != null">
+				cell_tem_11 = #{cellTem11,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem12 != null">
+				cell_tem_12 = #{cellTem12,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem13 != null">
+				cell_tem_13 = #{cellTem13,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem14 != null">
+				cell_tem_14 = #{cellTem14,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem15 != null">
+				cell_tem_15 = #{cellTem15,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem16 != null">
+				cell_tem_16 = #{cellTem16,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem17 != null">
+				cell_tem_17 = #{cellTem17,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem18 != null">
+				cell_tem_18 = #{cellTem18,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem19 != null">
+				cell_tem_19 = #{cellTem19,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem20 != null">
+				cell_tem_20 = #{cellTem20,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem21 != null">
+				cell_tem_21 = #{cellTem21,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem22 != null">
+				cell_tem_22 = #{cellTem22,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem23 != null">
+				cell_tem_23 = #{cellTem23,jdbcType=INTEGER},
+			</if>
+			<if test="cellTem24 != null">
+				cell_tem_24 = #{cellTem24,jdbcType=INTEGER},
+			</if>
+			<if test="cellEqu1 != null">
+				cell_equ_1 = #{cellEqu1,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu2 != null">
+				cell_equ_2 = #{cellEqu2,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu3 != null">
+				cell_equ_3 = #{cellEqu3,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu4 != null">
+				cell_equ_4 = #{cellEqu4,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu5 != null">
+				cell_equ_5 = #{cellEqu5,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu6 != null">
+				cell_equ_6 = #{cellEqu6,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu7 != null">
+				cell_equ_7 = #{cellEqu7,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu8 != null">
+				cell_equ_8 = #{cellEqu8,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu9 != null">
+				cell_equ_9 = #{cellEqu9,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu10 != null">
+				cell_equ_10 = #{cellEqu10,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu11 != null">
+				cell_equ_11 = #{cellEqu11,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu12 != null">
+				cell_equ_12 = #{cellEqu12,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu13 != null">
+				cell_equ_13 = #{cellEqu13,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu14 != null">
+				cell_equ_14 = #{cellEqu14,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu15 != null">
+				cell_equ_15 = #{cellEqu15,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu16 != null">
+				cell_equ_16 = #{cellEqu16,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu17 != null">
+				cell_equ_17 = #{cellEqu17,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu18 != null">
+				cell_equ_18 = #{cellEqu18,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu19 != null">
+				cell_equ_19 = #{cellEqu19,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu20 != null">
+				cell_equ_20 = #{cellEqu20,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu21 != null">
+				cell_equ_21 = #{cellEqu21,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu22 != null">
+				cell_equ_22 = #{cellEqu22,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu23 != null">
+				cell_equ_23 = #{cellEqu23,jdbcType=TINYINT},
+			</if>
+			<if test="cellEqu24 != null">
+				cell_equ_24 = #{cellEqu24,jdbcType=TINYINT},
+			</if>
+			<if test="comSuc1 != null">
+				com_suc_1 = #{comSuc1,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc2 != null">
+				com_suc_2 = #{comSuc2,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc3 != null">
+				com_suc_3 = #{comSuc3,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc4 != null">
+				com_suc_4 = #{comSuc4,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc5 != null">
+				com_suc_5 = #{comSuc5,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc6 != null">
+				com_suc_6 = #{comSuc6,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc7 != null">
+				com_suc_7 = #{comSuc7,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc8 != null">
+				com_suc_8 = #{comSuc8,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc9 != null">
+				com_suc_9 = #{comSuc9,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc10 != null">
+				com_suc_10 = #{comSuc10,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc11 != null">
+				com_suc_11 = #{comSuc11,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc12 != null">
+				com_suc_12 = #{comSuc12,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc13 != null">
+				com_suc_13 = #{comSuc13,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc14 != null">
+				com_suc_14 = #{comSuc14,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc15 != null">
+				com_suc_15 = #{comSuc15,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc16 != null">
+				com_suc_16 = #{comSuc16,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc17 != null">
+				com_suc_17 = #{comSuc17,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc18 != null">
+				com_suc_18 = #{comSuc18,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc19 != null">
+				com_suc_19 = #{comSuc19,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc20 != null">
+				com_suc_20 = #{comSuc20,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc21 != null">
+				com_suc_21 = #{comSuc21,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc22 != null">
+				com_suc_22 = #{comSuc22,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc23 != null">
+				com_suc_23 = #{comSuc23,jdbcType=INTEGER},
+			</if>
+			<if test="comSuc24 != null">
+				com_suc_24 = #{comSuc24,jdbcType=INTEGER},
+			</if>
+			<if test="passiveBalance != null">
+				passive_balance = #{passiveBalance,jdbcType=TINYINT},
+			</if>
+			<if test="initiativeBalance != null">
+				initiative_balance =
+				#{initiativeBalance,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.PackDataInfo">
+		update
+		pack_data_info
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		rcv_time =
+		#{rcvTime,jdbcType=TIMESTAMP},
+		state = #{state,jdbcType=VARCHAR},
+		gen_vol =
+		#{genVol,jdbcType=DECIMAL},
+		gen_cur =
+		#{genCur,jdbcType=DECIMAL},
+		environ_tem =
+		#{environTem,jdbcType=INTEGER},
+		soc = #{soc,jdbcType=DECIMAL},
+		cell_vol_1 = #{cellVol1,jdbcType=DECIMAL},
+		cell_vol_2 =
+		#{cellVol2,jdbcType=DECIMAL},
+		cell_vol_3 =
+		#{cellVol3,jdbcType=DECIMAL},
+		cell_vol_4 =
+		#{cellVol4,jdbcType=DECIMAL},
+		cell_vol_5 =
+		#{cellVol5,jdbcType=DECIMAL},
+		cell_vol_6 =
+		#{cellVol6,jdbcType=DECIMAL},
+		cell_vol_7 =
+		#{cellVol7,jdbcType=DECIMAL},
+		cell_vol_8 =
+		#{cellVol8,jdbcType=DECIMAL},
+		cell_vol_9 =
+		#{cellVol9,jdbcType=DECIMAL},
+		cell_vol_10 =
+		#{cellVol10,jdbcType=DECIMAL},
+		cell_vol_11 =
+		#{cellVol11,jdbcType=DECIMAL},
+		cell_vol_12 =
+		#{cellVol12,jdbcType=DECIMAL},
+		cell_vol_13 =
+		#{cellVol13,jdbcType=DECIMAL},
+		cell_vol_14 =
+		#{cellVol14,jdbcType=DECIMAL},
+		cell_vol_15 =
+		#{cellVol15,jdbcType=DECIMAL},
+		cell_vol_16 =
+		#{cellVol16,jdbcType=DECIMAL},
+		cell_vol_17 =
+		#{cellVol17,jdbcType=DECIMAL},
+		cell_vol_18 =
+		#{cellVol18,jdbcType=DECIMAL},
+		cell_vol_19 =
+		#{cellVol19,jdbcType=DECIMAL},
+		cell_vol_20 =
+		#{cellVol20,jdbcType=DECIMAL},
+		cell_vol_21 =
+		#{cellVol21,jdbcType=DECIMAL},
+		cell_vol_22 =
+		#{cellVol22,jdbcType=DECIMAL},
+		cell_vol_23 =
+		#{cellVol23,jdbcType=DECIMAL},
+		cell_vol_24 =
+		#{cellVol24,jdbcType=DECIMAL},
+		cell_tem_1 =
+		#{cellTem1,jdbcType=INTEGER},
+		cell_tem_2 =
+		#{cellTem2,jdbcType=INTEGER},
+		cell_tem_3 =
+		#{cellTem3,jdbcType=INTEGER},
+		cell_tem_4 =
+		#{cellTem4,jdbcType=INTEGER},
+		cell_tem_5 =
+		#{cellTem5,jdbcType=INTEGER},
+		cell_tem_6 =
+		#{cellTem6,jdbcType=INTEGER},
+		cell_tem_7 =
+		#{cellTem7,jdbcType=INTEGER},
+		cell_tem_8 =
+		#{cellTem8,jdbcType=INTEGER},
+		cell_tem_9 =
+		#{cellTem9,jdbcType=INTEGER},
+		cell_tem_10 =
+		#{cellTem10,jdbcType=INTEGER},
+		cell_tem_11 =
+		#{cellTem11,jdbcType=INTEGER},
+		cell_tem_12 =
+		#{cellTem12,jdbcType=INTEGER},
+		cell_tem_13 =
+		#{cellTem13,jdbcType=INTEGER},
+		cell_tem_14 =
+		#{cellTem14,jdbcType=INTEGER},
+		cell_tem_15 =
+		#{cellTem15,jdbcType=INTEGER},
+		cell_tem_16 =
+		#{cellTem16,jdbcType=INTEGER},
+		cell_tem_17 =
+		#{cellTem17,jdbcType=INTEGER},
+		cell_tem_18 =
+		#{cellTem18,jdbcType=INTEGER},
+		cell_tem_19 =
+		#{cellTem19,jdbcType=INTEGER},
+		cell_tem_20 =
+		#{cellTem20,jdbcType=INTEGER},
+		cell_tem_21 =
+		#{cellTem21,jdbcType=INTEGER},
+		cell_tem_22 =
+		#{cellTem22,jdbcType=INTEGER},
+		cell_tem_23 =
+		#{cellTem23,jdbcType=INTEGER},
+		cell_tem_24 =
+		#{cellTem24,jdbcType=INTEGER},
+		cell_equ_1 =
+		#{cellEqu1,jdbcType=TINYINT},
+		cell_equ_2 =
+		#{cellEqu2,jdbcType=TINYINT},
+		cell_equ_3 =
+		#{cellEqu3,jdbcType=TINYINT},
+		cell_equ_4 =
+		#{cellEqu4,jdbcType=TINYINT},
+		cell_equ_5 =
+		#{cellEqu5,jdbcType=TINYINT},
+		cell_equ_6 =
+		#{cellEqu6,jdbcType=TINYINT},
+		cell_equ_7 =
+		#{cellEqu7,jdbcType=TINYINT},
+		cell_equ_8 =
+		#{cellEqu8,jdbcType=TINYINT},
+		cell_equ_9 =
+		#{cellEqu9,jdbcType=TINYINT},
+		cell_equ_10 =
+		#{cellEqu10,jdbcType=TINYINT},
+		cell_equ_11 =
+		#{cellEqu11,jdbcType=TINYINT},
+		cell_equ_12 =
+		#{cellEqu12,jdbcType=TINYINT},
+		cell_equ_13 =
+		#{cellEqu13,jdbcType=TINYINT},
+		cell_equ_14 =
+		#{cellEqu14,jdbcType=TINYINT},
+		cell_equ_15 =
+		#{cellEqu15,jdbcType=TINYINT},
+		cell_equ_16 =
+		#{cellEqu16,jdbcType=TINYINT},
+		cell_equ_17 =
+		#{cellEqu17,jdbcType=TINYINT},
+		cell_equ_18 =
+		#{cellEqu18,jdbcType=TINYINT},
+		cell_equ_19 =
+		#{cellEqu19,jdbcType=TINYINT},
+		cell_equ_20 =
+		#{cellEqu20,jdbcType=TINYINT},
+		cell_equ_21 =
+		#{cellEqu21,jdbcType=TINYINT},
+		cell_equ_22 =
+		#{cellEqu22,jdbcType=TINYINT},
+		cell_equ_23 =
+		#{cellEqu23,jdbcType=TINYINT},
+		cell_equ_24 =
+		#{cellEqu24,jdbcType=TINYINT},
+		com_suc_1 =
+		#{comSuc1,jdbcType=INTEGER},
+		com_suc_2 = #{comSuc2,jdbcType=INTEGER},
+		com_suc_3 =
+		#{comSuc3,jdbcType=INTEGER},
+		com_suc_4 = #{comSuc4,jdbcType=INTEGER},
+		com_suc_5 = #{comSuc5,jdbcType=INTEGER},
+		com_suc_6 =
+		#{comSuc6,jdbcType=INTEGER},
+		com_suc_7 = #{comSuc7,jdbcType=INTEGER},
+		com_suc_8 = #{comSuc8,jdbcType=INTEGER},
+		com_suc_9 =
+		#{comSuc9,jdbcType=INTEGER},
+		com_suc_10 = #{comSuc10,jdbcType=INTEGER},
+		com_suc_11 = #{comSuc11,jdbcType=INTEGER},
+		com_suc_12 =
+		#{comSuc12,jdbcType=INTEGER},
+		com_suc_13 =
+		#{comSuc13,jdbcType=INTEGER},
+		com_suc_14 =
+		#{comSuc14,jdbcType=INTEGER},
+		com_suc_15 =
+		#{comSuc15,jdbcType=INTEGER},
+		com_suc_16 =
+		#{comSuc16,jdbcType=INTEGER},
+		com_suc_17 =
+		#{comSuc17,jdbcType=INTEGER},
+		com_suc_18 =
+		#{comSuc18,jdbcType=INTEGER},
+		com_suc_19 =
+		#{comSuc19,jdbcType=INTEGER},
+		com_suc_20 =
+		#{comSuc20,jdbcType=INTEGER},
+		com_suc_21 =
+		#{comSuc21,jdbcType=INTEGER},
+		com_suc_22 =
+		#{comSuc22,jdbcType=INTEGER},
+		com_suc_23 =
+		#{comSuc23,jdbcType=INTEGER},
+		com_suc_24 =
+		#{comSuc24,jdbcType=INTEGER},
+		passive_balance =
+		#{passiveBalance,jdbcType=TINYINT},
+		initiative_balance =
+		#{initiativeBalance,jdbcType=TINYINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectListByGprsIdTime" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.PackDataInfo">
+		select
+		<include refid="Base_Column_List" />
+		from pack_data_info
+		where gprs_id = #{gprsId,jdbcType=VARCHAR} and
+		rcv_time >=
+		#{rcvTime,jdbcType=TIMESTAMP}
+	</select>
+
+	<select id="getLatestValidDischargeRecord" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info
+		<where>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null">
+				and state = #{state,jdbcType=VARCHAR}
+			</if>
+			<if test="maxVol != null">
+				and gen_vol &lt;&#61; #{maxVol,jdbcType=DECIMAL}
+			</if>
+			<if test="minVol != null">
+				and gen_vol &gt;&#61; #{minVol,jdbcType=DECIMAL}
+			</if>
+			<if test="minCur != null and maxCur != null">
+				and (
+					(gen_cur &gt;&#61; ABS(#{minCur,jdbcType=DECIMAL}) AND gen_cur &lt;&#61; ABS(#{maxCur,jdbcType=DECIMAL}))
+					OR
+					(gen_cur &gt;&#61; #{maxCur,jdbcType=DECIMAL} AND gen_cur &lt;&#61; #{minCur,jdbcType=DECIMAL})
+				)
+			</if>
+			<if test="rcvTime1 != null">
+				and rcv_time &gt;&#61; #{rcvTime1,jdbcType=TIMESTAMP}
+			</if>
+			<if test="rcvTime2 != null">
+				and rcv_time &lt;&#61; #{rcvTime2,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+		ORDER BY rcv_time DESC limit 0,5
+	</select>
+
+	<select id="getPackDataInfosWhichIdLessThanGivenValue" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info a INNER JOIN (
+			SELECT id FROM pack_data_info WHERE gprs_id = #{gprsId,jdbcType=VARCHAR} and id &lt; #{id,jdbcType=INTEGER}
+			ORDER BY id DESC LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+		) b USING (id)
+	</select>
+
+	<select id="getPackDataInfosWhichGreaterThanGivenValue" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info a INNER JOIN (
+			SELECT id FROM pack_data_info WHERE gprs_id = #{gprsId,jdbcType=VARCHAR} and id &gt; #{id,jdbcType=INTEGER}
+			ORDER BY id ASC LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+		) b USING (id)
+	</select>
+
+	<select id="getPackDataInfosByTimes" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM pack_data_info a INNER JOIN (
+			SELECT id FROM pack_data_info
+			<where>
+				<if test="gprsId != null">
+					and gprs_id = #{gprsId,jdbcType=VARCHAR}
+				</if>
+				<if test="state != null">
+					and state = #{state,jdbcType=VARCHAR}
+				</if>
+				<if test="startTime != null">
+					and rcv_time &gt;&#61; #{startTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="endTime != null">
+					and rcv_time &lt;&#61; #{endTime,jdbcType=TIMESTAMP}
+				</if>
+			</where>
+			ORDER BY id DESC
+			LIMIT #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+		) b USING (id)
+	</select>
+
+	<select id="selectByOrderSelective" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pack_data_info
+		<where>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null">
+				and state = #{state,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time &lt; #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+		order by rcv_time desc
+		limit 0,2
+	</select>
+
+
+	<select id="selectListByTime" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pack_data_info
+		<where>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null">
+				and state = #{state,jdbcType=VARCHAR}
+			</if>
+			<!-- <if test="startTime != null">
+				and rcv_time between #{startTime,jdbcType=TIMESTAMP} and
+				#{endTime,jdbcType=TIMESTAMP}
+			</if> -->
+			<if test="startTime != null">
+				and rcv_time &gt;&#61; #{startTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="endTime != null">
+				and rcv_time &lt;&#61; #{endTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+		order by rcv_time desc
+	</select>
+</mapper>

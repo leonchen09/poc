@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.ModifyBalanceSendMapper">
+	<resultMap type="com.station.moudles.entity.ModifyBalanceSend" id="BaseResultMap">
+		<result property="id" jdbcType="INTEGER" column="id" />
+		<result property="gprsId" jdbcType="VARCHAR" column="gprs_id" />
+		<result property="para1" jdbcType="INTEGER" column="para1" />
+		<result property="para2" jdbcType="INTEGER" column="para2" />
+		<result property="para3" jdbcType="INTEGER" column="para3" />
+		<result property="para4" jdbcType="INTEGER" column="para4" />
+		<result property="para5" jdbcType="INTEGER" column="para5" />
+		<result property="para6" jdbcType="INTEGER" column="para6" />
+		<result property="para7" jdbcType="INTEGER" column="para7" />
+		<result property="sendDone" jdbcType="INTEGER" column="send_done" />
+		<result property="sendTime" jdbcType="TIMESTAMP" column="send_time" />
+
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, para1, para2, para3, para4,
+		para5, para6,
+		para7, send_done, send_time
+	</sql>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.ModifyBalanceSend"> 
+	insert into modify_balance_strategy_send 
+		(id, gprs_id, para1, para2, para3, para4,
+		para5, para6, para7, send_done, send_time) values
+		(#{id,jdbcType=INTEGER}, #{gprsId,jdbcType=VARCHAR},
+		#{para1,jdbcType=INTEGER}, #{para2,jdbcType=INTEGER},
+		#{para3,jdbcType=INTEGER}, #{para4,jdbcType=INTEGER},
+		#{para5,jdbcType=INTEGER}, #{para6,jdbcType=INTEGER},
+		#{para7,jdbcType=INTEGER}, 
+		#{sendDone,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.ModifyBalanceSend">
+		insert into modify_balance_strategy_send
+		<trim suffixOverrides="," suffix=")" prefix="(">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="para1 != null">
+				para1,
+			</if>
+			<if test="para2 != null">
+				para2,
+			</if>
+			<if test="para3 != null">
+				para3,
+			</if>
+			<if test="para4 != null">
+				para4,
+			</if>
+			<if test="para5 != null">
+				para5,
+			</if>
+			<if test="para6 != null">
+				para6,
+			</if>
+			<if test="para7 != null">
+				para7,
+			</if>
+			<if test="sendDone != null">
+				send_done,
+			</if>
+			<if test="sendTime != null">
+				sendTime,
+			</if>
+		
+		</trim>
+
+		<trim suffixOverrides="," suffix=")" prefix="values (">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="para1 != null">
+				#{para1,jdbcType=INTEGER},
+			</if>
+			<if test="para2 != null">
+				#{para2,jdbcType=INTEGER},
+			</if>
+			<if test="para3 != null">
+				#{para3,jdbcType=INTEGER},
+			</if>
+			<if test="para4 != null">
+				#{para4,jdbcType=INTEGER},
+			</if>
+			<if test="para5 != null">
+				#{para5,jdbcType=INTEGER},
+			</if>
+			<if test="para6 != null">
+				#{para6,jdbcType=INTEGER},
+			</if>
+			<if test="para7 != null">
+				#{para7,jdbcType=INTEGER},
+			</if>
+			<if test="sendDone != null">
+				#{sendDone,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				#{sendTime,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByGprsSelective" parameterType="com.station.moudles.entity.ModifyBalanceSend">
+		update modify_balance_strategy_send
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="para1 != null">
+				para1 = #{para1,jdbcType=INTEGER},
+			</if>
+			<if test="para2 != null">
+				para2 = #{para2,jdbcType=INTEGER},
+			</if>
+			<if test="para3 != null">
+				para3 = #{para3,jdbcType=INTEGER},
+			</if>
+			<if test="para4 != null">
+				para4 = #{para4,jdbcType=INTEGER},
+			</if>
+			<if test="para5 != null">
+				para5 = #{para5,jdbcType=INTEGER},
+			</if>
+			<if test="para6 != null">
+				para6 = #{para6,jdbcType=INTEGER},
+			</if>
+			<if test="para7 != null">
+				para7 = #{para7,jdbcType=INTEGER},
+			</if>
+			<if test="sendDone != null">
+				send_done = #{sendDone,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				send_time = #{sendTime,jdbcType=VARCHAR},
+			</if>
+			
+		</set>
+		where gprs_id = #{gprsId,jdbcType=VARCHAR}
+	</update>
+
+	
+
+	<select id="selectListSelective" resultMap="BaseResultMap"
+		parameterType="com.station.moudles.entity.ModifyBalanceSend">
+		select
+		<include refid="Base_Column_List" />
+		from modify_balance_strategy_send
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcTtype=INTEGER},
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="para1 != null">
+				and para1 = #{para1,jdbcType=INTEGER},
+			</if>
+			<if test="para2 != null">
+				and para2 = #{para2,jdbcType=INTEGER},
+			</if>
+			<if test="para3 != null">
+				and para3 = #{para3,jdbcType=INTEGER},
+			</if>
+			<if test="para4 != null">
+				and para4 = #{para4,jdbcType=INTEGER},
+			</if>
+			<if test="para5 != null">
+				and para5 = #{para5,jdbcType=INTEGER},
+			</if>
+			<if test="para6 != null">
+				and para6 = #{para6,jdbcType=INTEGER},
+			</if>
+			<if test="para7 != null">
+				and para7 = #{para7,jdbcType=INTEGER},
+			</if>
+			<if test="sendDone != null">
+				and send_done = #{sendDone,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				and send_time = #{sendTime,jdbcType=VARCHAR},
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from modify_balance_strategy_send
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByGprsIds" resultMap="BaseResultMap"
+		parameterType="java.util.List">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM modify_balance_strategy_send
+		WHERE gprs_id =
+		#{gprsId,jdbcType=VARCHER}
+	</select>
+
+
+
+</mapper>

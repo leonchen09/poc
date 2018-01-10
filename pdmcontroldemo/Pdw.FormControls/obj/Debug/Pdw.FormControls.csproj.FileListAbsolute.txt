@@ -1,0 +1,8 @@
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\bin\Debug\Pdw.FormControls.dll
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\bin\Debug\Pdw.FormControls.pdb
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\obj\Debug\ResolveAssemblyReference.cache
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\obj\Debug\Pdw.FormControls.Properties.Resources.resources
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\obj\Debug\GenerateResource.read.1.tlog
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\obj\Debug\GenerateResource.write.1.tlog
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\obj\Debug\Pdw.FormControls.dll
+D:\source\POC\pdmcontroldemo\Pdw.FormControls\obj\Debug\Pdw.FormControls.pdb

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WinServicesControl">
+</Property><Property Name="Solution File" Value="D:\work\source\POC\WinServicesControl\WinServicesControl.sln">
+</Property><Property Name="User Options File" Value="D:\work\source\POC\WinServicesControl\WinServicesControl.suo">
+</Property><Property Name="Date" Value="19 June 2014">
+</Property><Property Name="Time" Value="15:47">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WinServicesControl.sln" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl.sln">
+</Event><Event ErrorLevel="0" Project="" Source="WinServicesControl.suo" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl.suo">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\WinServicesControl.csproj" Description="Project file successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\WinServicesControl.csproj">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\ClServCtl.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\ClServCtl.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\FrmMian.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\FrmMian.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\FrmMian.Designer.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\FrmMian.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\Program.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\Program.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\Properties\Resources.Designer.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\Properties\Settings.Designer.cs" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\Properties\Settings.settings" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\App.config" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\App.config">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\FrmMian.resx" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\FrmMian.resx">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\Properties\Resources.resx" Description="File successfully backed up as D:\work\source\POC\WinServicesControl\Backup\WinServicesControl\Properties\Resources.resx">
+</Event><Event ErrorLevel="1" Project="WinServicesControl" Source="WinServicesControl\WinServicesControl.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\WinServicesControl.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WinServicesControl" Source="WinServicesControl\WinServicesControl.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WinServicesControl.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WinServicesControl.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WinServicesControl" Source="WinServicesControl\WinServicesControl.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

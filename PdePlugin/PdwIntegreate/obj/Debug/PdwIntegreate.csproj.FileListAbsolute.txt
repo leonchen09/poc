@@ -1,0 +1,13 @@
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\PdwIntegreate.dll
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\PdwIntegreate.pdb
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\PdwIntegreate.dll.manifest
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\PdwIntegreate.vsto
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\source\POC\PdePlugin\PdwIntegreate\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\source\POC\PdePlugin\PdwIntegreate\obj\Debug\ResolveAssemblyReference.cache
+D:\source\POC\PdePlugin\PdwIntegreate\obj\Debug\PdwIntegreate.Properties.Resources.resources
+D:\source\POC\PdePlugin\PdwIntegreate\obj\Debug\GenerateResource.read.1.tlog
+D:\source\POC\PdePlugin\PdwIntegreate\obj\Debug\GenerateResource.write.1.tlog
+D:\source\POC\PdePlugin\PdwIntegreate\obj\Debug\PdwIntegreate.dll
+D:\source\POC\PdePlugin\PdwIntegreate\obj\Debug\PdwIntegreate.pdb

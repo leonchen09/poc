@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.RoutingInspectionsMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.RoutingInspections">
+		<id column="routing_inspection_id" property="routingInspectionId" jdbcType="INTEGER" />
+		<result column="station_id" property="stationId" jdbcType="INTEGER" />
+		<result column="operate_type" property="operateType" jdbcType="INTEGER" />
+		<result column="operate_id" property="operateId" jdbcType="INTEGER" />
+		<result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+		<result column="routing_inspection_status" property="routingInspectionStatus" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="confirm_operate_id" property="confirmOperateId" jdbcType="INTEGER"/>
+		<result column="confirm_operate_name" property="confirmOperateName" jdbcType="VARCHAR"/>
+		<result column="operate_phone" property="operatePhone" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		routing_inspection_id, station_id, operate_type,
+		operate_id, operate_name, operate_time,
+		routing_inspection_status,
+		gprs_id,
+		confirm_operate_id, confirm_operate_name,operate_phone,remark,device_type
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from routing_inspections
+		where routing_inspection_id =
+		#{routingInspectionId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.RoutingInspections">
+		select
+		<include refid="Base_Column_List" />
+		from routing_inspections
+		<where>
+			<if test="routingInspectionId != null">
+				and routing_inspection_id =
+				#{routingInspectionId,jdbcType=INTEGER}
+			</if>
+			<if test="stationId != null">
+				and station_id = #{stationId,jdbcType=INTEGER}
+			</if>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="operateId != null">
+				and operate_id = #{operateId,jdbcType=INTEGER}
+			</if>
+			<if test="operateName != null">
+				and operate_name = #{operateName,jdbcType=VARCHAR}
+			</if>
+			<if test="operateTime != null">
+				and operate_time &gt;= #{operateTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="routingInspectionStatus != null">
+				and routing_inspection_status =
+				#{routingInspectionStatus,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="operatePhone != null">
+				and operate_phone = #{operatePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from routing_inspections
+		<where>
+			<if test="routingInspectionId != null">
+				and routing_inspection_id =
+				#{routingInspectionId,jdbcType=INTEGER}
+			</if>
+			<if test="stationId != null">
+				and station_id = #{stationId,jdbcType=INTEGER}
+			</if>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="operateId != null">
+				and operate_id = #{operateId,jdbcType=INTEGER}
+			</if>
+			<if test="operateName != null">
+				and operate_name like "%${operateName}%"
+			</if>
+			<if test="operateTime != null">
+				and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="routingInspectionStatus != null">
+				and routing_inspection_status =
+				#{routingInspectionStatus,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+		</where>
+		order by routing_inspection_id desc
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		routing_inspections
+		where routing_inspection_id =
+		#{routingInspectionId,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from routing_inspections
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			routing_inspection_id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.RoutingInspections">
+		delete from routing_inspections
+		<where>
+			<if test="routingInspectionId != null">
+				and routing_inspection_id =
+				#{routingInspectionId,jdbcType=INTEGER}
+			</if>
+			<if test="stationId != null">
+				and station_id = #{stationId,jdbcType=INTEGER}
+			</if>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="operateId != null">
+				and operate_id = #{operateId,jdbcType=INTEGER}
+			</if>
+			<if test="operateName != null">
+				and operate_name = #{operateName,jdbcType=VARCHAR}
+			</if>
+			<if test="operateTime != null">
+				and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="routingInspectionStatus != null">
+				and routing_inspection_status =
+				#{routingInspectionStatus,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.RoutingInspections" useGeneratedKeys="true" keyProperty="routingInspectionId">
+		insert into routing_inspections
+		(station_id, operate_type, operate_id,
+		operate_name, operate_time,
+		routing_inspection_status,
+		gprs_id,confirm_operate_id,
+		confirm_operate_name,operate_phone,remark)
+		values
+		(#{stationId,jdbcType=INTEGER}, #{operateType,jdbcType=INTEGER},
+		#{operateId,jdbcType=INTEGER},
+		#{operateName,jdbcType=VARCHAR},
+		#{operateTime,jdbcType=TIMESTAMP},
+		#{routingInspectionStatus,jdbcType=INTEGER},
+		#{gprsId,jdbcType=VARCHAR},
+		#{confirmOperateId,jdbcType=INTEGER},
+		#{confirmOperateName,jdbcType=VARCHAR},
+		#{operatePhone,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.RoutingInspections" useGeneratedKeys="true" keyProperty="routingInspectionId">
+		insert into routing_inspections
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="stationId != null">
+				station_id,
+			</if>
+			<if test="operateType != null">
+				operate_type,
+			</if>
+			<if test="operateId != null">
+				operate_id,
+			</if>
+			<if test="operateName != null">
+				operate_name,
+			</if>
+			<if test="operateTime != null">
+				operate_time,
+			</if>
+			<if test="routingInspectionStatus != null">
+				routing_inspection_status,
+			</if>
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="confirmOperateId != null">
+        		confirm_operate_id,
+		    </if>
+		    <if test="confirmOperateName != null">
+		        confirm_operate_name,
+		    </if>
+		    <if test="operatePhone != null">
+		        operate_phone,
+		    </if>
+		    <if test="remark != null">
+		        remark,
+		    </if>
+		    <if test="deviceType != null">
+		    	device_type,
+		    </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="stationId != null">
+				#{stationId,jdbcType=INTEGER},
+			</if>
+			<if test="operateType != null">
+				#{operateType,jdbcType=INTEGER},
+			</if>
+			<if test="operateId != null">
+				#{operateId,jdbcType=INTEGER},
+			</if>
+			<if test="operateName != null">
+				#{operateName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateTime != null">
+				#{operateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="routingInspectionStatus != null">
+				#{routingInspectionStatus,jdbcType=INTEGER},
+			</if>
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmOperateId != null">
+		        #{confirmOperateId,jdbcType=INTEGER},
+	      	</if>
+	      	<if test="confirmOperateName != null">
+		        #{confirmOperateName,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="operatePhone != null">
+		        #{operatePhone,jdbcType=VARCHAR},
+		    </if>
+		    <if test="remark != null">
+		        #{remark,jdbcType=VARCHAR},
+		    </if>
+		     <if test="deviceType != null">
+		    	#{deviceType,jdbcType=INTEGER},
+		    </if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.RoutingInspections">
+		update routing_inspections
+		<set>
+			<if test="stationId != null">
+				station_id = #{stationId,jdbcType=INTEGER},
+			</if>
+			<if test="operateType != null">
+				operate_type = #{operateType,jdbcType=INTEGER},
+			</if>
+			<if test="operateId != null">
+				operate_id = #{operateId,jdbcType=INTEGER},
+			</if>
+			<if test="operateName != null">
+				operate_name = #{operateName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateTime != null">
+				operate_time = #{operateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="routingInspectionStatus != null">
+				routing_inspection_status =
+				#{routingInspectionStatus,jdbcType=INTEGER},
+			</if>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmOperateId != null">
+				confirm_operate_id = #{confirmOperateId,jdbcType=INTEGER},
+			</if>
+			<if test="confirmOperateName != null">
+				confirm_operate_name = #{confirmOperateName,jdbcType=VARCHAR},
+			</if>
+			<if test="operatePhone != null">
+        		operate_phone = #{operatePhone,jdbcType=VARCHAR},
+      		</if>
+      		<if test="remark != null">
+       		 	remark = #{remark,jdbcType=VARCHAR},
+      		</if>
+		</set>
+		where routing_inspection_id = #{routingInspectionId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.RoutingInspections">
+		update
+		routing_inspections
+		set station_id = #{stationId,jdbcType=INTEGER},
+		operate_type = #{operateType,jdbcType=INTEGER},
+		operate_id =
+		#{operateId,jdbcType=INTEGER},
+		operate_name =
+		#{operateName,jdbcType=VARCHAR},
+		operate_time =
+		#{operateTime,jdbcType=TIMESTAMP},
+		routing_inspection_status =
+		#{routingInspectionStatus,jdbcType=INTEGER},
+		gprs_id =
+		#{gprsId,jdbcType=VARCHAR},
+		confirm_operate_id =
+		#{confirmOperateId,jdbcType=INTEGER},
+		confirm_operate_name =
+		#{confirmOperateName,jdbcType=VARCHAR},
+		operate_phone = #{operatePhone,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR}
+		where routing_inspection_id =
+		#{routingInspectionId,jdbcType=INTEGER}
+	</update>
+
+	<resultMap type="com.station.moudles.entity.RoutingInspectionsStation" id="StationBaseResultMap" extends="com.station.moudles.mapper.StationInfoMapper.BaseResultMap">
+		<id column="routing_inspection_id" property="routingInspectionId" jdbcType="INTEGER" />
+		<result column="station_id" property="stationId" jdbcType="INTEGER" />
+		<result column="operate_type" property="operateType" jdbcType="INTEGER" />
+		<result column="operate_id" property="operateId" jdbcType="INTEGER" />
+		<result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+		<result column="routing_inspection_status" property="routingInspectionStatus" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<select id="selectStationListSelectivePaging" resultMap="StationBaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select * from(
+		select * from routing_inspections  
+		<!--10/16 add 根据安装的状态查询  -->
+		<where>
+			<if test="routingInspectionStatus != null " >
+				and routing_inspection_status = #{routingInspectionStatus,jdbcType=INTEGER}
+			</if>
+			<!-- 10/18 add 根据巡检人员查询 -->
+			<if test="operateName != null">
+				and operate_name like "%${operateName}%"
+			</if>
+			and station_id in 		
+		</where>
+		
+		(select id
+		from
+		base_station_info
+		<where>
+
+			<if test="companyId1 != null">
+				and company_id1 = #{companyId1,jdbcType=INTEGER}
+			</if>
+			<if test="companyId2 != null">
+				and company_id2 = #{companyId2,jdbcType=INTEGER}
+			</if>
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			<if test="province != null">
+				and province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="district != null">
+				and district = #{district,jdbcType=VARCHAR}
+			</if>
+			<!-- 10/18 ADD OR GPRS_ID  -->
+			<if test="name != null">
+				and name like "%${name}%" or gprs_id like "%${name}%"
+			</if>
+	
+		</where>
+		) order by routing_inspection_id desc ) 
+		tmp left join base_station_info s on tmp.station_id=s.id
+	</select>
+
+	<resultMap type="com.station.moudles.entity.RoutingInspectionStationDetail" id="StationDetailBaseResultMap" extends="com.station.moudles.mapper.StationInfoMapper.BaseResultMap">
+		<id column="routing_inspection_id" property="routingInspectionId" jdbcType="INTEGER" />
+		<result column="station_id" property="stationId" jdbcType="INTEGER" />
+		<result column="operate_type" property="operateType" jdbcType="INTEGER" />
+		<result column="operate_id" property="operateId" jdbcType="INTEGER" />
+		<result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+		<result column="routing_inspection_status" property="routingInspectionStatus" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="operate_phone" property="operatePhone" jdbcType="VARCHAR"/>
+		<result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+		<collection property="routingInspectionDetailList" javaType="java.util.List" resultMap="com.station.moudles.mapper.RoutingInspectionDetailMapper.BaseResultMap">
+		</collection>
+	</resultMap>
+
+	<select id="selectStationDetailByPrimaryKey" resultMap="StationDetailBaseResultMap" parameterType="java.lang.Integer">
+<!-- 		select * from(
+		SELECT * FROM
+		base_station_management.routing_inspections
+		ri,base_station_info s
+		where
+		routing_inspection_id=#{routingInspectionId,jdbcType=INTEGER} and
+		s.id=ri.station_id) tmp left join routing_inspection_detail rid
+		on
+		tmp.routing_inspection_id=rid.routing_inspections_id -->
+		
+		select * from(
+		SELECT ri.gprs_id,s.name,s.operator_type,s.address,s.company_name3,
+		ri.station_id,ri.routing_inspection_id,ri.operate_name,ri.operate_time,ri.operate_phone,ri.device_type,
+		ri.operate_type
+		FROM
+		base_station_management.routing_inspections as ri left join base_station_info as s
+		 on s.id=ri.station_id where routing_inspection_id=#{routingInspectionId,jdbcType=INTEGER}
+		) tmp left join routing_inspection_detail rid
+		on
+		tmp.routing_inspection_id=rid.routing_inspections_id
+		
+	</select>
+	
+	
+	<select id="selectCellInspace" resultMap="BaseResultMap"
+		parameterType="com.station.moudles.entity.RoutingInspections">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM routing_inspections
+		<where>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="endTime != null">
+			 and operate_time &gt;= #{endTime,jdbcType=TIMESTAMP}	
+			</if>
+			
+			<if test="operateTime != null">
+			 and operate_time &lt;= #{operateTime,jdbcType=TIMESTAMP}	
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="selectListHasInspectSignCell" resultMap="BaseResultMap">
+		select r.routing_inspection_id, r.station_id, r.operate_type,
+		r.operate_time, r.gprs_id
+		FROM routing_inspections r
+		inner join 
+		inspect_sign_cell_index c
+		on 
+		r.routing_inspection_id = c.routing_inspection_id
+		<where>
+			<if test="stationId != null">
+				and station_id = #{stationId,jdbcType=INTEGER}
+			</if>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="startTime != null">
+				and operate_time &gt;= #{startTime,jdbcType=TIMESTAMP}	
+			</if>
+		</where>
+		GROUP BY r.routing_inspection_id
+	</select>
+	
+	<select id="selectOneLatestSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.RoutingInspections">
+		select
+		<include refid="Base_Column_List" />
+		from routing_inspections
+		<where>
+			<if test="stationId != null">
+				and station_id = #{stationId,jdbcType=INTEGER}
+			</if>
+			<if test="operateType != null">
+				and operate_type = #{operateType,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY operate_time DESC LIMIT 0,1
+	</select>
+	
+</mapper>

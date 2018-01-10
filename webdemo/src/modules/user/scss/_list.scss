@@ -1,0 +1,19 @@
+.tab{
+  width: 100%;
+  max-width: 700px;
+  border: 1px solid #d5d5d5;
+  font-size: 14px;
+  border-collapse: collapse;
+  > tbody >tr > td{
+    border: 1px solid #d5d5d5;
+    color: #999;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    > a{
+      text-decoration: none;
+    }
+  }
+}

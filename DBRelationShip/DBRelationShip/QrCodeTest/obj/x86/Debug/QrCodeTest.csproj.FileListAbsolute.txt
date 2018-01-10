@@ -1,0 +1,15 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Debug\QrCodeTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Debug\QrCodeTest.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Debug\Gma.QrCodeNet.Encoding.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Debug\Gma.QrCodeNet.Encoding.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.csprojResolveAssemblyReference.cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.Form1.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.Properties.Resources.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.csproj.GenerateResource.Cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.pdb
+E:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.Form1.resources
+E:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\QrCodeTest.Properties.Resources.resources
+E:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Debug\GenerateResource.write.1.tlog

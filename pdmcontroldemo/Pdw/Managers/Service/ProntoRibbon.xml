@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="Ribbon_Load" loadImage="LoadImage">
+  <commands>
+    <!-- *************** Bookmark in Insert tab *********************************************** -->
+    <command idMso="BookmarkInsert" getEnabled="IsEnable" />
+    <!-- *************** Macro, VisualBasic in Developer tab ********************************** -->
+    <command idMso="PlayMacro" getEnabled="IsEnable"/>
+    <command idMso="MacroRecordOrStop" getEnabled="IsEnable"/>
+    <command idMso="MacroRecorderPause" getEnabled="IsEnable"/>
+    <command idMso="MacroSecurity" getEnabled="IsEnable"/>
+    <command idMso="MacroPlay" getEnabled="IsEnable"/>
+    <command idMso="MacroRecorderStop" getEnabled="IsEnable"/>
+    <command idMso="MacroRecord" getEnabled="IsEnable"/>
+    <command idMso="VisualBasic" getEnabled="IsEnable"/>
+    <!-- *************** Macro in View tab **************************************************** -->
+    <command idMso ="MenuMacros" getEnabled="IsEnable"/>
+    <!-- *************** Restricting and Editing  ********************************************* -->
+    <command idMso ="ReviewProtectDocumentMenu" getEnabled="IsEnable"/>
+    <command idMso ="FilePermissionUnrestricted" getEnabled="IsEnable"/>
+    <command idMso ="ProtectDocument" getEnabled="IsEnable"/>
+    <command idMso ="ProtectOrUnprotectDocument" getEnabled="IsEnable"/>
+    <!-- *************** Save: Save in quick menu, Save in office menu, Ctrl + S ************* -->
+    <command idMso="FileSave" onAction="FileSave"/>
+  </commands>
+  <ribbon startFromScratch="false">
+    <!-- Start add Save as button -->
+    <officeMenu>
+      <menu idMso="FileSaveAsMenu">
+        <button
+          id="btnSaveAsPdw" label="PDW"
+          insertBeforeMso="FileSaveAsOtherFormats"
+          getImage="GetPdwIcon" showImage="true"
+          description="Save the file as a ProntoDoc for Word template"
+          onAction="btnSaveAsPdw_Click"
+        />
+        <button
+          id="btnSaveAsPdm" label="PDH"
+          insertBeforeMso="FileSaveAsOtherFormats"
+          getImage="GetPdmIcon" showImage="true"
+          description="Save the file as a ProntoDoc for Mht template"
+          onAction="btnSaveAsPdm_Click"
+        />
+        <button
+          id="btnSaveAsPdz" label="PDZ"
+          insertBeforeMso="FileSaveAsOtherFormats"
+          getImage="GetPdzIcon" showImage="true"
+          description="Save the file as a structured text template"
+          onAction="btnSaveAsPdz_Click"
+        />
+        <button
+          id="btnSaveAsPdm_Hack" label="PDM" 
+          insertBeforeMso="FileSaveAsOtherFormats"
+          getImage="GetPdmIcon_Hack" showImage="true"
+          description="Save the file as a ProntoDoc for HTML template"
+          onAction="btnSaveAsPdm_Hack_Click"
+          />
+      </menu>
+    </officeMenu>
+    <!-- End add Save as button -->
+    <!-- Starrt add ribbon buttons -->
+    <tabs>
+      <!-- old: TabAddIns (Note that we can only change the custom tab's label, rather than the system built-in tab like "TabHome", "TabAddIns"...)-->
+      <tab id="TabProntoDoc" getLabel="GetLabel" getVisible="IsVisibleRibbon">
+        <group id="ProntoPlugin" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnStartPronto"
+             size="large"
+             getLabel="GetLabel"
+             getImage="GetImage"
+             getScreentip="GetDescription"
+             onAction="btnStartPronto_Click"
+					/>
+        </group>
+        <group id="Controls" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnPreviewOsql"
+            size="large"
+            getLabel="GetLabel"
+            getImage ="GetPreview"
+            getScreentip="GetDescription"
+            onAction="btnPreviewOsql_Click"
+            getEnabled="IsEnablePreviewOsql"
+            getVisible="IsVisiblePreviewOsql"
+					/>
+          <button id="btnReconstruct"
+            size="large"
+            getLabel="GetLabel"
+            getImage ="GetReconstructImage"
+            getScreentip="GetDescription"
+            onAction="btnReconstruct_Click"
+            getEnabled="EnableReconstruct"
+					/>
+        </group>
+        <group id="Bookmarks" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnBookmarks"
+            size="large"
+            getLabel="GetLabel"
+            getImage="GetBookmarkImage"
+            getScreentip="GetDescription"
+            onAction="btnBookmarks_Click"
+            getEnabled="IsPronto"
+					/>
+          <button id="btnHighlightBookmark"
+            size="large"
+            getLabel="GetLabel"
+            getImage="GetBookmarkImage"
+            getScreentip="GetDescription"
+            getEnabled="IsEnableHighlight"
+            onAction="btnHighlightBookmark_Click"
+					/>
+        </group>
+        <group id="DomainTree" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnFontAsc"
+            size="large"
+            getLabel="GetLabel"
+            getImage ="GetFontSizeImageAsc"
+            getScreentip="GetDescription"
+            onAction="btnChangeFontAsc_Click"
+            getEnabled="IsPronto"
+					/>
+          <button id="btnFontDesc"
+            size="large"
+            getLabel="GetLabel"
+            getImage ="GetFontSizeImageDesc"
+            getScreentip="GetDescription"
+            onAction="btnChangeFontDesc_Click"
+            getEnabled="IsPronto"
+          />
+        </group>
+        <group id="DataSection" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnComment"
+            size="large"
+            getLabel="GetLabel"
+            getImage ="GetCommentImage"
+            getScreentip="GetDescription"
+            onAction="btnComment_Click"
+            getEnabled="IsPronto"
+					/>
+          <button id="btnForEach"
+            size="large"
+            getLabel="GetLabel"
+            getImage ="GetForEachImage"
+            getScreentip="GetDescription"
+            onAction="btnForEach_Click"
+            getEnabled="EnableForEach"
+					/>
+          <checkBox id="chkCollapseForeach"
+            getLabel="GetLabel"
+            getScreentip="GetDescription"
+            getEnabled="EnableForEach"
+            onAction="chkCollapseForEach_Click"
+					/>
+          <buttonGroup visible="true" id="bgrValidate">
+            <button id="btnValidate" 
+              getImage="GetGalleryValidateImage" 
+              getLabel="GetLabel" 
+              getScreentip="GetDescription"
+              getEnabled="EnableForEach" 
+              onAction="btnValidate_Click"
+            />
+            <gallery id="glrValidate" 
+              getEnabled="EnableForEach" 
+              showImage="false"
+              showItemLabel="false" 
+              columns="5" 
+              showItemImage="true" 
+              onAction="glrValidate_Click">
+              <item id="glrColorYellow" image="Yellow" screentip="Yellow" />
+              <item id="glrColorBrightGreen" image="BrightGreen" screentip="Bright Green"/>
+              <item id="glrColorTurquoise" image="Turquoise" screentip="Turquoise"/>
+              <item id="glrColorPink" image="Pink" screentip="Pink"/>
+              <item id="glrColorBlue" image="Blue" screentip="Blue"/>
+              <item id="glrColorRed" image="Red" screentip="Red"/>
+              <item id="glrColorDarkBlue" image="DarkBlue" screentip="Dark Blue"/>
+              <item id="glrColorTeal" image="Teal" screentip="Teal"/>
+              <item id="glrColorGreen" image="Green" screentip="Green"/>
+              <item id="glrColorViolet" image="Violet" screentip="Violet"/>
+              <item id="glrColorDarkRed" image="DarkRed" screentip="Dark Red"/>
+              <item id="glrColorDarkYellow" image="DarkYellow" screentip="Dark Yellow"/>
+              <item id="glrColorGray50" image="Gray50" screentip="Gray50"/>
+              <item id="glrColorGray25" image="Gray25" screentip="Gray25"/>
+              <item id="glrColorBlack" image="Black" screentip="Black"/>
+            </gallery>
+          </buttonGroup>
+        </group>
+        <group id="ProntoPdeIntegrate" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnPdeIntergrateImport"
+            size="large"
+            getLabel="GetLabel"
+            getDescription="GetDescription"
+            getImage="GetPdeIntergrateImportImage"
+            onAction="btnPdeIntergrateImport_Click"
+            getEnabled="IsPronto"
+           />
+        </group>
+        <group id="PdmTemplate" getLabel="GetLabel" getScreentip="GetDescription">
+          <button id="btnTextInput" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnTextInput_Click"/>
+          <button id="btnTextArea" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnTextArea_Click"/>
+          <button id="btnButton" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnButton_Click"/>
+          <button id="btnCheckBox" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnCheckBox_Click"/>
+          <button id="btnRadio" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnRadio_Click"/>
+          <button id="btnSelect" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnSelect_Click"/>
+          <button id="btnCheckBoxList" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnCheckBoxList_Click"/>
+          <button id="btnRadioList" getLabel="GetLabel" getScreentip="GetDescription" getEnabled="IsPronto" onAction="btnRadioList_Click"/>
+        </group>
+      </tab>
+    </tabs>
+    <!-- End add ribbon buttons -->
+  </ribbon>
+</customUI>

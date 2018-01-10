@@ -1,0 +1,9 @@
+D:\work\source\POC\WinServicesControl\WindowsService1\bin\Release\WindowsService1.exe
+D:\work\source\POC\WinServicesControl\WindowsService1\bin\Release\WindowsService1.pdb
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.exe
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.pdb
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.ProjectInstaller.resources
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.csproj.GenerateResource.Cache
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.csproj.ResolveComReference.cache
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.csprojResolveAssemblyReference.cache
+D:\work\source\POC\WinServicesControl\WindowsService1\obj\x86\Release\WindowsService1.Form1.resources

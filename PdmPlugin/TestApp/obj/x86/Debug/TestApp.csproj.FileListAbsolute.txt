@@ -1,0 +1,10 @@
+D:\source\POC\PdmPlugin\TestApp\bin\Debug\TestApp.exe
+D:\source\POC\PdmPlugin\TestApp\bin\Debug\TestApp.pdb
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\TestApp.Form1.resources
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\TestApp.Properties.Resources.resources
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\TestApp.exe
+D:\source\POC\PdmPlugin\TestApp\obj\x86\Debug\TestApp.pdb
+D:\OneDrive\source\POC\PdmPlugin\TestApp\obj\x86\Debug\TestApp.pdb

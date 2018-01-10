@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.StationInfoMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.StationInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="gprs_id_out" property="gprsIdOut" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="lat" property="lat" jdbcType="DECIMAL" />
+		<result column="lng" property="lng" jdbcType="DECIMAL" />
+		<result column="maintainance_id" property="maintainanceId" jdbcType="VARCHAR" />
+		<result column="pack_type" property="packType" jdbcType="VARCHAR" />
+		<result column="room_type" property="roomType" jdbcType="VARCHAR" />
+		<result column="duration" property="duration" jdbcType="DECIMAL" />
+		<result column="real_duration" property="realDuration" jdbcType="DECIMAL" />
+		<result column="ok_num" property="okNum" jdbcType="INTEGER" />
+		<result column="poor_num" property="poorNum" jdbcType="INTEGER" />
+		<result column="error_num" property="errorNum" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="company_id1" property="companyId1" jdbcType="INTEGER" />
+		<result column="company_id2" property="companyId2" jdbcType="INTEGER" />
+		<result column="company_id3" property="companyId3" jdbcType="INTEGER" />
+		<result column="del_flag" property="delFlag" jdbcType="INTEGER" />
+		<result column="company_name3" property="companyName3" jdbcType="VARCHAR" />
+		<result column="vol_level" property="volLevel" jdbcType="INTEGER" />
+		<result column="operator_type" property="operatorType" jdbcType="INTEGER" />
+		<result column="duration_status" property="durationStatus" jdbcType="INTEGER" />
+		<result column="link_status" property="linkStatus" jdbcType="TINYINT" />
+		<result column="device_type" property="deviceType" jdbcType="INTEGER" />
+		<result column="load_power" property="loadPower" jdbcType="DECIMAL"/>
+		<result column="inspect_status" property="inspectStatus" jdbcType="INTEGER"/>
+		<result column="address_coding" property="addressCoding" jdbcType="VARCHAR"/>
+		<result column="gen_vol" property="genVol" jdbcType="DECIMAL" />
+    	<result column="gen_cur" property="genCur" jdbcType="DECIMAL" />
+		
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, gprs_id_out, name, address, province, city,
+		district, lat,
+		lng, maintainance_id,
+		pack_type, room_type, duration,
+		real_duration, ok_num, poor_num, error_num,
+		status,
+		company_id1,
+		company_id2, company_id3, del_flag, company_name3, vol_level,
+		operator_type,
+		duration_status,
+		load_power,
+		inspect_status,
+		address_coding
+	</sql>
+
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM base_station_info
+	</select>
+
+	<select id="getStations" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM base_station_info
+		<where>
+			<if test="companyId3 != null">
+				AND company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			<if test="province != null">
+				AND province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				AND city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="district != null">
+				AND district = #{district,jdbcType=VARCHAR}
+			</if>
+			<if test="isGprsIdNotNull">
+				and gprs_id!="-1"
+			</if>
+			<if test="delFlag != null">
+				and del_flag = #{delFlag,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from base_station_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.StationInfo">
+		select tmp.*,config.link_status,config.device_type from(
+		select
+		<include refid="Base_Column_List" />
+		from base_station_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null">
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="address != null">
+				and address = #{address,jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="district != null">
+				and district = #{district,jdbcType=VARCHAR}
+			</if>
+			<if test="lat != null">
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<if test="lng != null">
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="maintainanceId != null">
+				and maintainance_id = #{maintainanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="packType != null">
+				and pack_type = #{packType,jdbcType=VARCHAR}
+			</if>
+			<if test="roomType != null">
+				and room_type = #{roomType,jdbcType=VARCHAR}
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=DECIMAL}
+			</if>
+			<if test="realDuration != null">
+				and real_duration = #{realDuration,jdbcType=DECIMAL}
+			</if>
+			<if test="okNum != null">
+				and ok_num = #{okNum,jdbcType=INTEGER}
+			</if>
+			<if test="poorNum != null">
+				and poor_num = #{poorNum,jdbcType=INTEGER}
+			</if>
+			<if test="errorNum != null">
+				and error_num = #{errorNum,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="companyId1 != null">
+				and company_id1 = #{companyId1,jdbcType=INTEGER}
+			</if>
+			<if test="companyId2 != null">
+				and company_id2 = #{companyId2,jdbcType=INTEGER}
+			</if>
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			<if test="delFlag != null">
+				and del_flag = #{delFlag,jdbcType=INTEGER}
+			</if>
+			<if test="companyName3 != null">
+				and company_name3 = #{companyName3,jdbcType=VARCHAR}
+			</if>
+			<if test="volLevel != null">
+				and vol_level = #{volLevel,jdbcType=INTEGER}
+			</if>
+			<if test="operatorType != null">
+				and operator_type = #{operatorType,jdbcType=INTEGER}
+			</if>
+			<if test="durationStatus != null">
+				and duration_status = #{durationStatus,jdbcType=INTEGER}
+			</if>
+			<if test="isGprsIdNotNull">
+				and gprs_id!="-1"
+			</if>
+			
+		
+		</where>
+		) tmp left join gprs_config_info config on tmp.gprs_id=config.gprs_id
+	</select>
+
+	<select id="getStationByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM base_station_info
+		WHERE company_id1 = #{companyId,jdbcType=INTEGER} OR company_id2 = #{companyId,jdbcType=INTEGER} OR company_id3 = #{companyId,jdbcType=INTEGER}
+	</select>
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select *
+		from full_station_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out like "%${gprsIdOut}%"
+			</if>
+			<if test="delFlag != null">
+				and del_flag = #{delFlag,jdbcType=INTEGER}
+			</if>
+			<!-- 添加设备id  -->
+			<if test="name != null">
+				and (name like "%${name}%" or gprs_id like "%${name}%")
+			</if>
+			<if test="address != null">
+				and address like "%${address}%"
+			</if>
+			<if test="province != null">
+				and province like "%${province}%"
+			</if>
+			<if test="city != null">
+				and city like "%${city}%"
+			</if>
+			<if test="district != null">
+				and district like "%${district}%"
+			</if>
+			<if test="lat != null">
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<if test="lng != null">
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="maintainanceId != null">
+				and maintainance_id like "%${maintainanceId}%"
+			</if>
+			<if test="packType != null">
+				and pack_type like "%${packType}%"
+			</if>
+			<if test="roomType != null">
+				and room_type like "%${roomType}%"
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=DECIMAL}
+			</if>
+			<if test="realDuration != null">
+				and real_duration = #{realDuration,jdbcType=DECIMAL}
+			</if>
+			<if test="okNum != null">
+				and ok_num = #{okNum,jdbcType=INTEGER}
+			</if>
+			<if test="poorNum != null">
+				and poor_num = #{poorNum,jdbcType=INTEGER}
+			</if>
+			<if test="errorNum != null">
+				and error_num = #{errorNum,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="companyId1 != null">
+				and company_id1 = #{companyId1,jdbcType=INTEGER}
+			</if>
+			<if test="companyId2 != null">
+				and company_id2 = #{companyId2,jdbcType=INTEGER}
+			</if>
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			
+			<if test="companyName3 != null">
+				and company_name3 like "%${companyName3}%"
+			</if>
+			<if test="volLevel != null">
+				and vol_level = #{volLevel,jdbcType=INTEGER}
+			</if>
+			<if test="operatorType != null">
+				and operator_type = #{operatorType,jdbcType=INTEGER}
+			</if>
+			<if test="isGprsIdNotNull">
+				and gprs_id!="-1"
+			</if>
+			<if test="linkStatus == 1">
+			and link_status = #{linkStatus,jdbcType=TINYINT}
+			</if>
+			<if test="linkStatus == 0">
+			and (link_status = #{linkStatus,jdbcType=TINYINT} or link_status is null)
+			</if>
+			<if test="state !=null"> 
+			and state = #{state,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id desc
+	</select>
+
+	<select id="selectDb" resultType="java.lang.String">
+		select database();
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		base_station_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="delByPKs">
+		drop database ${_parameter};
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from base_station_info
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.StationInfo">
+		delete from base_station_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null">
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="address != null">
+				and address = #{address,jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="district != null">
+				and district = #{district,jdbcType=VARCHAR}
+			</if>
+			<if test="lat != null">
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<if test="lng != null">
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="maintainanceId != null">
+				and maintainance_id = #{maintainanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="packType != null">
+				and pack_type = #{packType,jdbcType=VARCHAR}
+			</if>
+			<if test="roomType != null">
+				and room_type = #{roomType,jdbcType=VARCHAR}
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=DECIMAL}
+			</if>
+			<if test="realDuration != null">
+				and real_duration = #{realDuration,jdbcType=DECIMAL}
+			</if>
+			<if test="okNum != null">
+				and ok_num = #{okNum,jdbcType=INTEGER}
+			</if>
+			<if test="poorNum != null">
+				and poor_num = #{poorNum,jdbcType=INTEGER}
+			</if>
+			<if test="errorNum != null">
+				and error_num = #{errorNum,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="companyId1 != null">
+				and company_id1 = #{companyId1,jdbcType=INTEGER}
+			</if>
+			<if test="companyId2 != null">
+				and company_id2 = #{companyId2,jdbcType=INTEGER}
+			</if>
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			<if test="delFlag != null">
+				and del_flag = #{delFlag,jdbcType=INTEGER}
+			</if>
+			<if test="companyName3 != null">
+				and company_name3 = #{companyName3,jdbcType=VARCHAR}
+			</if>
+			<if test="volLevel != null">
+				and vol_level = #{volLevel,jdbcType=INTEGER}
+			</if>
+			<if test="operatorType != null">
+				and operator_type = #{operatorType,jdbcType=INTEGER}
+			</if>
+			<if test="durationStatus != null">
+				and duration_status = #{durationStatus,jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.StationInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into base_station_info
+		(gprs_id, gprs_id_out, name,
+		address, province, city,
+		district, lat,
+		lng,
+		maintainance_id, pack_type, room_type,
+		duration, real_duration,
+		ok_num,
+		poor_num, error_num, status,
+		company_id1, company_id2,
+		company_id3,
+		del_flag, company_name3, vol_level,
+		operator_type,
+		duration_status)
+		values (#{gprsId,jdbcType=VARCHAR},
+		#{gprsIdOut,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{district,jdbcType=VARCHAR},
+		#{lat,jdbcType=DECIMAL},
+		#{lng,jdbcType=DECIMAL},
+		#{maintainanceId,jdbcType=VARCHAR}, #{packType,jdbcType=VARCHAR},
+		#{roomType,jdbcType=VARCHAR},
+		#{duration,jdbcType=DECIMAL},
+		#{realDuration,jdbcType=DECIMAL},
+		#{okNum,jdbcType=INTEGER},
+		#{poorNum,jdbcType=INTEGER}, #{errorNum,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{companyId1,jdbcType=INTEGER},
+		#{companyId2,jdbcType=INTEGER},
+		#{companyId3,jdbcType=INTEGER},
+		#{delFlag,jdbcType=INTEGER}, #{companyName3,jdbcType=VARCHAR},
+		#{volLevel,jdbcType=INTEGER},
+		#{operatorType,jdbcType=INTEGER},
+		#{durationStatus,jdbcType=INTEGER})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.StationInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into base_station_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="gprsIdOut != null">
+				gprs_id_out,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="district != null">
+				district,
+			</if>
+			<if test="lat != null">
+				lat,
+			</if>
+			<if test="lng != null">
+				lng,
+			</if>
+			<if test="maintainanceId != null">
+				maintainance_id,
+			</if>
+			<if test="packType != null">
+				pack_type,
+			</if>
+			<if test="roomType != null">
+				room_type,
+			</if>
+			<if test="duration != null">
+				duration,
+			</if>
+			<if test="realDuration != null">
+				real_duration,
+			</if>
+			<if test="okNum != null">
+				ok_num,
+			</if>
+			<if test="poorNum != null">
+				poor_num,
+			</if>
+			<if test="errorNum != null">
+				error_num,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="companyId1 != null">
+				company_id1,
+			</if>
+			<if test="companyId2 != null">
+				company_id2,
+			</if>
+			<if test="companyId3 != null">
+				company_id3,
+			</if>
+			<if test="delFlag != null">
+				del_flag,
+			</if>
+			<if test="companyName3 != null">
+				company_name3,
+			</if>
+			<if test="volLevel != null">
+				vol_level,
+			</if>
+			<if test="operatorType != null">
+				operator_type,
+			</if>
+			<if test="durationStatus != null">
+				duration_status,
+			</if>
+			<if test="loadPower != null">
+				load_power,
+			</if>
+			<if test="addressCoding != null">
+				address_coding,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsIdOut != null">
+				#{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="district != null">
+				#{district,jdbcType=VARCHAR},
+			</if>
+			<if test="lat != null">
+				#{lat,jdbcType=DECIMAL},
+			</if>
+			<if test="lng != null">
+				#{lng,jdbcType=DECIMAL},
+			</if>
+			<if test="maintainanceId != null">
+				#{maintainanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="packType != null">
+				#{packType,jdbcType=VARCHAR},
+			</if>
+			<if test="roomType != null">
+				#{roomType,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				#{duration,jdbcType=DECIMAL},
+			</if>
+			<if test="realDuration != null">
+				#{realDuration,jdbcType=DECIMAL},
+			</if>
+			<if test="okNum != null">
+				#{okNum,jdbcType=INTEGER},
+			</if>
+			<if test="poorNum != null">
+				#{poorNum,jdbcType=INTEGER},
+			</if>
+			<if test="errorNum != null">
+				#{errorNum,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="companyId1 != null">
+				#{companyId1,jdbcType=INTEGER},
+			</if>
+			<if test="companyId2 != null">
+				#{companyId2,jdbcType=INTEGER},
+			</if>
+			<if test="companyId3 != null">
+				#{companyId3,jdbcType=INTEGER},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=INTEGER},
+			</if>
+			<if test="companyName3 != null">
+				#{companyName3,jdbcType=VARCHAR},
+			</if>
+			<if test="volLevel != null">
+				#{volLevel,jdbcType=INTEGER},
+			</if>
+			<if test="operatorType != null">
+				#{operatorType,jdbcType=INTEGER},
+			</if>
+			<if test="durationStatus != null">
+				#{durationStatus,jdbcType=INTEGER},
+			</if>
+			<if test="loadPower != null">
+				#{loadPower,jdbcType=DECIMAL},
+			</if>
+			<if test="addressCoding != null">
+				#{addressCoding,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.StationInfo">
+		update base_station_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsIdOut != null">
+				gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="district != null">
+				district = #{district,jdbcType=VARCHAR},
+			</if>
+			<if test="lat != null">
+				lat = #{lat,jdbcType=DECIMAL},
+			</if>
+			<if test="lng != null">
+				lng = #{lng,jdbcType=DECIMAL},
+			</if>
+			<if test="maintainanceId != null">
+				maintainance_id = #{maintainanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="packType != null">
+				pack_type = #{packType,jdbcType=VARCHAR},
+			</if>
+			<if test="roomType != null">
+				room_type = #{roomType,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				duration = #{duration,jdbcType=DECIMAL},
+			</if>
+			<if test="realDuration != null">
+				real_duration = #{realDuration,jdbcType=DECIMAL},
+			</if>
+			<if test="okNum != null">
+				ok_num = #{okNum,jdbcType=INTEGER},
+			</if>
+			<if test="poorNum != null">
+				poor_num = #{poorNum,jdbcType=INTEGER},
+			</if>
+			<if test="errorNum != null">
+				error_num = #{errorNum,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="companyId1 != null">
+				company_id1 = #{companyId1,jdbcType=INTEGER},
+			</if>
+			<if test="companyId2 != null">
+				company_id2 = #{companyId2,jdbcType=INTEGER},
+			</if>
+			<if test="companyId3 != null">
+				company_id3 = #{companyId3,jdbcType=INTEGER},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag,jdbcType=INTEGER},
+			</if>
+			<if test="companyName3 != null">
+				company_name3 = #{companyName3,jdbcType=VARCHAR},
+			</if>
+			<if test="volLevel != null">
+				vol_level = #{volLevel,jdbcType=INTEGER},
+			</if>
+			<if test="operatorType != null">
+				operator_type = #{operatorType,jdbcType=INTEGER},
+			</if>
+			<if test="durationStatus != null">
+				duration_status = #{durationStatus,jdbcType=INTEGER},
+			</if>
+			<if test="loadPower != null">
+				load_power = #{loadPower,jdbcType=DECIMAL},
+			</if>
+			<if test="inspectStatus != null">
+				inspect_status = #{inspectStatus,jdbcType=INTEGER}
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.StationInfo">
+		update
+		base_station_info
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		gprs_id_out
+		= #{gprsIdOut,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		province =
+		#{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		district
+		= #{district,jdbcType=VARCHAR},
+		lat = #{lat,jdbcType=DECIMAL},
+		lng =
+		#{lng,jdbcType=DECIMAL},
+		maintainance_id =
+		#{maintainanceId,jdbcType=VARCHAR},
+		pack_type =
+		#{packType,jdbcType=VARCHAR},
+		room_type = #{roomType,jdbcType=VARCHAR},
+		duration = #{duration,jdbcType=DECIMAL},
+		real_duration =
+		#{realDuration,jdbcType=DECIMAL},
+		ok_num = #{okNum,jdbcType=INTEGER},
+		poor_num = #{poorNum,jdbcType=INTEGER},
+		error_num =
+		#{errorNum,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		company_id1 = #{companyId1,jdbcType=INTEGER},
+		company_id2 =
+		#{companyId2,jdbcType=INTEGER},
+		company_id3 =
+		#{companyId3,jdbcType=INTEGER},
+		del_flag = #{delFlag,jdbcType=INTEGER},
+		company_name3 =
+		#{companyName3,jdbcType=VARCHAR},
+		vol_level =
+		#{volLevel,jdbcType=INTEGER},
+		operator_type =
+		#{operatorType,jdbcType=INTEGER},
+		duration_status =
+		#{durationStatus,jdbcType=INTEGER}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByGprsSelective" parameterType="com.station.moudles.entity.StationInfo">
+		update base_station_info
+		<set>
+			<if test="gprsIdOut != null">
+				gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="district != null">
+				district = #{district,jdbcType=VARCHAR},
+			</if>
+			<if test="lat != null">
+				lat = #{lat,jdbcType=DECIMAL},
+			</if>
+			<if test="lng != null">
+				lng = #{lng,jdbcType=DECIMAL},
+			</if>
+			<if test="maintainanceId != null">
+				maintainance_id = #{maintainanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="packType != null">
+				pack_type = #{packType,jdbcType=VARCHAR},
+			</if>
+			<if test="roomType != null">
+				room_type = #{roomType,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				duration = #{duration,jdbcType=DECIMAL},
+			</if>
+			<if test="realDuration != null">
+				real_duration = #{realDuration,jdbcType=DECIMAL},
+			</if>
+			<if test="okNum != null">
+				ok_num = #{okNum,jdbcType=INTEGER},
+			</if>
+			<if test="poorNum != null">
+				poor_num = #{poorNum,jdbcType=INTEGER},
+			</if>
+			<if test="errorNum != null">
+				error_num = #{errorNum,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="companyId1 != null">
+				company_id1 = #{companyId1,jdbcType=INTEGER},
+			</if>
+			<if test="companyId2 != null">
+				company_id2 = #{companyId2,jdbcType=INTEGER},
+			</if>
+			<if test="companyId3 != null">
+				company_id3 = #{companyId3,jdbcType=INTEGER},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag,jdbcType=INTEGER},
+			</if>
+			<if test="companyName3 != null">
+				company_name3 = #{companyName3,jdbcType=VARCHAR},
+			</if>
+			<if test="volLevel != null">
+				vol_level = #{volLevel,jdbcType=INTEGER},
+			</if>
+			<if test="operatorType != null">
+				operator_type = #{operatorType,jdbcType=INTEGER},
+			</if>
+			<if test="durationStatus != null">
+				duration_status = #{durationStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where gprs_id = #{gprsId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByCompanyIdSelective" parameterType="com.station.moudles.entity.StationInfo">
+		update base_station_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsIdOut != null">
+				gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="district != null">
+				district = #{district,jdbcType=VARCHAR},
+			</if>
+			<if test="lat != null">
+				lat = #{lat,jdbcType=DECIMAL},
+			</if>
+			<if test="lng != null">
+				lng = #{lng,jdbcType=DECIMAL},
+			</if>
+			<if test="maintainanceId != null">
+				maintainance_id = #{maintainanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="packType != null">
+				pack_type = #{packType,jdbcType=VARCHAR},
+			</if>
+			<if test="roomType != null">
+				room_type = #{roomType,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				duration = #{duration,jdbcType=DECIMAL},
+			</if>
+			<if test="realDuration != null">
+				real_duration = #{realDuration,jdbcType=DECIMAL},
+			</if>
+			<if test="okNum != null">
+				ok_num = #{okNum,jdbcType=INTEGER},
+			</if>
+			<if test="poorNum != null">
+				poor_num = #{poorNum,jdbcType=INTEGER},
+			</if>
+			<if test="errorNum != null">
+				error_num = #{errorNum,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="companyId1 != null">
+				company_id1 = #{companyId1,jdbcType=INTEGER},
+			</if>
+			<if test="companyId2 != null">
+				company_id2 = #{companyId2,jdbcType=INTEGER},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag,jdbcType=INTEGER},
+			</if>
+			<if test="companyName3 != null">
+				company_name3 = #{companyName3,jdbcType=VARCHAR},
+			</if>
+			<if test="volLevel != null">
+				vol_level = #{volLevel,jdbcType=INTEGER},
+			</if>
+			<if test="operatorType != null">
+				operator_type = #{operatorType,jdbcType=INTEGER},
+			</if>
+			<if test="durationStatus != null">
+				duration_status = #{durationStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where company_id3 = #{companyId3,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectStationStatus" parameterType="com.station.moudles.vo.CommonSearchVo" resultType="java.util.HashMap">
+		select
+		tmp.*,convert(num0/sum_num*100,decimal(6,2)) as
+		percent0,convert(num1/sum_num*100,decimal(6,2)) as
+		percent1,convert(num2/sum_num*100,decimal(6,2)) as percent2 from(
+		select
+		s.company_name3,s.district,s.city,s.sum_num,s.company_id3
+		,ifnull(s0.count0,0) as num0,ifnull(s1.count1,0) as
+		num1,ifnull(s2.count2,0) as num2
+		from (select
+		s.company_name3,s.district,s.city,count(*) as
+		sum_num,s.company_id3
+		from base_station_info s where status!=-1 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		group by s.city,s.district,s.company_id3 ) s
+		left join
+		(select
+		s.company_name3,s.district,s.city,count(*) as
+		count0,company_id3 from
+		base_station_info s where status=0 and del_flag != 1 and gprs_id != -1
+		group by
+		s.city,s.district,s.company_id3,status )
+		s0
+		on
+		s.company_id3=s0.company_id3 and
+		s.district=s0.district and
+		s.city=s0.city
+		left join
+		(select
+		s.company_name3,s.district,s.city,count(*) as
+		count1,company_id3 from
+		base_station_info s where status=1 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		group by s.city,s.district,s.company_id3,status ) s1
+		on
+		s.company_id3=s1.company_id3 and s.district=s1.district and s.city = s1.city
+		left join
+		(select s.company_name3,s.district,s.city,count(*) as
+		count2,company_id3 from
+		base_station_info s where status=2 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		group by s.city , s.district,s.company_id3,status ) s2
+		on
+		s.company_id3=s2.company_id3 and s.district=s2.district and s.city = s2.city
+		) tmp
+	</select>
+
+	<select id="selectStationDurationStatus" parameterType="com.station.moudles.vo.CommonSearchVo" resultType="java.util.HashMap">
+		SELECT
+		tmp.*,
+		CONVERT( num4 / sum_num * 100 , DECIMAL (6 , 2 )) AS
+		percent4,
+		CONVERT( num1 / sum_num * 100 , DECIMAL (6 , 2 )) AS
+		percent1,
+		CONVERT( num2 / sum_num * 100 , DECIMAL (6 , 2 )) AS
+		percent2,
+		CONVERT( num3 / sum_num * 100 , DECIMAL (6 , 2 )) AS percent3
+		FROM
+		(SELECT
+		s.company_name3,
+		s.district,
+		s.city,
+		s.sum_num,
+		s.company_id3,
+		IFNULL(s4.count4, 0) AS num4,
+		IFNULL(s1.count1, 0) AS num1,
+		IFNULL(s2.count2, 0) AS num2,
+		IFNULL(s3.count3, 0) AS num3
+		FROM
+		(SELECT
+		s.company_name3,
+		s.district,
+		s.city,
+		COUNT(*) AS sum_num,
+		s.company_id3
+		FROM
+		base_station_info s
+		WHERE
+		duration_status != - 1 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		GROUP BY s.city , s.district , s.company_id3) s
+		LEFT JOIN (SELECT
+		s.company_name3,
+		s.district,
+		s.city,
+		COUNT(*) AS count4,
+		company_id3
+		FROM
+		base_station_info s
+		WHERE
+		duration_status = 4 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		GROUP BY s.city , s.district , s.company_id3 , duration_status) s4 ON
+		s.company_id3
+		= s4.company_id3
+		AND s.city = s4.city
+		AND s.district = s4.district
+		LEFT JOIN
+		(SELECT
+		s.company_name3,
+		s.district,
+		s.city,
+		COUNT(*) AS count1,
+		company_id3
+		FROM
+		base_station_info s
+		WHERE
+		duration_status = 1 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		GROUP BY s.city , s.district , s.company_id3 , duration_status) s1 ON
+		s.company_id3
+		= s1.company_id3
+		AND s.city = s1.city
+		AND s.district = s1.district
+		LEFT JOIN
+		(SELECT
+		s.company_name3,
+		s.district,
+		s.city,
+		COUNT(*) AS count2,
+		company_id3
+		FROM
+		base_station_info s
+		WHERE
+		duration_status = 2 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		GROUP BY s.city , s.district , s.company_id3 , duration_status) s2 ON
+		s.company_id3
+		= s2.company_id3
+		AND s.city = s2.city
+		AND s.district = s2.district
+		LEFT JOIN
+		(SELECT
+		s.company_name3,
+		s.district,
+		s.city,
+		COUNT(*) AS count3,
+		company_id3
+		FROM
+		base_station_info s
+		WHERE
+		duration_status = 3 and del_flag != 1 and gprs_id != -1
+		<if test="companyLevel==1">
+			and company_id1=#{companyId}
+		</if>
+		<if test="companyLevel==2">
+			and company_id2=#{companyId}
+		</if>
+		<if test="companyLevel==3">
+			and company_id3=#{companyId}
+		</if>
+		GROUP BY s.city , s.district , s.company_id3 , duration_status) s3 ON
+		s.company_id3
+		= s3.company_id3
+		AND s.city = s3.city
+		AND s.district = s3.district) tmp
+	</select>
+
+	<select id="appSelectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select  *,
+		case inspect_status when 30 then 
+		(case link_status when  null then 30 when 1 then 31 when 0 then 32 end)
+		 else inspect_status end as appstatuts 
+		from full_station_info 
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out like "%${gprsIdOut}%"
+			</if>
+			<if test="delFlag != null">
+				and del_flag = #{delFlag,jdbcType=INTEGER}
+			</if>
+			<!-- 添加设备id  -->
+			<if test="name != null">
+				and (name like "%${name}%" or gprs_id like "%${name}%")
+			</if>
+			<if test="address != null">
+				and address like "%${address}%"
+			</if>
+			<if test="province != null">
+				and province like "%${province}%"
+			</if>
+			<if test="city != null">
+				and city like "%${city}%"
+			</if>
+			<if test="district != null">
+				and district like "%${district}%"
+			</if>
+			<if test="lat != null">
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<if test="lng != null">
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="maintainanceId != null">
+				and maintainance_id like "%${maintainanceId}%"
+			</if>
+			<if test="packType != null">
+				and pack_type like "%${packType}%"
+			</if>
+			<if test="roomType != null">
+				and room_type like "%${roomType}%"
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=DECIMAL}
+			</if>
+			<if test="realDuration != null">
+				and real_duration = #{realDuration,jdbcType=DECIMAL}
+			</if>
+			<if test="okNum != null">
+				and ok_num = #{okNum,jdbcType=INTEGER}
+			</if>
+			<if test="poorNum != null">
+				and poor_num = #{poorNum,jdbcType=INTEGER}
+			</if>
+			<if test="errorNum != null">
+				and error_num = #{errorNum,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="companyId1 != null">
+				and company_id1 = #{companyId1,jdbcType=INTEGER}
+			</if>
+			<if test="companyId2 != null">
+				and company_id2 = #{companyId2,jdbcType=INTEGER}
+			</if>
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+			
+			<if test="companyName3 != null">
+				and company_name3 like "%${companyName3}%"
+			</if>
+			<if test="volLevel != null">
+				and vol_level = #{volLevel,jdbcType=INTEGER}
+			</if>
+			<if test="operatorType != null">
+				and operator_type = #{operatorType,jdbcType=INTEGER}
+			</if>
+			<if test="isGprsIdNotNull">
+				and gprs_id!="-1"
+			</if>
+			<if test="linkStatus == 1">
+			and link_status = #{linkStatus,jdbcType=TINYINT}
+			</if>
+			<if test="linkStatus == 0">
+			and (link_status = #{linkStatus,jdbcType=TINYINT} or link_status is null)
+			</if>
+			<if test="state !=null"> 
+			and state = #{state,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by appstatuts asc
+	</select>
+
+		<select id="appWarnAreaSelectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select f.* from(
+		select
+		gprs_id
+		from warning_info
+		 <where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time &gt;= #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="cellTemHigh != null">
+				and cell_tem_high = #{cellTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="envTemHigh != null">
+				and env_tem_high = #{envTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="cellTemLow != null">
+				and cell_tem_low = #{cellTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="envTemLow != null">
+				and env_tem_low = #{envTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="genVolHigh != null">
+				and gen_vol_high = #{genVolHigh,jdbcType=TINYINT}
+			</if>
+			<if test="genVolLow != null">
+				and gen_vol_low = #{genVolLow,jdbcType=TINYINT}
+			</if>
+			<if test="lossElectricity != null">
+				and loss_electricity =
+				#{lossElectricity,jdbcType=TINYINT}
+			</if>
+			<if test="socLow != null">
+				and soc_low = #{socLow,jdbcType=TINYINT}
+			</if>
+		</where>
+		) as w left join full_station_info as f on w.gprs_id=f.gprs_id 
+		<where>
+			f.gprs_id != -1
+			<if test="companyId3 != null">
+				and company_id3 = #{companyId3,jdbcType=INTEGER}
+			</if>
+		</where> 
+	</select>
+
+
+</mapper>

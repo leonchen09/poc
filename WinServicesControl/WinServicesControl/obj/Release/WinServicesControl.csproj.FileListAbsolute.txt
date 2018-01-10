@@ -1,0 +1,10 @@
+D:\work\source\POC\WinServicesControl\WinServicesControl\bin\Release\WinServicesControl.exe.config
+D:\work\source\POC\WinServicesControl\WinServicesControl\bin\Release\WinServicesControl.exe
+D:\work\source\POC\WinServicesControl\WinServicesControl\bin\Release\WinServicesControl.pdb
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.FrmMian.resources
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.Properties.Resources.resources
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.csproj.GenerateResource.Cache
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.exe
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.pdb
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.Form1.resources
+D:\work\source\POC\WinServicesControl\WinServicesControl\obj\Release\WinServicesControl.csprojResolveAssemblyReference.cache

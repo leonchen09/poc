@@ -1,0 +1,14 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Release\XmlSerTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Release\XmlSerTest.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.Form1.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.Properties.Resources.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.csproj.GenerateResource.Cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Release\XmlSerTest.exe
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Release\XmlSerTest.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.Form1.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.Properties.Resources.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.csproj.GenerateResource.Cache
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.exe
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Release\XmlSerTest.pdb

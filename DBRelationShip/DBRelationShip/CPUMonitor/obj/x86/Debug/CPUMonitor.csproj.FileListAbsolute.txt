@@ -1,0 +1,9 @@
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\bin\Debug\CPUMonitor.exe
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\bin\Debug\CPUMonitor.pdb
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\CPUMonitor.Form1.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\CPUMonitor.Properties.Resources.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\CPUMonitor.exe
+D:\Source\POC\DBRelationShip\DBRelationShip\CPUMonitor\obj\x86\Debug\CPUMonitor.pdb

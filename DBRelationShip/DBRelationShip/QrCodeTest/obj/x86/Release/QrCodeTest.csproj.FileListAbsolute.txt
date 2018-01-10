@@ -1,0 +1,13 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Release\QrCodeTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Release\QrCodeTest.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Release\Gma.QrCodeNet.Encoding.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\bin\Release\Gma.QrCodeNet.Encoding.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.csprojResolveAssemblyReference.cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.Form1.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.Properties.Resources.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.csproj.GenerateResource.Cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.Form1.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.Properties.Resources.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\QrCodeTest\obj\x86\Release\QrCodeTest.csproj.GenerateResource.Cache

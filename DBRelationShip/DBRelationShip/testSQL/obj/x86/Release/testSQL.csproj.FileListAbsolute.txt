@@ -1,0 +1,16 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\testSQL.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\testSQL.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\PDFU.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\PDFC.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\PDFD.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.csprojResolveAssemblyReference.cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.Form1.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.csproj.GenerateResource.Cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\testSQL.exe
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\testSQL.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.Form1.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.csproj.GenerateResource.Cache
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.exe
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\x86\Release\testSQL.pdb

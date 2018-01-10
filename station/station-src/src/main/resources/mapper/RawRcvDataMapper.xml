@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.RawRcvDataMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.RawRcvData">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="raw_data" property="rawData" jdbcType="VARCHAR" />
+		<result column="rcv_time" property="rcvTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, raw_data, rcv_time
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from raw_rcv_data
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.RawRcvData">
+		select
+		<include refid="Base_Column_List" />
+		from raw_rcv_data
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rawData != null">
+				and raw_data = #{rawData,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from raw_rcv_data
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="rawData != null">
+				and raw_data like "%${rawData}%"
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from raw_rcv_data
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from raw_rcv_data
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.RawRcvData">
+		delete from raw_rcv_data
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rawData != null">
+				and raw_data = #{rawData,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.RawRcvData" useGeneratedKeys="true" keyProperty="id">
+		insert into raw_rcv_data (gprs_id, raw_data, rcv_time
+		)
+		values (#{gprsId,jdbcType=VARCHAR}, #{rawData,jdbcType=VARCHAR}, #{rcvTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.RawRcvData" useGeneratedKeys="true" keyProperty="id">
+		insert into raw_rcv_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="rawData != null">
+				raw_data,
+			</if>
+			<if test="rcvTime != null">
+				rcv_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="rawData != null">
+				#{rawData,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				#{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.RawRcvData">
+		update raw_rcv_data
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="rawData != null">
+				raw_data = #{rawData,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.RawRcvData">
+		update raw_rcv_data
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		raw_data = #{rawData,jdbcType=VARCHAR},
+		rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

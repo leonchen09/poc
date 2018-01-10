@@ -1,0 +1,4 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\SQLDao\bin\Debug\SQLDao.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\SQLDao\bin\Debug\SQLDao.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\SQLDao\obj\Debug\SQLDao.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\SQLDao\obj\Debug\SQLDao.pdb

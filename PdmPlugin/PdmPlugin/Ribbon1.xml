@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <officeMenu>
+      <menu idMso="FileSaveAsMenu">
+        <button
+          id="btnSaveAsPdw" label="PDM"
+          insertBeforeMso="FileSaveAsOtherFormats"
+          getImage="GetPdwIcon" showImage="true"
+          description="Save the file as a ProntoDoc for Excel template"
+          onAction="btnSaveAsPde_Click"
+        />
+      </menu>
+    </officeMenu>
+    <tabs>
+      <tab idMso="TabAddIns">
+        <group id="MyGroup"
+               label="My Group">
+          <button id="btnStartPronto"
+        size="large"
+        label="Show"
+        screentip="Show or hide domain data in right panel"
+        onAction="btnStartPronto_Click"
+                  />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

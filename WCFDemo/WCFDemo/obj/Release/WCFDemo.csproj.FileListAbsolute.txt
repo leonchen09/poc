@@ -1,0 +1,5 @@
+D:\work\source\POC\WCFDemo\WCFDemo\bin\Release\WCFDemo.dll.config
+D:\work\source\POC\WCFDemo\WCFDemo\bin\Release\WCFDemo.dll
+D:\work\source\POC\WCFDemo\WCFDemo\bin\Release\WCFDemo.pdb
+D:\work\source\POC\WCFDemo\WCFDemo\obj\Release\WCFDemo.dll
+D:\work\source\POC\WCFDemo\WCFDemo\obj\Release\WCFDemo.pdb

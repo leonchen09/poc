@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties>
+		<property name="jdbc.dialect" value="mysql" />
+	</properties>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+
+	<!-- <plugins> <plugin interceptor="org.apache.mybatis.pagination.PaginationInterceptor"></plugin> 
+		</plugins> -->
+
+	<!-- 拦截器翻页时使用 -->
+	<plugins>
+		<plugin interceptor="com.station.common.interceptor.PagingInterceptor"></plugin>
+		<!-- <plugin interceptor="com.station.common.interceptor.LogTimeInterceptor"></plugin> -->
+	</plugins>
+
+</configuration>

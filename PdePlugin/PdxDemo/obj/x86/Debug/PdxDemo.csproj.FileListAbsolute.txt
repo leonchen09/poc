@@ -1,0 +1,9 @@
+D:\work\source\POC\PdePlugin\PdxDemo\bin\Debug\PdxDemo.exe
+D:\work\source\POC\PdePlugin\PdxDemo\bin\Debug\PdxDemo.pdb
+D:\work\source\POC\PdePlugin\PdxDemo\bin\Debug\Oracle.DataAccess.dll
+D:\work\source\POC\PdePlugin\PdxDemo\obj\x86\Debug\PdxDemo.csprojResolveAssemblyReference.cache
+D:\work\source\POC\PdePlugin\PdxDemo\obj\x86\Debug\PdxDemo.Form1.resources
+D:\work\source\POC\PdePlugin\PdxDemo\obj\x86\Debug\PdxDemo.Properties.Resources.resources
+D:\work\source\POC\PdePlugin\PdxDemo\obj\x86\Debug\PdxDemo.csproj.GenerateResource.Cache
+D:\work\source\POC\PdePlugin\PdxDemo\obj\x86\Debug\PdxDemo.exe
+D:\work\source\POC\PdePlugin\PdxDemo\obj\x86\Debug\PdxDemo.pdb

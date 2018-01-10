@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
+  <asmv1:assemblyIdentity name="PdwIntegreate.dll" version="1.0.0.0" publicKeyToken="dba20584c56781c1" language="neutral" processorArchitecture="msil" type="win32" />
+  <description xmlns="urn:schemas-microsoft-com:asm.v1">PdwIntegreate</description>
+  <application />
+  <entryPoint>
+    <co.v1:customHostSpecified />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Office.Tools.v4.0.Framework" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Office.Tools.Word" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.VisualStudio.Tools.Applications.Runtime" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ICSharpCode.SharpZipLib.dll" size="196608">
+      <assemblyIdentity name="ICSharpCode.SharpZipLib" version="0.86.0.518" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>vPGju3HjLLxKEbx5W6kx4x5Io5g=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.Common.v4.0.Utilities.dll" size="32664">
+      <assemblyIdentity name="Microsoft.Office.Tools.Common.v4.0.Utilities" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CtnCtseaMyfROIGe0ENdGO6arHg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PdwIntegreate.dll" size="15872">
+      <assemblyIdentity name="PdwIntegreate" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2qTUsPUGNc8IjMqROTo9IN9B8U0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <vstav3:addIn xmlns:vstav3="urn:schemas-microsoft-com:vsta.v3">
+    <vstav3:entryPointsCollection>
+      <vstav3:entryPoints>
+        <vstav3:entryPoint class="PdwIntegreate.ThisAddIn">
+          <assemblyIdentity name="PdwIntegreate" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+        </vstav3:entryPoint>
+      </vstav3:entryPoints>
+    </vstav3:entryPointsCollection>
+    <vstav3:update enabled="true">
+      <vstav3:expiration maximumAge="7" unit="days" />
+    </vstav3:update>
+    <vstav3:application>
+      <vstov4:customizations xmlns:vstov4="urn:schemas-microsoft-com:vsto.v4">
+        <vstov4:customization>
+          <vstov4:appAddIn application="Word" loadBehavior="3" keyName="PdwIntegreate">
+            <vstov4:friendlyName>PdwIntegreate</vstov4:friendlyName>
+            <vstov4:description>PdwIntegreate</vstov4:description>
+          </vstov4:appAddIn>
+        </vstov4:customization>
+      </vstov4:customizations>
+    </vstav3:application>
+  </vstav3:addIn>
+<publisherIdentity name="CN=ProntoDoc-PC\ProntoDoc" issuerKeyHash="1e4acaf6a00e8da66b4dc08987638d23b8ab2a80" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>7WhRfzA0fBifzoxtlOUE8pWsM60=</DigestValue></Reference></SignedInfo><SignatureValue>F0MtkpOWBAUEcElR6OTFHP8SZP+v51jSoMsuH/GiO4YmSCcPlRgCN1TdgJ3AbYVWEmQdlTXBMNaI5L0SCO6ymaa8z/ZmeGpFZ5asa50yEw+8xR1sgebfERR4Anc0kLP1GG8fMus7VlNImQkFKrShmrgdJtFBjHynw97wtL2x650=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>2jnrFuA6oI1Z2PFlQ5spoz1TdaBC0leO8t8HfRWMH247rqMpjXtOnYS2b1zjMGQEsDZ8UvNlwF/77d2tFxZoP60ruLDLM0cnHG7uLQg2LAEBsf6wAhdQptwz33ZY9IBw9cPZUN4xwoyZUmPgd4O9EmdDsGnORe1jI30Bdsjvnic=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="ad33ac95f204e5946d8cce9f187c34307f5168ed" Description="" Url=""><as:assemblyIdentity name="PdwIntegreate.dll" version="1.0.0.0" publicKeyToken="dba20584c56781c1" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=ProntoDoc-PC\ProntoDoc</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>+gkSt9VM7JO8z7+lmY2oAQH15Ac=</DigestValue></Reference></SignedInfo><SignatureValue>EkTFzAMbOVSD8VA3MWg4YJtHbfoRngvd0+N369Nrosej8+CkX4fuNtc9SqO3Cjj8tAKmEnVfGuwiZKQEAus5gdGfV2jwilDfiqWBQ3mX67CzgbIXbYr4oGKDsUcXfUH13ETVF9iLC6GAooylrNb2T0u+zwQr4XSc7aIc3oeFCjk=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>2jnrFuA6oI1Z2PFlQ5spoz1TdaBC0leO8t8HfRWMH247rqMpjXtOnYS2b1zjMGQEsDZ8UvNlwF/77d2tFxZoP60ruLDLM0cnHG7uLQg2LAEBsf6wAhdQptwz33ZY9IBw9cPZUN4xwoyZUmPgd4O9EmdDsGnORe1jI30Bdsjvnic=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB8TCCAVqgAwIBAgIQOG3GI9XwCZZB3lJfBWsqFTANBgkqhkiG9w0BAQUFADA3MTUwMwYDVQQDHiwAUAByAG8AbgB0AG8ARABvAGMALQBQAEMAXABQAHIAbwBuAHQAbwBEAG8AYzAeFw0xMjAzMDIwNzUwMjNaFw0xMzAzMDIxMzUwMjNaMDcxNTAzBgNVBAMeLABQAHIAbwBuAHQAbwBEAG8AYwAtAFAAQwBcAFAAcgBvAG4AdABvAEQAbwBjMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDaOesW4DqgjVnY8WVDmymjPVN1oELSV47y3wd9FYwfbjuuoymNe06dhLZvXOMwZASwNnxS82XAX/vt3a0XFmg/rSu4sMszRyccbu4tCDYsAQGx/rACF1Cm3DPfdlj0gHD1w9lQ3jHCjJlSY+B3g70SZ0Owac5F7WMjfQF2yO+eJwIDAQABMA0GCSqGSIb3DQEBBQUAA4GBANmaKbcm8PSE9II1cTNIrPFdg6gyV34j3nR4Gq0X0WNFz4yMH6MJDOTm6qcYMz92YsKNrXWpO3MpVIi70mx+TUYuDaFr5bkzaHf3kimvu9UN3XV9P5Zq/5tzmifsRb7/UyPqgl4O+KnmLocmpq7RpfVowDZzAoNkeBTuVsM750ES</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.reachcloud.demo.dao.DemoMapper" >
+  <resultMap id="BaseResultMap" type="com.reachcloud.demo.entity.Demo" >
+  	<id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="salary" property="salary" jdbcType="DECIMAL" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Column_List" >
+    id, name, age, salary,birthday
+  </sql>
+  <select id="load" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Column_List" />
+    from demo
+    where id = #{Id}
+  </select>
+  <select id="searchByParam" resultMap="BaseResultMap" parameterType="com.reachcloud.framework.base.entity.PaginationSearch" >
+    select 
+    <include refid="Column_List" />
+    from demo
+    where name like #{parameters.name}
+  </select>
+   <select id="pageingByParam" resultMap="BaseResultMap" parameterType="com.reachcloud.framework.base.entity.PaginationSearch" >
+    select 
+    <include refid="Column_List" />
+    from demo
+    where name like #{parameters.name} and id between #{start} and #{end}
+  </select>
+  <select id="getCount" resultType="int" parameterType="com.reachcloud.framework.base.entity.PaginationSearch" >
+    select 
+    count(1)
+    from demo
+    where name like #{parameters.name}
+  </select>
+  <insert id="add" parameterType="com.reachcloud.demo.entity.Demo">
+  	INSERT INTO demo(<include refid="Column_List"/>) values(#{id},#{name},#{age},#{salary},#{birthday,jdbcType=DATE})
+  </insert>
+</mapper>

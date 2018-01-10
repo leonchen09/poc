@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="Ribbon_Load">
+  <ribbon startFromScratch="false">
+    <officeMenu>
+      <menu idMso="FileSaveAsMenu">
+        <button
+          id="btnSaveAsPdw" label="PDE"
+          insertBeforeMso="FileSaveAsOtherFormats"
+          getImage="GetPdwIcon" showImage="true"
+          description="Save the file as a ProntoDoc for Excel template"
+          onAction="btnSaveAsPde_Click"
+        />
+      </menu>
+    </officeMenu>
+    <tabs>
+      <tab idMso="TabAddIns" label="ProntoExcel">
+        <group id="MyGroup" label="Plugin">
+          <button id="btnStartPronto"
+                  size="large"
+                  getLabel="GetLabel"
+                  getImage="GetImage"
+                  screentip="Show or hide domain data in right panel"
+                  onAction="btnStartPronto_Click"
+                  />
+          <button id="btnMapCell"
+                  size="large"
+                  label="单元     一二三四"
+				          getImage="GetMapCellImage"
+                  screentip="Map the tree node to single cell"
+                  onAction="btnMapCell_Click"
+                  getEnabled="IsPronto"
+                  />
+          <button id="btnMapTable"
+                  size="large"
+                  label="映射表"
+				          getImage="GetMapTableImage"
+                  screentip="Map the lis to table"
+                  onAction="btnMapTable_Click"
+                  getEnabled="IsPronto"
+                  />
+          <button id="btnCondGS"
+                  size="large"
+                  label="Condition Goal Seek"
+				          getImage="GetCGSImage"
+                  screentip="Create one condition goal seek"
+                  onAction="btnCondGS_Click"
+                  getEnabled="IsPronto"
+                  />
+          <button id="btnExport"
+                  size="large"
+                  label="Export Item"
+				          getImage="GetExportImage"
+                  screentip="Export the data to word plugin"
+                  onAction="btnExport_Click"
+                  getEnabled="IsPronto"
+                  />
+          <button id="btnExportTab"
+                  size="large"
+                  label="Export Table"
+				          getImage="GetExportImage"
+                  screentip="Export the table to word plugin"
+                  onAction="btnExportTab_Click"
+                  getEnabled="IsPronto"
+                  />
+          <button id="btnCondGSMan"
+                  size="large"
+                  label="Manage Goal Seek"
+                  getImage="GetCGSImage"
+                  screentip="view or delete condition goal seek"
+                  onAction="btnCondGSMan_Click"
+                  getEnabled="IsPronto"
+                  />
+          <button id="btnTest"
+                  size="large"
+                  label="Test"
+				          getImage="GetExportImage"
+                  screentip="Export the data to word plugin"
+                  onAction="btnTest_Click"
+                  getEnabled="IsPronto"
+                  getVisible="getTestVisiable"
+                  />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+  <!-- Start add Save as button -->
+  <!--<contextMenus>
+    <contextMenu idMso="FileSaveAsMenu">
+
+
+      <button
+        id="btnSaveAsPde" label="PDE"
+        insertBeforeMso="Cut"
+        getImage="GetPdwIcon" showImage="true"
+        description="Save the file as a ProntoDoc for Excel template"
+        onAction="btnSaveAsPde_Click"
+        />
+        
+    </contextMenu>
+  </contextMenus>-->
+</customUI>
+

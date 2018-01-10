@@ -1,0 +1,6 @@
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\testSQL.exe
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\bin\Release\testSQL.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\Release\testSQL.Form1.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\Release\testSQL.csproj.GenerateResource.Cache
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\Release\testSQL.exe
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\testSQL\obj\Release\testSQL.pdb

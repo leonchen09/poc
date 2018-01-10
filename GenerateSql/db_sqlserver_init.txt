@@ -1,0 +1,145 @@
+CREATE TABLE [dbo].[customer](
+	[id] [int] NOT NULL,
+	[code] [nvarchar](20) NULL,
+	[name] [nvarchar](50) NULL,
+	[sex] [nvarchar](50) NULL,
+	[tel] [nvarchar](50) NULL
+)
+
+GO
+
+CREATE TABLE [dbo].[application](
+	[id] [int] NOT NULL,
+	[code] [nvarchar](20) NULL,
+	[type] [nvarchar](20) NULL,
+	[desc] [nvarchar](200) NULL,
+	[description] [nvarchar](500) NULL,
+	[remark] [nvarchar](500) NULL,
+	[cust_id] [int] NULL
+)
+
+GO
+
+CREATE TABLE [dbo].[address](
+	[id] [int] NOT NULL,
+	[city_id] [int] NULL,
+	[detail] [nvarchar](50) NULL,
+	[cust_id] [int] NULL
+)
+
+GO
+
+CREATE TABLE [dbo].[city](
+	[id] [int] NOT NULL,
+	[code] [nvarchar](20) NULL,
+	[name] [nvarchar](100) NULL
+)
+
+GO
+INSERT INTO [sme].[dbo].[customer]
+           ([id]
+           ,[code]
+           ,[name]
+           ,[sex]
+           ,[tel])
+     VALUES
+           (1
+           ,'001'
+           ,'Peter'
+           ,'male'
+           ,'0086-91111111111')
+GO
+
+INSERT INTO [sme].[dbo].[customer]
+           ([id]
+           ,[code]
+           ,[name]
+           ,[sex]
+           ,[tel])
+     VALUES
+           (2
+           ,'002'
+           ,'Jone'
+           ,'female'
+           ,'00-23232323232')
+GO
+INSERT INTO [sme].[dbo].[application]
+           ([id]
+           ,[code]
+           ,[type]
+           ,[desc]
+           ,[description]
+           ,[remark]
+           ,[cust_id])
+     VALUES
+           (700
+           ,'007'
+           ,'Personal'
+           ,'personal matter'
+           ,'some description for 007'
+           ,'some tips for 007'
+           ,1)
+GO
+
+INSERT INTO [sme].[dbo].[application]
+           ([id]
+           ,[code]
+           ,[type]
+           ,[desc]
+           ,[description]
+           ,[remark]
+           ,[cust_id])
+     VALUES
+           (701
+           ,'008'
+           ,'Business'
+           ,'Business'
+           ,'Business is bussiness,bussiness matter'
+           ,'somethings should be remembered.'
+           ,1)
+GO
+
+INSERT INTO [sme].[dbo].[city]
+           ([id]
+           ,[code]
+           ,[name])
+     VALUES
+           (900
+           ,'CD'
+           ,'Sichuan ChengDu')
+GO
+
+INSERT INTO [sme].[dbo].[city]
+           ([id]
+           ,[code]
+           ,[name])
+     VALUES
+           (901
+           ,'BJ'
+           ,'BeiJing China')
+GO
+
+INSERT INTO [sme].[dbo].[address]
+           ([id]
+           ,[city_id]
+           ,[detail]
+           ,[cust_id])
+     VALUES
+           (800
+           ,901
+           ,'changan street'
+           ,null)
+GO
+
+INSERT INTO [sme].[dbo].[address]
+           ([id]
+           ,[city_id]
+           ,[detail]
+           ,[cust_id])
+     VALUES
+           (801
+           ,900
+           ,'renming road'
+           ,null)
+GO
+

@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="PlugInSQLUI.SingleSQLControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="397" d:DesignWidth="893">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="200" Width="770*" />
+            <ColumnDefinition MinWidth="20" Width="123*" />
+        </Grid.ColumnDefinitions>
+        <Grid Height="385" HorizontalAlignment="Left" Margin="30,12,0,0" Name="grid1" VerticalAlignment="Top" Width="725">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="20" />
+                <RowDefinition MinHeight="20" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Height="120" HorizontalAlignment="Left" Margin="6,6,0,0" Name="grid2" VerticalAlignment="Top" Width="713">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="89*" />
+                    <RowDefinition Height="31*" />
+                </Grid.RowDefinitions>
+                <RichTextBox Height="49" HorizontalAlignment="Left" Margin="42,20,0,0" Name="richTextBox1" VerticalAlignment="Top" Width="200" />
+                <Button Content="Button" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="620,8,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

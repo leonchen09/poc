@@ -1,0 +1,11 @@
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\bin\Debug\TestExpression.exe
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\bin\Debug\TestExpression.pdb
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\TestExpression.Form1.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\TestExpression.Form2.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\TestExpression.Properties.Resources.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\TestExpression.ScopeTree.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\TestExpression.exe
+D:\Source\POC\DBRelationShip\DBRelationShip\TestExpression\obj\x86\Debug\TestExpression.pdb

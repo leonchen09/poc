@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/xml-apis.jar" sourcepath="C:/Program Files/Java/jdk1.6.0_21/src.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/serializer.jar"/>
+	<classpathentry kind="lib" path="lib/xalan.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xsltc.jar"/>
+	<classpathentry kind="lib" path="D:/work/source/opensource/xstream-1.4.3.jar" sourcepath="D:/source/opensource/xstream-1.4.3-sources.jar"/>
+	<classpathentry kind="lib" path="D:/work/source/opensource/xmlpull-1.1.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/work/source/opensource/kxml2-2.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/work/source/opensource/joda-time-1.6/joda-time-1.6.jar" sourcepath="D:/source/opensource/joda-time-1.6/joda-time-1.6-sources.jar"/>
+	<classpathentry kind="lib" path="D:/work/source/pronto/java/ProntoDoc.Demonstration/WebContent/WEB-INF/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="D:/work/source/opensource/qrcode_java0.50beta10/lib/Qrcode.jar"/>
+	<classpathentry kind="lib" path="D:/app/ProntoDoc/product/11.2.0/dbhome_3/jdbc/lib/ojdbc6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

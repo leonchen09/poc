@@ -1,0 +1,35 @@
+<div>
+    <ul>
+        <li>
+            <input type="text" placeholder="姓名" ng-model="upDateForm.name"/>
+            <span class="err" ng-bind="validate.name.text" ng-show="validate.name.isError"></span>
+        </li>
+        <li>
+            <input type="text" class="inputText" ng-model="upDateForm.date" lay-date=""/>
+        </li>
+        <li>
+            <input type="radio" name="smoking" value="true" ng-model="upDateForm.smoke" ng-checked="{{upDateForm.smoke}}"/>抽烟
+            <input type="radio" name="smoking" value="false" ng-model="upDateForm.smoke" ng-checked="{{!upDateForm.smoke}}"/>不抽烟
+        </li>
+        <li>
+            <span ng-repeat="item in colorList">
+                <input type="checkbox" name="color" ng-true-value="{{item.val}}" ng-false-value="0" ng-model="item.name" ng-checked="{{item.checked}}"/>{{item.text}}
+            </span>
+        </li>
+        <li>
+            <select name="sex" id="sex" ng-model="upDateForm.sex" ng-options="type.value as type.text for type in sexList">
+            </select>
+        </li>
+        <li>
+            <input type="text" placeholder="年龄" ng-model="upDateForm.age"/>
+            <span class="err" ng-bind="validate.age.text" ng-show="validate.age.isError"></span>
+        </li>
+        <li>
+            <input type="text" placeholder="电话" ng-model="upDateForm.phone"/>
+            <span class="err" ng-bind="validate.phone.text" ng-show="validate.phone.isError"></span>
+        </li>
+        <li>
+            <button ng-click="upDateSubmit()">提交</button>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.ParameterMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.Parameter">
+		<id column="parameter_code" property="parameterCode" jdbcType="VARCHAR" />
+		<result column="parameter_value" property="parameterValue" jdbcType="VARCHAR" />
+		<result column="parameter_desc" property="parameterDesc" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		parameter_code, parameter_value, parameter_desc
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from parameters
+		where parameter_code = #{parameterCode,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.Parameter">
+		select
+		<include refid="Base_Column_List" />
+		from parameters
+		<where>
+			<if test="parameterCode != null">
+				and parameter_code = #{parameterCode,jdbcType=VARCHAR}
+			</if>
+			<if test="parameterValue != null">
+				and parameter_value = #{parameterValue,jdbcType=VARCHAR}
+			</if>
+			<if test="parameterDesc != null">
+				and parameter_desc = #{parameterDesc,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from parameters
+		<where>
+			<if test="parameterCode != null">
+				and parameter_code like "%${parameterCode}%"
+			</if>
+			<if test="parameterValue != null">
+				and parameter_value like "%${parameterValue}%"
+			</if>
+			<if test="parameterDesc != null">
+				and parameter_desc like "%${parameterDesc}%"
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from parameters
+		where parameter_code = #{parameterCode,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.String">
+		delete from parameters
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			parameter_code = #{item,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.Parameter">
+		delete from parameters
+		<where>
+			<if test="parameterCode != null">
+				and parameter_code = #{parameterCode,jdbcType=VARCHAR}
+			</if>
+			<if test="parameterValue != null">
+				and parameter_value = #{parameterValue,jdbcType=VARCHAR}
+			</if>
+			<if test="parameterDesc != null">
+				and parameter_desc = #{parameterDesc,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.Parameter" useGeneratedKeys="true" keyProperty="parameterCode">
+		insert into parameters (parameter_value, parameter_desc)
+		values (#{parameterValue,jdbcType=VARCHAR}, #{parameterDesc,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.Parameter" useGeneratedKeys="true" keyProperty="parameterCode">
+		insert into parameters
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="parameterValue != null">
+				parameter_value,
+			</if>
+			<if test="parameterDesc != null">
+				parameter_desc,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="parameterValue != null">
+				#{parameterValue,jdbcType=VARCHAR},
+			</if>
+			<if test="parameterDesc != null">
+				#{parameterDesc,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.Parameter">
+		update parameters
+		<set>
+			<if test="parameterValue != null">
+				parameter_value = #{parameterValue,jdbcType=VARCHAR},
+			</if>
+			<if test="parameterDesc != null">
+				parameter_desc = #{parameterDesc,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where parameter_code = #{parameterCode,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.Parameter">
+		update parameters
+		set parameter_value = #{parameterValue,jdbcType=VARCHAR},
+		parameter_desc = #{parameterDesc,jdbcType=VARCHAR}
+		where parameter_code = #{parameterCode,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

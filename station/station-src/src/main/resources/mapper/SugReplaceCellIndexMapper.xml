@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.SugReplaceCellIndexMapper">
+    <resultMap id="BaseResultMap" type="com.station.moudles.entity.SugReplaceCellIndex">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gprs_id" property="gprsId" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="cell_replace_1" property="cellReplace1" jdbcType="INTEGER"/>
+        <result column="cell_replace_2" property="cellReplace2" jdbcType="INTEGER"/>
+        <result column="cell_replace_3" property="cellReplace3" jdbcType="INTEGER"/>
+        <result column="cell_replace_4" property="cellReplace4" jdbcType="INTEGER"/>
+        <result column="cell_replace_5" property="cellReplace5" jdbcType="INTEGER"/>
+        <result column="cell_replace_6" property="cellReplace6" jdbcType="INTEGER"/>
+        <result column="cell_replace_7" property="cellReplace7" jdbcType="INTEGER"/>
+        <result column="cell_replace_8" property="cellReplace8" jdbcType="INTEGER"/>
+        <result column="cell_replace_9" property="cellReplace9" jdbcType="INTEGER"/>
+        <result column="cell_replace_10" property="cellReplace10" jdbcType="INTEGER"/>
+        <result column="cell_replace_11" property="cellReplace11" jdbcType="INTEGER"/>
+        <result column="cell_replace_12" property="cellReplace12" jdbcType="INTEGER"/>
+        <result column="cell_replace_13" property="cellReplace13" jdbcType="INTEGER"/>
+        <result column="cell_replace_14" property="cellReplace14" jdbcType="INTEGER"/>
+        <result column="cell_replace_15" property="cellReplace15" jdbcType="INTEGER"/>
+        <result column="cell_replace_16" property="cellReplace16" jdbcType="INTEGER"/>
+        <result column="cell_replace_17" property="cellReplace17" jdbcType="INTEGER"/>
+        <result column="cell_replace_18" property="cellReplace18" jdbcType="INTEGER"/>
+        <result column="cell_replace_19" property="cellReplace19" jdbcType="INTEGER"/>
+        <result column="cell_replace_20" property="cellReplace20" jdbcType="INTEGER"/>
+        <result column="cell_replace_21" property="cellReplace21" jdbcType="INTEGER"/>
+        <result column="cell_replace_22" property="cellReplace22" jdbcType="INTEGER"/>
+        <result column="cell_replace_23" property="cellReplace23" jdbcType="INTEGER"/>
+        <result column="cell_replace_24" property="cellReplace24" jdbcType="INTEGER"/>
+
+        <result column="cell_type_1" property="cellType1" jdbcType="INTEGER"/>
+        <result column="cell_type_2" property="cellType2" jdbcType="INTEGER"/>
+        <result column="cell_type_3" property="cellType3" jdbcType="INTEGER"/>
+        <result column="cell_type_4" property="cellType4" jdbcType="INTEGER"/>
+        <result column="cell_type_5" property="cellType5" jdbcType="INTEGER"/>
+        <result column="cell_type_6" property="cellType6" jdbcType="INTEGER"/>
+        <result column="cell_type_7" property="cellType7" jdbcType="INTEGER"/>
+        <result column="cell_type_8" property="cellType8" jdbcType="INTEGER"/>
+        <result column="cell_type_9" property="cellType9" jdbcType="INTEGER"/>
+        <result column="cell_type_10" property="cellType10" jdbcType="INTEGER"/>
+        <result column="cell_type_11" property="cellType11" jdbcType="INTEGER"/>
+        <result column="cell_type_12" property="cellType12" jdbcType="INTEGER"/>
+        <result column="cell_type_13" property="cellType13" jdbcType="INTEGER"/>
+        <result column="cell_type_14" property="cellType14" jdbcType="INTEGER"/>
+        <result column="cell_type_15" property="cellType15" jdbcType="INTEGER"/>
+        <result column="cell_type_16" property="cellType16" jdbcType="INTEGER"/>
+        <result column="cell_type_17" property="cellType17" jdbcType="INTEGER"/>
+        <result column="cell_type_18" property="cellType18" jdbcType="INTEGER"/>
+        <result column="cell_type_19" property="cellType19" jdbcType="INTEGER"/>
+        <result column="cell_type_20" property="cellType20" jdbcType="INTEGER"/>
+        <result column="cell_type_21" property="cellType21" jdbcType="INTEGER"/>
+        <result column="cell_type_22" property="cellType22" jdbcType="INTEGER"/>
+        <result column="cell_type_23" property="cellType23" jdbcType="INTEGER"/>
+        <result column="cell_type_24" property="cellType24" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, gprs_id, update_time,
+		cell_replace_1, cell_replace_2, cell_replace_3, cell_replace_4, cell_replace_5, cell_replace_6,
+		cell_replace_7, cell_replace_8, cell_replace_9, cell_replace_10, cell_replace_11, cell_replace_12,
+		cell_replace_13, cell_replace_14, cell_replace_15, cell_replace_16, cell_replace_17, cell_replace_18,
+		cell_replace_19, cell_replace_20, cell_replace_21, cell_replace_22, cell_replace_23, cell_replace_24,
+        cell_type_1, cell_type_2, cell_type_3, cell_type_4, cell_type_5, cell_type_6,
+		cell_type_7, cell_type_8, cell_type_9, cell_type_10, cell_type_11, cell_type_12,
+		cell_type_13, cell_type_14, cell_type_15, cell_type_16, cell_type_17, cell_type_18,
+		cell_type_19, cell_type_20, cell_type_21, cell_type_22, cell_type_23, cell_type_24
+	</sql>
+
+    <select id="getLatestByGprsIds" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT a.*
+        FROM sug_replace_cell_index a INNER JOIN (
+            SELECT  MAX(id) id, gprs_id FROM sug_replace_cell_index
+            WHERE gprs_id IN
+            <foreach item="id" index="index" collection="list" open="(" separator="," close=")">#{id,jdbcType=VARCHAR}</foreach>
+            GROUP BY gprs_id
+        ) b
+        ON  a.id = b.id
+    </select>
+
+    <insert id="insert" parameterType="com.station.moudles.entity.SugReplaceCellIndex" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sug_replace_cell_index
+        (gprs_id,
+		cell_replace_1, cell_replace_2, cell_replace_3, cell_replace_4, cell_replace_5, cell_replace_6,
+		cell_replace_7, cell_replace_8, cell_replace_9, cell_replace_10, cell_replace_11, cell_replace_12,
+		cell_replace_13, cell_replace_14, cell_replace_15, cell_replace_16, cell_replace_17, cell_replace_18,
+		cell_replace_19, cell_replace_20, cell_replace_21, cell_replace_22, cell_replace_23, cell_replace_24,
+        cell_type_1, cell_type_2, cell_type_3, cell_type_4, cell_type_5, cell_type_6,
+		cell_type_7, cell_type_8, cell_type_9, cell_type_10, cell_type_11, cell_type_12,
+		cell_type_13, cell_type_14, cell_type_15, cell_type_16, cell_type_17, cell_type_18,
+		cell_type_19, cell_type_20, cell_type_21, cell_type_22, cell_type_23, cell_type_24)
+		VALUES (
+		#{gprsId,jdbcType=VARCHAR},
+		#{cellReplace1,jdbcType=INTEGER},#{cellReplace2,jdbcType=INTEGER},#{cellReplace3,jdbcType=INTEGER},#{cellReplace4,jdbcType=INTEGER},#{cellReplace5,jdbcType=INTEGER},#{cellReplace6,jdbcType=INTEGER},
+		#{cellReplace7,jdbcType=INTEGER},#{cellReplace8,jdbcType=INTEGER},#{cellReplace9,jdbcType=INTEGER},#{cellReplace10,jdbcType=INTEGER},#{cellReplace11,jdbcType=INTEGER},#{cellReplace12,jdbcType=INTEGER},
+		#{cellReplace13,jdbcType=INTEGER},#{cellReplace14,jdbcType=INTEGER},#{cellReplace15,jdbcType=INTEGER},#{cellReplace16,jdbcType=INTEGER},#{cellReplace17,jdbcType=INTEGER},#{cellReplace18,jdbcType=INTEGER},
+		#{cellReplace19,jdbcType=INTEGER},#{cellReplace20,jdbcType=INTEGER},#{cellReplace21,jdbcType=INTEGER},#{cellReplace22,jdbcType=INTEGER},#{cellReplace23,jdbcType=INTEGER},#{cellReplace24,jdbcType=INTEGER},
+        #{cellType1,jdbcType=INTEGER},#{cellType2,jdbcType=INTEGER},#{cellType3,jdbcType=INTEGER},#{cellType4,jdbcType=INTEGER},#{cellType5,jdbcType=INTEGER},#{cellType6,jdbcType=INTEGER},
+		#{cellType7,jdbcType=INTEGER},#{cellType8,jdbcType=INTEGER},#{cellType9,jdbcType=INTEGER},#{cellType10,jdbcType=INTEGER},#{cellType11,jdbcType=INTEGER},#{cellType12,jdbcType=INTEGER},
+		#{cellType13,jdbcType=INTEGER},#{cellType14,jdbcType=INTEGER},#{cellType15,jdbcType=INTEGER},#{cellType16,jdbcType=INTEGER},#{cellType17,jdbcType=INTEGER},#{cellType18,jdbcType=INTEGER},
+		#{cellType19,jdbcType=INTEGER},#{cellType20,jdbcType=INTEGER},#{cellType21,jdbcType=INTEGER},#{cellType22,jdbcType=INTEGER},#{cellType23,jdbcType=INTEGER},#{cellType24,jdbcType=INTEGER}
+		)
+    </insert>
+</mapper>

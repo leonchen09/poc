@@ -1,0 +1,8 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\bin\Release\OracleDao.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\bin\Release\OracleDao.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\obj\Release\OracleDao.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\obj\Release\OracleDao.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\OracleDao\bin\Release\OracleDao.dll
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\OracleDao\bin\Release\OracleDao.pdb
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\OracleDao\obj\Release\OracleDao.dll
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\OracleDao\obj\Release\OracleDao.pdb

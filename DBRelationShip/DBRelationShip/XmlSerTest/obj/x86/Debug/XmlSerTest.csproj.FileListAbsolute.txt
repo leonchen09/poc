@@ -1,0 +1,17 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Debug\XmlSerTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Debug\XmlSerTest.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.Form1.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.Properties.Resources.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.csproj.GenerateResource.Cache
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.exe
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.csprojResolveAssemblyReference.cache
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Debug\XmlSerTest.exe
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\bin\Debug\XmlSerTest.pdb
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.Form1.resources
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.Properties.Resources.resources
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.exe
+E:\work\source\POC\DBRelationShip\DBRelationShip\XmlSerTest\obj\x86\Debug\XmlSerTest.pdb

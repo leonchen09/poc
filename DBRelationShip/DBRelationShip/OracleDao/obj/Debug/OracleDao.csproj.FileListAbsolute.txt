@@ -1,0 +1,4 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\bin\Debug\OracleDao.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\bin\Debug\OracleDao.pdb
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\obj\Debug\OracleDao.dll
+D:\work\source\POC\DBRelationShip\DBRelationShip\OracleDao\obj\Debug\OracleDao.pdb

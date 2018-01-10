@@ -1,0 +1,10 @@
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.csproj.ResolveComReference.cache
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.exe
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.pdb
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.csprojResolveAssemblyReference.cache
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.Form1.resources
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.Form2.resources
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.Properties.Resources.resources
+D:\work\source\POC\PdePlugin\Test\obj\x86\Debug\Test.csproj.GenerateResource.Cache
+D:\work\source\POC\PdePlugin\Test\bin\Debug\Test.exe
+D:\work\source\POC\PdePlugin\Test\bin\Debug\Test.pdb

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.PulseCalculationSendMapper">
+    <resultMap id="BaseResultMap" type="com.station.moudles.entity.PulseCalculationSend">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gprs_id" property="gprsId" jdbcType="VARCHAR"/>
+        <result column="send_done" property="sendDone" jdbcType="INTEGER"/>
+        <result column="send_done_message" property="sendDoneMessage" jdbcType="VARCHAR"/>
+        <result column="resistance_status" property="resistanceStatus" jdbcType="INTEGER"/>
+        <result column="resistance_status_message" property="resistanceStatusMessage" jdbcType="VARCHAR"/>
+        <result column="capacity_status" property="capacityStatus" jdbcType="INTEGER"/>
+        <result column="capacity_status_message" property="capacityStatusMessage" jdbcType="VARCHAR"/>
+        <result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, gprs_id, send_done, send_done_message, resistance_status, resistance_status_message, capacity_status,
+		capacity_status_message, send_time, end_time
+	</sql>
+
+    <select id="getResistanceRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pulse_calculation_send
+        where gprs_id = #{gprsId,jdbcType=VARCHAR} and resistance_status = 1 and id <![CDATA[ <> ]]> #{exclusionId, jdbcType=INTEGER}
+        ORDER BY id DESC LIMIT 1
+    </select>
+
+    <select id="getCapacityRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pulse_calculation_send
+        where gprs_id = #{gprsId,jdbcType=VARCHAR} and capacity_status = 1 and id <![CDATA[ <> ]]> #{exclusionId, jdbcType=INTEGER}
+        ORDER BY id DESC LIMIT 1
+    </select>
+
+    <select id="getLatestRecords" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT m.*, n.name FROM pulse_calculation_send m, base_station_info n WHERE m.gprs_id = n.gprs_id
+        AND n.id IN (
+            SELECT d.id FROM (
+              SELECT MAX(e.id) id FROM base_station_info e GROUP BY gprs_id
+            ) d
+        )
+        AND m.id IN (
+          SELECT b.id FROM (
+            SELECT MAX(a.id) id , a.gprs_id FROM pulse_calculation_send a
+            WHERE a.gprs_id IN
+            <foreach item="id" index="index" collection="list" open="(" separator="," close=")">#{id,jdbcType=VARCHAR}</foreach>
+            GROUP BY a.`gprs_id`
+          ) b
+        )
+    </select>
+
+    <select id="getLatestResistanceSuccessRecords" resultMap="BaseResultMap">
+        SELECT m.*, n.name FROM pulse_calculation_send m, base_station_info n WHERE m.gprs_id = n.gprs_id
+        AND n.id IN (
+          SELECT d.id FROM (
+            SELECT MAX(e.id) id FROM base_station_info e GROUP BY gprs_id
+          ) d
+        )
+        AND m.resistance_status = 1
+        AND m.gprs_id IN
+        <foreach item="id" index="index" collection="gprsIds" open="(" separator="," close=")">#{id,jdbcType=VARCHAR}</foreach>
+        AND m.id NOT IN
+        <foreach item="id" index="index" collection="exclusionIds" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
+    </select>
+
+    <select id="getLatestCapacitySuccessRecords" resultMap="BaseResultMap">
+        SELECT m.*, n.name FROM pulse_calculation_send m, base_station_info n WHERE m.gprs_id = n.gprs_id
+        AND n.id IN (
+          SELECT d.id FROM (
+            SELECT MAX(e.id) id FROM base_station_info e GROUP BY gprs_id
+          ) d
+        )
+        AND m.capacity_status = 1
+        AND m.gprs_id IN
+        <foreach item="id" index="index" collection="gprsIds" open="(" separator="," close=")">#{id,jdbcType=VARCHAR}</foreach>
+        AND m.id NOT IN
+        <foreach item="id" index="index" collection="exclusionIds" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
+    </select>
+
+    <select id="getLatestRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from pulse_calculation_send
+        where gprs_id = #{gprsId,jdbcType=VARCHAR}
+        ORDER BY id DESC LIMIT 1
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pulse_calculation_send
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectListSelective" resultMap="BaseResultMap"
+            parameterType="com.station.moudles.entity.PulseCalculationSend">
+        select
+        <include refid="Base_Column_List"/>
+        from pulse_calculation_send
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="gprsId != null">
+                and gprs_id = #{gprsId,jdbcType=VARCHAR}
+            </if>
+            <if test="sendDone != null">
+                and send_done = #{sendDone,jdbcType=INTEGER}
+            </if>
+            <if test="resistanceStatus != null">
+                and resistance_status = #{resistanceStatus,jdbcType=INTEGER}
+            </if>
+            <if test="capacityStatus != null">
+                and capacity_status = #{capacityStatus,jdbcType=INTEGER}
+            </if>
+            <if test="sendTime != null">
+                and send_time = #{sendTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectListSelectivePaging" resultMap="BaseResultMap"
+            parameterType="com.station.moudles.vo.search.PageEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from pulse_calculation_send
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="gprsId != null">
+                and gprs_id like "%${gprsId}%"
+            </if>
+            <if test="sendDone != null">
+                and send_done = #{sendDone,jdbcType=INTEGER}
+            </if>
+            <if test="resistanceStatus != null">
+                and resistance_status = #{resistanceStatus,jdbcType=INTEGER}
+            </if>
+            <if test="capacityStatus != null">
+                and capacity_status = #{capacityStatus,jdbcType=INTEGER}
+            </if>
+            <if test="sendTime != null">
+                and send_time = #{sendTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		pulse_calculation_send
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+    <delete id="deleteByPKs" parameterType="java.lang.Integer">
+        delete from pulse_calculation_send
+        where
+        <foreach collection="array" index="index" separator="or" item="item">
+            id = #{item,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSelective" parameterType="com.station.moudles.entity.PulseCalculationSend">
+        delete from pulse_calculation_send
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="gprsId != null">
+                and gprs_id = #{gprsId,jdbcType=VARCHAR}
+            </if>
+            <if test="sendDone != null">
+                and send_done = #{sendDone,jdbcType=INTEGER}
+            </if>
+            <if test="resistanceStatus != null">
+                and resistance_status = #{resistanceStatus,jdbcType=INTEGER}
+            </if>
+            <if test="capacityStatus != null">
+                and capacity_status = #{capacityStatus,jdbcType=INTEGER}
+            </if>
+            <if test="sendTime != null">
+                and send_time = #{sendTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+
+    <insert id="insert" parameterType="com.station.moudles.entity.PulseCalculationSend" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into pulse_calculation_send (gprs_id, send_done, send_done_message, resistance_status, resistance_status_message, capacity_status,
+		capacity_status_message, send_time, end_time)
+		values
+		(
+		  #{gprsId,jdbcType=VARCHAR}, #{sendDone,jdbcType=INTEGER}, #{sendDoneMessage,jdbcType=VARCHAR}, #{resistanceStatus,jdbcType=INTEGER},
+		  #{resistanceStatusMessage,jdbcType=VARCHAR}, #{capacityStatus,jdbcType=INTEGER}, #{capacityStatusMessage,jdbcType=VARCHAR},
+		  #{sendTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+    <insert id="insertSelective" parameterType="com.station.moudles.entity.PulseCalculationSend" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into pulse_calculation_send
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="gprsId != null">
+                gprs_id,
+            </if>
+            <if test="sendDone != null">
+                send_done,
+            </if>
+            <if test="sendDoneMessage != null">
+                send_done_message,
+            </if>
+            <if test="resistanceStatus != null">
+                resistance_status
+            </if>
+            <if test="resistanceStatusMessage != null">
+                resistance_status_message,
+            </if>
+            <if test="capacityStatus != null">
+                capacity_status
+            </if>
+            <if test="capacityStatusMessage != null">
+                capacity_status_message,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="gprsId != null">
+                #{gprsId,jdbcType=VARCHAR},
+            </if>
+            <if test="sendDone != null">
+                #{sendDone,jdbcType=INTEGER},
+            </if>
+            <if test="sendDoneMessage != null">
+                #{sendDoneMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="resistanceStatus != null">
+                #{resistanceStatus,jdbcType=INTEGER},
+            </if>
+            <if test="resistanceStatusMessage != null">
+                #{resistanceStatusMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="capacityStatus != null">
+                #{capacityStatus,jdbcType=INTEGER},
+            </if>
+            <if test="capacityStatusMessage != null">
+                #{capacityStatusMessage,jdbcType=INTEGER},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.PulseCalculationSend">
+        update pulse_calculation_send
+        <set>
+            <if test="gprsId != null">
+                gprs_id = #{gprsId,jdbcType=VARCHAR},
+            </if>
+            <if test="sendDone != null">
+                send_done = #{sendDone,jdbcType=INTEGER},
+            </if>
+            <if test="sendDoneMessage != null">
+                send_done_message = #{sendDoneMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="resistanceStatus != null">
+                resistance_status = #{resistanceStatus,jdbcType=INTEGER},
+            </if>
+            <if test="resistanceStatusMessage != null">
+                resistance_status_message = #{resistanceStatusMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="capacityStatus != null">
+                capacity_status = #{capacityStatus,jdbcType=INTEGER},
+            </if>
+            <if test="capacityStatusMessage != null">
+                capacity_status_message = #{capacityStatusMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.PulseCalculationSend">
+		update pulse_calculation_send
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		send_done = #{sendDone,jdbcType=INTEGER},
+		send_done_message = #{sendDoneMessage,jdbcType=VARCHAR},
+		resistance_status = #{resistanceStatus,jdbcType=INTEGER},
+		resistance_status_message = #{resistanceStatusMessage,jdbcType=VARCHAR},
+		capacity_status = #{capacityStatus,jdbcType=INTEGER},
+		capacity_status_message = #{capacityStatusMessage,jdbcType=VARCHAR},
+		send_time = #{sendTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

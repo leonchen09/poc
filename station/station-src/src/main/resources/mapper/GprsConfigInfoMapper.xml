@@ -1,0 +1,2450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.GprsConfigInfoMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.GprsConfigInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="gprs_id_out" property="gprsIdOut" jdbcType="VARCHAR" />
+		<result column="rcv_time" property="rcvTime" jdbcType="TIMESTAMP" />
+		<result column="link_status" property="linkStatus" jdbcType="TINYINT" />
+		<result column="port" property="port" jdbcType="INTEGER" />
+		<result column="connection_type" property="connectionType"
+			jdbcType="INTEGER" />
+		<result column="heartbeat_interval" property="heartbeatInterval"
+			jdbcType="INTEGER" />
+		<result column="float_interval" property="floatInterval"
+			jdbcType="INTEGER" />
+		<result column="discharge_interval" property="dischargeInterval"
+			jdbcType="INTEGER" />
+		<result column="charge_threshold" property="chargeThreshold"
+			jdbcType="DECIMAL" />
+		<result column="discharge_threshold" property="dischargeThreshold"
+			jdbcType="DECIMAL" />
+		<result column="nominal_capacity" property="nominalCapacity"
+			jdbcType="DECIMAL" />
+		<result column="current_capacity" property="currentCapacity"
+			jdbcType="DECIMAL" />
+		<result column="vol_high_warning_threshold" property="volHighWarningThreshold"
+			jdbcType="DECIMAL" />
+		<result column="vol_low_warning_threshold" property="volLowWarningThreshold"
+			jdbcType="DECIMAL" />
+		<result column="tem_high_warning_threshold" property="temHighWarningThreshold"
+			jdbcType="INTEGER" />
+		<result column="tem_low_warning_threshold" property="temLowWarningThreshold"
+			jdbcType="INTEGER" />
+		<result column="soc_low_warning_threshold" property="socLowWarningThreshold"
+			jdbcType="INTEGER" />
+		<result column="publish_version" property="publishVersion"
+			jdbcType="INTEGER" />
+		<result column="children_version" property="childrenVersion"
+			jdbcType="INTEGER" />
+		<result column="edit_version" property="editVersion" jdbcType="INTEGER" />
+		<result column="publish_time" property="publishTime" jdbcType="DATE" />
+		<result column="device_type" property="deviceType" jdbcType="INTEGER" />
+		<result column="device_phone" property="devicePhone" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="create_id" property="createId" jdbcType="INTEGER" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="refresh_time" property="refreshTime" jdbcType="INTEGER" />
+		<result column="console_cell_cap_error" property="consoleCellCapError"
+			jdbcType="DECIMAL" />
+		<result column="console_cell_cap_normal" property="consoleCellCapNormal"
+			jdbcType="DECIMAL" />
+		<result column="company_id" property="companyId" jdbcType="INTEGER" />
+		<result column="duration_min_excellent" property="durationMinExcellent"
+			jdbcType="INTEGER" />
+		<result column="duration_max_excellent" property="durationMaxExcellent"
+			jdbcType="INTEGER" />
+		<result column="duration_min_good" property="durationMinGood"
+			jdbcType="INTEGER" />
+		<result column="duration_max_good" property="durationMaxGood"
+			jdbcType="INTEGER" />
+		<result column="duration_min_medium" property="durationMinMedium"
+			jdbcType="INTEGER" />
+		<result column="duration_max_medium" property="durationMaxMedium"
+			jdbcType="INTEGER" />
+		<result column="duration_max_bad" property="durationMaxBad"
+			jdbcType="INTEGER" />
+		<result column="duration_min_bad" property="durationMinBad"
+			jdbcType="INTEGER" />
+		<result column="valid_discharge_vol" property="validDischargeVol"
+			jdbcType="DECIMAL" />
+		<result column="valid_charge_vol" property="validChargeVol"
+			jdbcType="DECIMAL" />
+		<result column="hall_flag" property="hallFlag" jdbcType="INTEGER" />
+		<result column="fast_sample_interval" property="fastSampleInterval"
+			jdbcType="INTEGER" />
+		<result column="slow_sample_interval" property="slowSampleInterval"
+			jdbcType="INTEGER" />
+		<result column="discharge_time" property="dischargeTime"
+			jdbcType="INTEGER" />
+		<result column="slow_sample_time" property="slowSampleTime"
+			jdbcType="INTEGER" />
+		<result column="valid_discharge_cur" property="validDischargeCur"
+			jdbcType="DECIMAL" />
+		<result column="valid_charge_cur" property="validChargeCur"
+			jdbcType="DECIMAL" />
+		<result column="down_cur" property="downCur" jdbcType="DECIMAL" />
+		<result column="down_vol" property="downVol" jdbcType="DECIMAL" />
+		<result column="valid_day" property="validDay" jdbcType="INTEGER" />
+		<result column="suggest_cell_cap_percent" property="suggestCellCapPercent"
+			jdbcType="VARCHAR" />
+		<result column="suggest_time" property="suggestTime" jdbcType="VARCHAR" />
+		<result column="suggest_average_num" property="suggestAverageNum"
+			jdbcType="INTEGER" />
+		<result column="margin_time" property="marginTime" jdbcType="DECIMAL" />
+		<result column="max_discharge_cur" property="maxDischargeCur"
+			jdbcType="DECIMAL" />
+		<!-- add -->
+		<result column="gprs_flag" property="gprsFlag" jdbcType="INTEGER" />
+		<!-- 10/10add -->
+		<result column="gprs_port" property="gprsPort" jdbcType="VARCHAR" />
+		<result column="gprs_spec" property="gprsSpec" jdbcType="VARCHAR" />
+		<!-- 加上均衡信息 -->
+		<result property="para1" jdbcType="INTEGER" column="para1" />
+		<result property="para2" jdbcType="INTEGER" column="para2" />
+		<result property="para3" jdbcType="INTEGER" column="para3" />
+		<result property="para4" jdbcType="INTEGER" column="para4" />
+		<result property="para5" jdbcType="INTEGER" column="para5" />
+		<result property="para6" jdbcType="INTEGER" column="para6" />
+		<result property="para7" jdbcType="INTEGER" column="para7" />
+		<result column="charge_interval" property="chargeInterval" jdbcType="INTEGER"/>
+		
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, gprs_id_out, rcv_time, link_status, port,
+		connection_type, heartbeat_interval,
+		float_interval,
+		discharge_interval, charge_threshold, discharge_threshold,
+		nominal_capacity,
+		current_capacity, vol_high_warning_threshold,
+		vol_low_warning_threshold,
+		tem_high_warning_threshold,
+		tem_low_warning_threshold, soc_low_warning_threshold, publish_version,
+		children_version,
+		edit_version, publish_time, device_type,
+		device_phone, create_time,
+		create_id, create_name,
+		refresh_time,
+		console_cell_cap_error, console_cell_cap_normal, company_id,
+		duration_min_excellent,
+		duration_max_excellent, duration_min_good,
+		duration_max_good, duration_min_medium,
+		duration_max_medium,
+		duration_max_bad, duration_min_bad,
+		valid_discharge_vol,
+		valid_charge_vol,
+		hall_flag,
+		fast_sample_interval,
+		slow_sample_interval,
+		discharge_time,
+		slow_sample_time,
+		valid_discharge_cur, valid_charge_cur,
+		down_cur, down_vol, valid_day,
+		suggest_cell_cap_percent,
+		suggest_time,
+		suggest_average_num, margin_time,
+		max_discharge_cur,
+		gprs_flag,
+		gprs_port,
+		gprs_spec,charge_interval
+	</sql>
+
+	<select id="selectByGprsIds" resultMap="BaseResultMap"
+		parameterType="java.util.List">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		gprs_config_info
+		WHERE gprs_id IN
+		<foreach item="id" index="index" collection="list" open="("
+			separator="," close=")">#{id,jdbcType=VARCHAR}</foreach>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		<!-- 原来的 -->
+		<!-- select <include refid="Base_Column_List" /> from gprs_config_info 
+			where id = #{id,jdbcType=INTEGER} -->
+		<!-- 加上均衡信息 -->
+		select
+		gprs.* ,
+		balance.para1, balance.para2, balance.para3,
+		balance.para4,
+		balance.para5,
+		balance.para6, balance.para7
+		from
+		gprs_config_info as gprs left join version_and_balance_info as balance
+		on gprs.gprs_id=balance.gprs_id
+		where gprs.id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap"
+		parameterType="com.station.moudles.entity.GprsConfigInfo">
+		select
+		<include refid="Base_Column_List" />
+		from gprs_config_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="linkStatus != null">
+				and link_status = #{linkStatus,jdbcType=TINYINT}
+			</if>
+			<if test="port != null">
+				and port = #{port,jdbcType=INTEGER}
+			</if>
+			<if test="connectionType != null">
+				and connection_type = #{connectionType,jdbcType=INTEGER}
+			</if>
+			<if test="heartbeatInterval != null">
+				and heartbeat_interval =
+				#{heartbeatInterval,jdbcType=INTEGER}
+			</if>
+			<if test="floatInterval != null">
+				and float_interval = #{floatInterval,jdbcType=INTEGER}
+			</if>
+			<if test="dischargeInterval != null">
+				and discharge_interval =
+				#{dischargeInterval,jdbcType=INTEGER}
+			</if>
+			<if test="chargeThreshold != null">
+				and charge_threshold =
+				#{chargeThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="dischargeThreshold != null">
+				and discharge_threshold =
+				#{dischargeThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="nominalCapacity != null">
+				and nominal_capacity =
+				#{nominalCapacity,jdbcType=DECIMAL}
+			</if>
+			<if test="currentCapacity != null">
+				and current_capacity =
+				#{currentCapacity,jdbcType=DECIMAL}
+			</if>
+			<if test="volHighWarningThreshold != null">
+				and vol_high_warning_threshold =
+				#{volHighWarningThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="volLowWarningThreshold != null">
+				and vol_low_warning_threshold =
+				#{volLowWarningThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="temHighWarningThreshold != null">
+				and tem_high_warning_threshold =
+				#{temHighWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="temLowWarningThreshold != null">
+				and tem_low_warning_threshold =
+				#{temLowWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="socLowWarningThreshold != null">
+				and soc_low_warning_threshold =
+				#{socLowWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="publishVersion != null">
+				and publish_version = #{publishVersion,jdbcType=INTEGER}
+			</if>
+			<if test="childrenVersion != null">
+				and children_version =
+				#{childrenVersion,jdbcType=INTEGER}
+			</if>
+			<if test="editVersion != null">
+				and edit_version = #{editVersion,jdbcType=INTEGER}
+			</if>
+			<if test="publishTime != null">
+				and publish_time = #{publishTime,jdbcType=DATE}
+			</if>
+			<if test="deviceType != null">
+				and device_type = #{deviceType,jdbcType=INTEGER}
+			</if>
+			<if test="devicePhone != null">
+				and device_phone = #{devicePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name = #{createName,jdbcType=VARCHAR}
+			</if>
+			<if test="refreshTime != null">
+				and refresh_time = #{refreshTime,jdbcType=INTEGER}
+			</if>
+			<if test="consoleCellCapError != null">
+				and console_cell_cap_error =
+				#{consoleCellCapError,jdbcType=DECIMAL}
+			</if>
+			<if test="consoleCellCapNormal != null">
+				and console_cell_cap_normal =
+				#{consoleCellCapNormal,jdbcType=DECIMAL}
+			</if>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinExcellent != null">
+				and duration_min_excellent =
+				#{durationMinExcellent,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxExcellent != null">
+				and duration_max_excellent =
+				#{durationMaxExcellent,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinGood != null">
+				and duration_min_good =
+				#{durationMinGood,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxGood != null">
+				and duration_max_good =
+				#{durationMaxGood,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinMedium != null">
+				and duration_min_medium =
+				#{durationMinMedium,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxMedium != null">
+				and duration_max_medium =
+				#{durationMaxMedium,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxBad != null">
+				and duration_max_bad = #{durationMaxBad,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinBad != null">
+				and duration_min_bad = #{durationMinBad,jdbcType=INTEGER}
+			</if>
+			<if test="validDischargeVol != null">
+				and valid_discharge_vol =
+				#{validDischargeVol,jdbcType=DECIMAL}
+			</if>
+			<if test="validChargeVol != null">
+				and valid_charge_vol = #{validChargeVol,jdbcType=DECIMAL}
+			</if>
+			<if test="hallFlag != null">
+				and hall_flag = #{hallFlag,jdbcType=INTEGER}
+			</if>
+			<if test="fastSampleInterval != null">
+				and fast_sample_interval =
+				#{fastSampleInterval,jdbcType=INTEGER}
+			</if>
+			<if test="slowSampleInterval != null">
+				and slow_sample_interval =
+				#{slowSampleInterval,jdbcType=INTEGER}
+			</if>
+			<if test="dischargeTime != null">
+				and discharge_time = #{dischargeTime,jdbcType=INTEGER}
+			</if>
+			<if test="slowSampleTime != null">
+				and slow_sample_time = #{slowSampleTime,jdbcType=INTEGER}
+			</if>
+			<if test="validDischargeCur != null">
+				and valid_discharge_cur =
+				#{validDischargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="validChargeCur != null">
+				and valid_charge_cur = #{validChargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="downCur != null">
+				and down_cur = #{downCur,jdbcType=DECIMAL}
+			</if>
+			<if test="downVol != null">
+				and down_vol = #{downVol,jdbcType=DECIMAL}
+			</if>
+			<if test="validDay != null">
+				and valid_day = #{validDay,jdbcType=INTEGER}
+			</if>
+			<if test="suggestCellCapPercent != null">
+				and suggest_cell_cap_percent =
+				#{suggestCellCapPercent,jdbcType=VARCHAR}
+			</if>
+			<if test="suggestTime != null">
+				and suggest_time = #{suggestTime,jdbcType=VARCHAR}
+			</if>
+			<if test="suggestAverageNum != null">
+				and suggest_average_num =
+				#{suggestAverageNum,jdbcType=INTEGER}
+			</if>
+			<if test="maxDischargeCur != null">
+				and max_discharge_cur =
+				#{maxDischargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="chargeInterval != null">
+				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap"
+		parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from gprs_config_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out like "%${gprsIdOut}%"
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="linkStatus == 1">
+				and link_status = #{linkStatus,jdbcType=TINYINT}
+			</if>
+			<if test="linkStatus == 0">
+				and (link_status = #{linkStatus,jdbcType=TINYINT} or link_dtatus is null)
+			</if>
+			<if test="port != null">
+				and port = #{port,jdbcType=INTEGER}
+			</if>
+			<if test="connectionType != null">
+				and connection_type = #{connectionType,jdbcType=INTEGER}
+			</if>
+			<if test="heartbeatInterval != null">
+				and heartbeat_interval =
+				#{heartbeatInterval,jdbcType=INTEGER}
+			</if>
+			<if test="floatInterval != null">
+				and float_interval = #{floatInterval,jdbcType=INTEGER}
+			</if>
+			<if test="dischargeInterval != null">
+				and discharge_interval =
+				#{dischargeInterval,jdbcType=INTEGER}
+			</if>
+			<if test="chargeThreshold != null">
+				and charge_threshold =
+				#{chargeThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="dischargeThreshold != null">
+				and discharge_threshold =
+				#{dischargeThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="nominalCapacity != null">
+				and nominal_capacity =
+				#{nominalCapacity,jdbcType=DECIMAL}
+			</if>
+			<if test="currentCapacity != null">
+				and current_capacity =
+				#{currentCapacity,jdbcType=DECIMAL}
+			</if>
+			<if test="volHighWarningThreshold != null">
+				and vol_high_warning_threshold =
+				#{volHighWarningThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="volLowWarningThreshold != null">
+				and vol_low_warning_threshold =
+				#{volLowWarningThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="temHighWarningThreshold != null">
+				and tem_high_warning_threshold =
+				#{temHighWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="temLowWarningThreshold != null">
+				and tem_low_warning_threshold =
+				#{temLowWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="socLowWarningThreshold != null">
+				and soc_low_warning_threshold =
+				#{socLowWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="publishVersion != null">
+				and publish_version = #{publishVersion,jdbcType=INTEGER}
+			</if>
+			<if test="childrenVersion != null">
+				and children_version =
+				#{childrenVersion,jdbcType=INTEGER}
+			</if>
+			<if test="editVersion != null">
+				and edit_version = #{editVersion,jdbcType=INTEGER}
+			</if>
+			<if test="publishTime != null">
+				and publish_time = #{publishTime,jdbcType=DATE}
+			</if>
+			<if test="deviceType != null">
+				and device_type = #{deviceType,jdbcType=INTEGER}
+			</if>
+			<if test="devicePhone != null">
+				and device_phone like "%${devicePhone}%"
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name like "%${createName}%"
+			</if>
+			<if test="refreshTime != null">
+				and refresh_time = #{refreshTime,jdbcType=INTEGER}
+			</if>
+			<if test="consoleCellCapError != null">
+				and console_cell_cap_error =
+				#{consoleCellCapError,jdbcType=DECIMAL}
+			</if>
+			<if test="consoleCellCapNormal != null">
+				and console_cell_cap_normal =
+				#{consoleCellCapNormal,jdbcType=DECIMAL}
+			</if>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinExcellent != null">
+				and duration_min_excellent =
+				#{durationMinExcellent,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxExcellent != null">
+				and duration_max_excellent =
+				#{durationMaxExcellent,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinGood != null">
+				and duration_min_good =
+				#{durationMinGood,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxGood != null">
+				and duration_max_good =
+				#{durationMaxGood,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinMedium != null">
+				and duration_min_medium =
+				#{durationMinMedium,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxMedium != null">
+				and duration_max_medium =
+				#{durationMaxMedium,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxBad != null">
+				and duration_max_bad = #{durationMaxBad,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinBad != null">
+				and duration_min_bad = #{durationMinBad,jdbcType=INTEGER}
+			</if>
+			<if test="validDischargeVol != null">
+				and valid_discharge_vol =
+				#{validDischargeVol,jdbcType=DECIMAL}
+			</if>
+			<if test="validChargeVol != null">
+				and valid_charge_vol = #{validChargeVol,jdbcType=DECIMAL}
+			</if>
+			<if test="hallFlag != null">
+				and hall_flag = #{hallFlag,jdbcType=INTEGER}
+			</if>
+			<if test="fastSampleInterval != null">
+				and fast_sample_interval =
+				#{fastSampleInterval,jdbcType=INTEGER}
+			</if>
+			<if test="slowSampleInterval != null">
+				and slow_sample_interval =
+				#{slowSampleInterval,jdbcType=INTEGER}
+			</if>
+			<if test="dischargeTime != null">
+				and discharge_time = #{dischargeTime,jdbcType=INTEGER}
+			</if>
+			<if test="slowSampleTime != null">
+				and slow_sample_time = #{slowSampleTime,jdbcType=INTEGER}
+			</if>
+			<if test="validDischargeCur != null">
+				and valid_discharge_cur =
+				#{validDischargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="validChargeCur != null">
+				and valid_charge_cur = #{validChargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="downCur != null">
+				and down_cur = #{downCur,jdbcType=DECIMAL}
+			</if>
+			<if test="downVol != null">
+				and down_vol = #{downVol,jdbcType=DECIMAL}
+			</if>
+			<if test="validDay != null">
+				and valid_day = #{validDay,jdbcType=INTEGER}
+			</if>
+			<if test="suggestCellCapPercent != null">
+				and suggest_cell_cap_percent like
+				"%${suggestCellCapPercent}%"
+			</if>
+			<if test="suggestTime != null">
+				and suggest_time like "%${suggestTime}%"
+			</if>
+			<if test="suggestAverageNum != null">
+				and suggest_average_num =
+				#{suggestAverageNum,jdbcType=INTEGER}
+			</if>
+			<!-- add -->
+			<if test="gprsFlag != null">
+				and gprs_flag = #{gprsFlag,jdbcType=INTEGER}
+			</if>
+			<!-- 10/10add 备用主机端口和规格 -->
+			<if test="gprsPort != null">
+				and gprs_prot like "%${gprsPort}%"
+			</if>
+			<if test="gprsSpec != null">
+				and gprs_spec like "%${gprsSpec}%"
+			</if>
+			
+			<if test="chargeInterval != null">
+				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+		</where>
+		order by id desc
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		gprs_config_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from gprs_config_info
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.GprsConfigInfo">
+		delete from gprs_config_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="linkStatus != null">
+				and link_status = #{linkStatus,jdbcType=TINYINT}
+			</if>
+			<if test="port != null">
+				and port = #{port,jdbcType=INTEGER}
+			</if>
+			<if test="connectionType != null">
+				and connection_type = #{connectionType,jdbcType=INTEGER}
+			</if>
+			<if test="heartbeatInterval != null">
+				and heartbeat_interval =
+				#{heartbeatInterval,jdbcType=INTEGER}
+			</if>
+			<if test="floatInterval != null">
+				and float_interval = #{floatInterval,jdbcType=INTEGER}
+			</if>
+			<if test="dischargeInterval != null">
+				and discharge_interval =
+				#{dischargeInterval,jdbcType=INTEGER}
+			</if>
+			<if test="chargeThreshold != null">
+				and charge_threshold =
+				#{chargeThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="dischargeThreshold != null">
+				and discharge_threshold =
+				#{dischargeThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="nominalCapacity != null">
+				and nominal_capacity =
+				#{nominalCapacity,jdbcType=DECIMAL}
+			</if>
+			<if test="currentCapacity != null">
+				and current_capacity =
+				#{currentCapacity,jdbcType=DECIMAL}
+			</if>
+			<if test="volHighWarningThreshold != null">
+				and vol_high_warning_threshold =
+				#{volHighWarningThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="volLowWarningThreshold != null">
+				and vol_low_warning_threshold =
+				#{volLowWarningThreshold,jdbcType=DECIMAL}
+			</if>
+			<if test="temHighWarningThreshold != null">
+				and tem_high_warning_threshold =
+				#{temHighWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="temLowWarningThreshold != null">
+				and tem_low_warning_threshold =
+				#{temLowWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="socLowWarningThreshold != null">
+				and soc_low_warning_threshold =
+				#{socLowWarningThreshold,jdbcType=INTEGER}
+			</if>
+			<if test="publishVersion != null">
+				and publish_version = #{publishVersion,jdbcType=INTEGER}
+			</if>
+			<if test="childrenVersion != null">
+				and children_version =
+				#{childrenVersion,jdbcType=INTEGER}
+			</if>
+			<if test="editVersion != null">
+				and edit_version = #{editVersion,jdbcType=INTEGER}
+			</if>
+			<if test="publishTime != null">
+				and publish_time = #{publishTime,jdbcType=DATE}
+			</if>
+			<if test="deviceType != null">
+				and device_type = #{deviceType,jdbcType=INTEGER}
+			</if>
+			<if test="devicePhone != null">
+				and device_phone = #{devicePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name = #{createName,jdbcType=VARCHAR}
+			</if>
+			<if test="refreshTime != null">
+				and refresh_time = #{refreshTime,jdbcType=INTEGER}
+			</if>
+			<if test="consoleCellCapError != null">
+				and console_cell_cap_error =
+				#{consoleCellCapError,jdbcType=DECIMAL}
+			</if>
+			<if test="consoleCellCapNormal != null">
+				and console_cell_cap_normal =
+				#{consoleCellCapNormal,jdbcType=DECIMAL}
+			</if>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinExcellent != null">
+				and duration_min_excellent =
+				#{durationMinExcellent,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxExcellent != null">
+				and duration_max_excellent =
+				#{durationMaxExcellent,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinGood != null">
+				and duration_min_good =
+				#{durationMinGood,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxGood != null">
+				and duration_max_good =
+				#{durationMaxGood,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinMedium != null">
+				and duration_min_medium =
+				#{durationMinMedium,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxMedium != null">
+				and duration_max_medium =
+				#{durationMaxMedium,jdbcType=INTEGER}
+			</if>
+			<if test="durationMaxBad != null">
+				and duration_max_bad = #{durationMaxBad,jdbcType=INTEGER}
+			</if>
+			<if test="durationMinBad != null">
+				and duration_min_bad = #{durationMinBad,jdbcType=INTEGER}
+			</if>
+			<if test="validDischargeVol != null">
+				and valid_discharge_vol =
+				#{validDischargeVol,jdbcType=DECIMAL}
+			</if>
+			<if test="validChargeVol != null">
+				and valid_charge_vol = #{validChargeVol,jdbcType=DECIMAL}
+			</if>
+			<if test="hallFlag != null">
+				and hall_flag = #{hallFlag,jdbcType=INTEGER}
+			</if>
+			<if test="fastSampleInterval != null">
+				and fast_sample_interval =
+				#{fastSampleInterval,jdbcType=INTEGER}
+			</if>
+			<if test="slowSampleInterval != null">
+				and slow_sample_interval =
+				#{slowSampleInterval,jdbcType=INTEGER}
+			</if>
+			<if test="dischargeTime != null">
+				and discharge_time = #{dischargeTime,jdbcType=INTEGER}
+			</if>
+			<if test="slowSampleTime != null">
+				and slow_sample_time = #{slowSampleTime,jdbcType=INTEGER}
+			</if>
+			<if test="validDischargeCur != null">
+				and valid_discharge_cur =
+				#{validDischargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="validChargeCur != null">
+				and valid_charge_cur = #{validChargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="downCur != null">
+				and down_cur = #{downCur,jdbcType=DECIMAL}
+			</if>
+			<if test="downVol != null">
+				and down_vol = #{downVol,jdbcType=DECIMAL}
+			</if>
+			<if test="validDay != null">
+				and valid_day = #{validDay,jdbcType=INTEGER}
+			</if>
+			<if test="suggestCellCapPercent != null">
+				and suggest_cell_cap_percent =
+				#{suggestCellCapPercent,jdbcType=VARCHAR}
+			</if>
+			<if test="suggestTime != null">
+				and suggest_time = #{suggestTime,jdbcType=VARCHAR}
+			</if>
+			<if test="suggestAverageNum != null">
+				and suggest_average_num =
+				#{suggestAverageNum,jdbcType=INTEGER}
+			</if>
+			<if test="chargeInterval != null">
+				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.GprsConfigInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into gprs_config_info
+		(gprs_id, gprs_id_out, rcv_time,
+		link_status, port,
+		connection_type,
+		heartbeat_interval, float_interval, discharge_interval,
+		charge_threshold, discharge_threshold, nominal_capacity,
+		current_capacity, vol_high_warning_threshold,
+		vol_low_warning_threshold, tem_high_warning_threshold,
+		tem_low_warning_threshold, soc_low_warning_threshold,
+		publish_version,
+		children_version, edit_version,
+		publish_time, device_type,
+		device_phone,
+		create_time, create_id, create_name,
+		refresh_time,
+		console_cell_cap_error, console_cell_cap_normal,
+		company_id,
+		duration_min_excellent, duration_max_excellent,
+		duration_min_good,
+		duration_max_good,
+		duration_min_medium,
+		duration_max_medium,
+		duration_max_bad, duration_min_bad,
+		valid_discharge_vol,
+		valid_charge_vol, hall_flag,
+		fast_sample_interval,
+		slow_sample_interval,
+		discharge_time, slow_sample_time,
+		valid_discharge_cur,
+		valid_charge_cur, down_cur, down_vol,
+		valid_day,
+		suggest_cell_cap_percent, suggest_time,
+		suggest_average_num,
+		margin_time, max_discharge_cur,gprs_flag,gprs_port,gprs_spec,charge_interval)
+		values
+		(#{gprsId,jdbcType=VARCHAR},
+		#{gprsIdOut,jdbcType=VARCHAR},
+		#{rcvTime,jdbcType=TIMESTAMP},
+		#{linkStatus,jdbcType=TINYINT},
+		#{port,jdbcType=INTEGER},
+		#{connectionType,jdbcType=INTEGER},
+		#{heartbeatInterval,jdbcType=INTEGER},
+		#{floatInterval,jdbcType=INTEGER},
+		#{dischargeInterval,jdbcType=INTEGER},
+		#{chargeThreshold,jdbcType=DECIMAL},
+		#{dischargeThreshold,jdbcType=DECIMAL},
+		#{nominalCapacity,jdbcType=DECIMAL},
+		#{currentCapacity,jdbcType=DECIMAL},
+		#{volHighWarningThreshold,jdbcType=DECIMAL},
+		#{volLowWarningThreshold,jdbcType=DECIMAL},
+		#{temHighWarningThreshold,jdbcType=INTEGER},
+		#{temLowWarningThreshold,jdbcType=INTEGER},
+		#{socLowWarningThreshold,jdbcType=INTEGER},
+		#{publishVersion,jdbcType=INTEGER},
+		#{childrenVersion,jdbcType=INTEGER}, #{editVersion,jdbcType=INTEGER},
+		#{publishTime,jdbcType=DATE},
+		#{deviceType,jdbcType=INTEGER},
+		#{devicePhone,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{createId,jdbcType=INTEGER}, #{createName,jdbcType=VARCHAR},
+		#{refreshTime,jdbcType=INTEGER},
+		#{consoleCellCapError,jdbcType=DECIMAL},
+		#{consoleCellCapNormal,jdbcType=DECIMAL},
+		#{companyId,jdbcType=INTEGER},
+		#{durationMinExcellent,jdbcType=INTEGER},
+		#{durationMaxExcellent,jdbcType=INTEGER},
+		#{durationMinGood,jdbcType=INTEGER},
+		#{durationMaxGood,jdbcType=INTEGER},
+		#{durationMinMedium,jdbcType=INTEGER},
+		#{durationMaxMedium,jdbcType=INTEGER},
+		#{durationMaxBad,jdbcType=INTEGER},
+		#{durationMinBad,jdbcType=INTEGER},
+		#{validDischargeVol,jdbcType=DECIMAL},
+		#{validChargeVol,jdbcType=DECIMAL}, #{hallFlag,jdbcType=INTEGER},
+		#{fastSampleInterval,jdbcType=INTEGER},
+		#{slowSampleInterval,jdbcType=INTEGER},
+		#{dischargeTime,jdbcType=INTEGER}, #{slowSampleTime,jdbcType=INTEGER},
+		#{validDischargeCur,jdbcType=DECIMAL},
+		#{validChargeCur,jdbcType=DECIMAL},
+		#{downCur,jdbcType=DECIMAL},
+		#{downVol,jdbcType=DECIMAL},
+		#{validDay,jdbcType=INTEGER},
+		#{suggestCellCapPercent,jdbcType=VARCHAR},
+		#{suggestTime,jdbcType=VARCHAR},
+		#{suggestAverageNum,jdbcType=INTEGER},
+		#{marginTime,jdbcType=DECIMAL},
+		#{maxDischargeCur,jdbcType=DECIMAL},
+		#{gprsFlag,jdbcType=INTEGER},
+		#{gprsPort,jdbcType=VARCHAR},
+		#{gprsSpec,jdbcType=VARCHAR},
+		#{chargeInterval,jdbcType=INTEGER})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.GprsConfigInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into gprs_config_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="gprsIdOut != null">
+				gprs_id_out,
+			</if>
+			<if test="rcvTime != null">
+				rcv_time,
+			</if>
+			<if test="linkStatus != null">
+				link_status,
+			</if>
+			<if test="port != null">
+				port,
+			</if>
+			<if test="connectionType != null">
+				connection_type,
+			</if>
+			<if test="heartbeatInterval != null">
+				heartbeat_interval,
+			</if>
+			<if test="floatInterval != null">
+				float_interval,
+			</if>
+			<if test="dischargeInterval != null">
+				discharge_interval,
+			</if>
+			<if test="chargeThreshold != null">
+				charge_threshold,
+			</if>
+			<if test="dischargeThreshold != null">
+				discharge_threshold,
+			</if>
+			<if test="nominalCapacity != null">
+				nominal_capacity,
+			</if>
+			<if test="currentCapacity != null">
+				current_capacity,
+			</if>
+			<if test="volHighWarningThreshold != null">
+				vol_high_warning_threshold,
+			</if>
+			<if test="volLowWarningThreshold != null">
+				vol_low_warning_threshold,
+			</if>
+			<if test="temHighWarningThreshold != null">
+				tem_high_warning_threshold,
+			</if>
+			<if test="temLowWarningThreshold != null">
+				tem_low_warning_threshold,
+			</if>
+			<if test="socLowWarningThreshold != null">
+				soc_low_warning_threshold,
+			</if>
+			<if test="publishVersion != null">
+				publish_version,
+			</if>
+			<if test="childrenVersion != null">
+				children_version,
+			</if>
+			<if test="editVersion != null">
+				edit_version,
+			</if>
+			<if test="publishTime != null">
+				publish_time,
+			</if>
+			<if test="deviceType != null">
+				device_type,
+			</if>
+			<if test="devicePhone != null">
+				device_phone,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+			<if test="createName != null">
+				create_name,
+			</if>
+			<if test="refreshTime != null">
+				refresh_time,
+			</if>
+			<if test="consoleCellCapError != null">
+				console_cell_cap_error,
+			</if>
+			<if test="consoleCellCapNormal != null">
+				console_cell_cap_normal,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="durationMinExcellent != null">
+				duration_min_excellent,
+			</if>
+			<if test="durationMaxExcellent != null">
+				duration_max_excellent,
+			</if>
+			<if test="durationMinGood != null">
+				duration_min_good,
+			</if>
+			<if test="durationMaxGood != null">
+				duration_max_good,
+			</if>
+			<if test="durationMinMedium != null">
+				duration_min_medium,
+			</if>
+			<if test="durationMaxMedium != null">
+				duration_max_medium,
+			</if>
+			<if test="durationMaxBad != null">
+				duration_max_bad,
+			</if>
+			<if test="durationMinBad != null">
+				duration_min_bad,
+			</if>
+			<if test="validDischargeVol != null">
+				valid_discharge_vol,
+			</if>
+			<if test="validChargeVol != null">
+				valid_charge_vol,
+			</if>
+			<if test="hallFlag != null">
+				hall_flag,
+			</if>
+			<if test="fastSampleInterval != null">
+				fast_sample_interval,
+			</if>
+			<if test="slowSampleInterval != null">
+				slow_sample_interval,
+			</if>
+			<if test="dischargeTime != null">
+				discharge_time,
+			</if>
+			<if test="slowSampleTime != null">
+				slow_sample_time,
+			</if>
+			<if test="dischargeTime != null">
+				discharge_time,
+			</if>
+			<if test="slowSampleTime != null">
+				slow_sample_time,
+			</if>
+			<if test="validDischargeCur != null">
+				valid_discharge_cur,
+			</if>
+			<if test="validChargeCur != null">
+				valid_charge_cur,
+			</if>
+			<if test="downCur != null">
+				down_cur,
+			</if>
+			<if test="downVol != null">
+				down_vol,
+			</if>
+			<if test="validDay != null">
+				valid_day,
+			</if>
+			<if test="suggestCellCapPercent != null">
+				suggest_cell_cap_percent,
+			</if>
+			<if test="suggestTime != null">
+				suggest_time,
+			</if>
+			<if test="suggestAverageNum != null">
+				suggest_average_num,
+			</if>
+			<if test="marginTime != null">
+				margin_time,
+			</if>
+			<if test="maxDischargeCur != null">
+				max_discharge_cur,
+			</if>
+			<!-- ADD -->
+			<if test="gprsFlag != null">
+				gprs_flag,
+			</if>
+			<!--10/10 ADD -->
+			<if test="gprsSpec != null">
+				gprs_spec,
+			</if>
+			<if test="gprsPort != null">
+				gprs_port,
+			</if>
+			<if test="chargeInterval != null">
+				 charge_interval, 
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsIdOut != null">
+				#{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				#{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="linkStatus != null">
+				#{linkStatus,jdbcType=TINYINT},
+			</if>
+			<if test="port != null">
+				#{port,jdbcType=INTEGER},
+			</if>
+			<if test="connectionType != null">
+				#{connectionType,jdbcType=INTEGER},
+			</if>
+			<if test="heartbeatInterval != null">
+				#{heartbeatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="floatInterval != null">
+				#{floatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeInterval != null">
+				#{dischargeInterval,jdbcType=INTEGER},
+			</if>
+			<if test="chargeThreshold != null">
+				#{chargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="dischargeThreshold != null">
+				#{dischargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="nominalCapacity != null">
+				#{nominalCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="currentCapacity != null">
+				#{currentCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="volHighWarningThreshold != null">
+				#{volHighWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="volLowWarningThreshold != null">
+				#{volLowWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="temHighWarningThreshold != null">
+				#{temHighWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="temLowWarningThreshold != null">
+				#{temLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="socLowWarningThreshold != null">
+				#{socLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="publishVersion != null">
+				#{publishVersion,jdbcType=INTEGER},
+			</if>
+			<if test="childrenVersion != null">
+				#{childrenVersion,jdbcType=INTEGER},
+			</if>
+			<if test="editVersion != null">
+				#{editVersion,jdbcType=INTEGER},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=DATE},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=INTEGER},
+			</if>
+			<if test="devicePhone != null">
+				#{devicePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				#{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="refreshTime != null">
+				#{refreshTime,jdbcType=INTEGER},
+			</if>
+			<if test="consoleCellCapError != null">
+				#{consoleCellCapError,jdbcType=DECIMAL},
+			</if>
+			<if test="consoleCellCapNormal != null">
+				#{consoleCellCapNormal,jdbcType=DECIMAL},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinExcellent != null">
+				#{durationMinExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxExcellent != null">
+				#{durationMaxExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinGood != null">
+				#{durationMinGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxGood != null">
+				#{durationMaxGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinMedium != null">
+				#{durationMinMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxMedium != null">
+				#{durationMaxMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxBad != null">
+				#{durationMaxBad,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinBad != null">
+				#{durationMinBad,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeVol != null">
+				#{validDischargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeVol != null">
+				#{validChargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="hallFlag != null">
+				#{hallFlag,jdbcType=INTEGER},
+			</if>
+			<if test="fastSampleInterval != null">
+				#{fastSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleInterval != null">
+				#{slowSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeTime != null">
+				#{dischargeTime,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleTime != null">
+				#{slowSampleTime,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeCur != null">
+				#{validDischargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeCur != null">
+				#{validChargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downCur != null">
+				#{downCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downVol != null">
+				#{downVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validDay != null">
+				#{validDay,jdbcType=INTEGER},
+			</if>
+			<if test="suggestCellCapPercent != null">
+				#{suggestCellCapPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestTime != null">
+				#{suggestTime,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestAverageNum != null">
+				#{suggestAverageNum,jdbcType=INTEGER},
+			</if>
+			<if test="marginTime != null">
+				#{marginTime,jdbcType=DECIMAL},
+			</if>
+			<if test="maxDischargeCur != null">
+				#{maxDischargeCur,jdbcType=DECIMAL},
+			</if>
+			<!-- ADD -->
+			<if test="gprsFlag !=null ">
+				#{gprsFlag,jdbcType=INTEGER},
+			</if>
+			<!-- 10/10 add -->
+			<if test="gprsSpec !=null ">
+				#{gprsSpec,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsPort !=null ">
+				#{gprsPort,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeInterval != null">
+				 #{chargeInterval,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.GprsConfigInfo">
+		update gprs_config_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsIdOut != null">
+				gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="linkStatus != null">
+				link_status = #{linkStatus,jdbcType=TINYINT},
+			</if>
+			<if test="port != null">
+				port = #{port,jdbcType=INTEGER},
+			</if>
+			<if test="connectionType != null">
+				connection_type = #{connectionType,jdbcType=INTEGER},
+			</if>
+			<if test="heartbeatInterval != null">
+				heartbeat_interval =
+				#{heartbeatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="floatInterval != null">
+				float_interval = #{floatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeInterval != null">
+				discharge_interval =
+				#{dischargeInterval,jdbcType=INTEGER},
+			</if>
+			<if test="chargeThreshold != null">
+				charge_threshold = #{chargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="dischargeThreshold != null">
+				discharge_threshold =
+				#{dischargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="nominalCapacity != null">
+				nominal_capacity = #{nominalCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="currentCapacity != null">
+				current_capacity = #{currentCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="volHighWarningThreshold != null">
+				vol_high_warning_threshold =
+				#{volHighWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="volLowWarningThreshold != null">
+				vol_low_warning_threshold =
+				#{volLowWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="temHighWarningThreshold != null">
+				tem_high_warning_threshold =
+				#{temHighWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="temLowWarningThreshold != null">
+				tem_low_warning_threshold =
+				#{temLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="socLowWarningThreshold != null">
+				soc_low_warning_threshold =
+				#{socLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="publishVersion != null">
+				publish_version = #{publishVersion,jdbcType=INTEGER},
+			</if>
+			<if test="childrenVersion != null">
+				children_version = #{childrenVersion,jdbcType=INTEGER},
+			</if>
+			<if test="editVersion != null">
+				edit_version = #{editVersion,jdbcType=INTEGER},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=DATE},
+			</if>
+			<if test="deviceType != null">
+				device_type = #{deviceType,jdbcType=INTEGER},
+			</if>
+			<if test="devicePhone != null">
+				device_phone = #{devicePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				create_name = #{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="refreshTime != null">
+				refresh_time = #{refreshTime,jdbcType=INTEGER},
+			</if>
+			<if test="consoleCellCapError != null">
+				console_cell_cap_error =
+				#{consoleCellCapError,jdbcType=DECIMAL},
+			</if>
+			<if test="consoleCellCapNormal != null">
+				console_cell_cap_normal =
+				#{consoleCellCapNormal,jdbcType=DECIMAL},
+			</if>
+			<if test="companyId != null">
+				company_id = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinExcellent != null">
+				duration_min_excellent =
+				#{durationMinExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxExcellent != null">
+				duration_max_excellent =
+				#{durationMaxExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinGood != null">
+				duration_min_good = #{durationMinGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxGood != null">
+				duration_max_good = #{durationMaxGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinMedium != null">
+				duration_min_medium =
+				#{durationMinMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxMedium != null">
+				duration_max_medium =
+				#{durationMaxMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxBad != null">
+				duration_max_bad = #{durationMaxBad,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinBad != null">
+				duration_min_bad = #{durationMinBad,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeVol != null">
+				valid_discharge_vol =
+				#{validDischargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeVol != null">
+				valid_charge_vol = #{validChargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="hallFlag != null">
+				hall_flag = #{hallFlag,jdbcType=INTEGER},
+			</if>
+			<if test="fastSampleInterval != null">
+				fast_sample_interval =
+				#{fastSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleInterval != null">
+				slow_sample_interval =
+				#{slowSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeTime != null">
+				discharge_time = #{dischargeTime,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleTime != null">
+				slow_sample_time = #{slowSampleTime,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeCur != null">
+				valid_discharge_cur =
+				#{validDischargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeCur != null">
+				valid_charge_cur = #{validChargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downCur != null">
+				down_cur = #{downCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downVol != null">
+				down_vol = #{downVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validDay != null">
+				valid_day = #{validDay,jdbcType=INTEGER},
+			</if>
+			<if test="suggestCellCapPercent != null">
+				suggest_cell_cap_percent =
+				#{suggestCellCapPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestTime != null">
+				suggest_time = #{suggestTime,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestAverageNum != null">
+				suggest_average_num =
+				#{suggestAverageNum,jdbcType=INTEGER},
+			</if>
+			<if test="marginTime != null">
+				margin_time = #{marginTime,jdbcType=DECIMAL},
+			</if>
+			<if test="maxDischargeCur != null">
+				max_discharge_cur = #{maxDischargeCur,jdbcType=DECIMAL},
+			</if>
+
+			<if test="gprsFlag != null ">
+				gprs_flag = #{gprsFlag,jdbcType=INTEGER},
+			</if>
+			<!--10/10ADD 备用主机的端口和规格 -->
+			<if test="gprsPort !=null ">
+				gprs_port = #{gprsPort,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsSpec !=null ">
+				gprs_spec = #{gprsSpec,jdbcType=VARCHAR}
+			</if>
+			<if test="chargeInterval != null">
+				and charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.GprsConfigInfo">
+		update
+		gprs_config_info
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		gprs_id_out =
+		#{gprsIdOut,jdbcType=VARCHAR},
+		rcv_time =
+		#{rcvTime,jdbcType=TIMESTAMP},
+		link_status =
+		#{linkStatus,jdbcType=TINYINT},
+		port = #{port,jdbcType=INTEGER},
+		connection_type = #{connectionType,jdbcType=INTEGER},
+		heartbeat_interval =
+		#{heartbeatInterval,jdbcType=INTEGER},
+		float_interval = #{floatInterval,jdbcType=INTEGER},
+		discharge_interval
+		= #{dischargeInterval,jdbcType=INTEGER},
+		charge_threshold =
+		#{chargeThreshold,jdbcType=DECIMAL},
+		discharge_threshold =
+		#{dischargeThreshold,jdbcType=DECIMAL},
+		nominal_capacity =
+		#{nominalCapacity,jdbcType=DECIMAL},
+		current_capacity =
+		#{currentCapacity,jdbcType=DECIMAL},
+		vol_high_warning_threshold =
+		#{volHighWarningThreshold,jdbcType=DECIMAL},
+		vol_low_warning_threshold
+		=
+		#{volLowWarningThreshold,jdbcType=DECIMAL},
+		tem_high_warning_threshold =
+		#{temHighWarningThreshold,jdbcType=INTEGER},
+		tem_low_warning_threshold
+		=
+		#{temLowWarningThreshold,jdbcType=INTEGER},
+		soc_low_warning_threshold
+		=
+		#{socLowWarningThreshold,jdbcType=INTEGER},
+		publish_version =
+		#{publishVersion,jdbcType=INTEGER},
+		children_version =
+		#{childrenVersion,jdbcType=INTEGER},
+		edit_version =
+		#{editVersion,jdbcType=INTEGER},
+		publish_time =
+		#{publishTime,jdbcType=DATE},
+		device_type =
+		#{deviceType,jdbcType=INTEGER},
+		device_phone =
+		#{devicePhone,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		create_id =
+		#{createId,jdbcType=INTEGER},
+		create_name =
+		#{createName,jdbcType=VARCHAR},
+		refresh_time =
+		#{refreshTime,jdbcType=INTEGER},
+		console_cell_cap_error =
+		#{consoleCellCapError,jdbcType=DECIMAL},
+		console_cell_cap_normal =
+		#{consoleCellCapNormal,jdbcType=DECIMAL},
+		company_id =
+		#{companyId,jdbcType=INTEGER},
+		duration_min_excellent =
+		#{durationMinExcellent,jdbcType=INTEGER},
+		duration_max_excellent =
+		#{durationMaxExcellent,jdbcType=INTEGER},
+		duration_min_good =
+		#{durationMinGood,jdbcType=INTEGER},
+		duration_max_good =
+		#{durationMaxGood,jdbcType=INTEGER},
+		duration_min_medium =
+		#{durationMinMedium,jdbcType=INTEGER},
+		duration_max_medium =
+		#{durationMaxMedium,jdbcType=INTEGER},
+		duration_max_bad =
+		#{durationMaxBad,jdbcType=INTEGER},
+		duration_min_bad =
+		#{durationMinBad,jdbcType=INTEGER},
+		valid_discharge_vol =
+		#{validDischargeVol,jdbcType=DECIMAL},
+		valid_charge_vol =
+		#{validChargeVol,jdbcType=DECIMAL},
+		hall_flag =
+		#{hallFlag,jdbcType=INTEGER},
+		fast_sample_interval =
+		#{fastSampleInterval,jdbcType=INTEGER},
+		slow_sample_interval =
+		#{slowSampleInterval,jdbcType=INTEGER},
+		discharge_time =
+		#{dischargeTime,jdbcType=INTEGER},
+		slow_sample_time =
+		#{slowSampleTime,jdbcType=INTEGER},
+		valid_discharge_cur =
+		#{validDischargeCur,jdbcType=DECIMAL},
+		valid_charge_cur =
+		#{validChargeCur,jdbcType=DECIMAL},
+		down_cur =
+		#{downCur,jdbcType=DECIMAL},
+		down_vol =
+		#{downVol,jdbcType=DECIMAL},
+		valid_day = #{validDay,jdbcType=INTEGER},
+		suggest_cell_cap_percent =
+		#{suggestCellCapPercent,jdbcType=VARCHAR},
+		suggest_time =
+		#{suggestTime,jdbcType=VARCHAR},
+		suggest_average_num =
+		#{suggestAverageNum,jdbcType=INTEGER},
+		margin_time =
+		#{marginTime,jdbcType=DECIMAL},
+		max_discharge_cur =
+		#{maxDischargeCur,jdbcType=DECIMAL}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByCompanyId" parameterType="com.station.moudles.entity.GprsConfigInfo">
+		update gprs_config_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsIdOut != null">
+				gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="connectionType != null">
+				connection_type = #{connectionType,jdbcType=INTEGER},
+			</if>
+			<if test="heartbeatInterval != null">
+				heartbeat_interval =
+				#{heartbeatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="floatInterval != null">
+				float_interval = #{floatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeInterval != null">
+				discharge_interval =
+				#{dischargeInterval,jdbcType=INTEGER},
+			</if>
+			<if test="chargeThreshold != null">
+				charge_threshold = #{chargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="dischargeThreshold != null">
+				discharge_threshold =
+				#{dischargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="nominalCapacity != null">
+				nominal_capacity = #{nominalCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="currentCapacity != null">
+				current_capacity = #{currentCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="volHighWarningThreshold != null">
+				vol_high_warning_threshold =
+				#{volHighWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="volLowWarningThreshold != null">
+				vol_low_warning_threshold =
+				#{volLowWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="temHighWarningThreshold != null">
+				tem_high_warning_threshold =
+				#{temHighWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="temLowWarningThreshold != null">
+				tem_low_warning_threshold =
+				#{temLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="socLowWarningThreshold != null">
+				soc_low_warning_threshold =
+				#{socLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="publishVersion != null">
+				publish_version = #{publishVersion,jdbcType=INTEGER},
+			</if>
+			<if test="childrenVersion != null">
+				children_version = #{childrenVersion,jdbcType=INTEGER},
+			</if>
+			<if test="editVersion != null">
+				edit_version = #{editVersion,jdbcType=INTEGER},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=DATE},
+			</if>
+			<if test="deviceType != null">
+				device_type = #{deviceType,jdbcType=INTEGER},
+			</if>
+			<if test="devicePhone != null">
+				device_phone = #{devicePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				create_name = #{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="refreshTime != null">
+				refresh_time = #{refreshTime,jdbcType=INTEGER},
+			</if>
+			<if test="consoleCellCapError != null">
+				console_cell_cap_error =
+				#{consoleCellCapError,jdbcType=DECIMAL},
+			</if>
+			<if test="consoleCellCapNormal != null">
+				console_cell_cap_normal =
+				#{consoleCellCapNormal,jdbcType=DECIMAL},
+			</if>
+			<if test="durationMinExcellent != null">
+				duration_min_excellent =
+				#{durationMinExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxExcellent != null">
+				duration_max_excellent =
+				#{durationMaxExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinGood != null">
+				duration_min_good = #{durationMinGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxGood != null">
+				duration_max_good = #{durationMaxGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinMedium != null">
+				duration_min_medium =
+				#{durationMinMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxMedium != null">
+				duration_max_medium =
+				#{durationMaxMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxBad != null">
+				duration_max_bad = #{durationMaxBad,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinBad != null">
+				duration_min_bad = #{durationMinBad,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeVol != null">
+				valid_discharge_vol =
+				#{validDischargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeVol != null">
+				valid_charge_vol = #{validChargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="hallFlag != null">
+				hall_flag = #{hallFlag,jdbcType=INTEGER},
+			</if>
+			<if test="fastSampleInterval != null">
+				fast_sample_interval =
+				#{fastSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleInterval != null">
+				slow_sample_interval =
+				#{slowSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeTime != null">
+				discharge_time = #{dischargeTime,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleTime != null">
+				slow_sample_time = #{slowSampleTime,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeCur != null">
+				valid_discharge_cur =
+				#{validDischargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeCur != null">
+				valid_charge_cur = #{validChargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downCur != null">
+				down_cur = #{downCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downVol != null">
+				down_vol = #{downVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validDay != null">
+				valid_day = #{validDay,jdbcType=INTEGER},
+			</if>
+			<if test="suggestCellCapPercent != null">
+				suggest_cell_cap_percent =
+				#{suggestCellCapPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestTime != null">
+				suggest_time = #{suggestTime,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestAverageNum != null">
+				suggest_average_num =
+				#{suggestAverageNum,jdbcType=INTEGER},
+			</if>
+			<if test="marginTime != null">
+				margin_time = #{marginTime,jdbcType=DECIMAL},
+			</if>
+			<if test="maxDischargeCur != null">
+				max_discharge_cur = #{maxDischargeCur,jdbcType=DECIMAL}
+			</if>
+			<if test="chargeInterval != null">
+				 charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+		</set>
+		where company_id = #{companyId,jdbcType=INTEGER}
+	</update>
+
+	<resultMap type="com.station.moudles.entity.GprsConfigInfoDetail"
+		id="DetailBaseResultMap" extends="BaseResultMap">
+		<collection property="subDeviceList" javaType="java.util.List"
+			ofType="com.station.moudles.entity.SubDevice">
+			<id column="sub_id" property="id" jdbcType="INTEGER" />
+			<result column="sub_device_id_out" property="subDeviceIdOut"
+				jdbcType="CHAR" />
+			<result column="sub_device_id" property="subDeviceId"
+				jdbcType="CHAR" />
+			<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+			<result column="cell_sort" property="cellSort" jdbcType="INTEGER" />
+			<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		</collection>
+	</resultMap>
+
+	<select id="selectDetailById" resultMap="DetailBaseResultMap">
+		select c.*,s.id as
+		sub_id, sub_device_id_out, sub_device_id, cell_sort, update_time
+		from(select
+		*
+		from gprs_config_info where id = #{id,jdbcType=INTEGER}) c
+		left
+		join
+		sub_devices s on c.gprs_id=s.gprs_id
+	</select>
+
+	<update id="updateByGprsSelective" parameterType="com.station.moudles.entity.GprsConfigInfo">
+		update gprs_config_info
+		<set>
+			<if test="gprsIdOut != null">
+				gprs_id_out = #{gprsIdOut,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="connectionType != null">
+				connection_type = #{connectionType,jdbcType=INTEGER},
+			</if>
+			<if test="heartbeatInterval != null">
+				heartbeat_interval =
+				#{heartbeatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="floatInterval != null">
+				float_interval = #{floatInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeInterval != null">
+				discharge_interval =
+				#{dischargeInterval,jdbcType=INTEGER},
+			</if>
+			<if test="chargeThreshold != null">
+				charge_threshold = #{chargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="dischargeThreshold != null">
+				discharge_threshold =
+				#{dischargeThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="nominalCapacity != null">
+				nominal_capacity = #{nominalCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="currentCapacity != null">
+				current_capacity = #{currentCapacity,jdbcType=DECIMAL},
+			</if>
+			<if test="volHighWarningThreshold != null">
+				vol_high_warning_threshold =
+				#{volHighWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="volLowWarningThreshold != null">
+				vol_low_warning_threshold =
+				#{volLowWarningThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="temHighWarningThreshold != null">
+				tem_high_warning_threshold =
+				#{temHighWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="temLowWarningThreshold != null">
+				tem_low_warning_threshold =
+				#{temLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="socLowWarningThreshold != null">
+				soc_low_warning_threshold =
+				#{socLowWarningThreshold,jdbcType=INTEGER},
+			</if>
+			<if test="publishVersion != null">
+				publish_version = #{publishVersion,jdbcType=INTEGER},
+			</if>
+			<if test="childrenVersion != null">
+				children_version = #{childrenVersion,jdbcType=INTEGER},
+			</if>
+			<if test="editVersion != null">
+				edit_version = #{editVersion,jdbcType=INTEGER},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=DATE},
+			</if>
+			<if test="deviceType != null">
+				device_type = #{deviceType,jdbcType=INTEGER},
+			</if>
+			<if test="devicePhone != null">
+				device_phone = #{devicePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				create_name = #{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="refreshTime != null">
+				refresh_time = #{refreshTime,jdbcType=INTEGER},
+			</if>
+			<if test="consoleCellCapError != null">
+				console_cell_cap_error =
+				#{consoleCellCapError,jdbcType=DECIMAL},
+			</if>
+			<if test="consoleCellCapNormal != null">
+				console_cell_cap_normal =
+				#{consoleCellCapNormal,jdbcType=DECIMAL},
+			</if>
+			<if test="companyId != null">
+				company_id = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinExcellent != null">
+				duration_min_excellent =
+				#{durationMinExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxExcellent != null">
+				duration_max_excellent =
+				#{durationMaxExcellent,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinGood != null">
+				duration_min_good = #{durationMinGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxGood != null">
+				duration_max_good = #{durationMaxGood,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinMedium != null">
+				duration_min_medium =
+				#{durationMinMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxMedium != null">
+				duration_max_medium =
+				#{durationMaxMedium,jdbcType=INTEGER},
+			</if>
+			<if test="durationMaxBad != null">
+				duration_max_bad = #{durationMaxBad,jdbcType=INTEGER},
+			</if>
+			<if test="durationMinBad != null">
+				duration_min_bad = #{durationMinBad,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeVol != null">
+				valid_discharge_vol =
+				#{validDischargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeVol != null">
+				valid_charge_vol = #{validChargeVol,jdbcType=DECIMAL},
+			</if>
+			<if test="hallFlag != null">
+				hall_flag = #{hallFlag,jdbcType=INTEGER},
+			</if>
+			<if test="fastSampleInterval != null">
+				fast_sample_interval =
+				#{fastSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleInterval != null">
+				slow_sample_interval =
+				#{slowSampleInterval,jdbcType=INTEGER},
+			</if>
+			<if test="dischargeTime != null">
+				discharge_time = #{dischargeTime,jdbcType=INTEGER},
+			</if>
+			<if test="slowSampleTime != null">
+				slow_sample_time = #{slowSampleTime,jdbcType=INTEGER},
+			</if>
+			<if test="validDischargeCur != null">
+				valid_discharge_cur =
+				#{validDischargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="validChargeCur != null">
+				valid_charge_cur = #{validChargeCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downCur != null">
+				down_cur = #{downCur,jdbcType=DECIMAL},
+			</if>
+			<if test="downVol != null">
+				down_vol = #{downVol,jdbcType=DECIMAL},
+			</if>
+			<if test="validDay != null">
+				valid_day = #{validDay,jdbcType=INTEGER},
+			</if>
+			<if test="suggestCellCapPercent != null">
+				suggest_cell_cap_percent =
+				#{suggestCellCapPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestTime != null">
+				suggest_time = #{suggestTime,jdbcType=VARCHAR},
+			</if>
+			<if test="suggestAverageNum != null">
+				suggest_average_num =
+				#{suggestAverageNum,jdbcType=INTEGER},
+			</if>
+			<if test="marginTime != null">
+				margin_time = #{marginTime,jdbcType=DECIMAL},
+			</if>
+			<if test="maxDischargeCur != null">
+				max_discharge_cur = #{maxDischargeCur,jdbcType=DECIMAL},
+			</if>
+			<!--10/16 add -->
+			<if test="gprsFlag != null">
+				gprs_flag =#{gprsFlag,jdbcType=INTEGER},
+			</if>
+			<!--10/10 ADD -->
+			<if test="gprsSpec != null">
+				gprs_spec = #{gprsSpec,jdbcType=VARCHAR},
+			</if>
+			<if test="gprsPort != null">
+				gprs_port= #{gprsPort,jdbcType=VARCHAR}
+			</if>
+			<if test="chargeInterval != null">
+				 charge_interval = #{chargeInterval,jdbcType=INTEGER}
+			</if>
+		</set>
+		where gprs_id = #{gprsId,jdbcType=VARCHAR}
+	</update>
+
+	<resultMap type="com.station.moudles.entity.GprsConfigInfoStation"
+		id="StationBaseResultMap" extends="BaseResultMap">
+		<result column="company_id3" property="companyId3" jdbcType="INTEGER" />
+		<result column="company_name3" property="companyName3"
+			jdbcType="VARCHAR" />
+		<result column="operator_type" property="operatorType"
+			jdbcType="INTEGER" />
+		<result column="maintainance_id" property="maintainanceId"
+			jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectStationListSelectivePaging" resultMap="StationBaseResultMap"
+		parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		tmp.*,s.company_id3,s.company_name3,s.operator_type,s.maintainance_id,s.name
+		from base_station_info s right join (select
+		<include refid="Base_Column_List" />
+		from gprs_config_info
+		<where>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="deviceType != null">
+				and device_type = #{deviceType,jdbcType=INTEGER}
+			</if>
+			<if test="gprsIdOut != null">
+				and gprs_id_out like "%${gprsIdOut}%"
+			</if>
+			<if test="linkStatus == 1">
+				and link_status = #{linkStatus,jdbcType=TINYINT}
+			</if>
+			<if test="linkStatus == 0">
+				and (link_status = #{linkStatus,jdbcType=TINYINT} or link_status is null)
+			</if>
+
+			<!-- ADD -->
+			<if test="gprsFlag != null">
+				and gprs_flag =#{gprsFlag,jdbcType=INTEGER}
+			</if>
+			<!-- 10/10 add 查询主机端口和规格 -->
+			<if test="gprsPort != null">
+				and gprs_port =#{gprsPort,jdbcType=VARCHAR}
+			</if>
+			<if test="gprsSpec != null">
+				and gprs_spec =#{gprsSpec,jdbcType=VARCHAR}
+			</if>
+
+			<if test="equalType">
+				<if test="rcvTime != null">
+					and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="connectionType != null">
+					and connection_type = #{connectionType,jdbcType=INTEGER}
+				</if>
+				<if test="heartbeatInterval != null">
+					and heartbeat_interval =
+					#{heartbeatInterval,jdbcType=INTEGER}
+				</if>
+				<if test="floatInterval != null">
+					and float_interval = #{floatInterval,jdbcType=INTEGER}
+				</if>
+				<if test="dischargeInterval != null">
+					and discharge_interval =
+					#{dischargeInterval,jdbcType=INTEGER}
+				</if>
+				<if test="chargeThreshold != null">
+					and charge_threshold =
+					#{chargeThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="dischargeThreshold != null">
+					and discharge_threshold =
+					#{dischargeThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="nominalCapacity != null">
+					and nominal_capacity = #{nominalCapacity,jdbcType=DECIMAL}
+				</if>
+				<if test="currentCapacity != null">
+					and current_capacity = #{currentCapacity,jdbcType=DECIMAL}
+				</if>
+				<if test="volHighWarningThreshold != null">
+					and vol_high_warning_threshold =
+					#{volHighWarningThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="volLowWarningThreshold != null">
+					and vol_low_warning_threshold =
+					#{volLowWarningThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="temHighWarningThreshold != null">
+					and tem_high_warning_threshold =
+					#{temHighWarningThreshold,jdbcType=INTEGER}
+				</if>
+				<if test="temLowWarningThreshold != null">
+					and tem_low_warning_threshold =
+					#{temLowWarningThreshold,jdbcType=INTEGER}
+				</if>
+				<if test="socLowWarningThreshold != null">
+					and soc_low_warning_threshold =
+					#{socLowWarningThreshold,jdbcType=INTEGER}
+				</if>
+				<if test="publishVersion != null">
+					and publish_version = #{publishVersion,jdbcType=INTEGER}
+				</if>
+				<if test="childrenVersion != null">
+					and children_version =
+					#{childrenVersion,jdbcType=INTEGER}
+				</if>
+				<if test="editVersion != null">
+					and edit_version = #{editVersion,jdbcType=INTEGER}
+				</if>
+				<if test="publishTime != null">
+					and publish_time = #{publishTime,jdbcType=DATE}
+				</if>
+
+				<if test="devicePhone != null">
+					and device_phone like "%${devicePhone}%"
+				</if>
+				<if test="refreshTime != null">
+					and refresh_time = #{refreshTime,jdbcType=INTEGER}
+				</if>
+				<if test="consoleCellCapError != null">
+					and console_cell_cap_error =
+					#{consoleCellCapError,jdbcType=DECIMAL}
+				</if>
+				<if test="consoleCellCapNormal != null">
+					and console_cell_cap_normal =
+					#{consoleCellCapNormal,jdbcType=DECIMAL}
+				</if>
+				<if test="durationMinExcellent != null">
+					and duration_min_excellent =
+					#{durationMinExcellent,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxExcellent != null">
+					and duration_max_excellent =
+					#{durationMaxExcellent,jdbcType=INTEGER}
+				</if>
+				<if test="durationMinGood != null">
+					and duration_min_good =
+					#{durationMinGood,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxGood != null">
+					and duration_max_good =
+					#{durationMaxGood,jdbcType=INTEGER}
+				</if>
+				<if test="durationMinMedium != null">
+					and duration_min_medium =
+					#{durationMinMedium,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxMedium != null">
+					and duration_max_medium =
+					#{durationMaxMedium,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxBad != null">
+					and duration_max_bad =
+					#{durationMaxBad,jdbcType=INTEGER}
+				</if>
+				<if test="durationMinBad != null">
+					and duration_min_bad =
+					#{durationMinBad,jdbcType=INTEGER}
+				</if>
+				<if test="validDischargeVol != null">
+					and valid_discharge_vol =
+					#{validDischargeVol,jdbcType=DECIMAL}
+				</if>
+				<if test="validChargeVol != null">
+					and valid_charge_vol =
+					#{validChargeVol,jdbcType=DECIMAL}
+				</if>
+				<if test="hallFlag != null">
+					and hall_flag = #{hallFlag,jdbcType=INTEGER}
+				</if>
+				<if test="fastSampleInterval != null">
+					and fast_sample_interval =
+					#{fastSampleInterval,jdbcType=INTEGER}
+				</if>
+				<if test="slowSampleInterval != null">
+					and slow_sample_interval =
+					#{slowSampleInterval,jdbcType=INTEGER}
+				</if>
+				<if test="dischargeTime != null">
+					and discharge_time = #{dischargeTime,jdbcType=INTEGER}
+				</if>
+				<if test="slowSampleTime != null">
+					and slow_sample_time =
+					#{slowSampleTime,jdbcType=INTEGER}
+				</if>
+				<if test="validDischargeCur != null">
+					and valid_discharge_cur =
+					#{validDischargeCur,jdbcType=DECIMAL}
+				</if>
+				<if test="validChargeCur != null">
+					and valid_charge_cur =
+					#{validChargeCur,jdbcType=DECIMAL}
+				</if>
+				<if test="downCur != null">
+					and down_cur = #{downCur,jdbcType=DECIMAL}
+				</if>
+				<if test="downVol != null">
+					and down_vol = #{downVol,jdbcType=DECIMAL}
+				</if>
+				<if test="validDay != null">
+					and valid_day = #{validDay,jdbcType=INTEGER}
+				</if>
+				<if test="suggestCellCapPercent != null">
+					and suggest_cell_cap_percent =
+					#{suggestCellCapPercent,jdbcType=VARCHAR}
+				</if>
+				<if test="suggestTime != null">
+					and suggest_time = #{suggestTime,jdbcType=VARCHAR}
+				</if>
+				<if test="suggestAverageNum != null">
+					and suggest_average_num =
+					#{suggestAverageNum,jdbcType=INTEGER}
+				</if>
+			</if>
+			<if test="equalType == false">
+				<if test="connectionType != null">
+					and connection_type !=
+					#{connectionType,jdbcType=INTEGER}
+				</if>
+				<if test="heartbeatInterval != null">
+					and heartbeat_interval !=
+					#{heartbeatInterval,jdbcType=INTEGER}
+				</if>
+				<if test="floatInterval != null">
+					and float_interval != #{floatInterval,jdbcType=INTEGER}
+				</if>
+				<if test="dischargeInterval != null">
+					and discharge_interval !=
+					#{dischargeInterval,jdbcType=INTEGER}
+				</if>
+				<if test="chargeThreshold != null">
+					and charge_threshold !=
+					#{chargeThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="dischargeThreshold != null">
+					and discharge_threshold !=
+					#{dischargeThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="nominalCapacity != null">
+					and nominal_capacity != #{nominalCapacity,jdbcType=DECIMAL}
+				</if>
+				<if test="currentCapacity != null">
+					and current_capacity != #{currentCapacity,jdbcType=DECIMAL}
+				</if>
+				<if test="volHighWarningThreshold != null">
+					and vol_high_warning_threshold !=
+					#{volHighWarningThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="volLowWarningThreshold != null">
+					and vol_low_warning_threshold !=
+					#{volLowWarningThreshold,jdbcType=DECIMAL}
+				</if>
+				<if test="temHighWarningThreshold != null">
+					and tem_high_warning_threshold !=
+					#{temHighWarningThreshold,jdbcType=INTEGER}
+				</if>
+				<if test="temLowWarningThreshold != null">
+					and tem_low_warning_threshold !=
+					#{temLowWarningThreshold,jdbcType=INTEGER}
+				</if>
+				<if test="socLowWarningThreshold != null">
+					and soc_low_warning_threshold !=
+					#{socLowWarningThreshold,jdbcType=INTEGER}
+				</if>
+				<if test="publishVersion != null">
+					and publish_version !=
+					#{publishVersion,jdbcType=INTEGER}
+				</if>
+				<if test="childrenVersion != null">
+					and children_version !=
+					#{childrenVersion,jdbcType=INTEGER}
+				</if>
+				<if test="editVersion != null">
+					and edit_version != #{editVersion,jdbcType=INTEGER}
+				</if>
+				<if test="publishTime != null">
+					and publish_time != #{publishTime,jdbcType=DATE}
+				</if>
+				<if test="refreshTime != null">
+					and refresh_time != #{refreshTime,jdbcType=INTEGER}
+				</if>
+				<if test="consoleCellCapError != null">
+					and console_cell_cap_error !=
+					#{consoleCellCapError,jdbcType=DECIMAL}
+				</if>
+				<if test="consoleCellCapNormal != null">
+					and console_cell_cap_normal !=
+					#{consoleCellCapNormal,jdbcType=DECIMAL}
+				</if>
+				<if test="durationMinExcellent != null">
+					and duration_min_excellent !=
+					#{durationMinExcellent,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxExcellent != null">
+					and duration_max_excellent !=
+					#{durationMaxExcellent,jdbcType=INTEGER}
+				</if>
+				<if test="durationMinGood != null">
+					and duration_min_good !=
+					#{durationMinGood,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxGood != null">
+					and duration_max_good !=
+					#{durationMaxGood,jdbcType=INTEGER}
+				</if>
+				<if test="durationMinMedium != null">
+					and duration_min_medium !=
+					#{durationMinMedium,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxMedium != null">
+					and duration_max_medium !=
+					#{durationMaxMedium,jdbcType=INTEGER}
+				</if>
+				<if test="durationMaxBad != null">
+					and duration_max_bad !=
+					#{durationMaxBad,jdbcType=INTEGER}
+				</if>
+				<if test="durationMinBad != null">
+					and duration_min_bad !=
+					#{durationMinBad,jdbcType=INTEGER}
+				</if>
+				<if test="validDischargeVol != null">
+					and valid_discharge_vol !=
+					#{validDischargeVol,jdbcType=DECIMAL}
+				</if>
+				<if test="validChargeVol != null">
+					and valid_charge_vol !=
+					#{validChargeVol,jdbcType=DECIMAL}
+				</if>
+				<if test="hallFlag != null">
+					and hall_flag != #{hallFlag,jdbcType=INTEGER}
+				</if>
+				<if test="fastSampleInterval != null">
+					and fast_sample_interval !=
+					#{fastSampleInterval,jdbcType=INTEGER}
+				</if>
+				<if test="slowSampleInterval != null">
+					and slow_sample_interval !=
+					#{slowSampleInterval,jdbcType=INTEGER}
+				</if>
+				<if test="dischargeTime != null">
+					and discharge_time != #{dischargeTime,jdbcType=INTEGER}
+				</if>
+				<if test="slowSampleTime != null">
+					and slow_sample_time !=
+					#{slowSampleTime,jdbcType=INTEGER}
+				</if>
+				<if test="validDischargeCur != null">
+					and valid_discharge_cur !=
+					#{validDischargeCur,jdbcType=DECIMAL}
+				</if>
+				<if test="validChargeCur != null">
+					and valid_charge_cur !=
+					#{validChargeCur,jdbcType=DECIMAL}
+				</if>
+				<if test="downCur != null">
+					and down_cur != #{downCur,jdbcType=DECIMAL}
+				</if>
+				<if test="downVol != null">
+					and down_vol != #{downVol,jdbcType=DECIMAL}
+				</if>
+				<if test="validDay != null">
+					and valid_day != #{validDay,jdbcType=INTEGER}
+				</if>
+				<if test="suggestCellCapPercent != null">
+					and suggest_cell_cap_percent !=
+					#{suggestCellCapPercent,jdbcType=VARCHAR}
+				</if>
+				<if test="suggestTime != null">
+					and suggest_time != #{suggestTime,jdbcType=VARCHAR}
+				</if>
+				<if test="suggestAverageNum != null">
+					and suggest_average_num !=
+					#{suggestAverageNum,jdbcType=INTEGER}
+				</if>
+			</if>
+		</where>
+		) tmp on tmp.gprs_id=s.gprs_id
+		 order by id desc 
+	</select>
+
+	<select id="selectUnbindGprsList" resultType="java.lang.String">
+		select gprs_id from
+		gprs_config_info where gprs_id not in(select gprs_id
+		from
+		base_station_info)
+		and gprs_id like '%${_parameter}%' and gprs_flag = 0 
+
+	</select>
+	<select id="selectBindGprsList" resultType = "java.lang.String" parameterType="com.station.moudles.entity.GprsConfigInfo">
+		select gprs_id from
+		gprs_config_info where gprs_id not in(select
+		gprs_id
+		from
+		base_station_info)
+		<if test="gprsId != null">
+			and gprs_id like '%${gprsId}%'
+		</if>
+		<if test="deviceType != null">
+			and device_type = #{deviceType,jdbcType=INTEGER}
+		</if>
+		and gprs_flag =1
+	</select>
+
+	<select id = "selectRcvTimeNotNull" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.GprsConfigInfo" >
+		select 
+		<include refid="Base_Column_List" />
+		from gprs_config_info
+		where rcv_time is not null
+	
+	</select>
+
+
+</mapper>

@@ -1,0 +1,17 @@
+D:\work\source\POC\PdePlugin\PdePlugin\bin\Debug\PdePlugin.dll
+D:\work\source\POC\PdePlugin\PdePlugin\bin\Debug\PdePlugin.pdb
+D:\work\source\POC\PdePlugin\PdePlugin\bin\Debug\PdePlugin.dll.manifest
+D:\work\source\POC\PdePlugin\PdePlugin\bin\Debug\PdePlugin.vsto
+D:\work\source\POC\PdePlugin\PdePlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\work\source\POC\PdePlugin\PdePlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.csprojResolveAssemblyReference.cache
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.control.ConditionGSForm.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.control.ConditionGSListForm.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.control.ExpTableForm.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\Pdw.Managers.Hcl.ProntoExcelMarkup.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.control.TableMapForm.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.control.WaitingForm.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.Properties.Resources.resources
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.csproj.GenerateResource.Cache
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.dll
+D:\work\source\POC\PdePlugin\PdePlugin\obj\Debug\PdePlugin.pdb

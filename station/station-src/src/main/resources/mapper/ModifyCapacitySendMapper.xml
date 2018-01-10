@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.ModifyCapacitySendMapper">
+    <resultMap id="BaseResultMap" type="com.station.moudles.entity.ModifyCapacitySend">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gprs_id" property="gprsId" jdbcType="VARCHAR"/>
+        <result column="capacity" property="capacity" jdbcType="INTEGER"/>
+        <result column="send_done" property="sendDone" jdbcType="INTEGER"/>
+        <result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, gprs_id, capacity, send_done, send_time, created_time
+	</sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from modify_capacity_send
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectListSelective" resultMap="BaseResultMap"
+            parameterType="com.station.moudles.entity.ModifyCapacitySend">
+        select
+        <include refid="Base_Column_List"/>
+        from modify_capacity_send
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="gprsId != null">
+                and gprs_id = #{gprsId,jdbcType=VARCHAR}
+            </if>
+            <if test="capacity != null">
+                and capacity = #{capacity,jdbcType=INTEGER}
+            </if>
+            <if test="sendDone != null">
+                and send_done = #{sendDone,jdbcType=INTEGER}
+            </if>
+            <if test="sendTime != null">
+                and send_time = #{sendTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectListSelectivePaging" resultMap="BaseResultMap"
+            parameterType="com.station.moudles.vo.search.PageEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from modify_capacity_send
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="gprsId != null">
+                and gprs_id like "%${gprsId}%"
+            </if>
+            <if test="capacity != null">
+                and capacity = #{capacity,jdbcType=INTEGER}
+            </if>
+            <if test="sendDone != null">
+                and send_done = #{sendDone,jdbcType=INTEGER}
+            </if>
+            <if test="sendTime != null">
+                and send_time = #{sendTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		modify_capacity_send
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+    <delete id="deleteByPKs" parameterType="java.lang.Integer">
+        delete from modify_capacity_send
+        where
+        <foreach collection="array" index="index" separator="or" item="item">
+            id = #{item,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSelective" parameterType="com.station.moudles.entity.ModifyCapacitySend">
+        delete from modify_capacity_send
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="gprsId != null">
+                and gprs_id like "%${gprsId}%"
+            </if>
+            <if test="capacity != null">
+                and capacity = #{capacity,jdbcType=INTEGER}
+            </if>
+            <if test="sendDone != null">
+                and send_done = #{sendDone,jdbcType=INTEGER}
+            </if>
+            <if test="sendTime != null">
+                and send_time = #{sendTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+
+    <insert id="insert" parameterType="com.station.moudles.entity.ModifyCapacitySend" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into modify_capacity_send (gprs_id, capacity, send_done, send_time)
+		values
+		(
+		  #{gprsId,jdbcType=VARCHAR}, #{capacity,jdbcType=INTEGER}, #{sendDone,jdbcType=INTEGER}, #{sendTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+    <insert id="insertSelective" parameterType="com.station.moudles.entity.ModifyCapacitySend" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into modify_capacity_send
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="gprsId != null">
+                gprs_id,
+            </if>
+            <if test="capacity != null">
+                capacity,
+            </if>
+            <if test="sendDone != null">
+                send_done,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="gprsId != null">
+                #{gprsId,jdbcType=VARCHAR},
+            </if>
+            <if test="capacity != null">
+                #{capacity,jdbcType=INTEGER},
+            </if>
+            <if test="sendDone != null">
+                #{sendDone,jdbcType=INTEGER},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.ModifyCapacitySend">
+        update modify_capacity_send
+        <set>
+            <if test="gprsId != null">
+                gprs_id = #{gprsId,jdbcType=VARCHAR},
+            </if>
+            <if test="capacity != null">
+                capacity = #{capacity,jdbcType=INTEGER},
+            </if>
+            <if test="sendDone != null">
+                send_done = #{sendDone,jdbcType=INTEGER},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.ModifyCapacitySend">
+		update modify_capacity_send
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		capacity = #{capacity,jdbcType=INTEGER},
+		send_done = #{sendDone,jdbcType=INTEGER},
+		send_time = #{sendTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

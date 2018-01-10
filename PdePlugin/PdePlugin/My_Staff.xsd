@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+  <xsd:element name="PdeData">
+    <xsd:complexType mixed="false">
+      <xsd:sequence minOccurs="0" maxOccurs="1">
+        <xsd:element minOccurs="0" maxOccurs="unbounded" name="My_Staff">
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element type="xsd:string" name="First_Name"/>
+              <xsd:element type="xsd:string" name="Last_Name"/>
+              <xsd:element type="xsd:decimal" name="Salary"/>
+              <xsd:element type="xsd:string" name="Title"/>
+              <xsd:element type="xsd:decimal" name="Grade"/>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.CompanyMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.Company">
+		<id column="company_id" property="companyId" jdbcType="INTEGER" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="create_id" property="createId" jdbcType="INTEGER" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="parent_company_id" property="parentCompanyId" jdbcType="INTEGER" />
+		<result column="company_level" property="companyLevel" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		company_id, company_name, create_time, create_id, create_name, parent_company_id,
+		company_level
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from companies
+		where company_id = #{companyId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.Company">
+		select
+		<include refid="Base_Column_List" />
+		from companies
+		<where>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyName != null">
+				and company_name = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name = #{createName,jdbcType=VARCHAR}
+			</if>
+			<if test="parentCompanyId != null">
+				and parent_company_id = #{parentCompanyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyLevel != null">
+				and company_level = #{companyLevel,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectListCountSelective" resultType="int"
+		parameterType="com.station.moudles.entity.Company">
+		select count(*)
+		from companies
+		<where>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyName != null">
+				and company_name = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name = #{createName,jdbcType=VARCHAR}
+			</if>
+			<if test="parentCompanyId != null">
+				and parent_company_id =
+				#{parentCompanyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyLevel != null">
+				and company_level = #{companyLevel,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from companies
+		<where>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyName != null">
+				and company_name like "%${companyName}%"
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name like "%${createName}%"
+			</if>
+			<if test="parentCompanyId != null">
+				and parent_company_id = #{parentCompanyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyLevel != null">
+				and company_level = #{companyLevel,jdbcType=INTEGER}
+			</if>
+		</where> 
+		order by company_id desc
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from companies
+		where company_id = #{companyId,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from companies
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			company_id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.Company">
+		delete from companies
+		<where>
+			<if test="companyId != null">
+				and company_id = #{companyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyName != null">
+				and company_name = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createId != null">
+				and create_id = #{createId,jdbcType=INTEGER}
+			</if>
+			<if test="createName != null">
+				and create_name = #{createName,jdbcType=VARCHAR}
+			</if>
+			<if test="parentCompanyId != null">
+				and parent_company_id = #{parentCompanyId,jdbcType=INTEGER}
+			</if>
+			<if test="companyLevel != null">
+				and company_level = #{companyLevel,jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.Company" useGeneratedKeys="true" keyProperty="companyId">
+		insert into companies (company_name, create_time, create_id,
+		create_name, parent_company_id, company_level
+		)
+		values (#{companyName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER},
+		#{createName,jdbcType=VARCHAR}, #{parentCompanyId,jdbcType=INTEGER}, #{companyLevel,jdbcType=INTEGER}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.Company" useGeneratedKeys="true" keyProperty="companyId">
+		insert into companies
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="companyName != null">
+				company_name,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+			<if test="createName != null">
+				create_name,
+			</if>
+			<if test="parentCompanyId != null">
+				parent_company_id,
+			</if>
+			<if test="companyLevel != null">
+				company_level,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="companyName != null">
+				#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				#{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentCompanyId != null">
+				#{parentCompanyId,jdbcType=INTEGER},
+			</if>
+			<if test="companyLevel != null">
+				#{companyLevel,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.Company">
+		update companies
+		<set>
+			<if test="companyName != null">
+				company_name = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				create_name = #{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentCompanyId != null">
+				parent_company_id = #{parentCompanyId,jdbcType=INTEGER},
+			</if>
+			<if test="companyLevel != null">
+				company_level = #{companyLevel,jdbcType=INTEGER},
+			</if>
+		</set>
+		where company_id = #{companyId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.Company">
+		update companies
+		set company_name = #{companyName,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=INTEGER},
+		create_name = #{createName,jdbcType=VARCHAR},
+		parent_company_id = #{parentCompanyId,jdbcType=INTEGER},
+		company_level = #{companyLevel,jdbcType=INTEGER}
+		where company_id = #{companyId,jdbcType=INTEGER}
+	</update>
+	
+	
+	<!-- 通过用户登录id查询对应的一级公司 -->
+	<select id="selectCompany1ByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select c.* from users as u left join companies as c on u.company_id=c.company_id  
+		where c.company_level = 1 
+		and u.login_id = #{loginId,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<!-- 通过用户登录id查询对应的二级公司 -->
+	<select id="selectCompany2ByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select c.* from users as u left join companies as c on u.company_id=c.company_id  
+		where c.company_level = 2 
+		and u.login_id = #{loginId,jdbcType=VARCHAR}
+	</select>
+	<!-- 通过用户登录id查询对应的三级公司 -->
+	<select id="selectCompany3ByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select c.* from users as u left join companies as c on u.company_id=c.company_id  
+		where 	c.company_level = 3 
+		and u.login_id = #{loginId,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

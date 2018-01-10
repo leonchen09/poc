@@ -1,0 +1,9 @@
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\bin\Debug\WinServicesControl.exe
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\bin\Debug\WinServicesControl.pdb
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\obj\Debug\ResolveAssemblyReference.cache
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\obj\Debug\WinServicesControl.FrmMian.resources
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\obj\Debug\WinServicesControl.Properties.Resources.resources
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\obj\Debug\WinServicesControl.csproj.GenerateResource.Cache
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\obj\Debug\WinServicesControl.exe
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\obj\Debug\WinServicesControl.pdb
+D:\重新开始\C#基本\windows服务控制\WinServicesControl\WinServicesControl\bin\Debug\WinServicesControl.exe.config

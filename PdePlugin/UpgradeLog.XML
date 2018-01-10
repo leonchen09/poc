@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="PdePlugin">
+</Property><Property Name="Solution File" Value="D:\source\POC\PdePlugin\PdePlugin.sln">
+</Property><Property Name="Date" Value="2012年3月3日">
+</Property><Property Name="Time" Value="13:55">
+</Property></Properties><Event ErrorLevel="0" Project="PdePlugin" Source="PdePlugin\PdePlugin.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="PdePlugin" Source="PdePlugin\PdePlugin.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="PdeInstall" Source="PdeInstall\PdeInstall.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="PdeInstall" Source="PdeInstall\PdeInstall.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="SavePder" Source="SavePder\SavePder.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="SavePder" Source="SavePder\SavePder.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="PdwPlugin" Source="PdwPlugin\PdwPlugin.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="PdwPlugin" Source="PdwPlugin\PdwPlugin.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="PdwIntegreate" Source="PdwIntegreate\PdwIntegreate.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="PdwIntegreate" Source="PdwIntegreate\PdwIntegreate.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="PdePlugin.sln" Description="The solution file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="" Source="PdePlugin.sln" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="PdePlugin" Source="PdePlugin\PdePlugin.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="PdwPlugin" Source="PdwPlugin\PdwPlugin.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="PdwIntegreate" Source="PdwIntegreate\PdwIntegreate.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

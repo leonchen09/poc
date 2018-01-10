@@ -1,0 +1,6 @@
+D:\work\source\POC\DBRelationShip\DBRelationShip\TestOracle\obj\x86\Release\TestOracle.Form1.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\TestOracle\obj\x86\Release\TestOracle.Properties.Resources.resources
+D:\work\source\POC\DBRelationShip\DBRelationShip\TestOracle\obj\x86\Release\TestOracle.csproj.GenerateResource.Cache
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\TestOracle\obj\x86\Release\TestOracle.Form1.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\TestOracle\obj\x86\Release\TestOracle.Properties.Resources.resources
+D:\OneDrive\source\POC\DBRelationShip\DBRelationShip\TestOracle\obj\x86\Release\TestOracle.csproj.GenerateResource.Cache

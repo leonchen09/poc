@@ -1,0 +1,92 @@
+//  公用类
+
+//清除浮动
+.clear{
+  zoom:1;
+}
+.clear:after{
+  content:"";
+  display:block;
+  clear:both
+}
+
+//错误提示
+.err{
+  color: red;
+}
+
+//分页开始
+.list_Pagination_z{
+  text-align: center;
+  position: absolute;
+  bottom: 18px;
+  width: 100%; left: 0;
+}
+.page_tip {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  height: 18px;
+  line-height: 18px;
+  color: #999;
+  font-size: 14px;
+  display: none;
+}
+.pages{
+  vertical-align: middle;
+  display:inline-block;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  padding: 0 5px;
+  background-color: #ccc;
+  color: #ffffff;
+  /*box-sizing: border-box;*/
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.pages a{
+  color: #ffffff;
+  background-color: #ccc;
+}
+.pageNow a{
+  background-color: #fff;
+  color: #676767;
+}
+.pageNow{
+  vertical-align: middle;
+  display:inline-block;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  padding: 0 5px;
+  background-color: #fff;
+  color: #676767;
+  /*box-sizing: border-box;*/
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.changePage{
+  display: inline-block;
+  margin-left: 10px;
+}
+.Pagination_input{
+  width: 60px;
+  height: 25px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+}
+.Pagination_btn{
+  height: 25px;
+  width: 30px;
+  background-color: #666;
+  color: #fff;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+//分页结束

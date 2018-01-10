@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9275CF99-8123-46F1-AC81-3D398F91F50E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pdw.Core</RootNamespace>
+    <AssemblyName>Pdw.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PDFC">
+      <HintPath>..\..\References\PDFC.dll</HintPath>
+    </Reference>
+    <Reference Include="PDFU">
+      <HintPath>..\..\References\PDFU.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseConstant.cs" />
+    <Compile Include="DataGridViewColorBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DomainInfo.cs" />
+    <Compile Include="GoalSeekItem.cs" />
+    <Compile Include="IconInfo.cs" />
+    <Compile Include="InternalBookmark.cs" />
+    <Compile Include="InternalBookmarkDomain.cs" />
+    <Compile Include="InternalBookmarkItem.cs" />
+    <Compile Include="Mapping.cs" />
+    <Compile Include="BaseMarkupUtilities.cs" />
+    <Compile Include="BaseProntoMarkup.cs" />
+    <Compile Include="OrderByType.cs" />
+    <Compile Include="Osql.cs" />
+    <Compile Include="PdeDataTagInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationOn.cs" />
+    <Compile Include="Relations.cs" />
+    <Compile Include="TreeViewSpliter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TreeViewSpliter.designer.cs">
+      <DependentUpon>TreeViewSpliter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="USCItem.cs" />
+    <Compile Include="XsltType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TreeViewSpliter.resx">
+      <DependentUpon>TreeViewSpliter.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF EXIST "$(SolutionDir)\..\References\$(TargetFileName)"  (Xcopy  "$(TargetPath)" "$(SolutionDir)\..\References\$(TargetFileName)" /R /Y) ELSE (copy "$(TargetPath)" "$(SolutionDir)\..\References\$(TargetFileName)")</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

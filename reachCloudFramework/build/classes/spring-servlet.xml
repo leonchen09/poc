@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"     
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"     
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd		
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd" >
+
+    <!-- 设置使用contoller注解的类所在的包,use-default-filters="false"表示，不扫码所有注解，然后在下面指定需要扫描的注解，以过滤不需要的class-->
+    <context:component-scan base-package="com.reachcloud" use-default-filters="false">
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <!-- 添加转向页面的路径前后缀。prefix：前缀， suffix：后缀  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/view/" p:suffix=".jsp" />
+ 	<!-- 指定web静态资源位置（比如各种css，js的请求等），springMVC会自动让拦截器放行，不进行拦截，因为前面
+	     web.xml中的拦截是.do结尾的，所以此处可以不写，除非前面是拦截所有的请求，此处就可以指定资源位置，不拦截 -->
+	<!-- <mvc:resources mapping="/resources/**" location="/resources/" /> -->
+	
+	<mvc:annotation-driven>
+		<!-- 自定义controller参数解析器 -->
+		<mvc:argument-resolvers>
+			<bean class="com.reachcloud.framework.web.interceptor.PaginationArgumentResolver" />
+		</mvc:argument-resolvers>
+		<!-- 处理controller返回的结果-->
+		<mvc:message-converters>
+			<ref bean="ignorestrjsonmessageconverter"/>
+			<ref bean="stringhttpmsgconverter"/>
+			<ref bean="xmlresultmsgconverter"/>
+		</mvc:message-converters>
+		<!-- 处理自定义的contorller返回结果  -->
+		<mvc:return-value-handlers>
+			<bean class="com.reachcloud.framework.web.interceptor.StatusResponseReturnValueHandler" >
+				<constructor-arg>
+					<list>
+						<ref bean="stringhttpmsgconverter"/>
+						<ref bean="jsonresultmsgconverter"/>
+						<ref bean="xmlresultmsgconverter"/>
+					</list>
+				</constructor-arg>
+			</bean>
+		</mvc:return-value-handlers>
+	</mvc:annotation-driven>
+
+	<bean id="ignorestrjsonmessageconverter" class="com.reachcloud.framework.web.interceptor.IgnoreStrJsonMessageConverter">
+    	<property name="supportedMediaTypes">
+            <list>
+            	<value>application/json;charset=UTF-8</value>
+            	<value>application/x-www-form-urlencoded;charset=UTF-8</value>
+            </list>
+        </property>
+        <property name="features">
+	        <list>
+	            <value>WriteMapNullValue</value>
+	            <value>QuoteFieldNames</value>
+               <!-- 默认Date的日期转换器 -->
+               <value>WriteDateUseDateFormat</value>
+	        </list>
+         </property>
+    </bean>
+    <bean id="stringhttpmsgconverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+				<value>text/html;charset=UTF-8</value>
+				<value>text/plain;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jsonresultmsgconverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+    <!--<bean id="jsonresultmsgconverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
+    <!-- <bean id="jsonresultmsgconverter" class="com.sofn.framework.web.interceptor.JsonResultMessageConverter" >-->
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html; charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+        <property name="features">
+	        <list>
+	            <value>WriteMapNullValue</value>
+	            <value>QuoteFieldNames</value>
+               <!-- 默认Date的日期转换器 -->
+               <value>WriteDateUseDateFormat</value>
+	        </list>
+         </property>
+        <!--
+        <property name="objectMapper">  
+			<bean class="com.fasterxml.jackson.databind.ObjectMapper">  
+				<property name="dateFormat"> 
+					<ref bean="customDateFormat" />
+				</property>
+			</bean>
+        </property>
+        -->
+    </bean>
+    <bean id="xmlresultmsgconverter" class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter">
+    <!--<bean id="xmlresultmsgconverter" class="com.sofn.framework.web.interceptor.XmlResultMessageConverter"> -->
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/xml;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+ 
+
+	<!-- 统一异常处理 -->
+	<bean class="com.reachcloud.framework.web.interceptor.BindExceptionHandler" ></bean>
+	<bean id="exceptionHandler" class="com.reachcloud.framework.web.interceptor.ExceptionHandler">
+		<property name="bizExceptionView" value="common/bizException" />
+		<property name="sysExceptionView" value="common/sysException" />
+		<property name="exceptionView" value="common/exception" />
+		<property name="validationExceptionView" value="common/validationException" />
+	</bean>
+     <!-- 自定义拦截器，拦截所有的controller方法，权限判断 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 设置拦截规则 -->
+            <mvc:mapping path="/**"/>
+            <bean class="com.reachcloud.framework.web.interceptor.AccessInterceptor">
+            	<!-- 注意：首页登录等不需要权限拦截的配置在相应代码中配置 -->
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

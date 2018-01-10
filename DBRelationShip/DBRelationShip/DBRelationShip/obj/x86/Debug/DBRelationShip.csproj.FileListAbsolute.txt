@@ -1,0 +1,10 @@
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\bin\Debug\DBRelationShip.exe
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\bin\Debug\DBRelationShip.pdb
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\DBRelationShip.Form1.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\DBRelationShip.Properties.Resources.resources
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\DBRelationShip.exe
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\DBRelationShip.pdb
+D:\Source\POC\DBRelationShip\DBRelationShip\DBRelationShip\obj\x86\Debug\DBRelationShip.csproj.ResolveComReference.cache

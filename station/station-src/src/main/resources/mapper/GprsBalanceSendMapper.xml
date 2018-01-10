@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.GprsBalanceSendMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.GprsBalanceSend">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="cell_1" property="cell1" jdbcType="TINYINT" />
+		<result column="cell_2" property="cell2" jdbcType="TINYINT" />
+		<result column="cell_3" property="cell3" jdbcType="TINYINT" />
+		<result column="cell_4" property="cell4" jdbcType="TINYINT" />
+		<result column="cell_5" property="cell5" jdbcType="TINYINT" />
+		<result column="cell_6" property="cell6" jdbcType="TINYINT" />
+		<result column="cell_7" property="cell7" jdbcType="TINYINT" />
+		<result column="cell_8" property="cell8" jdbcType="TINYINT" />
+		<result column="cell_9" property="cell9" jdbcType="TINYINT" />
+		<result column="cell_10" property="cell10" jdbcType="TINYINT" />
+		<result column="cell_11" property="cell11" jdbcType="TINYINT" />
+		<result column="cell_12" property="cell12" jdbcType="TINYINT" />
+		<result column="cell_13" property="cell13" jdbcType="TINYINT" />
+		<result column="cell_14" property="cell14" jdbcType="TINYINT" />
+		<result column="cell_15" property="cell15" jdbcType="TINYINT" />
+		<result column="cell_16" property="cell16" jdbcType="TINYINT" />
+		<result column="cell_17" property="cell17" jdbcType="TINYINT" />
+		<result column="cell_18" property="cell18" jdbcType="TINYINT" />
+		<result column="cell_19" property="cell19" jdbcType="TINYINT" />
+		<result column="cell_20" property="cell20" jdbcType="TINYINT" />
+		<result column="cell_21" property="cell21" jdbcType="TINYINT" />
+		<result column="cell_22" property="cell22" jdbcType="TINYINT" />
+		<result column="cell_23" property="cell23" jdbcType="TINYINT" />
+		<result column="cell_24" property="cell24" jdbcType="TINYINT" />
+		<result column="duration" property="duration" jdbcType="INTEGER" />
+		<result column="send_done" property="sendDone" jdbcType="TINYINT" />
+		<result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, cell_1, cell_2, cell_3, cell_4, cell_5, cell_6, cell_7,
+		cell_8, cell_9,
+		cell_10, cell_11, cell_12, cell_13, cell_14, cell_15, cell_16, cell_17,
+		cell_18,
+		cell_19, cell_20,
+		cell_21, cell_22, cell_23, cell_24, duration, send_done,
+		send_time
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from gprs_balance_send
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.GprsBalanceSend">
+		select
+		<include refid="Base_Column_List" />
+		from gprs_balance_send
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="cell1 != null">
+				and cell_1 = #{cell1,jdbcType=TINYINT}
+			</if>
+			<if test="cell2 != null">
+				and cell_2 = #{cell2,jdbcType=TINYINT}
+			</if>
+			<if test="cell3 != null">
+				and cell_3 = #{cell3,jdbcType=TINYINT}
+			</if>
+			<if test="cell4 != null">
+				and cell_4 = #{cell4,jdbcType=TINYINT}
+			</if>
+			<if test="cell5 != null">
+				and cell_5 = #{cell5,jdbcType=TINYINT}
+			</if>
+			<if test="cell6 != null">
+				and cell_6 = #{cell6,jdbcType=TINYINT}
+			</if>
+			<if test="cell7 != null">
+				and cell_7 = #{cell7,jdbcType=TINYINT}
+			</if>
+			<if test="cell8 != null">
+				and cell_8 = #{cell8,jdbcType=TINYINT}
+			</if>
+			<if test="cell9 != null">
+				and cell_9 = #{cell9,jdbcType=TINYINT}
+			</if>
+			<if test="cell10 != null">
+				and cell_10 = #{cell10,jdbcType=TINYINT}
+			</if>
+			<if test="cell11 != null">
+				and cell_11 = #{cell11,jdbcType=TINYINT}
+			</if>
+			<if test="cell12 != null">
+				and cell_12 = #{cell12,jdbcType=TINYINT}
+			</if>
+			<if test="cell13 != null">
+				and cell_13 = #{cell13,jdbcType=TINYINT}
+			</if>
+			<if test="cell14 != null">
+				and cell_14 = #{cell14,jdbcType=TINYINT}
+			</if>
+			<if test="cell15 != null">
+				and cell_15 = #{cell15,jdbcType=TINYINT}
+			</if>
+			<if test="cell16 != null">
+				and cell_16 = #{cell16,jdbcType=TINYINT}
+			</if>
+			<if test="cell17 != null">
+				and cell_17 = #{cell17,jdbcType=TINYINT}
+			</if>
+			<if test="cell18 != null">
+				and cell_18 = #{cell18,jdbcType=TINYINT}
+			</if>
+			<if test="cell19 != null">
+				and cell_19 = #{cell19,jdbcType=TINYINT}
+			</if>
+			<if test="cell20 != null">
+				and cell_20 = #{cell20,jdbcType=TINYINT}
+			</if>
+			<if test="cell21 != null">
+				and cell_21 = #{cell21,jdbcType=TINYINT}
+			</if>
+			<if test="cell22 != null">
+				and cell_22 = #{cell22,jdbcType=TINYINT}
+			</if>
+			<if test="cell23 != null">
+				and cell_23 = #{cell23,jdbcType=TINYINT}
+			</if>
+			<if test="cell24 != null">
+				and cell_24 = #{cell24,jdbcType=TINYINT}
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=INTEGER}
+			</if>
+			<if test="sendDone != null">
+				and send_done = #{sendDone,jdbcType=TINYINT}
+			</if>
+			<if test="sendTime != null">
+				and send_time = #{sendTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from gprs_balance_send
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="cell1 != null">
+				and cell_1 = #{cell1,jdbcType=TINYINT}
+			</if>
+			<if test="cell2 != null">
+				and cell_2 = #{cell2,jdbcType=TINYINT}
+			</if>
+			<if test="cell3 != null">
+				and cell_3 = #{cell3,jdbcType=TINYINT}
+			</if>
+			<if test="cell4 != null">
+				and cell_4 = #{cell4,jdbcType=TINYINT}
+			</if>
+			<if test="cell5 != null">
+				and cell_5 = #{cell5,jdbcType=TINYINT}
+			</if>
+			<if test="cell6 != null">
+				and cell_6 = #{cell6,jdbcType=TINYINT}
+			</if>
+			<if test="cell7 != null">
+				and cell_7 = #{cell7,jdbcType=TINYINT}
+			</if>
+			<if test="cell8 != null">
+				and cell_8 = #{cell8,jdbcType=TINYINT}
+			</if>
+			<if test="cell9 != null">
+				and cell_9 = #{cell9,jdbcType=TINYINT}
+			</if>
+			<if test="cell10 != null">
+				and cell_10 = #{cell10,jdbcType=TINYINT}
+			</if>
+			<if test="cell11 != null">
+				and cell_11 = #{cell11,jdbcType=TINYINT}
+			</if>
+			<if test="cell12 != null">
+				and cell_12 = #{cell12,jdbcType=TINYINT}
+			</if>
+			<if test="cell13 != null">
+				and cell_13 = #{cell13,jdbcType=TINYINT}
+			</if>
+			<if test="cell14 != null">
+				and cell_14 = #{cell14,jdbcType=TINYINT}
+			</if>
+			<if test="cell15 != null">
+				and cell_15 = #{cell15,jdbcType=TINYINT}
+			</if>
+			<if test="cell16 != null">
+				and cell_16 = #{cell16,jdbcType=TINYINT}
+			</if>
+			<if test="cell17 != null">
+				and cell_17 = #{cell17,jdbcType=TINYINT}
+			</if>
+			<if test="cell18 != null">
+				and cell_18 = #{cell18,jdbcType=TINYINT}
+			</if>
+			<if test="cell19 != null">
+				and cell_19 = #{cell19,jdbcType=TINYINT}
+			</if>
+			<if test="cell20 != null">
+				and cell_20 = #{cell20,jdbcType=TINYINT}
+			</if>
+			<if test="cell21 != null">
+				and cell_21 = #{cell21,jdbcType=TINYINT}
+			</if>
+			<if test="cell22 != null">
+				and cell_22 = #{cell22,jdbcType=TINYINT}
+			</if>
+			<if test="cell23 != null">
+				and cell_23 = #{cell23,jdbcType=TINYINT}
+			</if>
+			<if test="cell24 != null">
+				and cell_24 = #{cell24,jdbcType=TINYINT}
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=INTEGER}
+			</if>
+			<if test="sendDone != null">
+				and send_done = #{sendDone,jdbcType=TINYINT}
+			</if>
+			<if test="sendTime != null">
+				and send_time = #{sendTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from gprs_balance_send
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from gprs_balance_send
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.GprsBalanceSend">
+		delete from gprs_balance_send
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="cell1 != null">
+				and cell_1 = #{cell1,jdbcType=TINYINT}
+			</if>
+			<if test="cell2 != null">
+				and cell_2 = #{cell2,jdbcType=TINYINT}
+			</if>
+			<if test="cell3 != null">
+				and cell_3 = #{cell3,jdbcType=TINYINT}
+			</if>
+			<if test="cell4 != null">
+				and cell_4 = #{cell4,jdbcType=TINYINT}
+			</if>
+			<if test="cell5 != null">
+				and cell_5 = #{cell5,jdbcType=TINYINT}
+			</if>
+			<if test="cell6 != null">
+				and cell_6 = #{cell6,jdbcType=TINYINT}
+			</if>
+			<if test="cell7 != null">
+				and cell_7 = #{cell7,jdbcType=TINYINT}
+			</if>
+			<if test="cell8 != null">
+				and cell_8 = #{cell8,jdbcType=TINYINT}
+			</if>
+			<if test="cell9 != null">
+				and cell_9 = #{cell9,jdbcType=TINYINT}
+			</if>
+			<if test="cell10 != null">
+				and cell_10 = #{cell10,jdbcType=TINYINT}
+			</if>
+			<if test="cell11 != null">
+				and cell_11 = #{cell11,jdbcType=TINYINT}
+			</if>
+			<if test="cell12 != null">
+				and cell_12 = #{cell12,jdbcType=TINYINT}
+			</if>
+			<if test="cell13 != null">
+				and cell_13 = #{cell13,jdbcType=TINYINT}
+			</if>
+			<if test="cell14 != null">
+				and cell_14 = #{cell14,jdbcType=TINYINT}
+			</if>
+			<if test="cell15 != null">
+				and cell_15 = #{cell15,jdbcType=TINYINT}
+			</if>
+			<if test="cell16 != null">
+				and cell_16 = #{cell16,jdbcType=TINYINT}
+			</if>
+			<if test="cell17 != null">
+				and cell_17 = #{cell17,jdbcType=TINYINT}
+			</if>
+			<if test="cell18 != null">
+				and cell_18 = #{cell18,jdbcType=TINYINT}
+			</if>
+			<if test="cell19 != null">
+				and cell_19 = #{cell19,jdbcType=TINYINT}
+			</if>
+			<if test="cell20 != null">
+				and cell_20 = #{cell20,jdbcType=TINYINT}
+			</if>
+			<if test="cell21 != null">
+				and cell_21 = #{cell21,jdbcType=TINYINT}
+			</if>
+			<if test="cell22 != null">
+				and cell_22 = #{cell22,jdbcType=TINYINT}
+			</if>
+			<if test="cell23 != null">
+				and cell_23 = #{cell23,jdbcType=TINYINT}
+			</if>
+			<if test="cell24 != null">
+				and cell_24 = #{cell24,jdbcType=TINYINT}
+			</if>
+			<if test="duration != null">
+				and duration = #{duration,jdbcType=INTEGER}
+			</if>
+			<if test="sendDone != null">
+				and send_done = #{sendDone,jdbcType=TINYINT}
+			</if>
+			<if test="sendTime != null">
+				and send_time = #{sendTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.GprsBalanceSend" useGeneratedKeys="true" keyProperty="id">
+		insert into gprs_balance_send (gprs_id, cell_1, cell_2,
+		cell_3, cell_4,
+		cell_5,
+		cell_6, cell_7, cell_8,
+		cell_9, cell_10, cell_11,
+		cell_12, cell_13, cell_14,
+		cell_15, cell_16, cell_17,
+		cell_18, cell_19, cell_20,
+		cell_21, cell_22, cell_23,
+		cell_24, duration, send_done,
+		send_time)
+		values (#{gprsId,jdbcType=VARCHAR}, #{cell1,jdbcType=TINYINT},
+		#{cell2,jdbcType=TINYINT},
+		#{cell3,jdbcType=TINYINT}, #{cell4,jdbcType=TINYINT}, #{cell5,jdbcType=TINYINT},
+		#{cell6,jdbcType=TINYINT}, #{cell7,jdbcType=TINYINT},
+		#{cell8,jdbcType=TINYINT},
+		#{cell9,jdbcType=TINYINT}, #{cell10,jdbcType=TINYINT}, #{cell11,jdbcType=TINYINT},
+		#{cell12,jdbcType=TINYINT},
+		#{cell13,jdbcType=TINYINT},
+		#{cell14,jdbcType=TINYINT},
+		#{cell15,jdbcType=TINYINT}, #{cell16,jdbcType=TINYINT}, #{cell17,jdbcType=TINYINT},
+		#{cell18,jdbcType=TINYINT}, #{cell19,jdbcType=TINYINT},
+		#{cell20,jdbcType=TINYINT},
+		#{cell21,jdbcType=TINYINT}, #{cell22,jdbcType=TINYINT}, #{cell23,jdbcType=TINYINT},
+		#{cell24,jdbcType=TINYINT}, #{duration,jdbcType=INTEGER},
+		#{sendDone,jdbcType=TINYINT},
+		#{sendTime,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.GprsBalanceSend" useGeneratedKeys="true" keyProperty="id">
+		insert into gprs_balance_send
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="cell1 != null">
+				cell_1,
+			</if>
+			<if test="cell2 != null">
+				cell_2,
+			</if>
+			<if test="cell3 != null">
+				cell_3,
+			</if>
+			<if test="cell4 != null">
+				cell_4,
+			</if>
+			<if test="cell5 != null">
+				cell_5,
+			</if>
+			<if test="cell6 != null">
+				cell_6,
+			</if>
+			<if test="cell7 != null">
+				cell_7,
+			</if>
+			<if test="cell8 != null">
+				cell_8,
+			</if>
+			<if test="cell9 != null">
+				cell_9,
+			</if>
+			<if test="cell10 != null">
+				cell_10,
+			</if>
+			<if test="cell11 != null">
+				cell_11,
+			</if>
+			<if test="cell12 != null">
+				cell_12,
+			</if>
+			<if test="cell13 != null">
+				cell_13,
+			</if>
+			<if test="cell14 != null">
+				cell_14,
+			</if>
+			<if test="cell15 != null">
+				cell_15,
+			</if>
+			<if test="cell16 != null">
+				cell_16,
+			</if>
+			<if test="cell17 != null">
+				cell_17,
+			</if>
+			<if test="cell18 != null">
+				cell_18,
+			</if>
+			<if test="cell19 != null">
+				cell_19,
+			</if>
+			<if test="cell20 != null">
+				cell_20,
+			</if>
+			<if test="cell21 != null">
+				cell_21,
+			</if>
+			<if test="cell22 != null">
+				cell_22,
+			</if>
+			<if test="cell23 != null">
+				cell_23,
+			</if>
+			<if test="cell24 != null">
+				cell_24,
+			</if>
+			<if test="duration != null">
+				duration,
+			</if>
+			<if test="sendDone != null">
+				send_done,
+			</if>
+			<if test="sendTime != null">
+				send_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="cell1 != null">
+				#{cell1,jdbcType=TINYINT},
+			</if>
+			<if test="cell2 != null">
+				#{cell2,jdbcType=TINYINT},
+			</if>
+			<if test="cell3 != null">
+				#{cell3,jdbcType=TINYINT},
+			</if>
+			<if test="cell4 != null">
+				#{cell4,jdbcType=TINYINT},
+			</if>
+			<if test="cell5 != null">
+				#{cell5,jdbcType=TINYINT},
+			</if>
+			<if test="cell6 != null">
+				#{cell6,jdbcType=TINYINT},
+			</if>
+			<if test="cell7 != null">
+				#{cell7,jdbcType=TINYINT},
+			</if>
+			<if test="cell8 != null">
+				#{cell8,jdbcType=TINYINT},
+			</if>
+			<if test="cell9 != null">
+				#{cell9,jdbcType=TINYINT},
+			</if>
+			<if test="cell10 != null">
+				#{cell10,jdbcType=TINYINT},
+			</if>
+			<if test="cell11 != null">
+				#{cell11,jdbcType=TINYINT},
+			</if>
+			<if test="cell12 != null">
+				#{cell12,jdbcType=TINYINT},
+			</if>
+			<if test="cell13 != null">
+				#{cell13,jdbcType=TINYINT},
+			</if>
+			<if test="cell14 != null">
+				#{cell14,jdbcType=TINYINT},
+			</if>
+			<if test="cell15 != null">
+				#{cell15,jdbcType=TINYINT},
+			</if>
+			<if test="cell16 != null">
+				#{cell16,jdbcType=TINYINT},
+			</if>
+			<if test="cell17 != null">
+				#{cell17,jdbcType=TINYINT},
+			</if>
+			<if test="cell18 != null">
+				#{cell18,jdbcType=TINYINT},
+			</if>
+			<if test="cell19 != null">
+				#{cell19,jdbcType=TINYINT},
+			</if>
+			<if test="cell20 != null">
+				#{cell20,jdbcType=TINYINT},
+			</if>
+			<if test="cell21 != null">
+				#{cell21,jdbcType=TINYINT},
+			</if>
+			<if test="cell22 != null">
+				#{cell22,jdbcType=TINYINT},
+			</if>
+			<if test="cell23 != null">
+				#{cell23,jdbcType=TINYINT},
+			</if>
+			<if test="cell24 != null">
+				#{cell24,jdbcType=TINYINT},
+			</if>
+			<if test="duration != null">
+				#{duration,jdbcType=INTEGER},
+			</if>
+			<if test="sendDone != null">
+				#{sendDone,jdbcType=TINYINT},
+			</if>
+			<if test="sendTime != null">
+				#{sendTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.GprsBalanceSend">
+		update gprs_balance_send
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="cell1 != null">
+				cell_1 = #{cell1,jdbcType=TINYINT},
+			</if>
+			<if test="cell2 != null">
+				cell_2 = #{cell2,jdbcType=TINYINT},
+			</if>
+			<if test="cell3 != null">
+				cell_3 = #{cell3,jdbcType=TINYINT},
+			</if>
+			<if test="cell4 != null">
+				cell_4 = #{cell4,jdbcType=TINYINT},
+			</if>
+			<if test="cell5 != null">
+				cell_5 = #{cell5,jdbcType=TINYINT},
+			</if>
+			<if test="cell6 != null">
+				cell_6 = #{cell6,jdbcType=TINYINT},
+			</if>
+			<if test="cell7 != null">
+				cell_7 = #{cell7,jdbcType=TINYINT},
+			</if>
+			<if test="cell8 != null">
+				cell_8 = #{cell8,jdbcType=TINYINT},
+			</if>
+			<if test="cell9 != null">
+				cell_9 = #{cell9,jdbcType=TINYINT},
+			</if>
+			<if test="cell10 != null">
+				cell_10 = #{cell10,jdbcType=TINYINT},
+			</if>
+			<if test="cell11 != null">
+				cell_11 = #{cell11,jdbcType=TINYINT},
+			</if>
+			<if test="cell12 != null">
+				cell_12 = #{cell12,jdbcType=TINYINT},
+			</if>
+			<if test="cell13 != null">
+				cell_13 = #{cell13,jdbcType=TINYINT},
+			</if>
+			<if test="cell14 != null">
+				cell_14 = #{cell14,jdbcType=TINYINT},
+			</if>
+			<if test="cell15 != null">
+				cell_15 = #{cell15,jdbcType=TINYINT},
+			</if>
+			<if test="cell16 != null">
+				cell_16 = #{cell16,jdbcType=TINYINT},
+			</if>
+			<if test="cell17 != null">
+				cell_17 = #{cell17,jdbcType=TINYINT},
+			</if>
+			<if test="cell18 != null">
+				cell_18 = #{cell18,jdbcType=TINYINT},
+			</if>
+			<if test="cell19 != null">
+				cell_19 = #{cell19,jdbcType=TINYINT},
+			</if>
+			<if test="cell20 != null">
+				cell_20 = #{cell20,jdbcType=TINYINT},
+			</if>
+			<if test="cell21 != null">
+				cell_21 = #{cell21,jdbcType=TINYINT},
+			</if>
+			<if test="cell22 != null">
+				cell_22 = #{cell22,jdbcType=TINYINT},
+			</if>
+			<if test="cell23 != null">
+				cell_23 = #{cell23,jdbcType=TINYINT},
+			</if>
+			<if test="cell24 != null">
+				cell_24 = #{cell24,jdbcType=TINYINT},
+			</if>
+			<if test="duration != null">
+				duration = #{duration,jdbcType=INTEGER},
+			</if>
+			<if test="sendDone != null">
+				send_done = #{sendDone,jdbcType=TINYINT},
+			</if>
+			<if test="sendTime != null">
+				send_time = #{sendTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.GprsBalanceSend">
+		update gprs_balance_send
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		cell_1 = #{cell1,jdbcType=TINYINT},
+		cell_2 = #{cell2,jdbcType=TINYINT},
+		cell_3 =
+		#{cell3,jdbcType=TINYINT},
+		cell_4 = #{cell4,jdbcType=TINYINT},
+		cell_5 = #{cell5,jdbcType=TINYINT},
+		cell_6 = #{cell6,jdbcType=TINYINT},
+		cell_7 = #{cell7,jdbcType=TINYINT},
+		cell_8 =
+		#{cell8,jdbcType=TINYINT},
+		cell_9 = #{cell9,jdbcType=TINYINT},
+		cell_10 = #{cell10,jdbcType=TINYINT},
+		cell_11 = #{cell11,jdbcType=TINYINT},
+		cell_12 = #{cell12,jdbcType=TINYINT},
+		cell_13 =
+		#{cell13,jdbcType=TINYINT},
+		cell_14 = #{cell14,jdbcType=TINYINT},
+		cell_15 = #{cell15,jdbcType=TINYINT},
+		cell_16 = #{cell16,jdbcType=TINYINT},
+		cell_17 = #{cell17,jdbcType=TINYINT},
+		cell_18 =
+		#{cell18,jdbcType=TINYINT},
+		cell_19 = #{cell19,jdbcType=TINYINT},
+		cell_20 = #{cell20,jdbcType=TINYINT},
+		cell_21 = #{cell21,jdbcType=TINYINT},
+		cell_22 = #{cell22,jdbcType=TINYINT},
+		cell_23 =
+		#{cell23,jdbcType=TINYINT},
+		cell_24 = #{cell24,jdbcType=TINYINT},
+		duration = #{duration,jdbcType=INTEGER},
+		send_done = #{sendDone,jdbcType=TINYINT},
+		send_time = #{sendTime,jdbcType=TIMESTAMP}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByGprs" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from gprs_balance_send
+		where id = (SELECT max(id) FROM base_station_management.gprs_balance_send
+		where gprs_id=#{gprsId,jdbcType=VARCHAR} and send_done!=-1)
+	</select>
+</mapper>

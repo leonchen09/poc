@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.WarningInfoMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.WarningInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="rcv_time" property="rcvTime" jdbcType="TIMESTAMP" />
+		<result column="cell_tem_high" property="cellTemHigh" jdbcType="TINYINT" />
+		<result column="env_tem_high" property="envTemHigh" jdbcType="TINYINT" />
+		<result column="cell_tem_low" property="cellTemLow" jdbcType="TINYINT" />
+		<result column="env_tem_low" property="envTemLow" jdbcType="TINYINT" />
+		<result column="gen_vol_high" property="genVolHigh" jdbcType="TINYINT" />
+		<result column="gen_vol_low" property="genVolLow" jdbcType="TINYINT" />
+		<result column="loss_electricity" property="lossElectricity" jdbcType="TINYINT" />
+		<result column="soc_low" property="socLow" jdbcType="TINYINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, rcv_time, cell_tem_high, env_tem_high,
+		cell_tem_low,
+		env_tem_low, gen_vol_high,
+		gen_vol_low, loss_electricity,
+		soc_low
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from warning_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.WarningInfo">
+		select
+		<include refid="Base_Column_List" />
+		from warning_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="cellTemHigh != null">
+				and cell_tem_high = #{cellTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="envTemHigh != null">
+				and env_tem_high = #{envTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="cellTemLow != null">
+				and cell_tem_low = #{cellTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="envTemLow != null">
+				and env_tem_low = #{envTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="genVolHigh != null">
+				and gen_vol_high = #{genVolHigh,jdbcType=TINYINT}
+			</if>
+			<if test="genVolLow != null">
+				and gen_vol_low = #{genVolLow,jdbcType=TINYINT}
+			</if>
+			<if test="lossElectricity != null">
+				and loss_electricity =
+				#{lossElectricity,jdbcType=TINYINT}
+			</if>
+			<if test="socLow != null">
+				and soc_low = #{socLow,jdbcType=TINYINT}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from warning_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="cellTemHigh != null">
+				and cell_tem_high = #{cellTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="envTemHigh != null">
+				and env_tem_high = #{envTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="cellTemLow != null">
+				and cell_tem_low = #{cellTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="envTemLow != null">
+				and env_tem_low = #{envTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="genVolHigh != null">
+				and gen_vol_high = #{genVolHigh,jdbcType=TINYINT}
+			</if>
+			<if test="genVolLow != null">
+				and gen_vol_low = #{genVolLow,jdbcType=TINYINT}
+			</if>
+			<if test="lossElectricity != null">
+				and loss_electricity =
+				#{lossElectricity,jdbcType=TINYINT}
+			</if>
+			<if test="socLow != null">
+				and soc_low = #{socLow,jdbcType=TINYINT}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		warning_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from warning_info
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.WarningInfo">
+		delete from warning_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="rcvTime != null">
+				and rcv_time = #{rcvTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="cellTemHigh != null">
+				and cell_tem_high = #{cellTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="envTemHigh != null">
+				and env_tem_high = #{envTemHigh,jdbcType=TINYINT}
+			</if>
+			<if test="cellTemLow != null">
+				and cell_tem_low = #{cellTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="envTemLow != null">
+				and env_tem_low = #{envTemLow,jdbcType=TINYINT}
+			</if>
+			<if test="genVolHigh != null">
+				and gen_vol_high = #{genVolHigh,jdbcType=TINYINT}
+			</if>
+			<if test="genVolLow != null">
+				and gen_vol_low = #{genVolLow,jdbcType=TINYINT}
+			</if>
+			<if test="lossElectricity != null">
+				and loss_electricity =
+				#{lossElectricity,jdbcType=TINYINT}
+			</if>
+			<if test="socLow != null">
+				and soc_low = #{socLow,jdbcType=TINYINT}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.WarningInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into warning_info (gprs_id,
+		rcv_time, cell_tem_high,
+		env_tem_high,
+		cell_tem_low, env_tem_low,
+		gen_vol_high, gen_vol_low, loss_electricity,
+		soc_low)
+		values
+		(#{gprsId,jdbcType=VARCHAR}, #{rcvTime,jdbcType=TIMESTAMP},
+		#{cellTemHigh,jdbcType=TINYINT},
+		#{envTemHigh,jdbcType=TINYINT},
+		#{cellTemLow,jdbcType=TINYINT}, #{envTemLow,jdbcType=TINYINT},
+		#{genVolHigh,jdbcType=TINYINT}, #{genVolLow,jdbcType=TINYINT},
+		#{lossElectricity,jdbcType=TINYINT},
+		#{socLow,jdbcType=TINYINT})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.WarningInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into warning_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="rcvTime != null">
+				rcv_time,
+			</if>
+			<if test="cellTemHigh != null">
+				cell_tem_high,
+			</if>
+			<if test="envTemHigh != null">
+				env_tem_high,
+			</if>
+			<if test="cellTemLow != null">
+				cell_tem_low,
+			</if>
+			<if test="envTemLow != null">
+				env_tem_low,
+			</if>
+			<if test="genVolHigh != null">
+				gen_vol_high,
+			</if>
+			<if test="genVolLow != null">
+				gen_vol_low,
+			</if>
+			<if test="lossElectricity != null">
+				loss_electricity,
+			</if>
+			<if test="socLow != null">
+				soc_low,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				#{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cellTemHigh != null">
+				#{cellTemHigh,jdbcType=TINYINT},
+			</if>
+			<if test="envTemHigh != null">
+				#{envTemHigh,jdbcType=TINYINT},
+			</if>
+			<if test="cellTemLow != null">
+				#{cellTemLow,jdbcType=TINYINT},
+			</if>
+			<if test="envTemLow != null">
+				#{envTemLow,jdbcType=TINYINT},
+			</if>
+			<if test="genVolHigh != null">
+				#{genVolHigh,jdbcType=TINYINT},
+			</if>
+			<if test="genVolLow != null">
+				#{genVolLow,jdbcType=TINYINT},
+			</if>
+			<if test="lossElectricity != null">
+				#{lossElectricity,jdbcType=TINYINT},
+			</if>
+			<if test="socLow != null">
+				#{socLow,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.WarningInfo">
+		update warning_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvTime != null">
+				rcv_time = #{rcvTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cellTemHigh != null">
+				cell_tem_high = #{cellTemHigh,jdbcType=TINYINT},
+			</if>
+			<if test="envTemHigh != null">
+				env_tem_high = #{envTemHigh,jdbcType=TINYINT},
+			</if>
+			<if test="cellTemLow != null">
+				cell_tem_low = #{cellTemLow,jdbcType=TINYINT},
+			</if>
+			<if test="envTemLow != null">
+				env_tem_low = #{envTemLow,jdbcType=TINYINT},
+			</if>
+			<if test="genVolHigh != null">
+				gen_vol_high = #{genVolHigh,jdbcType=TINYINT},
+			</if>
+			<if test="genVolLow != null">
+				gen_vol_low = #{genVolLow,jdbcType=TINYINT},
+			</if>
+			<if test="lossElectricity != null">
+				loss_electricity = #{lossElectricity,jdbcType=TINYINT},
+			</if>
+			<if test="socLow != null">
+				soc_low = #{socLow,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.WarningInfo">
+		update
+		warning_info
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		rcv_time =
+		#{rcvTime,jdbcType=TIMESTAMP},
+		cell_tem_high =
+		#{cellTemHigh,jdbcType=TINYINT},
+		env_tem_high =
+		#{envTemHigh,jdbcType=TINYINT},
+		cell_tem_low =
+		#{cellTemLow,jdbcType=TINYINT},
+		env_tem_low =
+		#{envTemLow,jdbcType=TINYINT},
+		gen_vol_high =
+		#{genVolHigh,jdbcType=TINYINT},
+		gen_vol_low =
+		#{genVolLow,jdbcType=TINYINT},
+		loss_electricity =
+		#{lossElectricity,jdbcType=TINYINT},
+		soc_low =
+		#{socLow,jdbcType=TINYINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<resultMap type="com.station.moudles.entity.StationWarningInfo" id="StationBaseResultMap" extends="BaseResultMap">
+		<result column="company_id3" property="companyId3" jdbcType="INTEGER" />
+		<result column="company_name3" property="companyName3" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="operator_type" property="operatorType" jdbcType="INTEGER" />
+		<result column="maintainance_id" property="maintainanceId" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="device_type" property="deviceType" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="selectWarningListByStation" resultMap="StationBaseResultMap">
+		select
+		w.*,s.company_id3,s.company_name3,s.name,s.operator_type,s.maintainance_id,
+		s.address,c.device_type from(
+		select
+		max(id) as w_id
+		from warning_info
+		where rcv_time>#{rcvTime}
+		<if test="stationList !=null">
+			<foreach collection="stationList" index="index" separator="or" item="item" open=" and( " close=")">
+				gprs_id = #{item.gprsId,jdbcType=VARCHAR}
+			</foreach>
+		</if>
+		group by gprs_id
+		) wtmp
+		left join warning_info w on wtmp.w_id=w.id
+		left join base_station_info s on w.gprs_id=s.gprs_id
+		left join gprs_config_info c on c.gprs_id=w.gprs_id
+	</select>
+
+	<resultMap id="WarnAreaResultMap" type="com.station.moudles.entity.WarnArea">
+		<result column="company_id3" property="companyId3" jdbcType="INTEGER" />
+		<result column="company_name3" property="companyName3" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+		<result column="cell_tem_high_num" property="cellTemHighNum" jdbcType="INTEGER" />
+		<result column="cell_tem_high_percent" property="cellTemHighPercent" jdbcType="VARCHAR" />
+		<result column="cell_tem_low_num" property="cellTemLowNum" jdbcType="INTEGER" />
+		<result column="cell_tem_low_percent" property="cellTemLowPercent" jdbcType="VARCHAR" />
+		<result column="env_tem_high_num" property="envTemHighNum" jdbcType="INTEGER" />
+		<result column="env_tem_high_percent" property="envTemHighPercent" jdbcType="VARCHAR" />
+		<result column="env_tem_low_num" property="envTemLowNum" jdbcType="INTEGER" />
+		<result column="env_tem_low_percent" property="envTemLowPercent" jdbcType="VARCHAR" />
+		<result column="gen_vol_high_num" property="genVolHighNum" jdbcType="INTEGER" />
+		<result column="gen_vol_high_percent" property="genVolHighPercent" jdbcType="VARCHAR" />
+		<result column="gen_vol_low_num" property="genVolLowNum" jdbcType="INTEGER" />
+		<result column="gen_vol_low_percent" property="genVolLowPercent" jdbcType="VARCHAR" />
+		<result column="loss_electricity_num" property="lossElectricityNum" jdbcType="INTEGER" />
+		<result column="loss_electricity_percent" property="lossElectricityPercent" jdbcType="VARCHAR" />
+		<result column="soc_low_num" property="socLowNum" jdbcType="INTEGER" />
+		<result column="soc_low_percent" property="socLowPercent" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectWarnAreaList" resultMap="WarnAreaResultMap">
+		SELECT
+		s.*,
+        cell_tem_high_num, round(cell_tem_high_num*100/num,2) as cell_tem_high_percent,
+		env_tem_high_num, round(env_tem_high_num*100/num,2) as env_tem_high_percent,
+		cell_tem_low_num, round(cell_tem_low_num*100/num,2) as cell_tem_low_percent,
+        env_tem_low_num, round(env_tem_low_num*100/num,2) as env_tem_low_percent,
+		gen_vol_high_num, round(gen_vol_high_num*100/num,2) as gen_vol_high_percent,
+        gen_vol_low_num, round(gen_vol_low_num*100/num,2) as gen_vol_low_percent,
+		loss_electricity_num, round(loss_electricity_num*100/num,2) as loss_electricity_percent,
+        soc_low_num, round(soc_low_num*100/num,2) as soc_low_percent
+		FROM
+		(SELECT
+		company_id3,
+		company_name3,
+		IFNULL(city, '-1') AS city,
+		IFNULL(district, city) AS
+		district,
+		SUM(cell_tem_high_num) as
+		cell_tem_high_num,
+		SUM(env_tem_high_num) as env_tem_high_num,
+		SUM(cell_tem_low_num) as cell_tem_low_num,
+		SUM(env_tem_low_num) as
+		env_tem_low_num,
+		SUM(gen_vol_high_num)
+		as gen_vol_high_num,
+		SUM(gen_vol_low_num) as gen_vol_low_num,
+		SUM(loss_electricity_num) as
+		loss_electricity_num,
+		SUM(soc_low_num) as soc_low_num
+		FROM
+		(SELECT
+		company_id3,
+		company_name3,
+		district,
+		city,
+		SUM(cell_tem_high) AS
+		cell_tem_high_num,
+		SUM(env_tem_high) AS env_tem_high_num,
+		SUM(cell_tem_low) AS cell_tem_low_num,
+		SUM(env_tem_low) AS
+		env_tem_low_num,
+		SUM(gen_vol_high) AS gen_vol_high_num,
+		SUM(gen_vol_low) AS gen_vol_low_num,
+		SUM(loss_electricity) AS
+		loss_electricity_num,
+		SUM(soc_low) AS soc_low_num
+		FROM
+		(
+		SELECT
+		warn.*,
+		s.company_id1,
+		s.company_id2,
+		s.company_id3,
+		s.company_name3,
+		s.city,
+		s.district
+		FROM
+		(SELECT
+		gprs_id, MAX(id) AS m_id
+		FROM
+		warning_info
+		WHERE
+		rcv_time > #{rcvTime,jdbcType=TIMESTAMP}
+		GROUP BY
+		gprs_id) w
+		LEFT JOIN base_station_info s ON w.gprs_id = s.gprs_id
+		LEFT
+		JOIN
+		warning_info warn ON warn.id = w.m_id
+		WHERE
+		<if test="companyId1 != null">
+			company_id1 = #{companyId1,jdbcType=INTEGER}
+		</if>
+		<if test="companyId2 != null">
+			company_id2 = #{companyId2,jdbcType=INTEGER}
+		</if>
+		<if test="companyId3 != null">
+			company_id3 = #{companyId3,jdbcType=INTEGER}
+		</if>
+		)
+		t1
+		GROUP BY district,company_id3) t2
+		GROUP BY company_name3 , city ,
+		district WITH
+		ROLLUP
+		HAVING city != - 1) t3
+		RIGHT JOIN
+		(SELECT
+		*
+		FROM
+		(SELECT
+		IFNULL(company_id3, - 1) AS company_id3,
+		company_name3,
+		IFNULL(city, - 1) AS
+		city,
+		IFNULL(district, city) AS district,
+		COUNT(*) AS num
+		FROM
+		base_station_info
+		WHERE
+		<if test="companyId1 != null">
+			company_id1 = #{companyId1,jdbcType=INTEGER}
+		</if>
+		<if test="companyId2 != null">
+			company_id2 = #{companyId2,jdbcType=INTEGER}
+		</if>
+		<if test="companyId3 != null">
+			company_id3 = #{companyId3,jdbcType=INTEGER}
+		</if>
+		GROUP BY company_id3, city,
+		district WITH ROLLUP) t
+		WHERE
+		t.company_id3 != - 1 AND city != - 1) s ON
+		t3.district = s.district and
+		t3.company_id3=s.company_id3
+	</select>
+
+</mapper>

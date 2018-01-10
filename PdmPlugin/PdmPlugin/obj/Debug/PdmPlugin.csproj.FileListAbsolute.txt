@@ -1,0 +1,13 @@
+D:\source\POC\PdmPlugin\PdmPlugin\bin\Debug\PdmPlugin.dll
+D:\source\POC\PdmPlugin\PdmPlugin\bin\Debug\PdmPlugin.pdb
+D:\source\POC\PdmPlugin\PdmPlugin\bin\Debug\PdmPlugin.dll.manifest
+D:\source\POC\PdmPlugin\PdmPlugin\bin\Debug\PdmPlugin.vsto
+D:\source\POC\PdmPlugin\PdmPlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\source\POC\PdmPlugin\PdmPlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\ResolveAssemblyReference.cache
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\PdmPlugin.Properties.Resources.resources
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\GenerateResource.read.1.tlog
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\GenerateResource.write.1.tlog
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\PdmPlugin.dll
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\PdmPlugin.pdb
+D:\source\POC\PdmPlugin\PdmPlugin\obj\Debug\PdmPlugin.CustomTaskPaneControl.resources

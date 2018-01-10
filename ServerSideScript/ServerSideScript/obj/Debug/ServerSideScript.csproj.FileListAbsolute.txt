@@ -1,0 +1,68 @@
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\ServerSideScript.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\ServerSideScript.pdb
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\obj\Debug\ResolveAssemblyReference.cache
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.pdb
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pdw.Services.Integrity.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pdwx.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.Framework.CoreObject.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.Framework.DAC.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.Framework.FolderWatcher.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.Framework.Utils.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.SX.Dao.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.SX.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.SX.SharedComponent.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.SX.Synchronous.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.SX.Utils.dll
+D:\NgocBV\Sample\ServerSideScript\ServerSideScript\bin\Pronto.SX.Asynchronous.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\ServerSideScript.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\ServerSideScript.pdb
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pdw.Services.Integrity.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pdwx.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.Framework.CoreObject.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.Framework.DAC.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.Framework.FolderWatcher.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.Framework.Utils.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.SX.Asynchronous.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.SX.Dao.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.SX.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.SX.SharedComponent.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.SX.Synchronous.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\bin\Pronto.SX.Utils.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.dll
+C:\Users\Pham Van Quy\Desktop\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.pdb
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\ServerSideScript.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\ServerSideScript.pdb
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pdw.Services.Integrity.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pdwx.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.Framework.CoreObject.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.Framework.DAC.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.Framework.FolderWatcher.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.Framework.Utils.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.SX.Asynchronous.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.SX.Dao.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.SX.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.SX.SharedComponent.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.SX.Synchronous.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\bin\Pronto.SX.Utils.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.dll
+D:\Project\02. Customer\08. Bronie\09.Temp\ServerSideScript\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.pdb
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\ServerSideScript.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\ServerSideScript.pdb
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pdw.Services.Integrity.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pdwx.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.Framework.CoreObject.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.Framework.DAC.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.Framework.FolderWatcher.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.Framework.Utils.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.SX.Asynchronous.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.SX.Dao.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.SX.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.SX.SharedComponent.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.SX.Synchronous.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\bin\Pronto.SX.Utils.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\obj\Debug\ResolveAssemblyReference.cache
+D:\Source\POC\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.dll
+D:\Source\POC\ServerSideScript\ServerSideScript\obj\Debug\ServerSideScript.pdb

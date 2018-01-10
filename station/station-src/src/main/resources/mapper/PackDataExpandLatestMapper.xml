@@ -1,0 +1,2155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.PackDataExpandLatestMapper" >
+  <resultMap id="BaseResultMap" type="com.station.moudles.entity.PackDataExpandLatest" >
+    <id column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="pack_cap_pred" property="packCapPred" jdbcType="INTEGER" />
+    <result column="pack_discharge_time_pred" property="packDischargeTimePred" jdbcType="DECIMAL" />
+    <result column="cell_resist_1" property="cellResist1" jdbcType="DECIMAL" />
+    <result column="cell_resist_2" property="cellResist2" jdbcType="DECIMAL" />
+    <result column="cell_resist_3" property="cellResist3" jdbcType="DECIMAL" />
+    <result column="cell_resist_4" property="cellResist4" jdbcType="DECIMAL" />
+    <result column="cell_resist_5" property="cellResist5" jdbcType="DECIMAL" />
+    <result column="cell_resist_6" property="cellResist6" jdbcType="DECIMAL" />
+    <result column="cell_resist_7" property="cellResist7" jdbcType="DECIMAL" />
+    <result column="cell_resist_8" property="cellResist8" jdbcType="DECIMAL" />
+    <result column="cell_resist_9" property="cellResist9" jdbcType="DECIMAL" />
+    <result column="cell_resist_10" property="cellResist10" jdbcType="DECIMAL" />
+    <result column="cell_resist_11" property="cellResist11" jdbcType="DECIMAL" />
+    <result column="cell_resist_12" property="cellResist12" jdbcType="DECIMAL" />
+    <result column="cell_resist_13" property="cellResist13" jdbcType="DECIMAL" />
+    <result column="cell_resist_14" property="cellResist14" jdbcType="DECIMAL" />
+    <result column="cell_resist_15" property="cellResist15" jdbcType="DECIMAL" />
+    <result column="cell_resist_16" property="cellResist16" jdbcType="DECIMAL" />
+    <result column="cell_resist_17" property="cellResist17" jdbcType="DECIMAL" />
+    <result column="cell_resist_18" property="cellResist18" jdbcType="DECIMAL" />
+    <result column="cell_resist_19" property="cellResist19" jdbcType="DECIMAL" />
+    <result column="cell_resist_20" property="cellResist20" jdbcType="DECIMAL" />
+    <result column="cell_resist_21" property="cellResist21" jdbcType="DECIMAL" />
+    <result column="cell_resist_22" property="cellResist22" jdbcType="DECIMAL" />
+    <result column="cell_resist_23" property="cellResist23" jdbcType="DECIMAL" />
+    <result column="cell_resist_24" property="cellResist24" jdbcType="DECIMAL" />
+    <result column="cell_cap_1" property="cellCap1" jdbcType="DECIMAL" />
+    <result column="cell_cap_2" property="cellCap2" jdbcType="DECIMAL" />
+    <result column="cell_cap_3" property="cellCap3" jdbcType="DECIMAL" />
+    <result column="cell_cap_4" property="cellCap4" jdbcType="DECIMAL" />
+    <result column="cell_cap_5" property="cellCap5" jdbcType="DECIMAL" />
+    <result column="cell_cap_6" property="cellCap6" jdbcType="DECIMAL" />
+    <result column="cell_cap_7" property="cellCap7" jdbcType="DECIMAL" />
+    <result column="cell_cap_8" property="cellCap8" jdbcType="DECIMAL" />
+    <result column="cell_cap_9" property="cellCap9" jdbcType="DECIMAL" />
+    <result column="cell_cap_10" property="cellCap10" jdbcType="DECIMAL" />
+    <result column="cell_cap_11" property="cellCap11" jdbcType="DECIMAL" />
+    <result column="cell_cap_12" property="cellCap12" jdbcType="DECIMAL" />
+    <result column="cell_cap_13" property="cellCap13" jdbcType="DECIMAL" />
+    <result column="cell_cap_14" property="cellCap14" jdbcType="DECIMAL" />
+    <result column="cell_cap_15" property="cellCap15" jdbcType="DECIMAL" />
+    <result column="cell_cap_16" property="cellCap16" jdbcType="DECIMAL" />
+    <result column="cell_cap_17" property="cellCap17" jdbcType="DECIMAL" />
+    <result column="cell_cap_18" property="cellCap18" jdbcType="DECIMAL" />
+    <result column="cell_cap_19" property="cellCap19" jdbcType="DECIMAL" />
+    <result column="cell_cap_20" property="cellCap20" jdbcType="DECIMAL" />
+    <result column="cell_cap_21" property="cellCap21" jdbcType="DECIMAL" />
+    <result column="cell_cap_22" property="cellCap22" jdbcType="DECIMAL" />
+    <result column="cell_cap_23" property="cellCap23" jdbcType="DECIMAL" />
+    <result column="cell_cap_24" property="cellCap24" jdbcType="DECIMAL" />
+    <result column="cell_evalu_1" property="cellEvalu1" jdbcType="INTEGER" />
+    <result column="cell_evalu_2" property="cellEvalu2" jdbcType="INTEGER" />
+    <result column="cell_evalu_3" property="cellEvalu3" jdbcType="INTEGER" />
+    <result column="cell_evalu_4" property="cellEvalu4" jdbcType="INTEGER" />
+    <result column="cell_evalu_5" property="cellEvalu5" jdbcType="INTEGER" />
+    <result column="cell_evalu_6" property="cellEvalu6" jdbcType="INTEGER" />
+    <result column="cell_evalu_7" property="cellEvalu7" jdbcType="INTEGER" />
+    <result column="cell_evalu_8" property="cellEvalu8" jdbcType="INTEGER" />
+    <result column="cell_evalu_9" property="cellEvalu9" jdbcType="INTEGER" />
+    <result column="cell_evalu_10" property="cellEvalu10" jdbcType="INTEGER" />
+    <result column="cell_evalu_11" property="cellEvalu11" jdbcType="INTEGER" />
+    <result column="cell_evalu_12" property="cellEvalu12" jdbcType="INTEGER" />
+    <result column="cell_evalu_13" property="cellEvalu13" jdbcType="INTEGER" />
+    <result column="cell_evalu_14" property="cellEvalu14" jdbcType="INTEGER" />
+    <result column="cell_evalu_15" property="cellEvalu15" jdbcType="INTEGER" />
+    <result column="cell_evalu_16" property="cellEvalu16" jdbcType="INTEGER" />
+    <result column="cell_evalu_17" property="cellEvalu17" jdbcType="INTEGER" />
+    <result column="cell_evalu_18" property="cellEvalu18" jdbcType="INTEGER" />
+    <result column="cell_evalu_19" property="cellEvalu19" jdbcType="INTEGER" />
+    <result column="cell_evalu_20" property="cellEvalu20" jdbcType="INTEGER" />
+    <result column="cell_evalu_21" property="cellEvalu21" jdbcType="INTEGER" />
+    <result column="cell_evalu_22" property="cellEvalu22" jdbcType="INTEGER" />
+    <result column="cell_evalu_23" property="cellEvalu23" jdbcType="INTEGER" />
+    <result column="cell_evalu_24" property="cellEvalu24" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_1" property="cellCapSort1" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_2" property="cellCapSort2" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_3" property="cellCapSort3" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_4" property="cellCapSort4" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_5" property="cellCapSort5" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_6" property="cellCapSort6" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_7" property="cellCapSort7" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_8" property="cellCapSort8" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_9" property="cellCapSort9" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_10" property="cellCapSort10" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_11" property="cellCapSort11" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_12" property="cellCapSort12" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_13" property="cellCapSort13" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_14" property="cellCapSort14" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_15" property="cellCapSort15" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_16" property="cellCapSort16" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_17" property="cellCapSort17" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_18" property="cellCapSort18" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_19" property="cellCapSort19" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_20" property="cellCapSort20" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_21" property="cellCapSort21" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_22" property="cellCapSort22" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_23" property="cellCapSort23" jdbcType="INTEGER" />
+    <result column="cell_cap_sort_24" property="cellCapSort24" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    gprs_id, update_time, pack_cap_pred, pack_discharge_time_pred, cell_resist_1, cell_resist_2,
+    cell_resist_3, cell_resist_4, cell_resist_5, cell_resist_6, cell_resist_7, cell_resist_8,
+    cell_resist_9, cell_resist_10, cell_resist_11, cell_resist_12, cell_resist_13, cell_resist_14,
+    cell_resist_15, cell_resist_16, cell_resist_17, cell_resist_18, cell_resist_19, cell_resist_20,
+    cell_resist_21, cell_resist_22, cell_resist_23, cell_resist_24, cell_cap_1, cell_cap_2,
+    cell_cap_3, cell_cap_4, cell_cap_5, cell_cap_6, cell_cap_7, cell_cap_8, cell_cap_9,
+    cell_cap_10, cell_cap_11, cell_cap_12, cell_cap_13, cell_cap_14, cell_cap_15, cell_cap_16,
+    cell_cap_17, cell_cap_18, cell_cap_19, cell_cap_20, cell_cap_21, cell_cap_22, cell_cap_23,
+    cell_cap_24, cell_evalu_1, cell_evalu_2, cell_evalu_3, cell_evalu_4, cell_evalu_5,
+    cell_evalu_6, cell_evalu_7, cell_evalu_8, cell_evalu_9, cell_evalu_10, cell_evalu_11,
+    cell_evalu_12, cell_evalu_13, cell_evalu_14, cell_evalu_15, cell_evalu_16, cell_evalu_17,
+    cell_evalu_18, cell_evalu_19, cell_evalu_20, cell_evalu_21, cell_evalu_22, cell_evalu_23,
+    cell_evalu_24,
+    cell_cap_sort_1, cell_cap_sort_2, cell_cap_sort_3, cell_cap_sort_4, cell_cap_sort_5, cell_cap_sort_6, cell_cap_sort_7, cell_cap_sort_8,
+    cell_cap_sort_9, cell_cap_sort_10, cell_cap_sort_11, cell_cap_sort_12, cell_cap_sort_13, cell_cap_sort_14, cell_cap_sort_15,
+    cell_cap_sort_16, cell_cap_sort_17, cell_cap_sort_18, cell_cap_sort_19, cell_cap_sort_20, cell_cap_sort_21, cell_cap_sort_22,
+    cell_cap_sort_23, cell_cap_sort_24
+  </sql>
+
+  <select id="getByGprsIds" resultMap="BaseResultMap" parameterType="java.util.List">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM pack_data_expand_latest
+    WHERE  gprs_id IN
+    <foreach item="id" index="index" collection="list" open="(" separator="," close=")">#{id,jdbcType=VARCHAR}</foreach>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from pack_data_expand_latest
+    where gprs_id = #{gprsId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.PackDataExpandLatest" >
+    select
+    <include refid="Base_Column_List" />
+    from pack_data_expand_latest
+    <where >
+      <if test="gprsId != null" >
+        and gprs_id = #{gprsId,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="packCapPred != null" >
+        and pack_cap_pred = #{packCapPred,jdbcType=INTEGER}
+      </if>
+      <if test="packDischargeTimePred != null" >
+        and pack_discharge_time_pred = #{packDischargeTimePred,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist1 != null" >
+        and cell_resist_1 = #{cellResist1,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist2 != null" >
+        and cell_resist_2 = #{cellResist2,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist3 != null" >
+        and cell_resist_3 = #{cellResist3,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist4 != null" >
+        and cell_resist_4 = #{cellResist4,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist5 != null" >
+        and cell_resist_5 = #{cellResist5,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist6 != null" >
+        and cell_resist_6 = #{cellResist6,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist7 != null" >
+        and cell_resist_7 = #{cellResist7,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist8 != null" >
+        and cell_resist_8 = #{cellResist8,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist9 != null" >
+        and cell_resist_9 = #{cellResist9,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist10 != null" >
+        and cell_resist_10 = #{cellResist10,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist11 != null" >
+        and cell_resist_11 = #{cellResist11,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist12 != null" >
+        and cell_resist_12 = #{cellResist12,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist13 != null" >
+        and cell_resist_13 = #{cellResist13,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist14 != null" >
+        and cell_resist_14 = #{cellResist14,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist15 != null" >
+        and cell_resist_15 = #{cellResist15,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist16 != null" >
+        and cell_resist_16 = #{cellResist16,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist17 != null" >
+        and cell_resist_17 = #{cellResist17,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist18 != null" >
+        and cell_resist_18 = #{cellResist18,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist19 != null" >
+        and cell_resist_19 = #{cellResist19,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist20 != null" >
+        and cell_resist_20 = #{cellResist20,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist21 != null" >
+        and cell_resist_21 = #{cellResist21,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist22 != null" >
+        and cell_resist_22 = #{cellResist22,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist23 != null" >
+        and cell_resist_23 = #{cellResist23,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist24 != null" >
+        and cell_resist_24 = #{cellResist24,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap1 != null" >
+        and cell_cap_1 = #{cellCap1,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap2 != null" >
+        and cell_cap_2 = #{cellCap2,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap3 != null" >
+        and cell_cap_3 = #{cellCap3,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap4 != null" >
+        and cell_cap_4 = #{cellCap4,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap5 != null" >
+        and cell_cap_5 = #{cellCap5,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap6 != null" >
+        and cell_cap_6 = #{cellCap6,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap7 != null" >
+        and cell_cap_7 = #{cellCap7,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap8 != null" >
+        and cell_cap_8 = #{cellCap8,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap9 != null" >
+        and cell_cap_9 = #{cellCap9,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap10 != null" >
+        and cell_cap_10 = #{cellCap10,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap11 != null" >
+        and cell_cap_11 = #{cellCap11,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap12 != null" >
+        and cell_cap_12 = #{cellCap12,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap13 != null" >
+        and cell_cap_13 = #{cellCap13,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap14 != null" >
+        and cell_cap_14 = #{cellCap14,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap15 != null" >
+        and cell_cap_15 = #{cellCap15,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap16 != null" >
+        and cell_cap_16 = #{cellCap16,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap17 != null" >
+        and cell_cap_17 = #{cellCap17,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap18 != null" >
+        and cell_cap_18 = #{cellCap18,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap19 != null" >
+        and cell_cap_19 = #{cellCap19,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap20 != null" >
+        and cell_cap_20 = #{cellCap20,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap21 != null" >
+        and cell_cap_21 = #{cellCap21,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap22 != null" >
+        and cell_cap_22 = #{cellCap22,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap23 != null" >
+        and cell_cap_23 = #{cellCap23,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap24 != null" >
+        and cell_cap_24 = #{cellCap24,jdbcType=DECIMAL}
+      </if>
+      <if test="cellEvalu1 != null" >
+        and cell_evalu_1 = #{cellEvalu1,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu2 != null" >
+        and cell_evalu_2 = #{cellEvalu2,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu3 != null" >
+        and cell_evalu_3 = #{cellEvalu3,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu4 != null" >
+        and cell_evalu_4 = #{cellEvalu4,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu5 != null" >
+        and cell_evalu_5 = #{cellEvalu5,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu6 != null" >
+        and cell_evalu_6 = #{cellEvalu6,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu7 != null" >
+        and cell_evalu_7 = #{cellEvalu7,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu8 != null" >
+        and cell_evalu_8 = #{cellEvalu8,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu9 != null" >
+        and cell_evalu_9 = #{cellEvalu9,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu10 != null" >
+        and cell_evalu_10 = #{cellEvalu10,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu11 != null" >
+        and cell_evalu_11 = #{cellEvalu11,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu12 != null" >
+        and cell_evalu_12 = #{cellEvalu12,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu13 != null" >
+        and cell_evalu_13 = #{cellEvalu13,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu14 != null" >
+        and cell_evalu_14 = #{cellEvalu14,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu15 != null" >
+        and cell_evalu_15 = #{cellEvalu15,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu16 != null" >
+        and cell_evalu_16 = #{cellEvalu16,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu17 != null" >
+        and cell_evalu_17 = #{cellEvalu17,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu18 != null" >
+        and cell_evalu_18 = #{cellEvalu18,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu19 != null" >
+        and cell_evalu_19 = #{cellEvalu19,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu20 != null" >
+        and cell_evalu_20 = #{cellEvalu20,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu21 != null" >
+        and cell_evalu_21 = #{cellEvalu21,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu22 != null" >
+        and cell_evalu_22 = #{cellEvalu22,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu23 != null" >
+        and cell_evalu_23 = #{cellEvalu23,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu24 != null" >
+        and cell_evalu_24 = #{cellEvalu24,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort1 != null" >
+        and cell_cap_sort_1 = #{cellCapSort1,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort2 != null" >
+        and cell_cap_sort_2 = #{cellCapSort2,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort3 != null" >
+        and cell_cap_sort_3 = #{cellCapSort3,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort4 != null" >
+        and cell_cap_sort_4 = #{cellCapSort4,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort5 != null" >
+        and cell_cap_sort_5 = #{cellCapSort5,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort6 != null" >
+        and cell_cap_sort_6 = #{cellCapSort6,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort7 != null" >
+        and cell_cap_sort_7 = #{cellCapSort7,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort8 != null" >
+        and cell_cap_sort_8 = #{cellCapSort8,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort9 != null" >
+        and cell_cap_sort_9 = #{cellCapSort9,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort10 != null" >
+        and cell_cap_sort_10 = #{cellCapSort10,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort11 != null" >
+        and cell_cap_sort_11 = #{cellCapSort11,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort12 != null" >
+        and cell_cap_sort_12 = #{cellCapSort12,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort13 != null" >
+        and cell_cap_sort_13 = #{cellCapSort13,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort14 != null" >
+        and cell_cap_sort_14 = #{cellCapSort14,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort15 != null" >
+        and cell_cap_sort_15 = #{cellCapSort15,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort16 != null" >
+        and cell_cap_sort_16 = #{cellCapSort16,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort17 != null" >
+        and cell_cap_sort_17 = #{cellCapSort17,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort18 != null" >
+        and cell_cap_sort_18 = #{cellCapSort18,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort19 != null" >
+        and cell_cap_sort_19 = #{cellCapSort19,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort20 != null" >
+        and cell_cap_sort_20 = #{cellCapSort20,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort21 != null" >
+        and cell_cap_sort_21 = #{cellCapSort21,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort22 != null" >
+        and cell_cap_sort_22 = #{cellCapSort22,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort23 != null" >
+        and cell_cap_sort_23 = #{cellCapSort23,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort24 != null" >
+        and cell_cap_sort_24 = #{cellCapSort24,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity" >
+    select
+    <include refid="Base_Column_List" />
+    from pack_data_expand_latest
+    <where >
+      <if test="gprsId != null" >
+        and gprs_id like "%${gprsId}%"
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="packCapPred != null" >
+        and pack_cap_pred = #{packCapPred,jdbcType=INTEGER}
+      </if>
+      <if test="packDischargeTimePred != null" >
+        and pack_discharge_time_pred = #{packDischargeTimePred,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist1 != null" >
+        and cell_resist_1 = #{cellResist1,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist2 != null" >
+        and cell_resist_2 = #{cellResist2,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist3 != null" >
+        and cell_resist_3 = #{cellResist3,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist4 != null" >
+        and cell_resist_4 = #{cellResist4,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist5 != null" >
+        and cell_resist_5 = #{cellResist5,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist6 != null" >
+        and cell_resist_6 = #{cellResist6,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist7 != null" >
+        and cell_resist_7 = #{cellResist7,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist8 != null" >
+        and cell_resist_8 = #{cellResist8,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist9 != null" >
+        and cell_resist_9 = #{cellResist9,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist10 != null" >
+        and cell_resist_10 = #{cellResist10,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist11 != null" >
+        and cell_resist_11 = #{cellResist11,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist12 != null" >
+        and cell_resist_12 = #{cellResist12,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist13 != null" >
+        and cell_resist_13 = #{cellResist13,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist14 != null" >
+        and cell_resist_14 = #{cellResist14,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist15 != null" >
+        and cell_resist_15 = #{cellResist15,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist16 != null" >
+        and cell_resist_16 = #{cellResist16,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist17 != null" >
+        and cell_resist_17 = #{cellResist17,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist18 != null" >
+        and cell_resist_18 = #{cellResist18,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist19 != null" >
+        and cell_resist_19 = #{cellResist19,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist20 != null" >
+        and cell_resist_20 = #{cellResist20,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist21 != null" >
+        and cell_resist_21 = #{cellResist21,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist22 != null" >
+        and cell_resist_22 = #{cellResist22,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist23 != null" >
+        and cell_resist_23 = #{cellResist23,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist24 != null" >
+        and cell_resist_24 = #{cellResist24,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap1 != null" >
+        and cell_cap_1 = #{cellCap1,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap2 != null" >
+        and cell_cap_2 = #{cellCap2,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap3 != null" >
+        and cell_cap_3 = #{cellCap3,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap4 != null" >
+        and cell_cap_4 = #{cellCap4,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap5 != null" >
+        and cell_cap_5 = #{cellCap5,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap6 != null" >
+        and cell_cap_6 = #{cellCap6,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap7 != null" >
+        and cell_cap_7 = #{cellCap7,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap8 != null" >
+        and cell_cap_8 = #{cellCap8,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap9 != null" >
+        and cell_cap_9 = #{cellCap9,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap10 != null" >
+        and cell_cap_10 = #{cellCap10,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap11 != null" >
+        and cell_cap_11 = #{cellCap11,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap12 != null" >
+        and cell_cap_12 = #{cellCap12,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap13 != null" >
+        and cell_cap_13 = #{cellCap13,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap14 != null" >
+        and cell_cap_14 = #{cellCap14,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap15 != null" >
+        and cell_cap_15 = #{cellCap15,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap16 != null" >
+        and cell_cap_16 = #{cellCap16,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap17 != null" >
+        and cell_cap_17 = #{cellCap17,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap18 != null" >
+        and cell_cap_18 = #{cellCap18,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap19 != null" >
+        and cell_cap_19 = #{cellCap19,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap20 != null" >
+        and cell_cap_20 = #{cellCap20,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap21 != null" >
+        and cell_cap_21 = #{cellCap21,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap22 != null" >
+        and cell_cap_22 = #{cellCap22,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap23 != null" >
+        and cell_cap_23 = #{cellCap23,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap24 != null" >
+        and cell_cap_24 = #{cellCap24,jdbcType=DECIMAL}
+      </if>
+      <if test="cellEvalu1 != null" >
+        and cell_evalu_1 = #{cellEvalu1,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu2 != null" >
+        and cell_evalu_2 = #{cellEvalu2,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu3 != null" >
+        and cell_evalu_3 = #{cellEvalu3,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu4 != null" >
+        and cell_evalu_4 = #{cellEvalu4,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu5 != null" >
+        and cell_evalu_5 = #{cellEvalu5,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu6 != null" >
+        and cell_evalu_6 = #{cellEvalu6,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu7 != null" >
+        and cell_evalu_7 = #{cellEvalu7,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu8 != null" >
+        and cell_evalu_8 = #{cellEvalu8,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu9 != null" >
+        and cell_evalu_9 = #{cellEvalu9,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu10 != null" >
+        and cell_evalu_10 = #{cellEvalu10,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu11 != null" >
+        and cell_evalu_11 = #{cellEvalu11,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu12 != null" >
+        and cell_evalu_12 = #{cellEvalu12,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu13 != null" >
+        and cell_evalu_13 = #{cellEvalu13,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu14 != null" >
+        and cell_evalu_14 = #{cellEvalu14,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu15 != null" >
+        and cell_evalu_15 = #{cellEvalu15,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu16 != null" >
+        and cell_evalu_16 = #{cellEvalu16,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu17 != null" >
+        and cell_evalu_17 = #{cellEvalu17,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu18 != null" >
+        and cell_evalu_18 = #{cellEvalu18,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu19 != null" >
+        and cell_evalu_19 = #{cellEvalu19,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu20 != null" >
+        and cell_evalu_20 = #{cellEvalu20,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu21 != null" >
+        and cell_evalu_21 = #{cellEvalu21,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu22 != null" >
+        and cell_evalu_22 = #{cellEvalu22,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu23 != null" >
+        and cell_evalu_23 = #{cellEvalu23,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu24 != null" >
+        and cell_evalu_24 = #{cellEvalu24,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort1 != null" >
+        and cell_cap_sort_1 = #{cellCapSort1,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort2 != null" >
+        and cell_cap_sort_2 = #{cellCapSort2,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort3 != null" >
+        and cell_cap_sort_3 = #{cellCapSort3,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort4 != null" >
+        and cell_cap_sort_4 = #{cellCapSort4,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort5 != null" >
+        and cell_cap_sort_5 = #{cellCapSort5,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort6 != null" >
+        and cell_cap_sort_6 = #{cellCapSort6,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort7 != null" >
+        and cell_cap_sort_7 = #{cellCapSort7,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort8 != null" >
+        and cell_cap_sort_8 = #{cellCapSort8,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort9 != null" >
+        and cell_cap_sort_9 = #{cellCapSort9,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort10 != null" >
+        and cell_cap_sort_10 = #{cellCapSort10,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort11 != null" >
+        and cell_cap_sort_11 = #{cellCapSort11,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort12 != null" >
+        and cell_cap_sort_12 = #{cellCapSort12,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort13 != null" >
+        and cell_cap_sort_13 = #{cellCapSort13,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort14 != null" >
+        and cell_cap_sort_14 = #{cellCapSort14,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort15 != null" >
+        and cell_cap_sort_15 = #{cellCapSort15,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort16 != null" >
+        and cell_cap_sort_16 = #{cellCapSort16,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort17 != null" >
+        and cell_cap_sort_17 = #{cellCapSort17,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort18 != null" >
+        and cell_cap_sort_18 = #{cellCapSort18,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort19 != null" >
+        and cell_cap_sort_19 = #{cellCapSort19,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort20 != null" >
+        and cell_cap_sort_20 = #{cellCapSort20,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort21 != null" >
+        and cell_cap_sort_21 = #{cellCapSort21,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort22 != null" >
+        and cell_cap_sort_22 = #{cellCapSort22,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort23 != null" >
+        and cell_cap_sort_23 = #{cellCapSort23,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort24 != null" >
+        and cell_cap_sort_24 = #{cellCapSort24,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pack_data_expand_latest
+    where gprs_id = #{gprsId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByPKs" parameterType="java.lang.String" >
+    delete from pack_data_expand_latest
+    where
+    <foreach collection="array" index="index" separator="or" item="item" >
+      gprs_id = #{item,jdbcType=VARCHAR}
+    </foreach>
+  </delete>
+
+  <delete id="deleteSelective" parameterType="com.station.moudles.entity.PackDataExpandLatest" >
+    delete from pack_data_expand_latest
+    <where >
+      <if test="gprsId != null" >
+        and gprs_id = #{gprsId,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="packCapPred != null" >
+        and pack_cap_pred = #{packCapPred,jdbcType=INTEGER}
+      </if>
+      <if test="packDischargeTimePred != null" >
+        and pack_discharge_time_pred = #{packDischargeTimePred,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist1 != null" >
+        and cell_resist_1 = #{cellResist1,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist2 != null" >
+        and cell_resist_2 = #{cellResist2,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist3 != null" >
+        and cell_resist_3 = #{cellResist3,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist4 != null" >
+        and cell_resist_4 = #{cellResist4,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist5 != null" >
+        and cell_resist_5 = #{cellResist5,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist6 != null" >
+        and cell_resist_6 = #{cellResist6,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist7 != null" >
+        and cell_resist_7 = #{cellResist7,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist8 != null" >
+        and cell_resist_8 = #{cellResist8,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist9 != null" >
+        and cell_resist_9 = #{cellResist9,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist10 != null" >
+        and cell_resist_10 = #{cellResist10,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist11 != null" >
+        and cell_resist_11 = #{cellResist11,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist12 != null" >
+        and cell_resist_12 = #{cellResist12,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist13 != null" >
+        and cell_resist_13 = #{cellResist13,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist14 != null" >
+        and cell_resist_14 = #{cellResist14,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist15 != null" >
+        and cell_resist_15 = #{cellResist15,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist16 != null" >
+        and cell_resist_16 = #{cellResist16,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist17 != null" >
+        and cell_resist_17 = #{cellResist17,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist18 != null" >
+        and cell_resist_18 = #{cellResist18,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist19 != null" >
+        and cell_resist_19 = #{cellResist19,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist20 != null" >
+        and cell_resist_20 = #{cellResist20,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist21 != null" >
+        and cell_resist_21 = #{cellResist21,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist22 != null" >
+        and cell_resist_22 = #{cellResist22,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist23 != null" >
+        and cell_resist_23 = #{cellResist23,jdbcType=DECIMAL}
+      </if>
+      <if test="cellResist24 != null" >
+        and cell_resist_24 = #{cellResist24,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap1 != null" >
+        and cell_cap_1 = #{cellCap1,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap2 != null" >
+        and cell_cap_2 = #{cellCap2,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap3 != null" >
+        and cell_cap_3 = #{cellCap3,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap4 != null" >
+        and cell_cap_4 = #{cellCap4,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap5 != null" >
+        and cell_cap_5 = #{cellCap5,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap6 != null" >
+        and cell_cap_6 = #{cellCap6,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap7 != null" >
+        and cell_cap_7 = #{cellCap7,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap8 != null" >
+        and cell_cap_8 = #{cellCap8,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap9 != null" >
+        and cell_cap_9 = #{cellCap9,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap10 != null" >
+        and cell_cap_10 = #{cellCap10,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap11 != null" >
+        and cell_cap_11 = #{cellCap11,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap12 != null" >
+        and cell_cap_12 = #{cellCap12,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap13 != null" >
+        and cell_cap_13 = #{cellCap13,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap14 != null" >
+        and cell_cap_14 = #{cellCap14,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap15 != null" >
+        and cell_cap_15 = #{cellCap15,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap16 != null" >
+        and cell_cap_16 = #{cellCap16,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap17 != null" >
+        and cell_cap_17 = #{cellCap17,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap18 != null" >
+        and cell_cap_18 = #{cellCap18,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap19 != null" >
+        and cell_cap_19 = #{cellCap19,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap20 != null" >
+        and cell_cap_20 = #{cellCap20,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap21 != null" >
+        and cell_cap_21 = #{cellCap21,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap22 != null" >
+        and cell_cap_22 = #{cellCap22,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap23 != null" >
+        and cell_cap_23 = #{cellCap23,jdbcType=DECIMAL}
+      </if>
+      <if test="cellCap24 != null" >
+        and cell_cap_24 = #{cellCap24,jdbcType=DECIMAL}
+      </if>
+      <if test="cellEvalu1 != null" >
+        and cell_evalu_1 = #{cellEvalu1,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu2 != null" >
+        and cell_evalu_2 = #{cellEvalu2,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu3 != null" >
+        and cell_evalu_3 = #{cellEvalu3,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu4 != null" >
+        and cell_evalu_4 = #{cellEvalu4,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu5 != null" >
+        and cell_evalu_5 = #{cellEvalu5,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu6 != null" >
+        and cell_evalu_6 = #{cellEvalu6,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu7 != null" >
+        and cell_evalu_7 = #{cellEvalu7,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu8 != null" >
+        and cell_evalu_8 = #{cellEvalu8,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu9 != null" >
+        and cell_evalu_9 = #{cellEvalu9,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu10 != null" >
+        and cell_evalu_10 = #{cellEvalu10,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu11 != null" >
+        and cell_evalu_11 = #{cellEvalu11,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu12 != null" >
+        and cell_evalu_12 = #{cellEvalu12,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu13 != null" >
+        and cell_evalu_13 = #{cellEvalu13,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu14 != null" >
+        and cell_evalu_14 = #{cellEvalu14,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu15 != null" >
+        and cell_evalu_15 = #{cellEvalu15,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu16 != null" >
+        and cell_evalu_16 = #{cellEvalu16,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu17 != null" >
+        and cell_evalu_17 = #{cellEvalu17,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu18 != null" >
+        and cell_evalu_18 = #{cellEvalu18,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu19 != null" >
+        and cell_evalu_19 = #{cellEvalu19,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu20 != null" >
+        and cell_evalu_20 = #{cellEvalu20,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu21 != null" >
+        and cell_evalu_21 = #{cellEvalu21,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu22 != null" >
+        and cell_evalu_22 = #{cellEvalu22,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu23 != null" >
+        and cell_evalu_23 = #{cellEvalu23,jdbcType=INTEGER}
+      </if>
+      <if test="cellEvalu24 != null" >
+        and cell_evalu_24 = #{cellEvalu24,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort1 != null" >
+        and cell_cap_sort_1 = #{cellCapSort1,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort2 != null" >
+        and cell_cap_sort_2 = #{cellCapSort2,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort3 != null" >
+        and cell_cap_sort_3 = #{cellCapSort3,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort4 != null" >
+        and cell_cap_sort_4 = #{cellCapSort4,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort5 != null" >
+        and cell_cap_sort_5 = #{cellCapSort5,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort6 != null" >
+        and cell_cap_sort_6 = #{cellCapSort6,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort7 != null" >
+        and cell_cap_sort_7 = #{cellCapSort7,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort8 != null" >
+        and cell_cap_sort_8 = #{cellCapSort8,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort9 != null" >
+        and cell_cap_sort_9 = #{cellCapSort9,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort10 != null" >
+        and cell_cap_sort_10 = #{cellCapSort10,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort11 != null" >
+        and cell_cap_sort_11 = #{cellCapSort11,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort12 != null" >
+        and cell_cap_sort_12 = #{cellCapSort12,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort13 != null" >
+        and cell_cap_sort_13 = #{cellCapSort13,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort14 != null" >
+        and cell_cap_sort_14 = #{cellCapSort14,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort15 != null" >
+        and cell_cap_sort_15 = #{cellCapSort15,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort16 != null" >
+        and cell_cap_sort_16 = #{cellCapSort16,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort17 != null" >
+        and cell_cap_sort_17 = #{cellCapSort17,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort18 != null" >
+        and cell_cap_sort_18 = #{cellCapSort18,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort19 != null" >
+        and cell_cap_sort_19 = #{cellCapSort19,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort20 != null" >
+        and cell_cap_sort_20 = #{cellCapSort20,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort21 != null" >
+        and cell_cap_sort_21 = #{cellCapSort21,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort22 != null" >
+        and cell_cap_sort_22 = #{cellCapSort22,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort23 != null" >
+        and cell_cap_sort_23 = #{cellCapSort23,jdbcType=INTEGER}
+      </if>
+      <if test="cellCapSort24 != null" >
+        and cell_cap_sort_24 = #{cellCapSort24,jdbcType=INTEGER}
+      </if>
+    </where>
+  </delete>
+
+  <insert id="insert" parameterType="com.station.moudles.entity.PackDataExpandLatest" useGeneratedKeys="true" keyProperty="gprsId" >
+    insert into pack_data_expand_latest (gprs_id, update_time, pack_cap_pred, pack_discharge_time_pred,
+      cell_resist_1, cell_resist_2, cell_resist_3,
+      cell_resist_4, cell_resist_5, cell_resist_6,
+      cell_resist_7, cell_resist_8, cell_resist_9,
+      cell_resist_10, cell_resist_11, cell_resist_12,
+      cell_resist_13, cell_resist_14, cell_resist_15,
+      cell_resist_16, cell_resist_17, cell_resist_18,
+      cell_resist_19, cell_resist_20, cell_resist_21,
+      cell_resist_22, cell_resist_23, cell_resist_24,
+      cell_cap_1, cell_cap_2, cell_cap_3,
+      cell_cap_4, cell_cap_5, cell_cap_6,
+      cell_cap_7, cell_cap_8, cell_cap_9,
+      cell_cap_10, cell_cap_11, cell_cap_12,
+      cell_cap_13, cell_cap_14, cell_cap_15,
+      cell_cap_16, cell_cap_17, cell_cap_18,
+      cell_cap_19, cell_cap_20, cell_cap_21,
+      cell_cap_22, cell_cap_23, cell_cap_24,
+      cell_evalu_1, cell_evalu_2, cell_evalu_3,
+      cell_evalu_4, cell_evalu_5, cell_evalu_6,
+      cell_evalu_7, cell_evalu_8, cell_evalu_9,
+      cell_evalu_10, cell_evalu_11, cell_evalu_12,
+      cell_evalu_13, cell_evalu_14, cell_evalu_15,
+      cell_evalu_16, cell_evalu_17, cell_evalu_18,
+      cell_evalu_19, cell_evalu_20, cell_evalu_21,
+      cell_evalu_22, cell_evalu_23, cell_evalu_24,
+      cell_cap_sort_1, cell_cap_sort_2, cell_cap_sort_3, cell_cap_sort_4, cell_cap_sort_5, cell_cap_sort_6, cell_cap_sort_7, cell_cap_sort_8,
+      cell_cap_sort_9, cell_cap_sort_10, cell_cap_sort_11, cell_cap_sort_12, cell_cap_sort_13, cell_cap_sort_14,
+      cell_cap_sort_15, cell_cap_sort_16, cell_cap_sort_17, cell_cap_sort_18, cell_cap_sort_19, cell_cap_sort_20,
+      cell_cap_sort_21, cell_cap_sort_22, cell_cap_sort_23, cell_cap_sort_24
+      )
+    values (#{gprsId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{packCapPred,jdbcType=INTEGER}, #{packDischargeTimePred,jdbcType=DECIMAL},
+      #{cellResist1,jdbcType=DECIMAL}, #{cellResist2,jdbcType=DECIMAL}, #{cellResist3,jdbcType=DECIMAL},
+      #{cellResist4,jdbcType=DECIMAL}, #{cellResist5,jdbcType=DECIMAL}, #{cellResist6,jdbcType=DECIMAL},
+      #{cellResist7,jdbcType=DECIMAL}, #{cellResist8,jdbcType=DECIMAL}, #{cellResist9,jdbcType=DECIMAL},
+      #{cellResist10,jdbcType=DECIMAL}, #{cellResist11,jdbcType=DECIMAL}, #{cellResist12,jdbcType=DECIMAL},
+      #{cellResist13,jdbcType=DECIMAL}, #{cellResist14,jdbcType=DECIMAL}, #{cellResist15,jdbcType=DECIMAL},
+      #{cellResist16,jdbcType=DECIMAL}, #{cellResist17,jdbcType=DECIMAL}, #{cellResist18,jdbcType=DECIMAL},
+      #{cellResist19,jdbcType=DECIMAL}, #{cellResist20,jdbcType=DECIMAL}, #{cellResist21,jdbcType=DECIMAL},
+      #{cellResist22,jdbcType=DECIMAL}, #{cellResist23,jdbcType=DECIMAL}, #{cellResist24,jdbcType=DECIMAL},
+      #{cellCap1,jdbcType=DECIMAL}, #{cellCap2,jdbcType=DECIMAL}, #{cellCap3,jdbcType=DECIMAL},
+      #{cellCap4,jdbcType=DECIMAL}, #{cellCap5,jdbcType=DECIMAL}, #{cellCap6,jdbcType=DECIMAL},
+      #{cellCap7,jdbcType=DECIMAL}, #{cellCap8,jdbcType=DECIMAL}, #{cellCap9,jdbcType=DECIMAL},
+      #{cellCap10,jdbcType=DECIMAL}, #{cellCap11,jdbcType=DECIMAL}, #{cellCap12,jdbcType=DECIMAL},
+      #{cellCap13,jdbcType=DECIMAL}, #{cellCap14,jdbcType=DECIMAL}, #{cellCap15,jdbcType=DECIMAL},
+      #{cellCap16,jdbcType=DECIMAL}, #{cellCap17,jdbcType=DECIMAL}, #{cellCap18,jdbcType=DECIMAL},
+      #{cellCap19,jdbcType=DECIMAL}, #{cellCap20,jdbcType=DECIMAL}, #{cellCap21,jdbcType=DECIMAL},
+      #{cellCap22,jdbcType=DECIMAL}, #{cellCap23,jdbcType=DECIMAL}, #{cellCap24,jdbcType=DECIMAL},
+      #{cellEvalu1,jdbcType=INTEGER}, #{cellEvalu2,jdbcType=INTEGER}, #{cellEvalu3,jdbcType=INTEGER},
+      #{cellEvalu4,jdbcType=INTEGER}, #{cellEvalu5,jdbcType=INTEGER}, #{cellEvalu6,jdbcType=INTEGER},
+      #{cellEvalu7,jdbcType=INTEGER}, #{cellEvalu8,jdbcType=INTEGER}, #{cellEvalu9,jdbcType=INTEGER},
+      #{cellEvalu10,jdbcType=INTEGER}, #{cellEvalu11,jdbcType=INTEGER}, #{cellEvalu12,jdbcType=INTEGER},
+      #{cellEvalu13,jdbcType=INTEGER}, #{cellEvalu14,jdbcType=INTEGER}, #{cellEvalu15,jdbcType=INTEGER},
+      #{cellEvalu16,jdbcType=INTEGER}, #{cellEvalu17,jdbcType=INTEGER}, #{cellEvalu18,jdbcType=INTEGER},
+      #{cellEvalu19,jdbcType=INTEGER}, #{cellEvalu20,jdbcType=INTEGER}, #{cellEvalu21,jdbcType=INTEGER},
+      #{cellEvalu22,jdbcType=INTEGER}, #{cellEvalu23,jdbcType=INTEGER}, #{cellEvalu24,jdbcType=INTEGER},
+      #{cellCapSort1,jdbcType=INTEGER}, #{cellCapSort2,jdbcType=INTEGER},
+      #{cellCapSort3,jdbcType=INTEGER}, #{cellCapSort4,jdbcType=INTEGER}, #{cellCapSort5,jdbcType=INTEGER},
+      #{cellCapSort6,jdbcType=INTEGER}, #{cellCapSort7,jdbcType=INTEGER}, #{cellCapSort8,jdbcType=INTEGER},
+      #{cellCapSort9,jdbcType=INTEGER}, #{cellCapSort10,jdbcType=INTEGER}, #{cellCapSort11,jdbcType=INTEGER},
+      #{cellCapSort12,jdbcType=INTEGER}, #{cellCapSort13,jdbcType=INTEGER}, #{cellCapSort14,jdbcType=INTEGER},
+      #{cellCapSort15,jdbcType=INTEGER}, #{cellCapSort16,jdbcType=INTEGER}, #{cellCapSort17,jdbcType=INTEGER},
+      #{cellCapSort18,jdbcType=INTEGER}, #{cellCapSort19,jdbcType=INTEGER}, #{cellCapSort20,jdbcType=INTEGER},
+      #{cellCapSort21,jdbcType=INTEGER}, #{cellCapSort22,jdbcType=INTEGER}, #{cellCapSort23,jdbcType=INTEGER},
+      #{cellCapSort24,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.station.moudles.entity.PackDataExpandLatest" useGeneratedKeys="true" keyProperty="gprsId" >
+    insert into pack_data_expand_latest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="packCapPred != null" >
+        pack_cap_pred,
+      </if>
+      <if test="packDischargeTimePred != null" >
+        pack_discharge_time_pred,
+      </if>
+      <if test="cellResist1 != null" >
+        cell_resist_1,
+      </if>
+      <if test="cellResist2 != null" >
+        cell_resist_2,
+      </if>
+      <if test="cellResist3 != null" >
+        cell_resist_3,
+      </if>
+      <if test="cellResist4 != null" >
+        cell_resist_4,
+      </if>
+      <if test="cellResist5 != null" >
+        cell_resist_5,
+      </if>
+      <if test="cellResist6 != null" >
+        cell_resist_6,
+      </if>
+      <if test="cellResist7 != null" >
+        cell_resist_7,
+      </if>
+      <if test="cellResist8 != null" >
+        cell_resist_8,
+      </if>
+      <if test="cellResist9 != null" >
+        cell_resist_9,
+      </if>
+      <if test="cellResist10 != null" >
+        cell_resist_10,
+      </if>
+      <if test="cellResist11 != null" >
+        cell_resist_11,
+      </if>
+      <if test="cellResist12 != null" >
+        cell_resist_12,
+      </if>
+      <if test="cellResist13 != null" >
+        cell_resist_13,
+      </if>
+      <if test="cellResist14 != null" >
+        cell_resist_14,
+      </if>
+      <if test="cellResist15 != null" >
+        cell_resist_15,
+      </if>
+      <if test="cellResist16 != null" >
+        cell_resist_16,
+      </if>
+      <if test="cellResist17 != null" >
+        cell_resist_17,
+      </if>
+      <if test="cellResist18 != null" >
+        cell_resist_18,
+      </if>
+      <if test="cellResist19 != null" >
+        cell_resist_19,
+      </if>
+      <if test="cellResist20 != null" >
+        cell_resist_20,
+      </if>
+      <if test="cellResist21 != null" >
+        cell_resist_21,
+      </if>
+      <if test="cellResist22 != null" >
+        cell_resist_22,
+      </if>
+      <if test="cellResist23 != null" >
+        cell_resist_23,
+      </if>
+      <if test="cellResist24 != null" >
+        cell_resist_24,
+      </if>
+      <if test="cellCap1 != null" >
+        cell_cap_1,
+      </if>
+      <if test="cellCap2 != null" >
+        cell_cap_2,
+      </if>
+      <if test="cellCap3 != null" >
+        cell_cap_3,
+      </if>
+      <if test="cellCap4 != null" >
+        cell_cap_4,
+      </if>
+      <if test="cellCap5 != null" >
+        cell_cap_5,
+      </if>
+      <if test="cellCap6 != null" >
+        cell_cap_6,
+      </if>
+      <if test="cellCap7 != null" >
+        cell_cap_7,
+      </if>
+      <if test="cellCap8 != null" >
+        cell_cap_8,
+      </if>
+      <if test="cellCap9 != null" >
+        cell_cap_9,
+      </if>
+      <if test="cellCap10 != null" >
+        cell_cap_10,
+      </if>
+      <if test="cellCap11 != null" >
+        cell_cap_11,
+      </if>
+      <if test="cellCap12 != null" >
+        cell_cap_12,
+      </if>
+      <if test="cellCap13 != null" >
+        cell_cap_13,
+      </if>
+      <if test="cellCap14 != null" >
+        cell_cap_14,
+      </if>
+      <if test="cellCap15 != null" >
+        cell_cap_15,
+      </if>
+      <if test="cellCap16 != null" >
+        cell_cap_16,
+      </if>
+      <if test="cellCap17 != null" >
+        cell_cap_17,
+      </if>
+      <if test="cellCap18 != null" >
+        cell_cap_18,
+      </if>
+      <if test="cellCap19 != null" >
+        cell_cap_19,
+      </if>
+      <if test="cellCap20 != null" >
+        cell_cap_20,
+      </if>
+      <if test="cellCap21 != null" >
+        cell_cap_21,
+      </if>
+      <if test="cellCap22 != null" >
+        cell_cap_22,
+      </if>
+      <if test="cellCap23 != null" >
+        cell_cap_23,
+      </if>
+      <if test="cellCap24 != null" >
+        cell_cap_24,
+      </if>
+      <if test="cellEvalu1 != null" >
+        cell_evalu_1,
+      </if>
+      <if test="cellEvalu2 != null" >
+        cell_evalu_2,
+      </if>
+      <if test="cellEvalu3 != null" >
+        cell_evalu_3,
+      </if>
+      <if test="cellEvalu4 != null" >
+        cell_evalu_4,
+      </if>
+      <if test="cellEvalu5 != null" >
+        cell_evalu_5,
+      </if>
+      <if test="cellEvalu6 != null" >
+        cell_evalu_6,
+      </if>
+      <if test="cellEvalu7 != null" >
+        cell_evalu_7,
+      </if>
+      <if test="cellEvalu8 != null" >
+        cell_evalu_8,
+      </if>
+      <if test="cellEvalu9 != null" >
+        cell_evalu_9,
+      </if>
+      <if test="cellEvalu10 != null" >
+        cell_evalu_10,
+      </if>
+      <if test="cellEvalu11 != null" >
+        cell_evalu_11,
+      </if>
+      <if test="cellEvalu12 != null" >
+        cell_evalu_12,
+      </if>
+      <if test="cellEvalu13 != null" >
+        cell_evalu_13,
+      </if>
+      <if test="cellEvalu14 != null" >
+        cell_evalu_14,
+      </if>
+      <if test="cellEvalu15 != null" >
+        cell_evalu_15,
+      </if>
+      <if test="cellEvalu16 != null" >
+        cell_evalu_16,
+      </if>
+      <if test="cellEvalu17 != null" >
+        cell_evalu_17,
+      </if>
+      <if test="cellEvalu18 != null" >
+        cell_evalu_18,
+      </if>
+      <if test="cellEvalu19 != null" >
+        cell_evalu_19,
+      </if>
+      <if test="cellEvalu20 != null" >
+        cell_evalu_20,
+      </if>
+      <if test="cellEvalu21 != null" >
+        cell_evalu_21,
+      </if>
+      <if test="cellEvalu22 != null" >
+        cell_evalu_22,
+      </if>
+      <if test="cellEvalu23 != null" >
+        cell_evalu_23,
+      </if>
+      <if test="cellEvalu24 != null" >
+        cell_evalu_24,
+      </if>
+      <if test="cellCapSort1 != null" >
+        cell_cap_sort_1,
+      </if>
+      <if test="cellCapSort2 != null" >
+        cell_cap_sort_2,
+      </if>
+      <if test="cellCapSort3 != null" >
+        cell_cap_sort_3,
+      </if>
+      <if test="cellCapSort4 != null" >
+        cell_cap_sort_4,
+      </if>
+      <if test="cellCapSort5 != null" >
+        cell_cap_sort_5,
+      </if>
+      <if test="cellCapSort6 != null" >
+        cell_cap_sort_6,
+      </if>
+      <if test="cellCapSort7 != null" >
+        cell_cap_sort_7,
+      </if>
+      <if test="cellCapSort8 != null" >
+        cell_cap_sort_8,
+      </if>
+      <if test="cellCapSort9 != null" >
+        cell_cap_sort_9,
+      </if>
+      <if test="cellCapSort10 != null" >
+        cell_cap_sort_10,
+      </if>
+      <if test="cellCapSort11 != null" >
+        cell_cap_sort_11,
+      </if>
+      <if test="cellCapSort12 != null" >
+        cell_cap_sort_12,
+      </if>
+      <if test="cellCapSort13 != null" >
+        cell_cap_sort_13,
+      </if>
+      <if test="cellCapSort14 != null" >
+        cell_cap_sort_14,
+      </if>
+      <if test="cellCapSort15 != null" >
+        cell_cap_sort_15,
+      </if>
+      <if test="cellCapSort16 != null" >
+        cell_cap_sort_16,
+      </if>
+      <if test="cellCapSort17 != null" >
+        cell_cap_sort_17,
+      </if>
+      <if test="cellCapSort18 != null" >
+        cell_cap_sort_18,
+      </if>
+      <if test="cellCapSort19 != null" >
+        cell_cap_sort_19,
+      </if>
+      <if test="cellCapSort20 != null" >
+        cell_cap_sort_20,
+      </if>
+      <if test="cellCapSort21 != null" >
+        cell_cap_sort_21,
+      </if>
+      <if test="cellCapSort22 != null" >
+        cell_cap_sort_22,
+      </if>
+      <if test="cellCapSort23 != null" >
+        cell_cap_sort_23,
+      </if>
+      <if test="cellCapSort24 != null" >
+        cell_cap_sort_24,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packCapPred != null" >
+        #{packCapPred,jdbcType=INTEGER},
+      </if>
+      <if test="packDischargeTimePred != null" >
+        #{packDischargeTimePred,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist1 != null" >
+        #{cellResist1,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist2 != null" >
+        #{cellResist2,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist3 != null" >
+        #{cellResist3,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist4 != null" >
+        #{cellResist4,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist5 != null" >
+        #{cellResist5,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist6 != null" >
+        #{cellResist6,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist7 != null" >
+        #{cellResist7,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist8 != null" >
+        #{cellResist8,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist9 != null" >
+        #{cellResist9,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist10 != null" >
+        #{cellResist10,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist11 != null" >
+        #{cellResist11,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist12 != null" >
+        #{cellResist12,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist13 != null" >
+        #{cellResist13,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist14 != null" >
+        #{cellResist14,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist15 != null" >
+        #{cellResist15,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist16 != null" >
+        #{cellResist16,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist17 != null" >
+        #{cellResist17,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist18 != null" >
+        #{cellResist18,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist19 != null" >
+        #{cellResist19,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist20 != null" >
+        #{cellResist20,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist21 != null" >
+        #{cellResist21,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist22 != null" >
+        #{cellResist22,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist23 != null" >
+        #{cellResist23,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist24 != null" >
+        #{cellResist24,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap1 != null" >
+        #{cellCap1,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap2 != null" >
+        #{cellCap2,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap3 != null" >
+        #{cellCap3,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap4 != null" >
+        #{cellCap4,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap5 != null" >
+        #{cellCap5,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap6 != null" >
+        #{cellCap6,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap7 != null" >
+        #{cellCap7,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap8 != null" >
+        #{cellCap8,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap9 != null" >
+        #{cellCap9,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap10 != null" >
+        #{cellCap10,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap11 != null" >
+        #{cellCap11,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap12 != null" >
+        #{cellCap12,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap13 != null" >
+        #{cellCap13,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap14 != null" >
+        #{cellCap14,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap15 != null" >
+        #{cellCap15,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap16 != null" >
+        #{cellCap16,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap17 != null" >
+        #{cellCap17,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap18 != null" >
+        #{cellCap18,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap19 != null" >
+        #{cellCap19,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap20 != null" >
+        #{cellCap20,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap21 != null" >
+        #{cellCap21,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap22 != null" >
+        #{cellCap22,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap23 != null" >
+        #{cellCap23,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap24 != null" >
+        #{cellCap24,jdbcType=DECIMAL},
+      </if>
+      <if test="cellEvalu1 != null" >
+        #{cellEvalu1,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu2 != null" >
+        #{cellEvalu2,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu3 != null" >
+        #{cellEvalu3,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu4 != null" >
+        #{cellEvalu4,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu5 != null" >
+        #{cellEvalu5,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu6 != null" >
+        #{cellEvalu6,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu7 != null" >
+        #{cellEvalu7,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu8 != null" >
+        #{cellEvalu8,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu9 != null" >
+        #{cellEvalu9,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu10 != null" >
+        #{cellEvalu10,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu11 != null" >
+        #{cellEvalu11,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu12 != null" >
+        #{cellEvalu12,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu13 != null" >
+        #{cellEvalu13,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu14 != null" >
+        #{cellEvalu14,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu15 != null" >
+        #{cellEvalu15,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu16 != null" >
+        #{cellEvalu16,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu17 != null" >
+        #{cellEvalu17,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu18 != null" >
+        #{cellEvalu18,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu19 != null" >
+        #{cellEvalu19,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu20 != null" >
+        #{cellEvalu20,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu21 != null" >
+        #{cellEvalu21,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu22 != null" >
+        #{cellEvalu22,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu23 != null" >
+        #{cellEvalu23,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu24 != null" >
+        #{cellEvalu24,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort1 != null" >
+        #{cellCapSort1,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort2 != null" >
+        #{cellCapSort2,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort3 != null" >
+        #{cellCapSort3,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort4 != null" >
+        #{cellCapSort4,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort5 != null" >
+        #{cellCapSort5,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort6 != null" >
+        #{cellCapSort6,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort7 != null" >
+        #{cellCapSort7,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort8 != null" >
+        #{cellCapSort8,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort9 != null" >
+        #{cellCapSort9,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort10 != null" >
+        #{cellCapSort10,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort11 != null" >
+        #{cellCapSort11,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort12 != null" >
+        #{cellCapSort12,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort13 != null" >
+        #{cellCapSort13,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort14 != null" >
+        #{cellCapSort14,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort15 != null" >
+        #{cellCapSort15,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort16 != null" >
+        #{cellCapSort16,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort17 != null" >
+        #{cellCapSort17,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort18 != null" >
+        #{cellCapSort18,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort19 != null" >
+        #{cellCapSort19,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort20 != null" >
+        #{cellCapSort20,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort21 != null" >
+        #{cellCapSort21,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort22 != null" >
+        #{cellCapSort22,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort23 != null" >
+        #{cellCapSort23,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort24 != null" >
+        #{cellCapSort24,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.PackDataExpandLatest" >
+    update pack_data_expand_latest
+    <set >
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packCapPred != null" >
+        pack_cap_pred = #{packCapPred,jdbcType=INTEGER},
+      </if>
+      <if test="packDischargeTimePred != null" >
+        pack_discharge_time_pred = #{packDischargeTimePred,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist1 != null" >
+        cell_resist_1 = #{cellResist1,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist2 != null" >
+        cell_resist_2 = #{cellResist2,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist3 != null" >
+        cell_resist_3 = #{cellResist3,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist4 != null" >
+        cell_resist_4 = #{cellResist4,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist5 != null" >
+        cell_resist_5 = #{cellResist5,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist6 != null" >
+        cell_resist_6 = #{cellResist6,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist7 != null" >
+        cell_resist_7 = #{cellResist7,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist8 != null" >
+        cell_resist_8 = #{cellResist8,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist9 != null" >
+        cell_resist_9 = #{cellResist9,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist10 != null" >
+        cell_resist_10 = #{cellResist10,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist11 != null" >
+        cell_resist_11 = #{cellResist11,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist12 != null" >
+        cell_resist_12 = #{cellResist12,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist13 != null" >
+        cell_resist_13 = #{cellResist13,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist14 != null" >
+        cell_resist_14 = #{cellResist14,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist15 != null" >
+        cell_resist_15 = #{cellResist15,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist16 != null" >
+        cell_resist_16 = #{cellResist16,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist17 != null" >
+        cell_resist_17 = #{cellResist17,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist18 != null" >
+        cell_resist_18 = #{cellResist18,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist19 != null" >
+        cell_resist_19 = #{cellResist19,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist20 != null" >
+        cell_resist_20 = #{cellResist20,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist21 != null" >
+        cell_resist_21 = #{cellResist21,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist22 != null" >
+        cell_resist_22 = #{cellResist22,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist23 != null" >
+        cell_resist_23 = #{cellResist23,jdbcType=DECIMAL},
+      </if>
+      <if test="cellResist24 != null" >
+        cell_resist_24 = #{cellResist24,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap1 != null" >
+        cell_cap_1 = #{cellCap1,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap2 != null" >
+        cell_cap_2 = #{cellCap2,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap3 != null" >
+        cell_cap_3 = #{cellCap3,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap4 != null" >
+        cell_cap_4 = #{cellCap4,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap5 != null" >
+        cell_cap_5 = #{cellCap5,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap6 != null" >
+        cell_cap_6 = #{cellCap6,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap7 != null" >
+        cell_cap_7 = #{cellCap7,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap8 != null" >
+        cell_cap_8 = #{cellCap8,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap9 != null" >
+        cell_cap_9 = #{cellCap9,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap10 != null" >
+        cell_cap_10 = #{cellCap10,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap11 != null" >
+        cell_cap_11 = #{cellCap11,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap12 != null" >
+        cell_cap_12 = #{cellCap12,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap13 != null" >
+        cell_cap_13 = #{cellCap13,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap14 != null" >
+        cell_cap_14 = #{cellCap14,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap15 != null" >
+        cell_cap_15 = #{cellCap15,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap16 != null" >
+        cell_cap_16 = #{cellCap16,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap17 != null" >
+        cell_cap_17 = #{cellCap17,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap18 != null" >
+        cell_cap_18 = #{cellCap18,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap19 != null" >
+        cell_cap_19 = #{cellCap19,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap20 != null" >
+        cell_cap_20 = #{cellCap20,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap21 != null" >
+        cell_cap_21 = #{cellCap21,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap22 != null" >
+        cell_cap_22 = #{cellCap22,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap23 != null" >
+        cell_cap_23 = #{cellCap23,jdbcType=DECIMAL},
+      </if>
+      <if test="cellCap24 != null" >
+        cell_cap_24 = #{cellCap24,jdbcType=DECIMAL},
+      </if>
+      <if test="cellEvalu1 != null" >
+        cell_evalu_1 = #{cellEvalu1,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu2 != null" >
+        cell_evalu_2 = #{cellEvalu2,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu3 != null" >
+        cell_evalu_3 = #{cellEvalu3,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu4 != null" >
+        cell_evalu_4 = #{cellEvalu4,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu5 != null" >
+        cell_evalu_5 = #{cellEvalu5,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu6 != null" >
+        cell_evalu_6 = #{cellEvalu6,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu7 != null" >
+        cell_evalu_7 = #{cellEvalu7,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu8 != null" >
+        cell_evalu_8 = #{cellEvalu8,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu9 != null" >
+        cell_evalu_9 = #{cellEvalu9,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu10 != null" >
+        cell_evalu_10 = #{cellEvalu10,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu11 != null" >
+        cell_evalu_11 = #{cellEvalu11,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu12 != null" >
+        cell_evalu_12 = #{cellEvalu12,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu13 != null" >
+        cell_evalu_13 = #{cellEvalu13,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu14 != null" >
+        cell_evalu_14 = #{cellEvalu14,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu15 != null" >
+        cell_evalu_15 = #{cellEvalu15,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu16 != null" >
+        cell_evalu_16 = #{cellEvalu16,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu17 != null" >
+        cell_evalu_17 = #{cellEvalu17,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu18 != null" >
+        cell_evalu_18 = #{cellEvalu18,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu19 != null" >
+        cell_evalu_19 = #{cellEvalu19,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu20 != null" >
+        cell_evalu_20 = #{cellEvalu20,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu21 != null" >
+        cell_evalu_21 = #{cellEvalu21,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu22 != null" >
+        cell_evalu_22 = #{cellEvalu22,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu23 != null" >
+        cell_evalu_23 = #{cellEvalu23,jdbcType=INTEGER},
+      </if>
+      <if test="cellEvalu24 != null" >
+        cell_evalu_24 = #{cellEvalu24,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort1 != null" >
+        cell_cap_sort_1 =  #{cellCapSort1,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort2 != null" >
+        cell_cap_sort_2 =  #{cellCapSort2,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort3 != null" >
+        cell_cap_sort_3 =  #{cellCapSort3,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort4 != null" >
+        cell_cap_sort_4 =   #{cellCapSort4,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort5 != null" >
+        cell_cap_sort_5 =  #{cellCapSort5,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort6 != null" >
+        cell_cap_sort_6 =  #{cellCapSort6,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort7 != null" >
+        cell_cap_sort_7 =  #{cellCapSort7,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort8 != null" >
+        cell_cap_sort_8 =  #{cellCapSort8,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort9 != null" >
+        cell_cap_sort_9 =  #{cellCapSort9,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort10 != null" >
+        cell_cap_sort_10 =  #{cellCapSort10,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort11 != null" >
+        cell_cap_sort_11 =  #{cellCapSort11,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort12 != null" >
+        cell_cap_sort_12 =  #{cellCapSort12,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort13 != null" >
+        cell_cap_sort_13 =  #{cellCapSort13,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort14 != null" >
+        cell_cap_sort_14 =  #{cellCapSort14,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort15 != null" >
+        cell_cap_sort_15 =  #{cellCapSort15,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort16 != null" >
+        cell_cap_sort_16 =  #{cellCapSort16,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort17 != null" >
+        cell_cap_sort_17 =  #{cellCapSort17,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort18 != null" >
+        cell_cap_sort_18 =  #{cellCapSort18,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort19 != null" >
+        cell_cap_sort_19 =  #{cellCapSort19,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort20 != null" >
+        cell_cap_sort_20 =  #{cellCapSort20,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort21 != null" >
+        cell_cap_sort_21 =  #{cellCapSort21,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort22 != null" >
+        cell_cap_sort_22 =  #{cellCapSort22,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort23 != null" >
+        cell_cap_sort_23 =  #{cellCapSort23,jdbcType=INTEGER},
+      </if>
+      <if test="cellCapSort24 != null" >
+        cell_cap_sort_24 =  #{cellCapSort24,jdbcType=INTEGER},
+      </if>
+    </set>
+    where gprs_id = #{gprsId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.PackDataExpandLatest" >
+    update pack_data_expand_latest
+    set update_time = #{updateTime,jdbcType=TIMESTAMP},
+      pack_cap_pred = #{packCapPred,jdbcType=INTEGER},
+      pack_discharge_time_pred = #{packDischargeTimePred,jdbcType=DECIMAL},
+      cell_resist_1 = #{cellResist1,jdbcType=DECIMAL},
+      cell_resist_2 = #{cellResist2,jdbcType=DECIMAL},
+      cell_resist_3 = #{cellResist3,jdbcType=DECIMAL},
+      cell_resist_4 = #{cellResist4,jdbcType=DECIMAL},
+      cell_resist_5 = #{cellResist5,jdbcType=DECIMAL},
+      cell_resist_6 = #{cellResist6,jdbcType=DECIMAL},
+      cell_resist_7 = #{cellResist7,jdbcType=DECIMAL},
+      cell_resist_8 = #{cellResist8,jdbcType=DECIMAL},
+      cell_resist_9 = #{cellResist9,jdbcType=DECIMAL},
+      cell_resist_10 = #{cellResist10,jdbcType=DECIMAL},
+      cell_resist_11 = #{cellResist11,jdbcType=DECIMAL},
+      cell_resist_12 = #{cellResist12,jdbcType=DECIMAL},
+      cell_resist_13 = #{cellResist13,jdbcType=DECIMAL},
+      cell_resist_14 = #{cellResist14,jdbcType=DECIMAL},
+      cell_resist_15 = #{cellResist15,jdbcType=DECIMAL},
+      cell_resist_16 = #{cellResist16,jdbcType=DECIMAL},
+      cell_resist_17 = #{cellResist17,jdbcType=DECIMAL},
+      cell_resist_18 = #{cellResist18,jdbcType=DECIMAL},
+      cell_resist_19 = #{cellResist19,jdbcType=DECIMAL},
+      cell_resist_20 = #{cellResist20,jdbcType=DECIMAL},
+      cell_resist_21 = #{cellResist21,jdbcType=DECIMAL},
+      cell_resist_22 = #{cellResist22,jdbcType=DECIMAL},
+      cell_resist_23 = #{cellResist23,jdbcType=DECIMAL},
+      cell_resist_24 = #{cellResist24,jdbcType=DECIMAL},
+      cell_cap_1 = #{cellCap1,jdbcType=DECIMAL},
+      cell_cap_2 = #{cellCap2,jdbcType=DECIMAL},
+      cell_cap_3 = #{cellCap3,jdbcType=DECIMAL},
+      cell_cap_4 = #{cellCap4,jdbcType=DECIMAL},
+      cell_cap_5 = #{cellCap5,jdbcType=DECIMAL},
+      cell_cap_6 = #{cellCap6,jdbcType=DECIMAL},
+      cell_cap_7 = #{cellCap7,jdbcType=DECIMAL},
+      cell_cap_8 = #{cellCap8,jdbcType=DECIMAL},
+      cell_cap_9 = #{cellCap9,jdbcType=DECIMAL},
+      cell_cap_10 = #{cellCap10,jdbcType=DECIMAL},
+      cell_cap_11 = #{cellCap11,jdbcType=DECIMAL},
+      cell_cap_12 = #{cellCap12,jdbcType=DECIMAL},
+      cell_cap_13 = #{cellCap13,jdbcType=DECIMAL},
+      cell_cap_14 = #{cellCap14,jdbcType=DECIMAL},
+      cell_cap_15 = #{cellCap15,jdbcType=DECIMAL},
+      cell_cap_16 = #{cellCap16,jdbcType=DECIMAL},
+      cell_cap_17 = #{cellCap17,jdbcType=DECIMAL},
+      cell_cap_18 = #{cellCap18,jdbcType=DECIMAL},
+      cell_cap_19 = #{cellCap19,jdbcType=DECIMAL},
+      cell_cap_20 = #{cellCap20,jdbcType=DECIMAL},
+      cell_cap_21 = #{cellCap21,jdbcType=DECIMAL},
+      cell_cap_22 = #{cellCap22,jdbcType=DECIMAL},
+      cell_cap_23 = #{cellCap23,jdbcType=DECIMAL},
+      cell_cap_24 = #{cellCap24,jdbcType=DECIMAL},
+      cell_evalu_1 = #{cellEvalu1,jdbcType=INTEGER},
+      cell_evalu_2 = #{cellEvalu2,jdbcType=INTEGER},
+      cell_evalu_3 = #{cellEvalu3,jdbcType=INTEGER},
+      cell_evalu_4 = #{cellEvalu4,jdbcType=INTEGER},
+      cell_evalu_5 = #{cellEvalu5,jdbcType=INTEGER},
+      cell_evalu_6 = #{cellEvalu6,jdbcType=INTEGER},
+      cell_evalu_7 = #{cellEvalu7,jdbcType=INTEGER},
+      cell_evalu_8 = #{cellEvalu8,jdbcType=INTEGER},
+      cell_evalu_9 = #{cellEvalu9,jdbcType=INTEGER},
+      cell_evalu_10 = #{cellEvalu10,jdbcType=INTEGER},
+      cell_evalu_11 = #{cellEvalu11,jdbcType=INTEGER},
+      cell_evalu_12 = #{cellEvalu12,jdbcType=INTEGER},
+      cell_evalu_13 = #{cellEvalu13,jdbcType=INTEGER},
+      cell_evalu_14 = #{cellEvalu14,jdbcType=INTEGER},
+      cell_evalu_15 = #{cellEvalu15,jdbcType=INTEGER},
+      cell_evalu_16 = #{cellEvalu16,jdbcType=INTEGER},
+      cell_evalu_17 = #{cellEvalu17,jdbcType=INTEGER},
+      cell_evalu_18 = #{cellEvalu18,jdbcType=INTEGER},
+      cell_evalu_19 = #{cellEvalu19,jdbcType=INTEGER},
+      cell_evalu_20 = #{cellEvalu20,jdbcType=INTEGER},
+      cell_evalu_21 = #{cellEvalu21,jdbcType=INTEGER},
+      cell_evalu_22 = #{cellEvalu22,jdbcType=INTEGER},
+      cell_evalu_23 = #{cellEvalu23,jdbcType=INTEGER},
+      cell_evalu_24 = #{cellEvalu24,jdbcType=INTEGER},
+      cell_cap_sort_1 = #{cellCapSort1,jdbcType=INTEGER},
+      cell_cap_sort_2 = #{cellCapSort2,jdbcType=INTEGER},
+      cell_cap_sort_3 = #{cellCapSort3,jdbcType=INTEGER},
+      cell_cap_sort_4 = #{cellCapSort4,jdbcType=INTEGER},
+      cell_cap_sort_5 = #{cellCapSort5,jdbcType=INTEGER},
+      cell_cap_sort_6 = #{cellCapSort6,jdbcType=INTEGER},
+      cell_cap_sort_7 = #{cellCapSort7,jdbcType=INTEGER},
+      cell_cap_sort_8 = #{cellCapSort8,jdbcType=INTEGER},
+      cell_cap_sort_9 = #{cellCapSort9,jdbcType=INTEGER},
+      cell_cap_sort_10 = #{cellCapSort10,jdbcType=INTEGER},
+      cell_cap_sort_11 = #{cellCapSort11,jdbcType=INTEGER},
+      cell_cap_sort_12 = #{cellCapSort12,jdbcType=INTEGER},
+      cell_cap_sort_13 = #{cellCapSort13,jdbcType=INTEGER},
+      cell_cap_sort_14 = #{cellCapSort14,jdbcType=INTEGER},
+      cell_cap_sort_15 = #{cellCapSort15,jdbcType=INTEGER},
+      cell_cap_sort_16 = #{cellCapSort16,jdbcType=INTEGER},
+      cell_cap_sort_17 = #{cellCapSort17,jdbcType=INTEGER},
+      cell_cap_sort_18 = #{cellCapSort18,jdbcType=INTEGER},
+      cell_cap_sort_19 = #{cellCapSort19,jdbcType=INTEGER},
+      cell_cap_sort_20 = #{cellCapSort20,jdbcType=INTEGER},
+      cell_cap_sort_21 = #{cellCapSort21,jdbcType=INTEGER},
+      cell_cap_sort_22 = #{cellCapSort22,jdbcType=INTEGER},
+      cell_cap_sort_23 = #{cellCapSort23,jdbcType=INTEGER},
+      cell_cap_sort_24 = #{cellCapSort24,jdbcType=INTEGER}
+    where gprs_id = #{gprsId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

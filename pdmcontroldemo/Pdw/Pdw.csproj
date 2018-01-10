@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    This section defines project-level properties.
+
+    AssemblyName
+      Name of the output assembly.
+    Configuration
+      Specifies a default value for debug.
+    OutputType
+      Must be "Library" for VSTO.
+    Platform
+      Specifies what CPU the output of this project can run on.
+    NoStandardLibraries
+      Set to "false" for VSTO.
+    RootNamespace
+      In C#, this specifies the namespace given to new files. In VB, all objects are
+      wrapped in this namespace at runtime.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{BAA0C2D2-18E2-41B9-852F-F413020CAA33};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FF39C054-863E-4ECB-8627-1A7DC9528921}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <RootNamespace>Pdw</RootNamespace>
+    <AssemblyName>Pdw</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <DefineConstants>VSTO40</DefineConstants>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <PublishUrl>publish\</PublishUrl>
+    <InstallUrl />
+    <TargetCulture>en</TargetCulture>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>days</UpdateIntervalUnits>
+    <IsWebBootstrapper>False</IsWebBootstrapper>
+    <ProductName>Pdw</ProductName>
+    <PublisherName />
+    <SupportUrl />
+    <FriendlyName>Pdw</FriendlyName>
+    <OfficeApplicationDescription />
+    <LoadBehavior>3</LoadBehavior>
+  </PropertyGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <PropertyGroup>
+    <!--
+      OfficeApplication
+        Add-in host application
+    -->
+    <OfficeApplication>Word</OfficeApplication>
+  </PropertyGroup>
+  <!--
+    This section defines properties that are set when the "Debug" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!--
+    This section defines properties that are set when the "Release" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!--
+    This section enables pre- and post-build steps. However, in VSTO use
+    MSBuild tasks instead of these properties.       
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Pdw_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>16E9CBA38D709B8313A1A0BD8C8BB9FACA8A5AD6</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <!--
+    This section specifies references for the project.
+  -->
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\..\References\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Tools.Word, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PDFC">
+      <HintPath>..\..\References\PDFC.dll</HintPath>
+    </Reference>
+    <Reference Include="PDFE">
+      <HintPath>..\..\References\PDFE.dll</HintPath>
+    </Reference>
+    <Reference Include="PDFU">
+      <HintPath>..\..\References\PDFU.dll</HintPath>
+    </Reference>
+    <Reference Include="Pdw.Services.Integrity">
+      <HintPath>..\..\References\Pdw.Services.Integrity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <!--
+    This section defines the user source files that are part of the project.
+     
+    A "Compile" element specifies a source file to compile.
+    An "EmbeddedResource" element specifies an .resx file for embedded resources.
+    A "None" element specifies a file that is not to be passed to the compiler (for instance, 
+    a text file or XML file).
+    The "AppDesigner" element specifies the directory where the application properties files
+    can be found.
+  -->
+  <ItemGroup>
+    <Compile Include="AssetManager\FileAdapter.cs" />
+    <Compile Include="AssetManager\Globals.cs" />
+    <Compile Include="Core\BaseException.cs" />
+    <Compile Include="Core\BookmarkType.cs" />
+    <Compile Include="Core\Classifer.cs" />
+    <Compile Include="Core\Constant.cs" />
+    <Compile Include="Core\DialogBookmarkItem.cs" />
+    <Compile Include="Core\DomainMatchItem.cs" />
+    <Compile Include="Core\ErrorCode.cs" />
+    <Compile Include="Core\Events.cs" />
+    <Compile Include="Core\EventType.cs" />
+    <Compile Include="Core\FormatString.cs" />
+    <Compile Include="Core\FormControlType.cs" />
+    <Compile Include="Core\Kernel\DataSegmentHelper.cs" />
+    <Compile Include="Core\LogUtils.cs" />
+    <Compile Include="Core\MailHelper.cs" />
+    <Compile Include="Core\MarkupConstant.cs" />
+    <Compile Include="Core\MarkupUtilities.cs" />
+    <Compile Include="Core\MessageUtils.cs" />
+    <Compile Include="Core\NativeConstants.cs" />
+    <Compile Include="Core\NativeMethods.cs" />
+    <Compile Include="Core\NodeAttribute.cs" />
+    <Compile Include="Core\ProntoMarkup.cs" />
+    <Compile Include="Core\TemplateInfo.cs" />
+    <Compile Include="Core\UserData.cs" />
+    <Compile Include="Core\XmlDocNodeName.cs" />
+    <Compile Include="Managers\BaseManager.cs" />
+    <Compile Include="Managers\Context\ContextManager.cs" />
+    <Compile Include="Managers\Context\ContextValidator.cs" />
+    <Compile Include="Managers\DataIntegration\DataIntegrationManager.cs" />
+    <Compile Include="Managers\Hcl\BookmarkControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\BookmarkControl.designer.cs">
+      <DependentUpon>BookmarkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\ButtonDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\ButtonDropDown.designer.cs">
+      <DependentUpon>ButtonDropDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\ChooseDomain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\ChooseDomain.designer.cs">
+      <DependentUpon>ChooseDomain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\CollapsiblePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\CollapsiblePanel.designer.cs">
+      <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\DefineOrderByControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\DefineOrderByControl.designer.cs">
+      <DependentUpon>DefineOrderByControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\DomainSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\DomainSelector.Designer.cs">
+      <DependentUpon>DomainSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\ImportItemControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\ImportItemControl.Designer.cs">
+      <DependentUpon>ImportItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\ImportPdeControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\ImportPdeControl.Designer.cs">
+      <DependentUpon>ImportPdeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\ProntoDocMarkup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\ProntoDocMarkup.Designer.cs">
+      <DependentUpon>ProntoDocMarkup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\SaveMessageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\SaveMessageDialog.Designer.cs">
+      <DependentUpon>SaveMessageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Hcl\WaitingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Managers\Hcl\WaitingForm.Designer.cs">
+      <DependentUpon>WaitingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Integration\IntegrationManager.cs" />
+    <Compile Include="Managers\MainManager.cs" />
+    <Compile Include="Managers\ManagerException.cs" />
+    <Compile Include="Managers\Service\ProntoRibbon.cs" />
+    <Compile Include="Managers\Service\UIManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Content\ContentService.cs" />
+    <Compile Include="Services\Content\ValidateConditionHelper.cs" />
+    <Compile Include="Services\Integration\IntegrationService.cs" />
+    <Compile Include="Services\Integration\PdeService.cs" />
+    <Compile Include="Services\Integrity\IntegrityService.cs" />
+    <Compile Include="Services\MainService.cs" />
+    <Compile Include="Services\ServiceException.cs" />
+    <Compile Include="Services\Template\Base\BaseBookmark.cs" />
+    <Compile Include="Services\Template\Base\BaseXslGenerator.cs" />
+    <Compile Include="Services\Template\GenChecksumHelper.cs" />
+    <Compile Include="Services\Template\GenXsltHelper.cs" />
+    <Compile Include="Services\Template\Mht\Mime.cs" />
+    <Compile Include="Services\Template\Mht\Part.cs" />
+    <Compile Include="Services\Template\Mht\PartBookmark.cs" />
+    <Compile Include="Services\Template\Mht\PartContent.cs" />
+    <Compile Include="Services\Template\Mht\PartType.cs" />
+    <Compile Include="Services\Template\Mht\XslContent.cs" />
+    <Compile Include="Services\Template\Mht\XslGenerator.cs" />
+    <Compile Include="Services\Integration\PdmService.cs" />
+    <Compile Include="Services\Template\Pdm\PartBookmark.cs" />
+    <Compile Include="Services\Template\Pdm\XslGenerator.cs" />
+    <Compile Include="Services\Template\PdwGeneratorService.cs" />
+    <Compile Include="Services\Template\Pdx\TextParser.cs" />
+    <Compile Include="Services\Template\Pdx\PartBookmark.cs" />
+    <Compile Include="Services\Template\Pdx\XslGenerator.cs" />
+    <Compile Include="Services\Template\TemplateService.cs" />
+    <Compile Include="WKL\DataController\BaseController.cs" />
+    <Compile Include="WKL\DataController\CommonController.cs" />
+    <Compile Include="WKL\DataController\MainController.cs" />
+    <Compile Include="WKL\DataController\ManagerController.cs" />
+    <Compile Include="WKL\DataController\ServicesController.cs" />
+    <Compile Include="WKL\Profiler\BaseProfile.cs" />
+    <Compile Include="WKL\Profiler\Common\CommonProfile.cs" />
+    <Compile Include="WKL\Profiler\Manager\ManagerProfile.cs" />
+    <Compile Include="WKL\Profiler\Services\ContentServiceProfile.cs" />
+    <Compile Include="WKL\Profiler\Services\IntegrationServiceProfile.cs" />
+    <Compile Include="WKL\Profiler\Services\PdmTemplateServiceProfile.cs" />
+    <Compile Include="WKL\Profiler\Services\ServicesProfile.cs" />
+    <Compile Include="WKL\Profiler\Services\TemplateServiceProfile.cs" />
+    <Compile Include="WKL\Utilities\GuidHelper.cs" />
+    <EmbeddedResource Include="Managers\Hcl\BookmarkControl.resx">
+      <DependentUpon>BookmarkControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\ChooseDomain.resx">
+      <DependentUpon>ChooseDomain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\CollapsiblePanel.resx">
+      <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\DefineOrderByControl.resx">
+      <DependentUpon>DefineOrderByControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\DomainSelector.resx">
+      <DependentUpon>DomainSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\ImportItemControl.resx">
+      <DependentUpon>ImportItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\ImportPdeControl.resx">
+      <DependentUpon>ImportPdeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\ProntoDocMarkup.resx">
+      <DependentUpon>ProntoDocMarkup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\SaveMessageDialog.resx">
+      <DependentUpon>SaveMessageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Managers\Hcl\WaitingForm.resx">
+      <DependentUpon>WaitingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Pdw_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ThisAddIn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="ThisAddIn.Designer.xml">
+      <DependentUpon>ThisAddIn.cs</DependentUpon>
+    </None>
+    <Compile Include="ThisAddIn.Designer.cs">
+      <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pdw.Core\Pdw.Core.csproj">
+      <Project>{9275CF99-8123-46F1-AC81-3D398F91F50E}</Project>
+      <Name>Pdw.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pdw.FormControls\Pdw.FormControls.csproj">
+      <Project>{72A2EF99-3143-4F06-B20B-721AA6A1BC94}</Project>
+      <Name>Pdw.FormControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pdw.PreviewOsql\Pdw.PreviewOsql.csproj">
+      <Project>{E8969685-7663-4051-8C9A-EC23F9168362}</Project>
+      <Name>Pdw.PreviewOsql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pdw.Services.Template\Pdw.Services.Template.csproj">
+      <Project>{F8C5AC27-EC25-47D8-B38C-4AE17C7B2E5A}</Project>
+      <Name>Pdw.Services.Template</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pdw.SharedMemoryWrapper\Pdw.SharedMemoryWrapper.csproj">
+      <Project>{700C4C7B-577F-46A4-B2CE-2429CFE53828}</Project>
+      <Name>Pdw.SharedMemoryWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pdwx\Pdwx.csproj">
+      <Project>{3E5FFB08-B1B9-49A7-AA9F-70CDA3B38691}</Project>
+      <Name>Pdwx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart.png" />
+    <Content Include="Resources\Preview.png" />
+    <None Include="Resources\toggled.png" />
+    <None Include="Resources\untoggle.png" />
+    <None Include="Resources\pdh.ico" />
+    <None Include="Resources\pdz.ico" />
+    <None Include="Resources\pdx.ico" />
+    <None Include="Resources\pdm.ico" />
+    <None Include="Resources\ProntoOpenner.ico" />
+    <EmbeddedResource Include="Managers\Service\ProntoRibbon.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Resources\BigToSmallFont.png" />
+    <Content Include="Resources\Bookmarks.png" />
+    <None Include="Resources\Collapse.png" />
+    <None Include="Resources\CollapseHover.png" />
+    <None Include="Resources\CollapsiblePanelBg.jpg" />
+    <None Include="Resources\coloryellow.png" />
+    <None Include="Resources\colorblack.png" />
+    <None Include="Resources\colorblue.png" />
+    <None Include="Resources\colorbrightgreen.png" />
+    <None Include="Resources\colordarkblue.png" />
+    <None Include="Resources\colordarkred.png" />
+    <None Include="Resources\colordarkyellow.png" />
+    <None Include="Resources\colorgray25.png" />
+    <None Include="Resources\colorgray50.png" />
+    <None Include="Resources\colorgreen.png" />
+    <None Include="Resources\colorpink.png" />
+    <None Include="Resources\colorred.png" />
+    <None Include="Resources\colorteal.png" />
+    <None Include="Resources\colorturquoise.png" />
+    <None Include="Resources\colorviolet.png" />
+    <None Include="Resources\colornocolor.png" />
+    <Content Include="Resources\Comment.png" />
+    <Content Include="Resources\Document-Preview-icon.png" />
+    <None Include="Resources\Foreach.png" />
+    <None Include="Resources\ExpandHover.png" />
+    <None Include="Resources\Expand.png" />
+    <None Include="Resources\DomainAddSection.png" />
+    <None Include="Resources\DomainNormal.png" />
+    <Content Include="Resources\Icon-fix.png" />
+    <None Include="Resources\ImageHolder.jpg" />
+    <None Include="Resources\SmallToBigFont.png" />
+    <None Include="Resources\Start.png" />
+    <None Include="Resources\Stop.png" />
+    <None Include="Resources\About.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project. -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Include additional build rules for an Office application add-in. -->
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" />
+  <!-- This section defines VSTO properties that describe the host-changeable project properties. -->
+  <Target Name="BeforeBuild">
+    <Exec Command="..\..\References\VersionGenerator.exe Properties\AssemblyInfo.cs" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
+        <ProjectProperties HostName="Word" HostPackage="{20A848B8-E01F-4801-962E-25DB0FF57389}" OfficeVersion="14.0" VstxVersion="4.0" ApplicationType="Word" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\14.0\Word\InstallRoot\Path#WINWORD.EXE" DebugInfoCommandLine="/w" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
+        <Host Name="Word" GeneratedCodeNamespace="Pdw" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+        </Host>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

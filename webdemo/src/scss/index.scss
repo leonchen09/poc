@@ -1,0 +1,16 @@
+//引入重置样式表
+@import "compass/reset";
+//引出dialog样式表
+@import "ngDialog/dialog";
+//引入模块及基本配置变量
+@import "compass/css3";
+@import "modules/all";
+//引入main
+@import "../modules/register/scss/_main";
+//引入list
+@import "../modules/user/scss/_list";
+
+
+
+
+

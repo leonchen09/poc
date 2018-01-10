@@ -1,0 +1,9 @@
+D:\source\POC\PdePlugin\PdxDemo\bin\Release\PdxDemo.exe
+D:\source\POC\PdePlugin\PdxDemo\bin\Release\PdxDemo.pdb
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\ResolveAssemblyReference.cache
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\PdxDemo.Form1.resources
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\PdxDemo.Properties.Resources.resources
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\GenerateResource.read.1.tlog
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\GenerateResource.write.1.tlog
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\PdxDemo.exe
+D:\source\POC\PdePlugin\PdxDemo\obj\x86\Release\PdxDemo.pdb

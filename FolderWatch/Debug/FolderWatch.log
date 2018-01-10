@@ -1,0 +1,23 @@
+﻿Build started 2010/9/15 21:46:39.
+     1>Project "D:\works\Dev\DB4O\FolderWatch\FolderWatch\FolderWatch.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\FolderWatch.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files\Java\jdk1.6.0_02\include" /I"C:\Program Files\Java\jdk1.6.0_02\include\win32" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt FolerWatcher.cpp
+         FolerWatcher.cpp
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\FolderWatch.exe.embed.manifest.res" Debug\FolderWatch_manifest.rc 
+       Link:
+         D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FolderWatch.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.lib" /MACHINE:X86 Debug\FolderWatch.exe.embed.manifest.res
+         Debug\FolerWatcher.obj
+         LINK : D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.exe not found or not built by the last incremental link; performing full link
+            Creating library D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.lib and object D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.exp
+     1>MSVCRTD.lib(crtexe.obj) : error LNK2019: unresolved external symbol _main referenced in function ___tmainCRTStartup
+     1>D:\works\Dev\DB4O\FolderWatch\Debug\FolderWatch.exe : fatal error LNK1120: 1 unresolved externals
+     1>Done Building Project "D:\works\Dev\DB4O\FolderWatch\FolderWatch\FolderWatch.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:04.75

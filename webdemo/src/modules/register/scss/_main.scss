@@ -1,0 +1,19 @@
+.content{
+  //  text-align: center;
+  > h1{
+    margin-top: 10px;
+  }
+  > .register{
+    > h2{
+      margin-bottom: 10px;
+    }
+    > ul > li{
+      margin-bottom: 10px;
+    }
+  }
+}
+.dragBox{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}

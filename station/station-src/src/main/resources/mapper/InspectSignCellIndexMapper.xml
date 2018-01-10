@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.InspectSignCellIndexMapper">
+    <resultMap id="BaseResultMap" type="com.station.moudles.entity.InspectSignCellIndex">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="routing_inspection_id" property="routingInspectionId" jdbcType="INTEGER"/>
+        <id column="cell_index" property="cellIndex" jdbcType="INTEGER"/>
+        <id column="station_id" property="stationId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, routing_inspection_id, cell_index
+	</sql>
+
+    <insert id="insert" parameterType="com.station.moudles.entity.InspectSignCellIndex" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO inspect_sign_cell_index (routing_inspection_id, cell_index) VALUES (#{routingInspectionId,jdbcType=INTEGER},#{cellIndex,jdbcType=INTEGER})
+    </insert>
+
+    <select id="getLatestByStationId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM inspect_sign_cell_index a, routing_inspections b where a.routing_inspection_id = b.routing_inspection_id
+        and b.station_id =  #{stationId,jdbcType=INTEGER}
+        ORDER BY b.routing_inspection_id DESC LIMIT 1
+    </select>
+
+    <select id="getLatestByStationIds" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT a.*, b.station_id FROM
+        inspect_sign_cell_index a, routing_inspections b
+        WHERE a.routing_inspection_id = b.routing_inspection_id
+        AND a.id IN(
+            SELECT e.id FROM (
+	          SELECT MAX(c.id) id, c.cell_index, d.station_id
+	          FROM inspect_sign_cell_index c, routing_inspections d
+	          WHERE c.routing_inspection_id = d.routing_inspection_id
+              AND d.station_id IN
+              <foreach item="id" index="index" collection="list" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
+              GROUP BY c.cell_index, d.station_id
+            ) e
+        )
+    </select>
+</mapper>

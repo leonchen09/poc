@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ipm_mnuDeleteAll" xml:space="preserve">
+    <value>Delete All</value>
+  </data>
+  <data name="ipm_mnuDeleteCurrent" xml:space="preserve">
+    <value>Delete Current</value>
+  </data>
+  <data name="ipm_mnuGotoNext" xml:space="preserve">
+    <value>Go Next</value>
+    <comment>Goto Next</comment>
+  </data>
+  <data name="ipm_M001" xml:space="preserve">
+    <value>Adding document-specific condition failed. Error: {0}</value>
+    <comment>Condition Name is blank</comment>
+  </data>
+  <data name="ipe_M002" xml:space="preserve">
+    <value>Condition Name is existed</value>
+    <comment>Condition Name is existed</comment>
+  </data>
+  <data name="ipm_M004" xml:space="preserve">
+    <value>{0} added</value>
+    <comment>Adding "{0}" succecced</comment>
+  </data>
+  <data name="ipm_M005" xml:space="preserve">
+    <value>Validating ProntoDoc template failed. Error: {0}</value>
+    <comment>"{0}" is not existed</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="About" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\About.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ipm_TooltipHeader" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="ipm_RibbonTitle" xml:space="preserve">
+    <value>ProntoDoc</value>
+    <comment>Pronto Doc</comment>
+  </data>
+  <data name="ipm_mnuGoFirst" xml:space="preserve">
+    <value>Go First</value>
+  </data>
+  <data name="ipm_mnuGoLast" xml:space="preserve">
+    <value>Go Last</value>
+  </data>
+  <data name="ipm_mnuGoPrevious" xml:space="preserve">
+    <value>Go Previous</value>
+  </data>
+  <data name="ipm_mnuHighlightAll" xml:space="preserve">
+    <value>Highlight All</value>
+  </data>
+  <data name="ipm_mnuHighlightFirst" xml:space="preserve">
+    <value>Highlight First</value>
+  </data>
+  <data name="ipm_mnuHighlightLast" xml:space="preserve">
+    <value>Highlight Last</value>
+  </data>
+  <data name="ipm_mnuHighlightNext" xml:space="preserve">
+    <value>Highlight Next</value>
+  </data>
+  <data name="ipm_mnuHighlightPrevious" xml:space="preserve">
+    <value>Highlight Previous</value>
+  </data>
+  <data name="ipm_ExceptionErrorPredix" xml:space="preserve">
+    <value>Spurious tag </value>
+  </data>
+  <data name="ipm_WrongDomainMessages" xml:space="preserve">
+    <value>{0}The domain information is not correct. Refer to right panel.</value>
+    <comment>{0}The domain information is not correct. Refer to highlighted text.</comment>
+  </data>
+  <data name="ipm_WrongBookmarkMessages" xml:space="preserve">
+    <value>{0}The bookmark is not correct. Refer to highlighted text.</value>
+    <comment>{0}The bookmark is not correct. Refer to side panel.</comment>
+  </data>
+  <data name="ipm_M006" xml:space="preserve">
+    <value>ProntoDoc template {0} saved</value>
+    <comment>The pdw file is saved successful.</comment>
+  </data>
+  <data name="ipm_RibbonBtnHide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="ipm_RibbonBtnShow" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="DomainComboBoxText" xml:space="preserve">
+    <value>Select a domain</value>
+  </data>
+  <data name="ipm_WrongChecksumMessage" xml:space="preserve">
+    <value>{0}The checksum is wrong.</value>
+  </data>
+  <data name="ipm_WrongMessages" xml:space="preserve">
+    <value>Integrity error detected on this template.{0}Detail:</value>
+  </data>
+  <data name="ipm_SaveSuccessful" xml:space="preserve">
+    <value>ProntoDoc template {0} saved</value>
+    <comment>The pronto document is successful saved.</comment>
+  </data>
+  <data name="ipe_ValidateMessage" xml:space="preserve">
+    <value>Invalid data item and highlighted</value>
+    <comment>All highlight bookmark are wrong position or you still not tag any data. Please correct them before save</comment>
+  </data>
+  <data name="ipe_M007" xml:space="preserve">
+    <value>Empty expression</value>
+    <comment>Empty expression!</comment>
+  </data>
+  <data name="ipe_M008" xml:space="preserve">
+    <value>Condition must return true or false</value>
+    <comment>Condition must return Boolean type !</comment>
+  </data>
+  <data name="ipe_M009" xml:space="preserve">
+    <value>Invalid expression</value>
+    <comment>Invalid expression !</comment>
+  </data>
+  <data name="ipe_M010" xml:space="preserve">
+    <value>{0} doesnot exist</value>
+    <comment>Operand '{0}' doesnot exist !</comment>
+  </data>
+  <data name="ipm_NotIsProntoDoc" xml:space="preserve">
+    <value>Saving ProntoDoc template failed. Error: {0}</value>
+    <comment>This document is not pronto document.</comment>
+  </data>
+  <data name="Bookmarks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bookmarks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Document_Preview_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Document-Preview-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_fix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon-fix.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ipe_NotSaveMessage" xml:space="preserve">
+    <value>Invalid data and highlighted</value>
+    <comment>The saving is cancel because some bookmark is wrong and highlight.</comment>
+  </data>
+  <data name="ipm_SaveConfirmMessage" xml:space="preserve">
+    <value>Do you want to auto delete them?</value>
+  </data>
+  <data name="ipm_SaveNotifyMessage" xml:space="preserve">
+    <value>There is some data item is redundant and highlighted</value>
+    <comment>Some bookmark is redundant and highlight.</comment>
+  </data>
+  <data name="ImageHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImageHolder.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BigToSmallFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BigToSmallFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Foreach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Foreach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Comment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pdw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProntoOpenner.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SmallToBigFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SmallToBigFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Start.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ipm_CheckingMessage" xml:space="preserve">
+    <value>Validating ProntoDoc template {0}</value>
+    <comment>The document is checking...</comment>
+  </data>
+  <data name="ipm_ConfirmCaption" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ipm_ConfirmMessage" xml:space="preserve">
+    <value>ProntoDoc for Word Template {0} is incorrect. Do you want to auto correct?</value>
+    <comment>The pronto document word is incorrect. Do you want program auto correct?</comment>
+  </data>
+  <data name="ipm_DescriptionFile" xml:space="preserve">
+    <value>ProntoDoc for Word</value>
+    <comment>Pronto Document Word</comment>
+  </data>
+  <data name="ipm_DialogSaveTitle" xml:space="preserve">
+    <value>Save File</value>
+  </data>
+  <data name="ipm_FinishLoading" xml:space="preserve">
+    <value>ProntoDoc template {0} loaded</value>
+    <comment>The document has been load successful.</comment>
+  </data>
+  <data name="ipm_NoChooseDomain" xml:space="preserve">
+    <value>Normal of about</value>
+  </data>
+  <data name="ipm_OrderByMenuCaption" xml:space="preserve">
+    <value>Define order by</value>
+  </data>
+  <data name="ipe_M001" xml:space="preserve">
+    <value>Condition Name is blank</value>
+  </data>
+  <data name="ipe_M005" xml:space="preserve">
+    <value>{0} is not existed</value>
+  </data>
+  <data name="ipe_NotIsProntoDoc" xml:space="preserve">
+    <value>Invalid ProntoDoc template structure</value>
+  </data>
+  <data name="ipm_SaveNotifyCaption" xml:space="preserve">
+    <value>Save notify message for document: {0}</value>
+  </data>
+  <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CollapseHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CollapseHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CollapsiblePanelBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CollapsiblePanelBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExpandHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExpandHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DomainAddSection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomainAddSection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DomainNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DomainNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ipe_ChangeFontError" xml:space="preserve">
+    <value>Changing font failed. Error: {0}</value>
+  </data>
+  <data name="ipe_DeleteBookmarkError" xml:space="preserve">
+    <value>Deleting word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GenerateImageError" xml:space="preserve">
+    <value>Generating image failed. Error: {0}</value>
+  </data>
+  <data name="ipe_HighlightBookmarkError" xml:space="preserve">
+    <value>Highlighting word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_OpenDocumentError" xml:space="preserve">
+    <value>Opening document failed. Error: {0}</value>
+  </data>
+  <data name="ipe_OpenPdwrError" xml:space="preserve">
+    <value>Opening pdwr failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ReconstructError" xml:space="preserve">
+    <value>Recontructing failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SaveDocumentError" xml:space="preserve">
+    <value>Saving document failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SaveFileError" xml:space="preserve">
+    <value>Saving temporary file failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SavePdwError" xml:space="preserve">
+    <value>Saving pdw failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SendMailError" xml:space="preserve">
+    <value>Sending mail failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SendOutlookMailError" xml:space="preserve">
+    <value>Sending outlook mail failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UpdateRibbonUIError" xml:space="preserve">
+    <value>Updating ribbon UI failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GenOsqlError" xml:space="preserve">
+    <value>Generating osql failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GenXsltError" xml:space="preserve">
+    <value>Generating xslt failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GenChecksumError" xml:space="preserve">
+    <value>Generating checksum failed. Error: {0}</value>
+  </data>
+  <data name="ipe_LoadResourceError" xml:space="preserve">
+    <value>Loading resource failed. Error: {0}</value>
+  </data>
+  <data name="ipe_LoadDatasegmentError" xml:space="preserve">
+    <value>Cannot find datasegment</value>
+  </data>
+  <data name="ipe_AddBookmarkError" xml:space="preserve">
+    <value>Adding bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_AddIbmItemError" xml:space="preserve">
+    <value>Adding internal bookmark item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_CheckWordStructError" xml:space="preserve">
+    <value>Checking word struct failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetChecksumError" xml:space="preserve">
+    <value>Getting checksum failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetDistinctBookmarkError" xml:space="preserve">
+    <value>Getting distinct bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetWordBookmarksError" xml:space="preserve">
+    <value>Getting word bookmarks failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetXslContentError" xml:space="preserve">
+    <value>Getting xsl content failed. Error: {0}</value>
+  </data>
+  <data name="ipe_LoadInternalBookmarkError" xml:space="preserve">
+    <value>Loading internal bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_RepairWordStructError" xml:space="preserve">
+    <value>Repairing word struct failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UpdateIbmItemError" xml:space="preserve">
+    <value>Udating internal bookmark item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UpdateUSCItemError" xml:space="preserve">
+    <value>Updateing USC item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ValidateChecksumError" xml:space="preserve">
+    <value>Validateing checksum failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ValidateIbmsError" xml:space="preserve">
+    <value>Validateing internal bookmarks failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ValidateIbmWithDomainError" xml:space="preserve">
+    <value>Validating internal bookmark with domain failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ValidateStructError" xml:space="preserve">
+    <value>Validating file struct failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ValidateWordBookmarkError" xml:space="preserve">
+    <value>Validateing word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ValidateWordBookmarkWithDomainError" xml:space="preserve">
+    <value>Validateing word bookmark with domain failed. Error: {0}</value>
+  </data>
+  <data name="ipe_BindTreeError" xml:space="preserve">
+    <value>Binding data into tree failed. Error: {0}</value>
+  </data>
+  <data name="ipe_CheckIbmAndWbmError" xml:space="preserve">
+    <value>Checking internal bookmark with word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_CheckWbmWithDatasegment" xml:space="preserve">
+    <value>Checking work bookmark with datasegment failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetListDomainError" xml:space="preserve">
+    <value>Getting list domain failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetPluginInfoError" xml:space="preserve">
+    <value>Getting plugin information failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetWordBodyOuterXml" xml:space="preserve">
+    <value>Getting word body xml failed. Error: Can not get the word body content</value>
+  </data>
+  <data name="ipe_LoadDomainDataError" xml:space="preserve">
+    <value>Loading domain data failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SavePdwInfoError" xml:space="preserve">
+    <value>Saving pdw information failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UpdateStatusBarError" xml:space="preserve">
+    <value>Updating status bar failed. Error: {0}</value>
+  </data>
+  <data name="ipe_AddDataTagError" xml:space="preserve">
+    <value>Adding data tag failed. Error: {0}</value>
+  </data>
+  <data name="ipe_AddForechTagError" xml:space="preserve">
+    <value>Adding for-each tag failed. Error: {0}</value>
+  </data>
+  <data name="ipe_AddUSCItemError" xml:space="preserve">
+    <value>Adding usc item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_AddWordBookmarkError" xml:space="preserve">
+    <value>Adding word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ChangeDomainError" xml:space="preserve">
+    <value>Changing domain failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetInternalBookmarkError" xml:space="preserve">
+    <value>Getting internal bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetPdwInfoError" xml:space="preserve">
+    <value>Getting pdw information failed. Error: {0}</value>
+  </data>
+  <data name="ipe_GetWordBookmarkByPositionError" xml:space="preserve">
+    <value>Getting word bookmark order by position failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ProtectBookmarkError" xml:space="preserve">
+    <value>Protecing word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_ProtectDocumentError" xml:space="preserve">
+    <value>Protecting document failed. Error: {0}</value>
+  </data>
+  <data name="ipe_RemoveUSCItemError" xml:space="preserve">
+    <value>Removing usc item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SaveInternalBookmarkError" xml:space="preserve">
+    <value>Saving internal bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_SelectUSCItemError" xml:space="preserve">
+    <value>Selecting usc item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_TagUSCItemError" xml:space="preserve">
+    <value>Tagging usc item failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UnHighlightWordBookmarkError" xml:space="preserve">
+    <value>Un-highlighting word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UnProtectBookmarkError" xml:space="preserve">
+    <value>Un-protecing word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UnProtectDocumentError" xml:space="preserve">
+    <value>Un-protecting document failed. Error: {0}</value>
+  </data>
+  <data name="ipe_UpdateWordBookmarkError" xml:space="preserve">
+    <value>Updating word bookmark failed. Error: {0}</value>
+  </data>
+  <data name="pdz" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pdz.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pdh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pdh.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorblack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorblack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorblue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorblue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorbrightgreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorbrightgreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colordarkblue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colordarkblue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colordarkred" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colordarkred.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colordarkyellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colordarkyellow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorgray25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorgray25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorgray50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorgray50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorgreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorgreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colornocolor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colornocolor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorpink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorpink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorred" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorred.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorteal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorteal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorturquoise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorturquoise.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorviolet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorviolet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coloryellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coloryellow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="toggled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\toggled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="untoggle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\untoggle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pdm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pdm.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pdm_WartermarkStyle" xml:space="preserve">
+    <value>.watermark
+{
+        top:30%;  
+        position: absolute;
+        font-size:2em;
+        color:#CCC;
+        width: 100%;
+        text-align: center;
+        z-index: 1000;
+        -webkit-transform:rotate(-30deg);
+        -moz-transform:rotate(-30deg);
+        -o-transform:rotate(-30deg);
+        transform:rotate(-30deg);
+        filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+        opacity: 0.25;
+}</value>
+  </data>
+</root>

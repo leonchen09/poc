@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.CellHistoryInfoMapper">
+	<resultMap id="BaseResultMap" type="com.station.moudles.entity.CellHistoryInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gprs_id" property="gprsId" jdbcType="VARCHAR" />
+		<result column="cell_number" property="cellNumber" jdbcType="INTEGER" />
+		<result column="cell_type" property="cellType" jdbcType="VARCHAR" />
+		<result column="cell_plant" property="cellPlant" jdbcType="VARCHAR" />
+		<result column="change_log" property="changeLog" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, gprs_id, cell_number, cell_type, cell_plant, change_log, update_time
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from cell_history_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectListSelective" resultMap="BaseResultMap" parameterType="com.station.moudles.entity.CellHistoryInfo">
+		select
+		<include refid="Base_Column_List" />
+		from cell_history_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="cellNumber != null">
+				and cell_number = #{cellNumber,jdbcType=INTEGER}
+			</if>
+			<if test="cellType != null">
+				and cell_type = #{cellType,jdbcType=VARCHAR}
+			</if>
+			<if test="cellPlant != null">
+				and cell_plant = #{cellPlant,jdbcType=VARCHAR}
+			</if>
+			<if test="changeLog != null">
+				and change_log = #{changeLog,jdbcType=VARCHAR}
+			</if>
+			<if test="updateTime != null">
+				and update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select
+		<include refid="Base_Column_List" />
+		from cell_history_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id like "%${gprsId}%"
+			</if>
+			<if test="cellNumber != null">
+				and cell_number = #{cellNumber,jdbcType=INTEGER}
+			</if>
+			<if test="cellType != null">
+				and cell_type like "%${cellType}%"
+			</if>
+			<if test="cellPlant != null">
+				and cell_plant like "%${cellPlant}%"
+			</if>
+			<if test="changeLog != null">
+				and change_log like "%${changeLog}%"
+			</if>
+			<if test="updateTime != null">
+				and update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from cell_history_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPKs" parameterType="java.lang.Integer">
+		delete from cell_history_info
+		where
+		<foreach collection="array" index="index" separator="or" item="item">
+			id = #{item,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<delete id="deleteSelective" parameterType="com.station.moudles.entity.CellHistoryInfo">
+		delete from cell_history_info
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="gprsId != null">
+				and gprs_id = #{gprsId,jdbcType=VARCHAR}
+			</if>
+			<if test="cellNumber != null">
+				and cell_number = #{cellNumber,jdbcType=INTEGER}
+			</if>
+			<if test="cellType != null">
+				and cell_type = #{cellType,jdbcType=VARCHAR}
+			</if>
+			<if test="cellPlant != null">
+				and cell_plant = #{cellPlant,jdbcType=VARCHAR}
+			</if>
+			<if test="changeLog != null">
+				and change_log = #{changeLog,jdbcType=VARCHAR}
+			</if>
+			<if test="updateTime != null">
+				and update_time = #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insert" parameterType="com.station.moudles.entity.CellHistoryInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into cell_history_info (gprs_id, cell_number, cell_type,
+		cell_plant, change_log, update_time
+		)
+		values (#{gprsId,jdbcType=VARCHAR}, #{cellNumber,jdbcType=INTEGER}, #{cellType,jdbcType=VARCHAR},
+		#{cellPlant,jdbcType=VARCHAR}, #{changeLog,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.station.moudles.entity.CellHistoryInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into cell_history_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				gprs_id,
+			</if>
+			<if test="cellNumber != null">
+				cell_number,
+			</if>
+			<if test="cellType != null">
+				cell_type,
+			</if>
+			<if test="cellPlant != null">
+				cell_plant,
+			</if>
+			<if test="changeLog != null">
+				change_log,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gprsId != null">
+				#{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="cellNumber != null">
+				#{cellNumber,jdbcType=INTEGER},
+			</if>
+			<if test="cellType != null">
+				#{cellType,jdbcType=VARCHAR},
+			</if>
+			<if test="cellPlant != null">
+				#{cellPlant,jdbcType=VARCHAR},
+			</if>
+			<if test="changeLog != null">
+				#{changeLog,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.CellHistoryInfo">
+		update cell_history_info
+		<set>
+			<if test="gprsId != null">
+				gprs_id = #{gprsId,jdbcType=VARCHAR},
+			</if>
+			<if test="cellNumber != null">
+				cell_number = #{cellNumber,jdbcType=INTEGER},
+			</if>
+			<if test="cellType != null">
+				cell_type = #{cellType,jdbcType=VARCHAR},
+			</if>
+			<if test="cellPlant != null">
+				cell_plant = #{cellPlant,jdbcType=VARCHAR},
+			</if>
+			<if test="changeLog != null">
+				change_log = #{changeLog,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.station.moudles.entity.CellHistoryInfo">
+		update cell_history_info
+		set gprs_id = #{gprsId,jdbcType=VARCHAR},
+		cell_number = #{cellNumber,jdbcType=INTEGER},
+		cell_type = #{cellType,jdbcType=VARCHAR},
+		cell_plant = #{cellPlant,jdbcType=VARCHAR},
+		change_log = #{changeLog,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>
