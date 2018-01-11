@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.station.moudles.mapper.CellVolLevelMapper" >
+
+    <resultMap id="BaseResultMap" type="com.station.moudles.entity.CellVolLevel" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="vol_level_name" property="volLevelName" jdbcType="VARCHAR" />
+        <result column="vol_level_code" property="volLevelCode" jdbcType="INTEGER" />
+        <result column="create_id" property="createId" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, vol_level_name, vol_level_code, create_id, create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from cell_vol_level
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id = "selectListSelective" resultMap= "BaseResultMap" parameterType="com.station.moudles.entity.CellVolLevel">
+		select 
+		<include refid="Base_Column_List" />
+		from cell_vol_level
+		<where>
+			<if test="volLevelName != null" >
+                and vol_level_name = #{volLevelName,jdbcType=VARCHAR}
+            </if>
+            <if test="volLevelCode != null" >
+                and vol_level_code = #{volLevelCode,jdbcType=INTEGER}
+            </if>
+            <if test="createId != null" >
+                and create_id = #{createId,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+		</where>
+		order by vol_level_code asc		
+	</select>
+	
+	<select id="selectListSelectivePaging" resultMap="BaseResultMap" parameterType="com.station.moudles.vo.search.PageEntity">
+		select 
+		<include refid="Base_Column_List" />
+		from cell_vol_level
+		<where>
+			<if test="volLevelName != null" >
+                and vol_level_name like "%${volLevelName}%"
+            </if>
+            <if test="volLevelCode != null" >
+                and vol_level_code = #{volLevelCode,jdbcType=INTEGER}
+            </if>
+            <if test="createId != null" >
+                and create_id = #{createId,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+		</where>
+		
+	</select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from cell_vol_level
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.station.moudles.entity.CellVolLevel" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into cell_vol_level
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="volLevelName != null" >
+                vol_level_name,
+            </if>
+            <if test="volLevelCode != null" >
+                vol_level_code,
+            </if>
+            <if test="createId != null" >
+                create_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="volLevelName != null" >
+                #{volLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="volLevelCode != null" >
+                #{volLevelCode,jdbcType=INTEGER},
+            </if>
+            <if test="createId != null" >
+                #{createId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.station.moudles.entity.CellVolLevel" >
+        update cell_vol_level
+        <set >
+            <if test="volLevelName != null" >
+                vol_level_name = #{volLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="volLevelCode != null" >
+                vol_level_code = #{volLevelCode,jdbcType=INTEGER},
+            </if>
+            <if test="createId != null" >
+                create_id = #{createId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    
+</mapper>
